@@ -21,7 +21,7 @@ class _$JobApplicationSerializer
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
       'washer',
-      serializers.serialize(object.customer,
+      serializers.serialize(object.washer,
           specifiedType: const FullType(Washer)),
       'address',
       serializers.serialize(object.address,
@@ -61,7 +61,7 @@ class _$JobApplicationSerializer
               specifiedType: const FullType(String)) as String?;
           break;
         case 'washer':
-          result.customer.replace(serializers.deserialize(value,
+          result.washer.replace(serializers.deserialize(value,
               specifiedType: const FullType(Washer))! as Washer);
           break;
         case 'address':
@@ -88,7 +88,7 @@ class _$JobApplication extends JobApplication {
   @override
   final String? id;
   @override
-  final Washer customer;
+  final Washer washer;
   @override
   final Address address;
   @override
@@ -101,13 +101,12 @@ class _$JobApplication extends JobApplication {
 
   _$JobApplication._(
       {this.id,
-      required this.customer,
+      required this.washer,
       required this.address,
       required this.state,
       required this.noTravelCosts})
       : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        customer, r'JobApplication', 'customer');
+    BuiltValueNullFieldError.checkNotNull(washer, r'JobApplication', 'washer');
     BuiltValueNullFieldError.checkNotNull(
         address, r'JobApplication', 'address');
     BuiltValueNullFieldError.checkNotNull(state, r'JobApplication', 'state');
@@ -128,7 +127,7 @@ class _$JobApplication extends JobApplication {
     if (identical(other, this)) return true;
     return other is JobApplication &&
         id == other.id &&
-        customer == other.customer &&
+        washer == other.washer &&
         address == other.address &&
         state == other.state &&
         noTravelCosts == other.noTravelCosts;
@@ -138,7 +137,7 @@ class _$JobApplication extends JobApplication {
   int get hashCode {
     var _$hash = 0;
     _$hash = $jc(_$hash, id.hashCode);
-    _$hash = $jc(_$hash, customer.hashCode);
+    _$hash = $jc(_$hash, washer.hashCode);
     _$hash = $jc(_$hash, address.hashCode);
     _$hash = $jc(_$hash, state.hashCode);
     _$hash = $jc(_$hash, noTravelCosts.hashCode);
@@ -150,7 +149,7 @@ class _$JobApplication extends JobApplication {
   String toString() {
     return (newBuiltValueToStringHelper(r'JobApplication')
           ..add('id', id)
-          ..add('customer', customer)
+          ..add('washer', washer)
           ..add('address', address)
           ..add('state', state)
           ..add('noTravelCosts', noTravelCosts))
@@ -166,9 +165,9 @@ class JobApplicationBuilder
   String? get id => _$this._id;
   set id(String? id) => _$this._id = id;
 
-  WasherBuilder? _customer;
-  WasherBuilder get customer => _$this._customer ??= new WasherBuilder();
-  set customer(WasherBuilder? customer) => _$this._customer = customer;
+  WasherBuilder? _washer;
+  WasherBuilder get washer => _$this._washer ??= new WasherBuilder();
+  set washer(WasherBuilder? washer) => _$this._washer = washer;
 
   AddressBuilder? _address;
   AddressBuilder get address => _$this._address ??= new AddressBuilder();
@@ -189,7 +188,7 @@ class JobApplicationBuilder
     final $v = _$v;
     if ($v != null) {
       _id = $v.id;
-      _customer = $v.customer.toBuilder();
+      _washer = $v.washer.toBuilder();
       _address = $v.address.toBuilder();
       _state = $v.state;
       _noTravelCosts = $v.noTravelCosts;
@@ -218,7 +217,7 @@ class JobApplicationBuilder
       _$result = _$v ??
           new _$JobApplication._(
               id: id,
-              customer: customer.build(),
+              washer: washer.build(),
               address: address.build(),
               state: BuiltValueNullFieldError.checkNotNull(
                   state, r'JobApplication', 'state'),
@@ -227,8 +226,8 @@ class JobApplicationBuilder
     } catch (_) {
       late String _$failedField;
       try {
-        _$failedField = 'customer';
-        customer.build();
+        _$failedField = 'washer';
+        washer.build();
         _$failedField = 'address';
         address.build();
       } catch (e) {

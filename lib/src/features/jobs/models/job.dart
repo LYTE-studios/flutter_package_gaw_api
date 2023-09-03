@@ -29,7 +29,7 @@ abstract class Job implements Built<Job, JobBuilder> {
   JobState get state;
 
   @BuiltValueField(wireName: 'application')
-  JobApplication get application;
+  JobApplication? get application;
 
   String toJson() {
     return json.encode(

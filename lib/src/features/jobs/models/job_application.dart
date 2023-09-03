@@ -21,7 +21,7 @@ abstract class JobApplication
   String? get id;
 
   @BuiltValueField(wireName: 'washer')
-  Washer get customer;
+  Washer get washer;
 
   @BuiltValueField(wireName: 'address')
   Address get address;

@@ -27,9 +27,6 @@ class _$JobSerializer implements StructuredSerializer<Job> {
       'state',
       serializers.serialize(object.state,
           specifiedType: const FullType(JobState)),
-      'application',
-      serializers.serialize(object.application,
-          specifiedType: const FullType(JobApplication)),
     ];
     Object? value;
     value = object.id;
@@ -38,6 +35,13 @@ class _$JobSerializer implements StructuredSerializer<Job> {
         ..add('id')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
+    }
+    value = object.application;
+    if (value != null) {
+      result
+        ..add('application')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(JobApplication)));
     }
     return result;
   }
@@ -91,7 +95,7 @@ class _$Job extends Job {
   @override
   final JobState state;
   @override
-  final JobApplication application;
+  final JobApplication? application;
 
   factory _$Job([void Function(JobBuilder)? updates]) =>
       (new JobBuilder()..update(updates))._build();
@@ -101,12 +105,11 @@ class _$Job extends Job {
       required this.customer,
       required this.address,
       required this.state,
-      required this.application})
+      this.application})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(customer, r'Job', 'customer');
     BuiltValueNullFieldError.checkNotNull(address, r'Job', 'address');
     BuiltValueNullFieldError.checkNotNull(state, r'Job', 'state');
-    BuiltValueNullFieldError.checkNotNull(application, r'Job', 'application');
   }
 
   @override
@@ -185,7 +188,7 @@ class JobBuilder implements Builder<Job, JobBuilder> {
       _customer = $v.customer.toBuilder();
       _address = $v.address.toBuilder();
       _state = $v.state;
-      _application = $v.application.toBuilder();
+      _application = $v.application?.toBuilder();
       _$v = null;
     }
     return this;
@@ -215,7 +218,7 @@ class JobBuilder implements Builder<Job, JobBuilder> {
               address: address.build(),
               state:
                   BuiltValueNullFieldError.checkNotNull(state, r'Job', 'state'),
-              application: application.build());
+              application: _application?.build());
     } catch (_) {
       late String _$failedField;
       try {
@@ -225,7 +228,7 @@ class JobBuilder implements Builder<Job, JobBuilder> {
         address.build();
 
         _$failedField = 'application';
-        application.build();
+        _application?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             r'Job', _$failedField, e.toString());

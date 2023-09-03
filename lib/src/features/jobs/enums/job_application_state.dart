@@ -6,13 +6,13 @@ part 'job_application_state.g.dart';
 
 class JobApplicationState extends EnumClass {
   @BuiltValueEnumConst(wireName: 'approved')
-  static const JobApplicationState fulfilled = _$fulfilled;
+  static const JobApplicationState approved = _$approved;
 
   @BuiltValueEnumConst(wireName: 'pending')
   static const JobApplicationState pending = _$pending;
 
   @BuiltValueEnumConst(wireName: 'rejected')
-  static const JobApplicationState done = _$done;
+  static const JobApplicationState rejected = _$rejected;
 
   @BuiltValueEnumConst(wireName: 'unknown', fallback: true)
   static const JobApplicationState unknown = _$unknown;

@@ -6,20 +6,19 @@ part of 'job_application_state.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-const JobApplicationState _$fulfilled =
-    const JobApplicationState._('fulfilled');
+const JobApplicationState _$approved = const JobApplicationState._('approved');
 const JobApplicationState _$pending = const JobApplicationState._('pending');
-const JobApplicationState _$done = const JobApplicationState._('done');
+const JobApplicationState _$rejected = const JobApplicationState._('rejected');
 const JobApplicationState _$unknown = const JobApplicationState._('unknown');
 
 JobApplicationState _$vlOf(String name) {
   switch (name) {
-    case 'fulfilled':
-      return _$fulfilled;
+    case 'approved':
+      return _$approved;
     case 'pending':
       return _$pending;
-    case 'done':
-      return _$done;
+    case 'rejected':
+      return _$rejected;
     case 'unknown':
       return _$unknown;
     default:
@@ -29,9 +28,9 @@ JobApplicationState _$vlOf(String name) {
 
 final BuiltSet<JobApplicationState> _$values =
     new BuiltSet<JobApplicationState>(const <JobApplicationState>[
-  _$fulfilled,
+  _$approved,
   _$pending,
-  _$done,
+  _$rejected,
   _$unknown,
 ]);
 
@@ -41,15 +40,15 @@ Serializer<JobApplicationState> _$jobApplicationStateSerializer =
 class _$JobApplicationStateSerializer
     implements PrimitiveSerializer<JobApplicationState> {
   static const Map<String, Object> _toWire = const <String, Object>{
-    'fulfilled': 'approved',
+    'approved': 'approved',
     'pending': 'pending',
-    'done': 'rejected',
+    'rejected': 'rejected',
     'unknown': 'unknown',
   };
   static const Map<Object, String> _fromWire = const <Object, String>{
-    'approved': 'fulfilled',
+    'approved': 'approved',
     'pending': 'pending',
-    'rejected': 'done',
+    'rejected': 'rejected',
     'unknown': 'unknown',
   };
 

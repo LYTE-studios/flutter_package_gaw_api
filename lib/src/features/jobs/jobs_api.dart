@@ -9,7 +9,7 @@ class JobsApi {
 
     return JobListResponse(
       (b) => b
-        ..myJobs = ListBuilder<Job>(
+        ..upcomingJobs = ListBuilder<Job>(
           [
             Job(
               (b) => b
@@ -51,7 +51,7 @@ class JobsApi {
             ),
           ],
         )
-        ..upcomingJobs = ListBuilder(
+        ..myJobs = ListBuilder(
           [
             Job(
               (b) => b
@@ -69,6 +69,12 @@ class JobsApi {
                     ..id = 'IDEE'
                     ..noTravelCosts = true
                     ..state = JobApplicationState.approved
+                    ..washer = Washer(
+                      (b) => b
+                        ..email = 'hjk'
+                        ..firstName = 'hjfkl;d'
+                        ..lastName = 'ghjfdks',
+                    ).toBuilder()
                     ..address = Address(
                       (b) => b
                         ..streetName = 'gf'
@@ -101,6 +107,12 @@ class JobsApi {
                     ..id = 'htjfdk'
                     ..noTravelCosts = true
                     ..state = JobApplicationState.pending
+                    ..washer = Washer(
+                      (b) => b
+                        ..email = 'hjk'
+                        ..firstName = 'hjfkl;d'
+                        ..lastName = 'ghjfdks',
+                    ).toBuilder()
                     ..address = Address(
                       (b) => b
                         ..streetName = 'gf'
@@ -133,6 +145,12 @@ class JobsApi {
                     ..id = 'htjfdk'
                     ..noTravelCosts = true
                     ..state = JobApplicationState.rejected
+                    ..washer = Washer(
+                      (b) => b
+                        ..email = 'hjk'
+                        ..firstName = 'hjfkl;d'
+                        ..lastName = 'ghjfdks',
+                    ).toBuilder()
                     ..address = Address(
                       (b) => b
                         ..streetName = 'gf'

@@ -39,6 +39,14 @@ abstract class Address implements Built<Address, AddressBuilder> {
   @BuiltValueField(wireName: 'longitude')
   double? get longitude;
 
+  String shortAddress() {
+    return '${postalCode ?? ''} ${city ?? ''}';
+  }
+
+  String formattedAddres() {
+    return '${streetName ?? ''} ${houseNumber ?? ''} ${boxNumber ?? ''} ${postalCode ?? ''} ${city ?? ''} ${country ?? ''}';
+  }
+
   String toJson() {
     return json.encode(
       serializers.serializeWith(Address.serializer, this),

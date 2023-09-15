@@ -24,6 +24,9 @@ abstract class Customer implements Built<Customer, CustomerBuilder> {
   @BuiltValueField(wireName: 'initials')
   String get initials;
 
+  @BuiltValueField(wireName: 'company')
+  String? get company;
+
   @BuiltValueField(wireName: 'profile_picture_url')
   String? get profilePictureUrl;
 
@@ -31,6 +34,10 @@ abstract class Customer implements Built<Customer, CustomerBuilder> {
     return json.encode(
       serializers.serializeWith(Customer.serializer, this),
     );
+  }
+
+  String getFullName() {
+    return '$firstName $lastName';
   }
 
   static Customer? fromJson(String jsonString) {

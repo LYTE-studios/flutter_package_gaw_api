@@ -18,6 +18,11 @@ class _$JobSerializer implements StructuredSerializer<Job> {
   Iterable<Object?> serialize(Serializers serializers, Job object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
+      'start_time',
+      serializers.serialize(object.startTime,
+          specifiedType: const FullType(int)),
+      'end_time',
+      serializers.serialize(object.endTime, specifiedType: const FullType(int)),
       'customer',
       serializers.serialize(object.customer,
           specifiedType: const FullType(Customer)),
@@ -61,6 +66,14 @@ class _$JobSerializer implements StructuredSerializer<Job> {
           result.id = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'start_time':
+          result.startTime = serializers.deserialize(value,
+              specifiedType: const FullType(int))! as int;
+          break;
+        case 'end_time':
+          result.endTime = serializers.deserialize(value,
+              specifiedType: const FullType(int))! as int;
+          break;
         case 'customer':
           result.customer.replace(serializers.deserialize(value,
               specifiedType: const FullType(Customer))! as Customer);
@@ -89,6 +102,10 @@ class _$Job extends Job {
   @override
   final String? id;
   @override
+  final int startTime;
+  @override
+  final int endTime;
+  @override
   final Customer customer;
   @override
   final Address address;
@@ -102,11 +119,15 @@ class _$Job extends Job {
 
   _$Job._(
       {this.id,
+      required this.startTime,
+      required this.endTime,
       required this.customer,
       required this.address,
       required this.state,
       this.application})
       : super._() {
+    BuiltValueNullFieldError.checkNotNull(startTime, r'Job', 'startTime');
+    BuiltValueNullFieldError.checkNotNull(endTime, r'Job', 'endTime');
     BuiltValueNullFieldError.checkNotNull(customer, r'Job', 'customer');
     BuiltValueNullFieldError.checkNotNull(address, r'Job', 'address');
     BuiltValueNullFieldError.checkNotNull(state, r'Job', 'state');
@@ -124,6 +145,8 @@ class _$Job extends Job {
     if (identical(other, this)) return true;
     return other is Job &&
         id == other.id &&
+        startTime == other.startTime &&
+        endTime == other.endTime &&
         customer == other.customer &&
         address == other.address &&
         state == other.state &&
@@ -134,6 +157,8 @@ class _$Job extends Job {
   int get hashCode {
     var _$hash = 0;
     _$hash = $jc(_$hash, id.hashCode);
+    _$hash = $jc(_$hash, startTime.hashCode);
+    _$hash = $jc(_$hash, endTime.hashCode);
     _$hash = $jc(_$hash, customer.hashCode);
     _$hash = $jc(_$hash, address.hashCode);
     _$hash = $jc(_$hash, state.hashCode);
@@ -146,6 +171,8 @@ class _$Job extends Job {
   String toString() {
     return (newBuiltValueToStringHelper(r'Job')
           ..add('id', id)
+          ..add('startTime', startTime)
+          ..add('endTime', endTime)
           ..add('customer', customer)
           ..add('address', address)
           ..add('state', state)
@@ -160,6 +187,14 @@ class JobBuilder implements Builder<Job, JobBuilder> {
   String? _id;
   String? get id => _$this._id;
   set id(String? id) => _$this._id = id;
+
+  int? _startTime;
+  int? get startTime => _$this._startTime;
+  set startTime(int? startTime) => _$this._startTime = startTime;
+
+  int? _endTime;
+  int? get endTime => _$this._endTime;
+  set endTime(int? endTime) => _$this._endTime = endTime;
 
   CustomerBuilder? _customer;
   CustomerBuilder get customer => _$this._customer ??= new CustomerBuilder();
@@ -185,6 +220,8 @@ class JobBuilder implements Builder<Job, JobBuilder> {
     final $v = _$v;
     if ($v != null) {
       _id = $v.id;
+      _startTime = $v.startTime;
+      _endTime = $v.endTime;
       _customer = $v.customer.toBuilder();
       _address = $v.address.toBuilder();
       _state = $v.state;
@@ -214,6 +251,10 @@ class JobBuilder implements Builder<Job, JobBuilder> {
       _$result = _$v ??
           new _$Job._(
               id: id,
+              startTime: BuiltValueNullFieldError.checkNotNull(
+                  startTime, r'Job', 'startTime'),
+              endTime: BuiltValueNullFieldError.checkNotNull(
+                  endTime, r'Job', 'endTime'),
               customer: customer.build(),
               address: address.build(),
               state:

@@ -40,16 +40,29 @@ abstract class Address implements Built<Address, AddressBuilder> {
   double? get longitude;
 
   String shortAddress() {
-    return '${postalCode ?? ''} ${city ?? ''}';
+    return '${postalCode ?? ''} ${city ?? ''}'.trim();
+  }
+
+  String formattedStreetAddress() {
+    return '${streetName ?? ''} ${houseNumber ?? ''} ${boxNumber ?? ''}'.trim();
   }
 
   String formattedAddres() {
-    return '${streetName ?? ''} ${houseNumber ?? ''} ${boxNumber ?? ''} ${postalCode ?? ''} ${city ?? ''} ${country ?? ''}';
+    return '${streetName ?? ''} ${houseNumber ?? ''} ${boxNumber ?? ''} ${postalCode ?? ''} ${city ?? ''} ${country ?? ''}'
+        .trim();
   }
 
   String toJson() {
     return json.encode(
       serializers.serializeWith(Address.serializer, this),
+    );
+  }
+
+  static Address getDefault() {
+    return Address(
+      (b) => b
+        ..latitude = 50.8476
+        ..longitude = 4.3572,
     );
   }
 

@@ -19,6 +19,12 @@ abstract class Job implements Built<Job, JobBuilder> {
   @BuiltValueField(wireName: 'id')
   String? get id;
 
+  @BuiltValueField(wireName: 'start_time')
+  int get startTime;
+
+  @BuiltValueField(wireName: 'end_time')
+  int get endTime;
+
   @BuiltValueField(wireName: 'customer')
   Customer get customer;
 

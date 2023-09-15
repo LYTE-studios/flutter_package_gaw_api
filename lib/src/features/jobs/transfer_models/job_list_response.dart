@@ -22,6 +22,9 @@ abstract class JobListResponse
   @BuiltValueField(wireName: 'my_jobs')
   BuiltList<Job> get myJobs;
 
+  @BuiltValueField(wireName: 'jobs')
+  BuiltList<Job>? get jobs;
+
   String toJson() {
     return json.encode(
       serializers.serializeWith(JobListResponse.serializer, this),

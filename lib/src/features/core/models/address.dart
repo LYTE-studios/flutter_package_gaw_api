@@ -39,8 +39,6 @@ abstract class Address implements Built<Address, AddressBuilder> {
   @BuiltValueField(wireName: 'longitude')
   double? get longitude;
 
-<<<<<<< Updated upstream
-=======
   String shortAddress() {
     return '${postalCode ?? ''} ${city ?? ''}'.trim();
   }
@@ -54,7 +52,6 @@ abstract class Address implements Built<Address, AddressBuilder> {
         .trim();
   }
 
->>>>>>> Stashed changes
   String toJson() {
     return json.encode(
       serializers.serializeWith(Address.serializer, this),

@@ -39,9 +39,33 @@ abstract class Address implements Built<Address, AddressBuilder> {
   @BuiltValueField(wireName: 'longitude')
   double? get longitude;
 
+<<<<<<< Updated upstream
+=======
+  String shortAddress() {
+    return '${postalCode ?? ''} ${city ?? ''}'.trim();
+  }
+
+  String formattedStreetAddress() {
+    return '${streetName ?? ''} ${houseNumber ?? ''} ${boxNumber ?? ''}'.trim();
+  }
+
+  String formattedAddres() {
+    return '${streetName ?? ''} ${houseNumber ?? ''} ${boxNumber ?? ''} ${postalCode ?? ''} ${city ?? ''} ${country ?? ''}'
+        .trim();
+  }
+
+>>>>>>> Stashed changes
   String toJson() {
     return json.encode(
       serializers.serializeWith(Address.serializer, this),
+    );
+  }
+
+  static Address getDefault() {
+    return Address(
+      (b) => b
+        ..latitude = 50.8476
+        ..longitude = 4.3572,
     );
   }
 

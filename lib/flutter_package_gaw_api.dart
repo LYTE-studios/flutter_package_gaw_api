@@ -9,3 +9,4 @@ export 'src/features/core/models/address.dart';
 export 'src/features/washers/models/washer.dart';
 export 'src/features/jobs/transfer_models/job_list_response.dart';
 export 'src/features/jobs/jobs_api.dart';
+export 'src/shared/utils/gaw_date_util.dart';

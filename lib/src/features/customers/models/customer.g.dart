@@ -36,6 +36,13 @@ class _$CustomerSerializer implements StructuredSerializer<Customer> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.company;
+    if (value != null) {
+      result
+        ..add('company')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.profilePictureUrl;
     if (value != null) {
       result
@@ -73,6 +80,10 @@ class _$CustomerSerializer implements StructuredSerializer<Customer> {
           result.initials = serializers.deserialize(value,
               specifiedType: const FullType(String))! as String;
           break;
+        case 'company':
+          result.company = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
         case 'profile_picture_url':
           result.profilePictureUrl = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
@@ -94,6 +105,8 @@ class _$Customer extends Customer {
   @override
   final String initials;
   @override
+  final String? company;
+  @override
   final String? profilePictureUrl;
 
   factory _$Customer([void Function(CustomerBuilder)? updates]) =>
@@ -104,6 +117,7 @@ class _$Customer extends Customer {
       required this.firstName,
       required this.lastName,
       required this.initials,
+      this.company,
       this.profilePictureUrl})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(firstName, r'Customer', 'firstName');
@@ -126,6 +140,7 @@ class _$Customer extends Customer {
         firstName == other.firstName &&
         lastName == other.lastName &&
         initials == other.initials &&
+        company == other.company &&
         profilePictureUrl == other.profilePictureUrl;
   }
 
@@ -136,6 +151,7 @@ class _$Customer extends Customer {
     _$hash = $jc(_$hash, firstName.hashCode);
     _$hash = $jc(_$hash, lastName.hashCode);
     _$hash = $jc(_$hash, initials.hashCode);
+    _$hash = $jc(_$hash, company.hashCode);
     _$hash = $jc(_$hash, profilePictureUrl.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -148,6 +164,7 @@ class _$Customer extends Customer {
           ..add('firstName', firstName)
           ..add('lastName', lastName)
           ..add('initials', initials)
+          ..add('company', company)
           ..add('profilePictureUrl', profilePictureUrl))
         .toString();
   }
@@ -172,6 +189,10 @@ class CustomerBuilder implements Builder<Customer, CustomerBuilder> {
   String? get initials => _$this._initials;
   set initials(String? initials) => _$this._initials = initials;
 
+  String? _company;
+  String? get company => _$this._company;
+  set company(String? company) => _$this._company = company;
+
   String? _profilePictureUrl;
   String? get profilePictureUrl => _$this._profilePictureUrl;
   set profilePictureUrl(String? profilePictureUrl) =>
@@ -186,6 +207,7 @@ class CustomerBuilder implements Builder<Customer, CustomerBuilder> {
       _firstName = $v.firstName;
       _lastName = $v.lastName;
       _initials = $v.initials;
+      _company = $v.company;
       _profilePictureUrl = $v.profilePictureUrl;
       _$v = null;
     }
@@ -216,6 +238,7 @@ class CustomerBuilder implements Builder<Customer, CustomerBuilder> {
                 lastName, r'Customer', 'lastName'),
             initials: BuiltValueNullFieldError.checkNotNull(
                 initials, r'Customer', 'initials'),
+            company: company,
             profilePictureUrl: profilePictureUrl);
     replace(_$result);
     return _$result;

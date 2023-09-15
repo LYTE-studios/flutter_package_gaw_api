@@ -29,7 +29,15 @@ class _$JobListResponseSerializer
           specifiedType:
               const FullType(BuiltList, const [const FullType(Job)])),
     ];
-
+    Object? value;
+    value = object.jobs;
+    if (value != null) {
+      result
+        ..add('jobs')
+        ..add(serializers.serialize(value,
+            specifiedType:
+                const FullType(BuiltList, const [const FullType(Job)])));
+    }
     return result;
   }
 
@@ -57,6 +65,12 @@ class _$JobListResponseSerializer
                       const FullType(BuiltList, const [const FullType(Job)]))!
               as BuiltList<Object?>);
           break;
+        case 'jobs':
+          result.jobs.replace(serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(BuiltList, const [const FullType(Job)]))!
+              as BuiltList<Object?>);
+          break;
       }
     }
 
@@ -69,11 +83,14 @@ class _$JobListResponse extends JobListResponse {
   final BuiltList<Job> upcomingJobs;
   @override
   final BuiltList<Job> myJobs;
+  @override
+  final BuiltList<Job>? jobs;
 
   factory _$JobListResponse([void Function(JobListResponseBuilder)? updates]) =>
       (new JobListResponseBuilder()..update(updates))._build();
 
-  _$JobListResponse._({required this.upcomingJobs, required this.myJobs})
+  _$JobListResponse._(
+      {required this.upcomingJobs, required this.myJobs, this.jobs})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         upcomingJobs, r'JobListResponse', 'upcomingJobs');
@@ -93,7 +110,8 @@ class _$JobListResponse extends JobListResponse {
     if (identical(other, this)) return true;
     return other is JobListResponse &&
         upcomingJobs == other.upcomingJobs &&
-        myJobs == other.myJobs;
+        myJobs == other.myJobs &&
+        jobs == other.jobs;
   }
 
   @override
@@ -101,6 +119,7 @@ class _$JobListResponse extends JobListResponse {
     var _$hash = 0;
     _$hash = $jc(_$hash, upcomingJobs.hashCode);
     _$hash = $jc(_$hash, myJobs.hashCode);
+    _$hash = $jc(_$hash, jobs.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -109,7 +128,8 @@ class _$JobListResponse extends JobListResponse {
   String toString() {
     return (newBuiltValueToStringHelper(r'JobListResponse')
           ..add('upcomingJobs', upcomingJobs)
-          ..add('myJobs', myJobs))
+          ..add('myJobs', myJobs)
+          ..add('jobs', jobs))
         .toString();
   }
 }
@@ -128,6 +148,10 @@ class JobListResponseBuilder
   ListBuilder<Job> get myJobs => _$this._myJobs ??= new ListBuilder<Job>();
   set myJobs(ListBuilder<Job>? myJobs) => _$this._myJobs = myJobs;
 
+  ListBuilder<Job>? _jobs;
+  ListBuilder<Job> get jobs => _$this._jobs ??= new ListBuilder<Job>();
+  set jobs(ListBuilder<Job>? jobs) => _$this._jobs = jobs;
+
   JobListResponseBuilder();
 
   JobListResponseBuilder get _$this {
@@ -135,6 +159,7 @@ class JobListResponseBuilder
     if ($v != null) {
       _upcomingJobs = $v.upcomingJobs.toBuilder();
       _myJobs = $v.myJobs.toBuilder();
+      _jobs = $v.jobs?.toBuilder();
       _$v = null;
     }
     return this;
@@ -159,7 +184,9 @@ class JobListResponseBuilder
     try {
       _$result = _$v ??
           new _$JobListResponse._(
-              upcomingJobs: upcomingJobs.build(), myJobs: myJobs.build());
+              upcomingJobs: upcomingJobs.build(),
+              myJobs: myJobs.build(),
+              jobs: _jobs?.build());
     } catch (_) {
       late String _$failedField;
       try {
@@ -167,6 +194,8 @@ class JobListResponseBuilder
         upcomingJobs.build();
         _$failedField = 'myJobs';
         myJobs.build();
+        _$failedField = 'jobs';
+        _jobs?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             r'JobListResponse', _$failedField, e.toString());

@@ -1,6 +1,5 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter_package_gaw_api/flutter_package_gaw_api.dart';
-import 'package:flutter_package_gaw_api/src/features/jobs/transfer_models/job_list_response.dart';
 
 class JobsApi {
   static JobListResponse mockList = JobListResponse(
@@ -71,6 +70,7 @@ class JobsApi {
                   ..id = 'IDEE'
                   ..noTravelCosts = true
                   ..state = JobApplicationState.approved
+                  ..distance = 12.9
                   ..washer = Washer(
                     (b) => b
                       ..email = 'hjk'
@@ -112,6 +112,7 @@ class JobsApi {
                   ..id = 'htjfdk'
                   ..noTravelCosts = true
                   ..state = JobApplicationState.pending
+                  ..distance = 1.2
                   ..washer = Washer(
                     (b) => b
                       ..email = 'hjk'
@@ -151,6 +152,7 @@ class JobsApi {
                 (b) => b
                   ..id = 'htjfdk'
                   ..noTravelCosts = true
+                  ..distance = 6.9
                   ..state = JobApplicationState.rejected
                   ..washer = Washer(
                     (b) => b
@@ -204,6 +206,7 @@ class JobsApi {
                   ..id = 'IDEE'
                   ..noTravelCosts = true
                   ..state = JobApplicationState.approved
+                  ..distance = 0.6
                   ..washer = Washer(
                     (b) => b
                       ..email = 'hjk'
@@ -252,6 +255,7 @@ class JobsApi {
                   ..id = 'IDEE'
                   ..noTravelCosts = true
                   ..state = JobApplicationState.approved
+                  ..distance = 5.6
                   ..washer = Washer(
                     (b) => b
                       ..email = 'hjk'
@@ -300,6 +304,7 @@ class JobsApi {
                   ..id = 'htjfdk'
                   ..noTravelCosts = true
                   ..state = JobApplicationState.pending
+                  ..distance = 0.0
                   ..washer = Washer(
                     (b) => b
                       ..email = 'hjk'
@@ -348,6 +353,7 @@ class JobsApi {
                   ..id = 'htjfdk'
                   ..noTravelCosts = true
                   ..state = JobApplicationState.rejected
+                  ..distance = 2.6
                   ..washer = Washer(
                     (b) => b
                       ..email = 'hjk'

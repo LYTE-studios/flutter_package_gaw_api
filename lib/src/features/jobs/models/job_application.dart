@@ -29,6 +29,9 @@ abstract class JobApplication
   @BuiltValueField(wireName: 'state')
   JobApplicationState get state;
 
+  @BuiltValueField(wireName: 'distance')
+  double get distance;
+
   @BuiltValueField(wireName: 'no_travel_costs')
   bool get noTravelCosts;
 

@@ -29,6 +29,9 @@ class _$JobApplicationSerializer
       'state',
       serializers.serialize(object.state,
           specifiedType: const FullType(JobApplicationState)),
+      'distance',
+      serializers.serialize(object.distance,
+          specifiedType: const FullType(double)),
       'no_travel_costs',
       serializers.serialize(object.noTravelCosts,
           specifiedType: const FullType(bool)),
@@ -73,6 +76,10 @@ class _$JobApplicationSerializer
                   specifiedType: const FullType(JobApplicationState))!
               as JobApplicationState;
           break;
+        case 'distance':
+          result.distance = serializers.deserialize(value,
+              specifiedType: const FullType(double))! as double;
+          break;
         case 'no_travel_costs':
           result.noTravelCosts = serializers.deserialize(value,
               specifiedType: const FullType(bool))! as bool;
@@ -94,6 +101,8 @@ class _$JobApplication extends JobApplication {
   @override
   final JobApplicationState state;
   @override
+  final double distance;
+  @override
   final bool noTravelCosts;
 
   factory _$JobApplication([void Function(JobApplicationBuilder)? updates]) =>
@@ -104,12 +113,15 @@ class _$JobApplication extends JobApplication {
       required this.washer,
       required this.address,
       required this.state,
+      required this.distance,
       required this.noTravelCosts})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(washer, r'JobApplication', 'washer');
     BuiltValueNullFieldError.checkNotNull(
         address, r'JobApplication', 'address');
     BuiltValueNullFieldError.checkNotNull(state, r'JobApplication', 'state');
+    BuiltValueNullFieldError.checkNotNull(
+        distance, r'JobApplication', 'distance');
     BuiltValueNullFieldError.checkNotNull(
         noTravelCosts, r'JobApplication', 'noTravelCosts');
   }
@@ -130,6 +142,7 @@ class _$JobApplication extends JobApplication {
         washer == other.washer &&
         address == other.address &&
         state == other.state &&
+        distance == other.distance &&
         noTravelCosts == other.noTravelCosts;
   }
 
@@ -140,6 +153,7 @@ class _$JobApplication extends JobApplication {
     _$hash = $jc(_$hash, washer.hashCode);
     _$hash = $jc(_$hash, address.hashCode);
     _$hash = $jc(_$hash, state.hashCode);
+    _$hash = $jc(_$hash, distance.hashCode);
     _$hash = $jc(_$hash, noTravelCosts.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -152,6 +166,7 @@ class _$JobApplication extends JobApplication {
           ..add('washer', washer)
           ..add('address', address)
           ..add('state', state)
+          ..add('distance', distance)
           ..add('noTravelCosts', noTravelCosts))
         .toString();
   }
@@ -177,6 +192,10 @@ class JobApplicationBuilder
   JobApplicationState? get state => _$this._state;
   set state(JobApplicationState? state) => _$this._state = state;
 
+  double? _distance;
+  double? get distance => _$this._distance;
+  set distance(double? distance) => _$this._distance = distance;
+
   bool? _noTravelCosts;
   bool? get noTravelCosts => _$this._noTravelCosts;
   set noTravelCosts(bool? noTravelCosts) =>
@@ -191,6 +210,7 @@ class JobApplicationBuilder
       _washer = $v.washer.toBuilder();
       _address = $v.address.toBuilder();
       _state = $v.state;
+      _distance = $v.distance;
       _noTravelCosts = $v.noTravelCosts;
       _$v = null;
     }
@@ -221,6 +241,8 @@ class JobApplicationBuilder
               address: address.build(),
               state: BuiltValueNullFieldError.checkNotNull(
                   state, r'JobApplication', 'state'),
+              distance: BuiltValueNullFieldError.checkNotNull(
+                  distance, r'JobApplication', 'distance'),
               noTravelCosts: BuiltValueNullFieldError.checkNotNull(
                   noTravelCosts, r'JobApplication', 'noTravelCosts'));
     } catch (_) {

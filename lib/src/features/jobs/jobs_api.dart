@@ -11,6 +11,8 @@ class JobsApi {
               ..id = 'test data'
               ..startTime = 1694017800000
               ..endTime = 1694025000000
+              ..maxWashers = 3
+              ..selectedWashers = 1
               ..address = Address(
                 (b) => b
                   ..streetName = 'TestingStreet'
@@ -32,6 +34,77 @@ class JobsApi {
               ..id = 'Testende'
               ..startTime = 1694017800000
               ..endTime = 1694025000000
+              ..maxWashers = 6
+              ..selectedWashers = 4
+              ..address = Address(
+                (b) => b
+                  ..streetName = 'straat'
+                  ..houseNumber = '6'
+                  ..country = 'Toverland'
+                  ..city = 'Stad',
+              ).toBuilder()
+              ..state = JobState.pending
+              ..customer = Customer(
+                (b) => b
+                  ..id = 'idee'
+                  ..firstName = 'peter'
+                  ..lastName = 'dabee'
+                  ..initials = 'P.D.',
+              ).toBuilder(),
+          ),
+          Job(
+            (b) => b
+              ..id = 'Testende'
+              ..startTime = 1694017800000
+              ..endTime = 1694025000000
+              ..maxWashers = 6
+              ..selectedWashers = 4
+              ..address = Address(
+                (b) => b
+                  ..streetName = 'straat'
+                  ..houseNumber = '6'
+                  ..country = 'Toverland'
+                  ..city = 'Stad',
+              ).toBuilder()
+              ..state = JobState.pending
+              ..customer = Customer(
+                (b) => b
+                  ..id = 'idee'
+                  ..firstName = 'peter'
+                  ..lastName = 'dabee'
+                  ..initials = 'P.D.',
+              ).toBuilder(),
+          ),
+          Job(
+            (b) => b
+              ..id = 'Testende'
+              ..startTime = 1694017800000
+              ..endTime = 1694025000000
+              ..maxWashers = 6
+              ..selectedWashers = 4
+              ..address = Address(
+                (b) => b
+                  ..streetName = 'straat'
+                  ..houseNumber = '6'
+                  ..country = 'Toverland'
+                  ..city = 'Stad',
+              ).toBuilder()
+              ..state = JobState.pending
+              ..customer = Customer(
+                (b) => b
+                  ..id = 'idee'
+                  ..firstName = 'peter'
+                  ..lastName = 'dabee'
+                  ..initials = 'P.D.',
+              ).toBuilder(),
+          ),
+          Job(
+            (b) => b
+              ..id = 'Testende'
+              ..startTime = 1694017800000
+              ..endTime = 1694025000000
+              ..maxWashers = 6
+              ..selectedWashers = 4
               ..address = Address(
                 (b) => b
                   ..streetName = 'straat'
@@ -57,6 +130,8 @@ class JobsApi {
               ..id = 'Teest'
               ..startTime = 1694017800000
               ..endTime = 1694025000000
+              ..maxWashers = 3
+              ..selectedWashers = 2
               ..address = Address(
                 (b) => b
                   ..streetName = 'gf'
@@ -99,6 +174,8 @@ class JobsApi {
               ..id = 'pendino'
               ..startTime = 1694017800000
               ..endTime = 1694025000000
+              ..maxWashers = 7
+              ..selectedWashers = 2
               ..address = Address(
                 (b) => b
                   ..streetName = 'guijfivl;ad'
@@ -140,6 +217,8 @@ class JobsApi {
               ..id = 'Peeeend'
               ..startTime = 1694017800000
               ..endTime = 1694025000000
+              ..maxWashers = 3
+              ..selectedWashers = 1
               ..address = Address(
                 (b) => b
                   ..streetName = 'hgjfkd'
@@ -193,6 +272,8 @@ class JobsApi {
                     const Duration(days: 2),
                   )
                   .millisecondsSinceEpoch
+              ..maxWashers = 3
+              ..selectedWashers = 3
               ..address = Address(
                 (b) => b
                   ..streetName = 'gf'
@@ -242,6 +323,8 @@ class JobsApi {
                     const Duration(days: 3),
                   )
                   .millisecondsSinceEpoch
+              ..maxWashers = 3
+              ..selectedWashers = 3
               ..address = Address(
                 (b) => b
                   ..streetName = 'gf'
@@ -291,6 +374,8 @@ class JobsApi {
                     const Duration(days: 2, hours: 4),
                   )
                   .millisecondsSinceEpoch
+              ..maxWashers = 3
+              ..selectedWashers = 3
               ..address = Address(
                 (b) => b
                   ..streetName = 'guijfivl;ad'
@@ -335,6 +420,8 @@ class JobsApi {
                     const Duration(days: 40),
                   )
                   .millisecondsSinceEpoch
+              ..maxWashers = 5
+              ..selectedWashers = 5
               ..endTime = DateTime.now()
                   .subtract(
                     const Duration(days: 40, hours: 2),

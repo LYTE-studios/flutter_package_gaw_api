@@ -37,6 +37,12 @@ abstract class Job implements Built<Job, JobBuilder> {
   @BuiltValueField(wireName: 'application')
   JobApplication? get application;
 
+  @BuiltValueField(wireName: 'max_washers')
+  int get maxWashers;
+
+  @BuiltValueField(wireName: 'selected_washers')
+  int get selectedWashers;
+
   String toJson() {
     return json.encode(
       serializers.serializeWith(Job.serializer, this),

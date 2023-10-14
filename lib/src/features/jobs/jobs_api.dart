@@ -1,7 +1,21 @@
 import 'package:built_collection/built_collection.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_package_gaw_api/flutter_package_gaw_api.dart';
+import 'package:flutter_package_gaw_api/src/features/core/utils/request_factory.dart';
 
 class JobsApi {
+  static Future<bool> getUpcomingJobs() async {
+    Response response = await RequestFactory.executeGet(
+      endpoint: '/jobs/me/upcoming',
+    );
+
+    if (response.statusCode == 200) {
+      return true;
+    }
+
+    return false;
+  }
+
   static JobListResponse mockList = JobListResponse(
     (b) => b
       ..upcomingJobs = ListBuilder<Job>(

@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:flutter_package_gaw_api/src/features/core/models/timespan.dart';
-import 'package:flutter_package_gaw_api/src/features/core/models/weighted_double.dart';
 import 'package:flutter_package_gaw_api/src/features/washers/models/washer_chart.dart';
 import 'package:flutter_package_gaw_api/src/shared/serializers.dart';
 

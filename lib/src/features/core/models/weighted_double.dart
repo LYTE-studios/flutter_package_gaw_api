@@ -3,9 +3,6 @@ library weighted_double;
 import 'dart:convert';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
-import 'package:flutter_package_gaw_api/src/features/core/models/address.dart';
-import 'package:flutter_package_gaw_api/src/features/jobs/enums/job_application_state.dart';
-import 'package:flutter_package_gaw_api/src/features/washers/models/washer.dart';
 import 'package:flutter_package_gaw_api/src/shared/serializers.dart';
 
 part 'weighted_double.g.dart';

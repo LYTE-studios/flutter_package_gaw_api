@@ -1,12 +1,7 @@
 import 'package:built_value/serializer.dart';
 import 'package:built_value/standard_json_plugin.dart';
-import 'package:flutter_package_gaw_api/src/features/core/models/address.dart';
-import 'package:flutter_package_gaw_api/src/features/customers/models/customer.dart';
-import 'package:flutter_package_gaw_api/src/features/jobs/enums/job_application_state.dart';
-import 'package:flutter_package_gaw_api/src/features/jobs/enums/job_state.dart';
-import 'package:flutter_package_gaw_api/src/features/jobs/models/job.dart';
-import 'package:flutter_package_gaw_api/src/features/jobs/models/job_application.dart';
-import 'package:flutter_package_gaw_api/src/features/washers/models/washer.dart';
+import 'package:flutter_package_gaw_api/flutter_package_gaw_api.dart';
+import 'package:flutter_package_gaw_api/src/features/authentication/request_models/login_request.dart';
 
 part 'serializers.g.dart';
 
@@ -18,6 +13,9 @@ part 'serializers.g.dart';
   JobState,
   JobApplicationState,
   Address,
+  TokenResponse,
+  RegisterRequest,
+  LoginRequest,
 ])
 final Serializers serializers =
     (_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();

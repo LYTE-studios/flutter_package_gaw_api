@@ -13,6 +13,9 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(JobApplication.serializer)
       ..add(JobApplicationState.serializer)
       ..add(JobState.serializer)
+      ..add(LoginRequest.serializer)
+      ..add(RegisterRequest.serializer)
+      ..add(TokenResponse.serializer)
       ..add(Washer.serializer))
     .build();
 

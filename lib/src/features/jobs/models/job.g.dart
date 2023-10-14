@@ -32,6 +32,12 @@ class _$JobSerializer implements StructuredSerializer<Job> {
       'state',
       serializers.serialize(object.state,
           specifiedType: const FullType(JobState)),
+      'max_washers',
+      serializers.serialize(object.maxWashers,
+          specifiedType: const FullType(int)),
+      'selected_washers',
+      serializers.serialize(object.selectedWashers,
+          specifiedType: const FullType(int)),
     ];
     Object? value;
     value = object.id;
@@ -91,6 +97,14 @@ class _$JobSerializer implements StructuredSerializer<Job> {
                   specifiedType: const FullType(JobApplication))!
               as JobApplication);
           break;
+        case 'max_washers':
+          result.maxWashers = serializers.deserialize(value,
+              specifiedType: const FullType(int))! as int;
+          break;
+        case 'selected_washers':
+          result.selectedWashers = serializers.deserialize(value,
+              specifiedType: const FullType(int))! as int;
+          break;
       }
     }
 
@@ -113,6 +127,10 @@ class _$Job extends Job {
   final JobState state;
   @override
   final JobApplication? application;
+  @override
+  final int maxWashers;
+  @override
+  final int selectedWashers;
 
   factory _$Job([void Function(JobBuilder)? updates]) =>
       (new JobBuilder()..update(updates))._build();
@@ -124,13 +142,18 @@ class _$Job extends Job {
       required this.customer,
       required this.address,
       required this.state,
-      this.application})
+      this.application,
+      required this.maxWashers,
+      required this.selectedWashers})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(startTime, r'Job', 'startTime');
     BuiltValueNullFieldError.checkNotNull(endTime, r'Job', 'endTime');
     BuiltValueNullFieldError.checkNotNull(customer, r'Job', 'customer');
     BuiltValueNullFieldError.checkNotNull(address, r'Job', 'address');
     BuiltValueNullFieldError.checkNotNull(state, r'Job', 'state');
+    BuiltValueNullFieldError.checkNotNull(maxWashers, r'Job', 'maxWashers');
+    BuiltValueNullFieldError.checkNotNull(
+        selectedWashers, r'Job', 'selectedWashers');
   }
 
   @override
@@ -150,7 +173,9 @@ class _$Job extends Job {
         customer == other.customer &&
         address == other.address &&
         state == other.state &&
-        application == other.application;
+        application == other.application &&
+        maxWashers == other.maxWashers &&
+        selectedWashers == other.selectedWashers;
   }
 
   @override
@@ -163,6 +188,8 @@ class _$Job extends Job {
     _$hash = $jc(_$hash, address.hashCode);
     _$hash = $jc(_$hash, state.hashCode);
     _$hash = $jc(_$hash, application.hashCode);
+    _$hash = $jc(_$hash, maxWashers.hashCode);
+    _$hash = $jc(_$hash, selectedWashers.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -176,7 +203,9 @@ class _$Job extends Job {
           ..add('customer', customer)
           ..add('address', address)
           ..add('state', state)
-          ..add('application', application))
+          ..add('application', application)
+          ..add('maxWashers', maxWashers)
+          ..add('selectedWashers', selectedWashers))
         .toString();
   }
 }
@@ -214,6 +243,15 @@ class JobBuilder implements Builder<Job, JobBuilder> {
   set application(JobApplicationBuilder? application) =>
       _$this._application = application;
 
+  int? _maxWashers;
+  int? get maxWashers => _$this._maxWashers;
+  set maxWashers(int? maxWashers) => _$this._maxWashers = maxWashers;
+
+  int? _selectedWashers;
+  int? get selectedWashers => _$this._selectedWashers;
+  set selectedWashers(int? selectedWashers) =>
+      _$this._selectedWashers = selectedWashers;
+
   JobBuilder();
 
   JobBuilder get _$this {
@@ -226,6 +264,8 @@ class JobBuilder implements Builder<Job, JobBuilder> {
       _address = $v.address.toBuilder();
       _state = $v.state;
       _application = $v.application?.toBuilder();
+      _maxWashers = $v.maxWashers;
+      _selectedWashers = $v.selectedWashers;
       _$v = null;
     }
     return this;
@@ -259,7 +299,11 @@ class JobBuilder implements Builder<Job, JobBuilder> {
               address: address.build(),
               state:
                   BuiltValueNullFieldError.checkNotNull(state, r'Job', 'state'),
-              application: _application?.build());
+              application: _application?.build(),
+              maxWashers: BuiltValueNullFieldError.checkNotNull(
+                  maxWashers, r'Job', 'maxWashers'),
+              selectedWashers: BuiltValueNullFieldError.checkNotNull(
+                  selectedWashers, r'Job', 'selectedWashers'));
     } catch (_) {
       late String _$failedField;
       try {

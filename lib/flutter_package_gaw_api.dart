@@ -1,4 +1,4 @@
-library flutter_package_gaw_ui;
+library flutter_package_gaw_api;
 
 export 'src/features/authentication/authentication_api.dart';
 export 'src/features/authentication/request_models/login_request.dart';

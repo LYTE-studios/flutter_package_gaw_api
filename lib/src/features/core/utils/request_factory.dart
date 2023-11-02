@@ -15,11 +15,12 @@ class RequestFactory {
   static Future<Response> executeGet({
     required String endpoint,
     bool useToken = true,
+    bool useRefreshToken = false,
   }) async {
     Map<String, String> headers = baseHeaders;
 
-    if (useToken && Configuration.token != null) {
-      headers['Authorization'] = Configuration.token!;
+    if (useToken && Configuration.access_token != null) {
+      headers['Authorization'] = Configuration.access_token!;
     }
 
     return await mainClient.get(
@@ -35,11 +36,12 @@ class RequestFactory {
     required String endpoint,
     dynamic body,
     bool useToken = true,
+    bool useRefreshToken = false,
   }) async {
     Map<String, String> headers = baseHeaders;
 
-    if (useToken && Configuration.token != null) {
-      headers['Authorization'] = Configuration.token!;
+    if (useToken && Configuration.access_token != null) {
+      headers['Authorization'] = Configuration.access_token!;
     }
 
     return await mainClient.post(

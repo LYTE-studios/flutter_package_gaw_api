@@ -17,7 +17,6 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(LoginRequest.serializer)
       ..add(RefreshRequest.serializer)
       ..add(RegisterRequest.serializer)
-      ..add(TokenResponse.serializer)
       ..add(Washer.serializer))
     .build();
 

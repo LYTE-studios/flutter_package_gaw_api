@@ -17,15 +17,22 @@ class _$JwtResponseSerializer implements StructuredSerializer<JwtResponse> {
   @override
   Iterable<Object?> serialize(Serializers serializers, JwtResponse object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object?>[
-      'access',
-      serializers.serialize(object.accessToken,
-          specifiedType: const FullType(String)),
-      'refresh',
-      serializers.serialize(object.refreshToken,
-          specifiedType: const FullType(String)),
-    ];
-
+    final result = <Object?>[];
+    Object? value;
+    value = object.accessToken;
+    if (value != null) {
+      result
+        ..add('access_token')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.refreshToken;
+    if (value != null) {
+      result
+        ..add('refresh_token')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     return result;
   }
 
@@ -40,13 +47,13 @@ class _$JwtResponseSerializer implements StructuredSerializer<JwtResponse> {
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
-        case 'access':
+        case 'access_token':
           result.accessToken = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+              specifiedType: const FullType(String)) as String?;
           break;
-        case 'refresh':
+        case 'refresh_token':
           result.refreshToken = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+              specifiedType: const FullType(String)) as String?;
           break;
       }
     }
@@ -57,20 +64,14 @@ class _$JwtResponseSerializer implements StructuredSerializer<JwtResponse> {
 
 class _$JwtResponse extends JwtResponse {
   @override
-  final String accessToken;
+  final String? accessToken;
   @override
-  final String refreshToken;
+  final String? refreshToken;
 
   factory _$JwtResponse([void Function(JwtResponseBuilder)? updates]) =>
       (new JwtResponseBuilder()..update(updates))._build();
 
-  _$JwtResponse._({required this.accessToken, required this.refreshToken})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        accessToken, r'JwtResponse', 'accessToken');
-    BuiltValueNullFieldError.checkNotNull(
-        refreshToken, r'JwtResponse', 'refreshToken');
-  }
+  _$JwtResponse._({this.accessToken, this.refreshToken}) : super._();
 
   @override
   JwtResponse rebuild(void Function(JwtResponseBuilder) updates) =>
@@ -145,10 +146,7 @@ class JwtResponseBuilder implements Builder<JwtResponse, JwtResponseBuilder> {
   _$JwtResponse _build() {
     final _$result = _$v ??
         new _$JwtResponse._(
-            accessToken: BuiltValueNullFieldError.checkNotNull(
-                accessToken, r'JwtResponse', 'accessToken'),
-            refreshToken: BuiltValueNullFieldError.checkNotNull(
-                refreshToken, r'JwtResponse', 'refreshToken'));
+            accessToken: accessToken, refreshToken: refreshToken);
     replace(_$result);
     return _$result;
   }

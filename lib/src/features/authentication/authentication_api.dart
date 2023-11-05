@@ -23,13 +23,18 @@ class AuthenticationApi {
     required LoginRequest request,
   }) async {
     Response response = await RequestFactory.executePost(
-      endpoint: '/token',
+      endpoint: '/auth',
       body: request.toJson(),
       useToken: false,
     );
 
     if (response.statusCode == 200) {
-      return JwtResponse.fromJson(response.data);
+      JwtResponse jwt = JwtResponse.fromJson(response.data)!;
+
+      Configuration.accessToken = jwt.accessToken;
+      Configuration.refreshToken = jwt.refreshToken;
+
+      return jwt;
     }
 
     if (response.statusCode == 403) {
@@ -62,7 +67,8 @@ class AuthenticationApi {
       throw Exception("Refresh token is expired. User needs to re-login.");
     }
 
-    RefreshRequest refreshRequest = RefreshRequest((b) => b..refreshToken = refreshToken);
+    RefreshRequest refreshRequest =
+    RefreshRequest((b) => b..refreshToken = refreshToken);
     Response response = await RequestFactory.executePost(
       endpoint: '/token/refresh/',
       body: refreshRequest.toJson(),
@@ -76,50 +82,17 @@ class AuthenticationApi {
     throw DioException(requestOptions: RequestOptions(), response: response);
   }
 
-  static bool isRefreshTokenExpired (String tokenToCheck){
+  static bool isRefreshTokenExpired(String tokenToCheck) {
     final parts = tokenToCheck.split('.');
     if (parts.length != 3) {
       return true; // Not a valid token format
     }
 
-    final payload = json.decode(utf8.decode(base64Url.decode(base64Url.normalize(parts[1]))));
-    final expiry = DateTime.fromMillisecondsSinceEpoch(0).add(Duration(seconds: int.tryParse(payload['exp'].toString()) ?? 0));
+    final payload = json
+        .decode(utf8.decode(base64Url.decode(base64Url.normalize(parts[1]))));
+    final expiry = DateTime.fromMillisecondsSinceEpoch(0)
+        .add(Duration(seconds: int.tryParse(payload['exp'].toString()) ?? 0));
 
     return expiry.isBefore(DateTime.now());
   }
-  /*static Future<TokenResponse?> credentialsLogin({
-    required LoginRequest request,
-  }) async {
-    Response response = await RequestFactory.executePost(
-      endpoint: '/token',
-      body: request.toJson(),
-      useToken: false,
-    );
-
-    if (response.statusCode == 200) {
-      return TokenResponse.fromJson(response.data);
-    }
-
-    if (response.statusCode == 403) {
-      return null;
-    }
-
-    throw DioException(requestOptions: RequestOptions(), response: response);
-  }
-
-  static Future<TokenResponse?> credentialsRegister({
-    required RegisterRequest request,
-  }) async {
-    Response response = await RequestFactory.executePost(
-      endpoint: '/register',
-      body: request.toJson(),
-      useToken: false,
-    );
-
-    if (response.statusCode == 200) {
-      return TokenResponse.fromJson(response.data);
-    }
-
-    throw DioException(requestOptions: RequestOptions(), response: response);
-  }*/
 }

@@ -3,7 +3,6 @@ library flutter_package_gaw_api;
 export 'src/features/authentication/authentication_api.dart';
 export 'src/features/authentication/request_models/login_request.dart';
 export 'src/features/authentication/request_models/register_request.dart';
-export 'src/features/authentication/response_models/token_response.dart';
 export 'src/features/core/models/address.dart';
 export 'src/features/core/models/timespan.dart';
 export 'src/features/core/models/weighted_double.dart';

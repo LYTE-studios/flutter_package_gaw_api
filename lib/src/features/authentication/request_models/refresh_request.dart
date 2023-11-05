@@ -15,7 +15,7 @@ abstract class RefreshRequest implements Built<RefreshRequest, RefreshRequestBui
   factory RefreshRequest([Function(RefreshRequestBuilder b) updates]) = _$RefreshRequest;
 
   // Refresh token field
-  @BuiltValueField(wireName: 'refresh_token')
+  @BuiltValueField(wireName: 'refresh')
   String get refreshToken;
 
   // Convert the object to JSON

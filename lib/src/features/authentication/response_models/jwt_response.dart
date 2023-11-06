@@ -13,10 +13,10 @@ abstract class JwtResponse implements Built<JwtResponse, JwtResponseBuilder> {
 
   factory JwtResponse([Function(JwtResponseBuilder b) updates]) = _$JwtResponse;
 
-  @BuiltValueField(wireName: 'access')
+  @BuiltValueField(wireName: 'access_token')
   String? get accessToken;
 
-  @BuiltValueField(wireName: 'refresh')
+  @BuiltValueField(wireName: 'refresh_token')
   String? get refreshToken;
 
   String toJson() {

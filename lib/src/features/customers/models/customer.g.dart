@@ -46,7 +46,7 @@ class _$CustomerSerializer implements StructuredSerializer<Customer> {
     value = object.profilePictureUrl;
     if (value != null) {
       result
-        ..add('profile_picture_url')
+        ..add('profile_picture')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
@@ -84,7 +84,7 @@ class _$CustomerSerializer implements StructuredSerializer<Customer> {
           result.company = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'profile_picture_url':
+        case 'profile_picture':
           result.profilePictureUrl = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;

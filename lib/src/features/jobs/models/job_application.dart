@@ -1,8 +1,10 @@
 library job_application;
 
 import 'dart:convert';
+
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
+import 'package:flutter_package_gaw_api/flutter_package_gaw_api.dart';
 import 'package:flutter_package_gaw_api/src/features/core/models/address.dart';
 import 'package:flutter_package_gaw_api/src/features/jobs/enums/job_application_state.dart';
 import 'package:flutter_package_gaw_api/src/features/washers/models/washer.dart';
@@ -22,6 +24,9 @@ abstract class JobApplication
 
   @BuiltValueField(wireName: 'washer')
   Washer get washer;
+
+  @BuiltValueField(wireName: 'job')
+  Job get job;
 
   @BuiltValueField(wireName: 'address')
   Address get address;

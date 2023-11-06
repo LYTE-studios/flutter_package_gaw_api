@@ -12,6 +12,39 @@ class RequestFactory {
     'Client': Configuration.clientSecret,
   };
 
+  static Future<void> _authenticate() async {
+    if (Configuration.accessToken == null) {
+      throw Exception('No access token');
+    }
+
+    if (Configuration.refreshToken == null) {
+      throw Exception('No refresh token');
+    }
+
+    if (!AuthenticationApi.isRefreshTokenExpired(Configuration.accessToken!)) {
+      return;
+    }
+
+    Response response = await mainClient.post(
+      '${Configuration.apiUrl}/token/refresh',
+      data: {
+        'refresh_token': Configuration.refreshToken,
+      },
+      options: Options(
+        contentType: 'application/json',
+        headers: baseHeaders,
+        receiveTimeout: defaultTimeout,
+      ),
+    );
+
+    if (response.statusCode == 200) {
+      Configuration.accessToken = response.data['access_token'];
+      Configuration.refreshToken = response.data['refresh_token'];
+    } else {
+      throw DioException(requestOptions: RequestOptions(), response: response);
+    }
+  }
+
   static Future<Response> executeGet({
     required String endpoint,
     bool useToken = true,
@@ -19,8 +52,9 @@ class RequestFactory {
   }) async {
     Map<String, String> headers = baseHeaders;
 
-    if (useToken && Configuration.access_token != null) {
-      headers['Authorization'] = Configuration.access_token!;
+    if (useToken && Configuration.accessToken != null) {
+      _authenticate();
+      headers['Authorization'] = Configuration.accessToken!;
     }
 
     return await mainClient.get(
@@ -40,8 +74,9 @@ class RequestFactory {
   }) async {
     Map<String, String> headers = baseHeaders;
 
-    if (useToken && Configuration.access_token != null) {
-      headers['Authorization'] = Configuration.access_token!;
+    if (useToken && Configuration.accessToken != null) {
+      _authenticate();
+      headers['Authorization'] = Configuration.accessToken!;
     }
 
     return await mainClient.post(

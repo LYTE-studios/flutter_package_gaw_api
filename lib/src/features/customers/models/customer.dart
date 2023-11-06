@@ -27,7 +27,7 @@ abstract class Customer implements Built<Customer, CustomerBuilder> {
   @BuiltValueField(wireName: 'company')
   String? get company;
 
-  @BuiltValueField(wireName: 'profile_picture_url')
+  @BuiltValueField(wireName: 'profile_picture')
   String? get profilePictureUrl;
 
   String toJson() {

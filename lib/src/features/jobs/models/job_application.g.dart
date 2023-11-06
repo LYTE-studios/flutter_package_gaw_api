@@ -23,6 +23,8 @@ class _$JobApplicationSerializer
       'washer',
       serializers.serialize(object.washer,
           specifiedType: const FullType(Washer)),
+      'job',
+      serializers.serialize(object.job, specifiedType: const FullType(Job)),
       'address',
       serializers.serialize(object.address,
           specifiedType: const FullType(Address)),
@@ -67,6 +69,10 @@ class _$JobApplicationSerializer
           result.washer.replace(serializers.deserialize(value,
               specifiedType: const FullType(Washer))! as Washer);
           break;
+        case 'job':
+          result.job.replace(serializers.deserialize(value,
+              specifiedType: const FullType(Job))! as Job);
+          break;
         case 'address':
           result.address.replace(serializers.deserialize(value,
               specifiedType: const FullType(Address))! as Address);
@@ -97,6 +103,8 @@ class _$JobApplication extends JobApplication {
   @override
   final Washer washer;
   @override
+  final Job job;
+  @override
   final Address address;
   @override
   final JobApplicationState state;
@@ -111,12 +119,14 @@ class _$JobApplication extends JobApplication {
   _$JobApplication._(
       {this.id,
       required this.washer,
+      required this.job,
       required this.address,
       required this.state,
       required this.distance,
       required this.noTravelCosts})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(washer, r'JobApplication', 'washer');
+    BuiltValueNullFieldError.checkNotNull(job, r'JobApplication', 'job');
     BuiltValueNullFieldError.checkNotNull(
         address, r'JobApplication', 'address');
     BuiltValueNullFieldError.checkNotNull(state, r'JobApplication', 'state');
@@ -140,6 +150,7 @@ class _$JobApplication extends JobApplication {
     return other is JobApplication &&
         id == other.id &&
         washer == other.washer &&
+        job == other.job &&
         address == other.address &&
         state == other.state &&
         distance == other.distance &&
@@ -151,6 +162,7 @@ class _$JobApplication extends JobApplication {
     var _$hash = 0;
     _$hash = $jc(_$hash, id.hashCode);
     _$hash = $jc(_$hash, washer.hashCode);
+    _$hash = $jc(_$hash, job.hashCode);
     _$hash = $jc(_$hash, address.hashCode);
     _$hash = $jc(_$hash, state.hashCode);
     _$hash = $jc(_$hash, distance.hashCode);
@@ -164,6 +176,7 @@ class _$JobApplication extends JobApplication {
     return (newBuiltValueToStringHelper(r'JobApplication')
           ..add('id', id)
           ..add('washer', washer)
+          ..add('job', job)
           ..add('address', address)
           ..add('state', state)
           ..add('distance', distance)
@@ -183,6 +196,10 @@ class JobApplicationBuilder
   WasherBuilder? _washer;
   WasherBuilder get washer => _$this._washer ??= new WasherBuilder();
   set washer(WasherBuilder? washer) => _$this._washer = washer;
+
+  JobBuilder? _job;
+  JobBuilder get job => _$this._job ??= new JobBuilder();
+  set job(JobBuilder? job) => _$this._job = job;
 
   AddressBuilder? _address;
   AddressBuilder get address => _$this._address ??= new AddressBuilder();
@@ -208,6 +225,7 @@ class JobApplicationBuilder
     if ($v != null) {
       _id = $v.id;
       _washer = $v.washer.toBuilder();
+      _job = $v.job.toBuilder();
       _address = $v.address.toBuilder();
       _state = $v.state;
       _distance = $v.distance;
@@ -238,6 +256,7 @@ class JobApplicationBuilder
           new _$JobApplication._(
               id: id,
               washer: washer.build(),
+              job: job.build(),
               address: address.build(),
               state: BuiltValueNullFieldError.checkNotNull(
                   state, r'JobApplication', 'state'),
@@ -250,6 +269,8 @@ class JobApplicationBuilder
       try {
         _$failedField = 'washer';
         washer.build();
+        _$failedField = 'job';
+        job.build();
         _$failedField = 'address';
         address.build();
       } catch (e) {

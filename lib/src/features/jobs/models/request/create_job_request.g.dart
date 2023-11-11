@@ -1,23 +1,28 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'job.dart';
+part of 'create_job_request.dart';
 
 // **************************************************************************
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<Job> _$jobSerializer = new _$JobSerializer();
+Serializer<CreateJobRequest> _$createJobRequestSerializer =
+    new _$CreateJobRequestSerializer();
 
-class _$JobSerializer implements StructuredSerializer<Job> {
+class _$CreateJobRequestSerializer
+    implements StructuredSerializer<CreateJobRequest> {
   @override
-  final Iterable<Type> types = const [Job, _$Job];
+  final Iterable<Type> types = const [CreateJobRequest, _$CreateJobRequest];
   @override
-  final String wireName = 'Job';
+  final String wireName = 'CreateJobRequest';
 
   @override
-  Iterable<Object?> serialize(Serializers serializers, Job object,
+  Iterable<Object?> serialize(Serializers serializers, CreateJobRequest object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
+      'title',
+      serializers.serialize(object.title,
+          specifiedType: const FullType(String)),
       'address',
       serializers.serialize(object.address,
           specifiedType: const FullType(Address)),
@@ -27,34 +32,14 @@ class _$JobSerializer implements StructuredSerializer<Job> {
       'end_time',
       serializers.serialize(object.endTime,
           specifiedType: const FullType(String)),
+      'customer_id',
+      serializers.serialize(object.customerId,
+          specifiedType: const FullType(String)),
       'max_washers',
       serializers.serialize(object.maxWashers,
           specifiedType: const FullType(int)),
-      'selected_washers',
-      serializers.serialize(object.selectedWashers,
-          specifiedType: const FullType(int)),
-      'state',
-      serializers.serialize(object.state,
-          specifiedType: const FullType(JobState)),
-      'customer',
-      serializers.serialize(object.customer,
-          specifiedType: const FullType(Customer)),
     ];
     Object? value;
-    value = object.id;
-    if (value != null) {
-      result
-        ..add('id')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
-    value = object.title;
-    if (value != null) {
-      result
-        ..add('title')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
     value = object.description;
     if (value != null) {
       result
@@ -81,15 +66,16 @@ class _$JobSerializer implements StructuredSerializer<Job> {
       result
         ..add('is_draft')
         ..add(
-            serializers.serialize(value, specifiedType: const FullType(bool)));
+            serializers.serialize(value, specifiedType: const FullType(Bool)));
     }
     return result;
   }
 
   @override
-  Job deserialize(Serializers serializers, Iterable<Object?> serialized,
+  CreateJobRequest deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new JobBuilder();
+    final result = new CreateJobRequestBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -97,13 +83,9 @@ class _$JobSerializer implements StructuredSerializer<Job> {
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
-        case 'id':
-          result.id = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
-          break;
         case 'title':
           result.title = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'description':
           result.description = serializers.deserialize(value,
@@ -121,6 +103,14 @@ class _$JobSerializer implements StructuredSerializer<Job> {
           result.endTime = serializers.deserialize(value,
               specifiedType: const FullType(String))! as String;
           break;
+        case 'customer_id':
+          result.customerId = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'max_washers':
+          result.maxWashers = serializers.deserialize(value,
+              specifiedType: const FullType(int))! as int;
+          break;
         case 'application_start_time':
           result.applicationStartTime = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
@@ -129,25 +119,9 @@ class _$JobSerializer implements StructuredSerializer<Job> {
           result.applicationEndTime = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'max_washers':
-          result.maxWashers = serializers.deserialize(value,
-              specifiedType: const FullType(int))! as int;
-          break;
-        case 'selected_washers':
-          result.selectedWashers = serializers.deserialize(value,
-              specifiedType: const FullType(int))! as int;
-          break;
         case 'is_draft':
           result.isDraft = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool?;
-          break;
-        case 'state':
-          result.state = serializers.deserialize(value,
-              specifiedType: const FullType(JobState))! as JobState;
-          break;
-        case 'customer':
-          result.customer.replace(serializers.deserialize(value,
-              specifiedType: const FullType(Customer))! as Customer);
+              specifiedType: const FullType(Bool)) as Bool?;
           break;
       }
     }
@@ -156,11 +130,9 @@ class _$JobSerializer implements StructuredSerializer<Job> {
   }
 }
 
-class _$Job extends Job {
+class _$CreateJobRequest extends CreateJobRequest {
   @override
-  final String? id;
-  @override
-  final String? title;
+  final String title;
   @override
   final String? description;
   @override
@@ -170,120 +142,106 @@ class _$Job extends Job {
   @override
   final String endTime;
   @override
+  final String customerId;
+  @override
+  final int maxWashers;
+  @override
   final String? applicationStartTime;
   @override
   final String? applicationEndTime;
   @override
-  final int maxWashers;
-  @override
-  final int selectedWashers;
-  @override
-  final bool? isDraft;
-  @override
-  final JobState state;
-  @override
-  final Customer customer;
+  final Bool? isDraft;
 
-  factory _$Job([void Function(JobBuilder)? updates]) =>
-      (new JobBuilder()..update(updates))._build();
+  factory _$CreateJobRequest(
+          [void Function(CreateJobRequestBuilder)? updates]) =>
+      (new CreateJobRequestBuilder()..update(updates))._build();
 
-  _$Job._(
-      {this.id,
-      this.title,
+  _$CreateJobRequest._(
+      {required this.title,
       this.description,
       required this.address,
       required this.startTime,
       required this.endTime,
+      required this.customerId,
+      required this.maxWashers,
       this.applicationStartTime,
       this.applicationEndTime,
-      required this.maxWashers,
-      required this.selectedWashers,
-      this.isDraft,
-      required this.state,
-      required this.customer})
+      this.isDraft})
       : super._() {
-    BuiltValueNullFieldError.checkNotNull(address, r'Job', 'address');
-    BuiltValueNullFieldError.checkNotNull(startTime, r'Job', 'startTime');
-    BuiltValueNullFieldError.checkNotNull(endTime, r'Job', 'endTime');
-    BuiltValueNullFieldError.checkNotNull(maxWashers, r'Job', 'maxWashers');
+    BuiltValueNullFieldError.checkNotNull(title, r'CreateJobRequest', 'title');
     BuiltValueNullFieldError.checkNotNull(
-        selectedWashers, r'Job', 'selectedWashers');
-    BuiltValueNullFieldError.checkNotNull(state, r'Job', 'state');
-    BuiltValueNullFieldError.checkNotNull(customer, r'Job', 'customer');
+        address, r'CreateJobRequest', 'address');
+    BuiltValueNullFieldError.checkNotNull(
+        startTime, r'CreateJobRequest', 'startTime');
+    BuiltValueNullFieldError.checkNotNull(
+        endTime, r'CreateJobRequest', 'endTime');
+    BuiltValueNullFieldError.checkNotNull(
+        customerId, r'CreateJobRequest', 'customerId');
+    BuiltValueNullFieldError.checkNotNull(
+        maxWashers, r'CreateJobRequest', 'maxWashers');
   }
 
   @override
-  Job rebuild(void Function(JobBuilder) updates) =>
+  CreateJobRequest rebuild(void Function(CreateJobRequestBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  JobBuilder toBuilder() => new JobBuilder()..replace(this);
+  CreateJobRequestBuilder toBuilder() =>
+      new CreateJobRequestBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is Job &&
-        id == other.id &&
+    return other is CreateJobRequest &&
         title == other.title &&
         description == other.description &&
         address == other.address &&
         startTime == other.startTime &&
         endTime == other.endTime &&
+        customerId == other.customerId &&
+        maxWashers == other.maxWashers &&
         applicationStartTime == other.applicationStartTime &&
         applicationEndTime == other.applicationEndTime &&
-        maxWashers == other.maxWashers &&
-        selectedWashers == other.selectedWashers &&
-        isDraft == other.isDraft &&
-        state == other.state &&
-        customer == other.customer;
+        isDraft == other.isDraft;
   }
 
   @override
   int get hashCode {
     var _$hash = 0;
-    _$hash = $jc(_$hash, id.hashCode);
     _$hash = $jc(_$hash, title.hashCode);
     _$hash = $jc(_$hash, description.hashCode);
     _$hash = $jc(_$hash, address.hashCode);
     _$hash = $jc(_$hash, startTime.hashCode);
     _$hash = $jc(_$hash, endTime.hashCode);
+    _$hash = $jc(_$hash, customerId.hashCode);
+    _$hash = $jc(_$hash, maxWashers.hashCode);
     _$hash = $jc(_$hash, applicationStartTime.hashCode);
     _$hash = $jc(_$hash, applicationEndTime.hashCode);
-    _$hash = $jc(_$hash, maxWashers.hashCode);
-    _$hash = $jc(_$hash, selectedWashers.hashCode);
     _$hash = $jc(_$hash, isDraft.hashCode);
-    _$hash = $jc(_$hash, state.hashCode);
-    _$hash = $jc(_$hash, customer.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(r'Job')
-          ..add('id', id)
+    return (newBuiltValueToStringHelper(r'CreateJobRequest')
           ..add('title', title)
           ..add('description', description)
           ..add('address', address)
           ..add('startTime', startTime)
           ..add('endTime', endTime)
+          ..add('customerId', customerId)
+          ..add('maxWashers', maxWashers)
           ..add('applicationStartTime', applicationStartTime)
           ..add('applicationEndTime', applicationEndTime)
-          ..add('maxWashers', maxWashers)
-          ..add('selectedWashers', selectedWashers)
-          ..add('isDraft', isDraft)
-          ..add('state', state)
-          ..add('customer', customer))
+          ..add('isDraft', isDraft))
         .toString();
   }
 }
 
-class JobBuilder implements Builder<Job, JobBuilder> {
-  _$Job? _$v;
-
-  String? _id;
-  String? get id => _$this._id;
-  set id(String? id) => _$this._id = id;
+class CreateJobRequestBuilder
+    implements Builder<CreateJobRequest, CreateJobRequestBuilder> {
+  _$CreateJobRequest? _$v;
 
   String? _title;
   String? get title => _$this._title;
@@ -305,6 +263,14 @@ class JobBuilder implements Builder<Job, JobBuilder> {
   String? get endTime => _$this._endTime;
   set endTime(String? endTime) => _$this._endTime = endTime;
 
+  String? _customerId;
+  String? get customerId => _$this._customerId;
+  set customerId(String? customerId) => _$this._customerId = customerId;
+
+  int? _maxWashers;
+  int? get maxWashers => _$this._maxWashers;
+  set maxWashers(int? maxWashers) => _$this._maxWashers = maxWashers;
+
   String? _applicationStartTime;
   String? get applicationStartTime => _$this._applicationStartTime;
   set applicationStartTime(String? applicationStartTime) =>
@@ -315,98 +281,72 @@ class JobBuilder implements Builder<Job, JobBuilder> {
   set applicationEndTime(String? applicationEndTime) =>
       _$this._applicationEndTime = applicationEndTime;
 
-  int? _maxWashers;
-  int? get maxWashers => _$this._maxWashers;
-  set maxWashers(int? maxWashers) => _$this._maxWashers = maxWashers;
+  Bool? _isDraft;
+  Bool? get isDraft => _$this._isDraft;
+  set isDraft(Bool? isDraft) => _$this._isDraft = isDraft;
 
-  int? _selectedWashers;
-  int? get selectedWashers => _$this._selectedWashers;
-  set selectedWashers(int? selectedWashers) =>
-      _$this._selectedWashers = selectedWashers;
+  CreateJobRequestBuilder();
 
-  bool? _isDraft;
-  bool? get isDraft => _$this._isDraft;
-  set isDraft(bool? isDraft) => _$this._isDraft = isDraft;
-
-  JobState? _state;
-  JobState? get state => _$this._state;
-  set state(JobState? state) => _$this._state = state;
-
-  CustomerBuilder? _customer;
-  CustomerBuilder get customer => _$this._customer ??= new CustomerBuilder();
-  set customer(CustomerBuilder? customer) => _$this._customer = customer;
-
-  JobBuilder();
-
-  JobBuilder get _$this {
+  CreateJobRequestBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _id = $v.id;
       _title = $v.title;
       _description = $v.description;
       _address = $v.address.toBuilder();
       _startTime = $v.startTime;
       _endTime = $v.endTime;
+      _customerId = $v.customerId;
+      _maxWashers = $v.maxWashers;
       _applicationStartTime = $v.applicationStartTime;
       _applicationEndTime = $v.applicationEndTime;
-      _maxWashers = $v.maxWashers;
-      _selectedWashers = $v.selectedWashers;
       _isDraft = $v.isDraft;
-      _state = $v.state;
-      _customer = $v.customer.toBuilder();
       _$v = null;
     }
     return this;
   }
 
   @override
-  void replace(Job other) {
+  void replace(CreateJobRequest other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$Job;
+    _$v = other as _$CreateJobRequest;
   }
 
   @override
-  void update(void Function(JobBuilder)? updates) {
+  void update(void Function(CreateJobRequestBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  Job build() => _build();
+  CreateJobRequest build() => _build();
 
-  _$Job _build() {
-    _$Job _$result;
+  _$CreateJobRequest _build() {
+    _$CreateJobRequest _$result;
     try {
       _$result = _$v ??
-          new _$Job._(
-              id: id,
-              title: title,
+          new _$CreateJobRequest._(
+              title: BuiltValueNullFieldError.checkNotNull(
+                  title, r'CreateJobRequest', 'title'),
               description: description,
               address: address.build(),
               startTime: BuiltValueNullFieldError.checkNotNull(
-                  startTime, r'Job', 'startTime'),
+                  startTime, r'CreateJobRequest', 'startTime'),
               endTime: BuiltValueNullFieldError.checkNotNull(
-                  endTime, r'Job', 'endTime'),
+                  endTime, r'CreateJobRequest', 'endTime'),
+              customerId: BuiltValueNullFieldError.checkNotNull(
+                  customerId, r'CreateJobRequest', 'customerId'),
+              maxWashers: BuiltValueNullFieldError.checkNotNull(
+                  maxWashers, r'CreateJobRequest', 'maxWashers'),
               applicationStartTime: applicationStartTime,
               applicationEndTime: applicationEndTime,
-              maxWashers: BuiltValueNullFieldError.checkNotNull(
-                  maxWashers, r'Job', 'maxWashers'),
-              selectedWashers: BuiltValueNullFieldError.checkNotNull(
-                  selectedWashers, r'Job', 'selectedWashers'),
-              isDraft: isDraft,
-              state:
-                  BuiltValueNullFieldError.checkNotNull(state, r'Job', 'state'),
-              customer: customer.build());
+              isDraft: isDraft);
     } catch (_) {
       late String _$failedField;
       try {
         _$failedField = 'address';
         address.build();
-
-        _$failedField = 'customer';
-        customer.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            r'Job', _$failedField, e.toString());
+            r'CreateJobRequest', _$failedField, e.toString());
       }
       rethrow;
     }

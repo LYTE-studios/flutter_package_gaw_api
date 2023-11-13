@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_package_gaw_api/src/users/response_models/hello_there_response.dart';
 
@@ -11,7 +13,8 @@ class UsersApi {
     );
 
     if (response.statusCode == 200) {
-      return HelloThereResponse.fromJson(response.data);
+      String responseData = json.encode(response.data);
+      return HelloThereResponse.fromJson(responseData);
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);

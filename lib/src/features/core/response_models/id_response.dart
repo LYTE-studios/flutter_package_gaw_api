@@ -13,9 +13,7 @@ abstract class IdResponse implements Built<IdResponse, IdResponseBuilder> {
 
   factory IdResponse([Function(IdResponseBuilder b) updates]) = _$IdResponse;
 
-
-  // TODO: change to be id (generic)
-  @BuiltValueField(wireName: 'user_id')
+  @BuiltValueField(wireName: 'id')
   String get id;
 
   String toJson() {

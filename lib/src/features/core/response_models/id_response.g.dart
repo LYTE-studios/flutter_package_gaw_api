@@ -18,7 +18,7 @@ class _$IdResponseSerializer implements StructuredSerializer<IdResponse> {
   Iterable<Object?> serialize(Serializers serializers, IdResponse object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
-      'user_id',
+      'id',
       serializers.serialize(object.id, specifiedType: const FullType(String)),
     ];
 
@@ -36,7 +36,7 @@ class _$IdResponseSerializer implements StructuredSerializer<IdResponse> {
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
-        case 'user_id':
+        case 'id':
           result.id = serializers.deserialize(value,
               specifiedType: const FullType(String))! as String;
           break;

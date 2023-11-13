@@ -1,9 +1,24 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_package_gaw_api/flutter_package_gaw_api.dart';
-import 'package:flutter_package_gaw_api/src/features/core/models/timespan.dart';
-import 'package:flutter_package_gaw_api/src/features/washers/models/washer_chart.dart';
-import 'package:flutter_package_gaw_api/src/features/washers/models/washer_statistics.dart';
+import 'package:flutter_package_gaw_api/src/features/core/response_models/id_response.dart';
+
+import '../core/utils/request_factory.dart';
 
 class WashersApi {
+  static Future<IdResponse?> registerWasher(
+      {required RegisterRequest request}) async {
+    Response response = await RequestFactory.executePost(
+      endpoint: '/washers/register',
+      body: request.toJson(),
+    );
+
+    if (response.statusCode == 200) {
+      return IdResponse.fromJson(response.data);
+    }
+
+    throw DioException(requestOptions: RequestOptions(), response: response);
+  }
+
   static Future<WasherStatistics> getStatisticsForWasher(
       {required String washerId}) async {
     return WasherStatistics(

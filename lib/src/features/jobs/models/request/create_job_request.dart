@@ -25,10 +25,10 @@ abstract class CreateJobRequest implements Built<CreateJobRequest, CreateJobRequ
   Address get address;
 
   @BuiltValueField(wireName: 'start_time')
-  int get startTime;
+  String get startTime;
 
   @BuiltValueField(wireName: 'end_time')
-  int get endTime;
+  String get endTime;
 
   @BuiltValueField(wireName: 'customer_id')
   String get customerId;
@@ -37,10 +37,10 @@ abstract class CreateJobRequest implements Built<CreateJobRequest, CreateJobRequ
   int get maxWashers;
 
   @BuiltValueField(wireName: 'application_start_time')
-  int? get applicationStartTime;
+  String? get applicationStartTime;
 
   @BuiltValueField(wireName: 'application_end_time')
-  int? get applicationEndTime;
+  String? get applicationEndTime;
 
   @BuiltValueField(wireName: 'is_draft')
   Bool? get isDraft;

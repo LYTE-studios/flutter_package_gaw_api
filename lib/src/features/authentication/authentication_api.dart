@@ -54,7 +54,7 @@ class AuthenticationApi {
     RefreshRequest refreshRequest =
         RefreshRequest((b) => b..refreshToken = refreshToken);
     Response response = await RequestFactory.executePost(
-      endpoint: '/token/refresh/',
+      endpoint: '/token/refresh',
       body: refreshRequest.toJson(),
       useToken: false,
     );

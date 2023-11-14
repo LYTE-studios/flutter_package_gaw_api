@@ -26,7 +26,7 @@ class RequestFactory {
     }
 
     Response response = await mainClient.post(
-      '${Configuration.apiUrl}/token/refresh',
+      '${Configuration.apiUrl}/token/refresh/',
       data: {
         'refresh_token': Configuration.refreshToken,
       },

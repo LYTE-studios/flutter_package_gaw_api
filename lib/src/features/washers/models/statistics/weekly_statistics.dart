@@ -36,7 +36,7 @@ abstract class WeeklyStatistics implements Built<WeeklyStatistics, WeeklyStatist
   int get upcomingJobsCount;
 
   @BuiltValueField(wireName: 'daily_hours')
-  BuiltMap<String, DailyStatistics> get dailyHours;
+  DailyStatistics get dailyHours;
 
   String toJson() {
     return json.encode(

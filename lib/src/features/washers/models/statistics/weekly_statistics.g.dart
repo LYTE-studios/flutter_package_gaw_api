@@ -43,8 +43,7 @@ class _$WeeklyStatisticsSerializer
           specifiedType: const FullType(int)),
       'daily_hours',
       serializers.serialize(object.dailyHours,
-          specifiedType: const FullType(BuiltMap,
-              const [const FullType(String), const FullType(DailyStatistics)])),
+          specifiedType: const FullType(DailyStatistics)),
     ];
 
     return result;
@@ -92,10 +91,8 @@ class _$WeeklyStatisticsSerializer
           break;
         case 'daily_hours':
           result.dailyHours.replace(serializers.deserialize(value,
-              specifiedType: const FullType(BuiltMap, const [
-                const FullType(String),
-                const FullType(DailyStatistics)
-              ]))!);
+                  specifiedType: const FullType(DailyStatistics))!
+              as DailyStatistics);
           break;
       }
     }
@@ -120,7 +117,7 @@ class _$WeeklyStatistics extends WeeklyStatistics {
   @override
   final int upcomingJobsCount;
   @override
-  final BuiltMap<String, DailyStatistics> dailyHours;
+  final DailyStatistics dailyHours;
 
   factory _$WeeklyStatistics(
           [void Function(WeeklyStatisticsBuilder)? updates]) =>
@@ -242,10 +239,10 @@ class WeeklyStatisticsBuilder
   set upcomingJobsCount(int? upcomingJobsCount) =>
       _$this._upcomingJobsCount = upcomingJobsCount;
 
-  MapBuilder<String, DailyStatistics>? _dailyHours;
-  MapBuilder<String, DailyStatistics> get dailyHours =>
-      _$this._dailyHours ??= new MapBuilder<String, DailyStatistics>();
-  set dailyHours(MapBuilder<String, DailyStatistics>? dailyHours) =>
+  DailyStatisticsBuilder? _dailyHours;
+  DailyStatisticsBuilder get dailyHours =>
+      _$this._dailyHours ??= new DailyStatisticsBuilder();
+  set dailyHours(DailyStatisticsBuilder? dailyHours) =>
       _$this._dailyHours = dailyHours;
 
   WeeklyStatisticsBuilder();

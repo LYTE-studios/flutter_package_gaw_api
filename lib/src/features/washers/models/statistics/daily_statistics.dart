@@ -13,9 +13,27 @@ abstract class DailyStatistics implements Built<DailyStatistics, DailyStatistics
 
   factory DailyStatistics([void Function(DailyStatisticsBuilder) updates]) = _$DailyStatistics;
 
-  @BuiltValueField(wireName: 'hours_worked')
-  double get hoursWorked;
-
+  @BuiltValueField(wireName: 'Mon')
+  int get monday;
+  
+  @BuiltValueField(wireName: 'Tue')
+  int get tuesday; 
+  
+  @BuiltValueField(wireName: 'Wed')
+  int get wednesday; 
+  
+  @BuiltValueField(wireName: 'Thu')
+  int get thursday; 
+  
+  @BuiltValueField(wireName: 'Fri')
+  int get friday; 
+  
+  @BuiltValueField(wireName: 'Sat')
+  int get saturday; 
+  
+  @BuiltValueField(wireName: 'Sun')
+  int get sunday;
+  
   String toJson() {
     return json.encode(
       serializers.serializeWith(DailyStatistics.serializer, this),

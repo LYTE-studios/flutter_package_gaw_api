@@ -35,10 +35,6 @@ Serializers _$serializers = (new Serializers().toBuilder()
           const FullType(BuiltList, const [const FullType(YearlyStatistics)]),
           () => new ListBuilder<YearlyStatistics>())
       ..addBuilderFactory(
-          const FullType(BuiltMap,
-              const [const FullType(String), const FullType(DailyStatistics)]),
-          () => new MapBuilder<String, DailyStatistics>())
-      ..addBuilderFactory(
           const FullType(BuiltMap, const [
             const FullType(String),
             const FullType(MonthlyStatistics)

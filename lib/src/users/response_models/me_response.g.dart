@@ -48,8 +48,7 @@ class _$MeResponseSerializer implements StructuredSerializer<MeResponse> {
     if (value != null) {
       result
         ..add('date_of_birth')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(DateTime)));
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
     }
     value = object.address;
     if (value != null) {
@@ -104,7 +103,7 @@ class _$MeResponseSerializer implements StructuredSerializer<MeResponse> {
           break;
         case 'date_of_birth':
           result.dateOfBirth = serializers.deserialize(value,
-              specifiedType: const FullType(DateTime)) as DateTime?;
+              specifiedType: const FullType(int)) as int?;
           break;
         case 'address':
           result.address.replace(serializers.deserialize(value,
@@ -135,7 +134,7 @@ class _$MeResponse extends MeResponse {
   @override
   final String? email;
   @override
-  final DateTime? dateOfBirth;
+  final int? dateOfBirth;
   @override
   final Address? address;
   @override
@@ -229,9 +228,9 @@ class MeResponseBuilder implements Builder<MeResponse, MeResponseBuilder> {
   String? get email => _$this._email;
   set email(String? email) => _$this._email = email;
 
-  DateTime? _dateOfBirth;
-  DateTime? get dateOfBirth => _$this._dateOfBirth;
-  set dateOfBirth(DateTime? dateOfBirth) => _$this._dateOfBirth = dateOfBirth;
+  int? _dateOfBirth;
+  int? get dateOfBirth => _$this._dateOfBirth;
+  set dateOfBirth(int? dateOfBirth) => _$this._dateOfBirth = dateOfBirth;
 
   AddressBuilder? _address;
   AddressBuilder get address => _$this._address ??= new AddressBuilder();

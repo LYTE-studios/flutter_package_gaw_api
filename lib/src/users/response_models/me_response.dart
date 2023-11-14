@@ -28,7 +28,7 @@ abstract class MeResponse
   String? get email;
 
   @BuiltValueField(wireName: 'date_of_birth')
-  DateTime? get dateOfBirth;
+  int? get dateOfBirth;
 
   @BuiltValueField(wireName: 'address')
   Address? get address;
@@ -40,19 +40,15 @@ abstract class MeResponse
   String? get phoneNumber;
 
   String toJson() {
-    var serialized = serializers.serializeWith(Job.serializer, this) as Map<String, dynamic>;
-    if (serialized['date_of_birth'] != null) {
-        serialized['date_of_birth'] = (serialized['date_of_birth'] as DateTime).toIso8601String();
-    }
-    return json.encode(serialized);
+    return json.encode(
+      serializers.serializeWith(MeResponse.serializer, this),
+    );
   }
 
   static MeResponse? fromJson(String jsonString) {
-        var decodedJson = json.decode(jsonString);
-    decodedJson['date_of_birth'] = DateTime.parse(decodedJson['date_of_birth']);
     return serializers.deserializeWith(
       MeResponse.serializer,
-      decodedJson,
+      json.decode(jsonString),
     );
   }
 

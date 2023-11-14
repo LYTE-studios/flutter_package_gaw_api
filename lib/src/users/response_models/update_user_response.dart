@@ -1,0 +1,37 @@
+library update_user_response;
+
+import 'dart:convert';
+
+import 'package:built_value/built_value.dart';
+import 'package:built_value/serializer.dart';
+import 'package:flutter_package_gaw_api/src/shared/serializers.dart';
+
+part 'update_user_response.g.dart';
+
+abstract class UpdateUserResponse 
+    implements Built<UpdateUserResponse, UpdateUserResponseBuilder> {
+
+  UpdateUserResponse._();
+
+  factory UpdateUserResponse([Function(UpdateUserResponseBuilder b) updates]) =
+      _$UpdateUserResponse;
+
+  @BuiltValueField(wireName: 'user_id')
+  String get userId;
+
+  String toJson() {
+    return json.encode(
+      serializers.serializeWith(UpdateUserResponse.serializer, this),
+    );
+  }
+
+  static UpdateUserResponse? fromJson(String jsonString) {
+    return serializers.deserializeWith(
+      UpdateUserResponse.serializer,
+      json.decode(jsonString),
+    );
+  }
+
+  static Serializer<UpdateUserResponse> get serializer =>
+      _$updateUserResponseSerializer;    
+}

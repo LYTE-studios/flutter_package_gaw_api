@@ -12,6 +12,10 @@ import 'package:flutter_package_gaw_api/src/features/jobs/models/request/user_ba
 import 'package:flutter_package_gaw_api/src/features/jobs/models/response/time_registration_response.dart';
 import 'package:flutter_package_gaw_api/src/features/jobs/models/time_registration.dart';
 import 'package:flutter_package_gaw_api/src/features/jobs/transfer_models/time_registration_list_response.dart';
+import 'package:flutter_package_gaw_api/src/users/request_models/update_language_request.dart';
+import 'package:flutter_package_gaw_api/src/users/request_models/update_user_request.dart';
+import 'package:flutter_package_gaw_api/src/users/response_models/me_response.dart';
+import 'package:flutter_package_gaw_api/src/users/response_models/update_user_response.dart';
 
 part 'serializers.g.dart';
 
@@ -36,6 +40,10 @@ part 'serializers.g.dart';
   TimeRegistrationListResponse,
   TimeRegistrationRequest,
   CreateJobRequest,
+  UpdateLanguageRequest,
+  UpdateUserRequest,
+  UpdateUserResponse,
+  MeResponse,
 ])
 final Serializers serializers =
     (_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();

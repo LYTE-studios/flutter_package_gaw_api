@@ -7,8 +7,6 @@ import 'package:flutter_package_gaw_api/src/features/jobs/models/request/create_
 import 'package:flutter_package_gaw_api/src/features/jobs/models/request/time_registration_request.dart';
 import 'package:flutter_package_gaw_api/src/features/jobs/models/request/user_based_jobs_request.dart';
 import 'package:flutter_package_gaw_api/src/features/jobs/models/response/time_registration_response.dart';
-import 'package:flutter_package_gaw_api/src/features/jobs/models/time_registration.dart';
-import 'package:flutter_package_gaw_api/src/features/jobs/transfer_models/application_list_response.dart';
 import 'package:flutter_package_gaw_api/src/features/jobs/transfer_models/time_registration_list_response.dart';
 
 class JobsApi {

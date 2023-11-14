@@ -23,10 +23,9 @@ class _$JobSerializer implements StructuredSerializer<Job> {
           specifiedType: const FullType(Address)),
       'start_time',
       serializers.serialize(object.startTime,
-          specifiedType: const FullType(String)),
+          specifiedType: const FullType(int)),
       'end_time',
-      serializers.serialize(object.endTime,
-          specifiedType: const FullType(String)),
+      serializers.serialize(object.endTime, specifiedType: const FullType(int)),
       'max_washers',
       serializers.serialize(object.maxWashers,
           specifiedType: const FullType(int)),
@@ -66,15 +65,13 @@ class _$JobSerializer implements StructuredSerializer<Job> {
     if (value != null) {
       result
         ..add('application_start_time')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
     }
     value = object.applicationEndTime;
     if (value != null) {
       result
         ..add('application_end_time')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
     }
     value = object.isDraft;
     if (value != null) {
@@ -115,19 +112,19 @@ class _$JobSerializer implements StructuredSerializer<Job> {
           break;
         case 'start_time':
           result.startTime = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+              specifiedType: const FullType(int))! as int;
           break;
         case 'end_time':
           result.endTime = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+              specifiedType: const FullType(int))! as int;
           break;
         case 'application_start_time':
           result.applicationStartTime = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
+              specifiedType: const FullType(int)) as int?;
           break;
         case 'application_end_time':
           result.applicationEndTime = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
+              specifiedType: const FullType(int)) as int?;
           break;
         case 'max_washers':
           result.maxWashers = serializers.deserialize(value,
@@ -166,13 +163,13 @@ class _$Job extends Job {
   @override
   final Address address;
   @override
-  final String startTime;
+  final int startTime;
   @override
-  final String endTime;
+  final int endTime;
   @override
-  final String? applicationStartTime;
+  final int? applicationStartTime;
   @override
-  final String? applicationEndTime;
+  final int? applicationEndTime;
   @override
   final int maxWashers;
   @override
@@ -297,22 +294,22 @@ class JobBuilder implements Builder<Job, JobBuilder> {
   AddressBuilder get address => _$this._address ??= new AddressBuilder();
   set address(AddressBuilder? address) => _$this._address = address;
 
-  String? _startTime;
-  String? get startTime => _$this._startTime;
-  set startTime(String? startTime) => _$this._startTime = startTime;
+  int? _startTime;
+  int? get startTime => _$this._startTime;
+  set startTime(int? startTime) => _$this._startTime = startTime;
 
-  String? _endTime;
-  String? get endTime => _$this._endTime;
-  set endTime(String? endTime) => _$this._endTime = endTime;
+  int? _endTime;
+  int? get endTime => _$this._endTime;
+  set endTime(int? endTime) => _$this._endTime = endTime;
 
-  String? _applicationStartTime;
-  String? get applicationStartTime => _$this._applicationStartTime;
-  set applicationStartTime(String? applicationStartTime) =>
+  int? _applicationStartTime;
+  int? get applicationStartTime => _$this._applicationStartTime;
+  set applicationStartTime(int? applicationStartTime) =>
       _$this._applicationStartTime = applicationStartTime;
 
-  String? _applicationEndTime;
-  String? get applicationEndTime => _$this._applicationEndTime;
-  set applicationEndTime(String? applicationEndTime) =>
+  int? _applicationEndTime;
+  int? get applicationEndTime => _$this._applicationEndTime;
+  set applicationEndTime(int? applicationEndTime) =>
       _$this._applicationEndTime = applicationEndTime;
 
   int? _maxWashers;

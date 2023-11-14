@@ -29,16 +29,16 @@ abstract class Job implements Built<Job, JobBuilder> {
   Address get address;
 
   @BuiltValueField(wireName: 'start_time')
-  String get startTime;
+  int get startTime;
 
   @BuiltValueField(wireName: 'end_time')
-  String get endTime;
+  int get endTime;
 
   @BuiltValueField(wireName: 'application_start_time')
-  String? get applicationStartTime;
+  int? get applicationStartTime;
 
   @BuiltValueField(wireName: 'application_end_time')
-  String? get applicationEndTime;
+  int? get applicationEndTime;
 
   @BuiltValueField(wireName: 'max_washers')
   int get maxWashers;

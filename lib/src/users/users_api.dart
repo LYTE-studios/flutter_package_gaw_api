@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_package_gaw_api/flutter_package_gaw_api.dart';
 import 'package:flutter_package_gaw_api/src/users/request_models/update_language_request.dart';
 import 'package:flutter_package_gaw_api/src/users/request_models/update_user_request.dart';
 import 'package:flutter_package_gaw_api/src/users/response_models/hello_there_response.dart';

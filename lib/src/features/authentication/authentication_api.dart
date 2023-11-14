@@ -44,22 +44,6 @@ class AuthenticationApi {
     throw DioException(requestOptions: RequestOptions(), response: response);
   }
 
-  static Future<JwtResponse?> credentialsRegister({
-    required RegisterRequest request,
-  }) async {
-    Response response = await RequestFactory.executePost(
-      endpoint: '/register',
-      body: request.toJson(),
-      useToken: false,
-    );
-
-    if (response.statusCode == 200) {
-      return JwtResponse.fromJson(response.data);
-    }
-
-    throw DioException(requestOptions: RequestOptions(), response: response);
-  }
-
   static Future<JwtResponse?> refreshToken({
     required String refreshToken,
   }) async {
@@ -68,9 +52,9 @@ class AuthenticationApi {
     }
 
     RefreshRequest refreshRequest =
-    RefreshRequest((b) => b..refreshToken = refreshToken);
+        RefreshRequest((b) => b..refreshToken = refreshToken);
     Response response = await RequestFactory.executePost(
-      endpoint: '/token/refresh/',
+      endpoint: '/token/refresh',
       body: refreshRequest.toJson(),
       useToken: false,
     );

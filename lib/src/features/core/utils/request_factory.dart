@@ -28,7 +28,7 @@ class RequestFactory {
     Response response = await mainClient.post(
       '${Configuration.apiUrl}/token/refresh',
       data: {
-        'refresh_token': Configuration.refreshToken,
+        'refresh': Configuration.refreshToken,
       },
       options: Options(
         contentType: 'application/json',
@@ -52,7 +52,11 @@ class RequestFactory {
   }) async {
     Map<String, String> headers = baseHeaders;
 
-    if (useToken && Configuration.accessToken != null) {
+    if (useToken) {
+      if (Configuration.accessToken == null) {
+        throw Exception('No token found');
+      }
+
       _authenticate();
       headers['Authorization'] = Configuration.accessToken!;
     }
@@ -74,7 +78,11 @@ class RequestFactory {
   }) async {
     Map<String, String> headers = baseHeaders;
 
-    if (useToken && Configuration.accessToken != null) {
+    if (useToken) {
+      if (Configuration.accessToken == null) {
+        throw Exception('No token found');
+      }
+
       _authenticate();
       headers['Authorization'] = Configuration.accessToken!;
     }

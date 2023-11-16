@@ -16,8 +16,6 @@ export 'src/features/jobs/models/job_application.dart';
 export 'src/features/jobs/transfer_models/application_list_response.dart';
 export 'src/features/jobs/transfer_models/job_list_response.dart';
 export 'src/features/washers/models/washer.dart';
-export 'src/features/washers/models/washer_chart.dart';
-export 'src/features/washers/models/washer_statistics.dart';
 export 'src/features/washers/washers_api.dart';
 export 'src/shared/utils/gaw_date_util.dart';
 export 'src/users/response_models/hello_there_response.dart';

@@ -28,6 +28,12 @@ class _$YearlyStatisticsSerializer
             const FullType(String),
             const FullType(MonthlyStatistics)
           ])),
+      'completed_jobs_count',
+      serializers.serialize(object.completedJobsCount,
+          specifiedType: const FullType(int)),
+      'upcoming_jobs_count',
+      serializers.serialize(object.upcomingJobsCount,
+          specifiedType: const FullType(int)),
     ];
 
     return result;
@@ -56,6 +62,14 @@ class _$YearlyStatisticsSerializer
                 const FullType(MonthlyStatistics)
               ]))!);
           break;
+        case 'completed_jobs_count':
+          result.completedJobsCount = serializers.deserialize(value,
+              specifiedType: const FullType(int))! as int;
+          break;
+        case 'upcoming_jobs_count':
+          result.upcomingJobsCount = serializers.deserialize(value,
+              specifiedType: const FullType(int))! as int;
+          break;
       }
     }
 
@@ -68,16 +82,28 @@ class _$YearlyStatistics extends YearlyStatistics {
   final int year;
   @override
   final BuiltMap<String, MonthlyStatistics> monthlyStats;
+  @override
+  final int completedJobsCount;
+  @override
+  final int upcomingJobsCount;
 
   factory _$YearlyStatistics(
           [void Function(YearlyStatisticsBuilder)? updates]) =>
       (new YearlyStatisticsBuilder()..update(updates))._build();
 
-  _$YearlyStatistics._({required this.year, required this.monthlyStats})
+  _$YearlyStatistics._(
+      {required this.year,
+      required this.monthlyStats,
+      required this.completedJobsCount,
+      required this.upcomingJobsCount})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(year, r'YearlyStatistics', 'year');
     BuiltValueNullFieldError.checkNotNull(
         monthlyStats, r'YearlyStatistics', 'monthlyStats');
+    BuiltValueNullFieldError.checkNotNull(
+        completedJobsCount, r'YearlyStatistics', 'completedJobsCount');
+    BuiltValueNullFieldError.checkNotNull(
+        upcomingJobsCount, r'YearlyStatistics', 'upcomingJobsCount');
   }
 
   @override
@@ -93,7 +119,9 @@ class _$YearlyStatistics extends YearlyStatistics {
     if (identical(other, this)) return true;
     return other is YearlyStatistics &&
         year == other.year &&
-        monthlyStats == other.monthlyStats;
+        monthlyStats == other.monthlyStats &&
+        completedJobsCount == other.completedJobsCount &&
+        upcomingJobsCount == other.upcomingJobsCount;
   }
 
   @override
@@ -101,6 +129,8 @@ class _$YearlyStatistics extends YearlyStatistics {
     var _$hash = 0;
     _$hash = $jc(_$hash, year.hashCode);
     _$hash = $jc(_$hash, monthlyStats.hashCode);
+    _$hash = $jc(_$hash, completedJobsCount.hashCode);
+    _$hash = $jc(_$hash, upcomingJobsCount.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -109,7 +139,9 @@ class _$YearlyStatistics extends YearlyStatistics {
   String toString() {
     return (newBuiltValueToStringHelper(r'YearlyStatistics')
           ..add('year', year)
-          ..add('monthlyStats', monthlyStats))
+          ..add('monthlyStats', monthlyStats)
+          ..add('completedJobsCount', completedJobsCount)
+          ..add('upcomingJobsCount', upcomingJobsCount))
         .toString();
   }
 }
@@ -128,6 +160,16 @@ class YearlyStatisticsBuilder
   set monthlyStats(MapBuilder<String, MonthlyStatistics>? monthlyStats) =>
       _$this._monthlyStats = monthlyStats;
 
+  int? _completedJobsCount;
+  int? get completedJobsCount => _$this._completedJobsCount;
+  set completedJobsCount(int? completedJobsCount) =>
+      _$this._completedJobsCount = completedJobsCount;
+
+  int? _upcomingJobsCount;
+  int? get upcomingJobsCount => _$this._upcomingJobsCount;
+  set upcomingJobsCount(int? upcomingJobsCount) =>
+      _$this._upcomingJobsCount = upcomingJobsCount;
+
   YearlyStatisticsBuilder();
 
   YearlyStatisticsBuilder get _$this {
@@ -135,6 +177,8 @@ class YearlyStatisticsBuilder
     if ($v != null) {
       _year = $v.year;
       _monthlyStats = $v.monthlyStats.toBuilder();
+      _completedJobsCount = $v.completedJobsCount;
+      _upcomingJobsCount = $v.upcomingJobsCount;
       _$v = null;
     }
     return this;
@@ -161,7 +205,13 @@ class YearlyStatisticsBuilder
           new _$YearlyStatistics._(
               year: BuiltValueNullFieldError.checkNotNull(
                   year, r'YearlyStatistics', 'year'),
-              monthlyStats: monthlyStats.build());
+              monthlyStats: monthlyStats.build(),
+              completedJobsCount: BuiltValueNullFieldError.checkNotNull(
+                  completedJobsCount,
+                  r'YearlyStatistics',
+                  'completedJobsCount'),
+              upcomingJobsCount: BuiltValueNullFieldError.checkNotNull(
+                  upcomingJobsCount, r'YearlyStatistics', 'upcomingJobsCount'));
     } catch (_) {
       late String _$failedField;
       try {

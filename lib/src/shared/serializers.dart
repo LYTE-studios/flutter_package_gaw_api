@@ -44,6 +44,7 @@ part 'serializers.g.dart';
   CreateCustomerResponse,
   UserBasedJobsRequest,
   TimeRegistrationResponse,
+  HelloThereResponse,
   JobListResponse,
   TimeRegistrationListResponse,
   TimeRegistrationRequest,

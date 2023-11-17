@@ -11,20 +11,8 @@ abstract class MonthlyStatistics implements Built<MonthlyStatistics, MonthlyStat
 
   factory MonthlyStatistics([void Function(MonthlyStatisticsBuilder) updates]) = _$MonthlyStatistics;
 
-  @BuiltValueField(wireName: 'total_worked_hours')
-  double get totalWorkedHours;
-
-  @BuiltValueField(wireName: 'total_upcoming_hours')
-  double get totalUpcomingHours;
-
   @BuiltValueField(wireName: 'average_hours')
   double get averageHours;
-
-  @BuiltValueField(wireName: 'completed_jobs_count')
-  int get completedJobsCount;
-
-  @BuiltValueField(wireName: 'upcoming_jobs_count')
-  int get upcomingJobsCount;
 
   String toJson() {
     return json.encode(

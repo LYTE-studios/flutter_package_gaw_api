@@ -20,6 +20,12 @@ abstract class YearlyStatistics implements Built<YearlyStatistics, YearlyStatist
   @BuiltValueField(wireName: 'monthly_stats')
   BuiltMap<String, MonthlyStatistics> get monthlyStats;
 
+  @BuiltValueField(wireName: 'completed_jobs_count')
+  int get completedJobsCount;
+
+  @BuiltValueField(wireName: 'upcoming_jobs_count')
+  int get upcomingJobsCount;
+
   String toJson() {
     return json.encode(
       serializers.serializeWith(YearlyStatistics.serializer, this),

@@ -1,3 +1,5 @@
+library yearly_statistics_list_response;
+
 import 'dart:convert';
 
 import 'package:built_collection/built_collection.dart';

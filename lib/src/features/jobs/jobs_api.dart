@@ -1,3 +1,5 @@
+library jobs_api;
+
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
@@ -20,6 +22,19 @@ class JobsApi {
     if (response.statusCode == 200) {
       String responseData = json.encode(response.data);
       return ApplicationListResponse.fromJson(responseData);
+    }
+
+    throw DioException(requestOptions: RequestOptions(), response: response);
+  }
+
+  static Future<Job?> getJob({required String id}) async {
+    Response response = await RequestFactory.executeGet(
+      endpoint: '/jobs/details/$id',
+    );
+
+    if (response.statusCode == 200) {
+      String responseData = json.encode(response.data);
+      return Job.fromJson(responseData);
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);

@@ -27,7 +27,7 @@ class JobsApi {
     throw DioException(requestOptions: RequestOptions(), response: response);
   }
 
-  static Future<Job?> getJobDetails({required String id}) async {
+  static Future<Job?> getJob({required String id}) async {
     Response response = await RequestFactory.executeGet(
       endpoint: '/jobs/details/$id',
     );

@@ -8,6 +8,7 @@ part of 'serializers.dart';
 
 Serializers _$serializers = (new Serializers().toBuilder()
       ..add(Address.serializer)
+      ..add(ApplicationListResponse.serializer)
       ..add(CreateCustomerRequest.serializer)
       ..add(CreateCustomerResponse.serializer)
       ..add(CreateJobRequest.serializer)
@@ -43,6 +44,9 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(Job)]),
           () => new ListBuilder<Job>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(JobApplication)]),
+          () => new ListBuilder<JobApplication>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(TimeRegistration)]),
           () => new ListBuilder<TimeRegistration>())

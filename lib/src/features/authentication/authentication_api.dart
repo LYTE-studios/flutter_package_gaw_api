@@ -79,6 +79,8 @@ class AuthenticationApi {
     final expiry = DateTime.fromMillisecondsSinceEpoch(0)
         .add(Duration(seconds: int.tryParse(payload['exp'].toString()) ?? 0));
 
-    return expiry.isBefore(DateTime.now());
+    return expiry.isBefore(
+      DateTime.now(),
+    );
   }
 }

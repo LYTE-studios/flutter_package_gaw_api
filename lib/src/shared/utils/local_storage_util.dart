@@ -8,7 +8,6 @@ class LocalStorageUtil {
   static const String kRefreshToken = 'refresh_token';
 
   static Future<void> reset() async {
-    await mainStorage.ready;
     await mainStorage.clear();
   }
 

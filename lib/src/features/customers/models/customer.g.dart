@@ -17,22 +17,33 @@ class _$CustomerSerializer implements StructuredSerializer<Customer> {
   @override
   Iterable<Object?> serialize(Serializers serializers, Customer object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object?>[
-      'first_name',
-      serializers.serialize(object.firstName,
-          specifiedType: const FullType(String)),
-      'last_name',
-      serializers.serialize(object.lastName,
-          specifiedType: const FullType(String)),
-      'initials',
-      serializers.serialize(object.initials,
-          specifiedType: const FullType(String)),
-    ];
+    final result = <Object?>[];
     Object? value;
     value = object.id;
     if (value != null) {
       result
         ..add('id')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.firstName;
+    if (value != null) {
+      result
+        ..add('first_name')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.lastName;
+    if (value != null) {
+      result
+        ..add('last_name')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.initials;
+    if (value != null) {
+      result
+        ..add('initials')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
@@ -70,15 +81,15 @@ class _$CustomerSerializer implements StructuredSerializer<Customer> {
           break;
         case 'first_name':
           result.firstName = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'last_name':
           result.lastName = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'initials':
           result.initials = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'company':
           result.company = serializers.deserialize(value,
@@ -99,11 +110,11 @@ class _$Customer extends Customer {
   @override
   final String? id;
   @override
-  final String firstName;
+  final String? firstName;
   @override
-  final String lastName;
+  final String? lastName;
   @override
-  final String initials;
+  final String? initials;
   @override
   final String? company;
   @override
@@ -114,16 +125,12 @@ class _$Customer extends Customer {
 
   _$Customer._(
       {this.id,
-      required this.firstName,
-      required this.lastName,
-      required this.initials,
+      this.firstName,
+      this.lastName,
+      this.initials,
       this.company,
       this.profilePictureUrl})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(firstName, r'Customer', 'firstName');
-    BuiltValueNullFieldError.checkNotNull(lastName, r'Customer', 'lastName');
-    BuiltValueNullFieldError.checkNotNull(initials, r'Customer', 'initials');
-  }
+      : super._();
 
   @override
   Customer rebuild(void Function(CustomerBuilder) updates) =>
@@ -232,12 +239,9 @@ class CustomerBuilder implements Builder<Customer, CustomerBuilder> {
     final _$result = _$v ??
         new _$Customer._(
             id: id,
-            firstName: BuiltValueNullFieldError.checkNotNull(
-                firstName, r'Customer', 'firstName'),
-            lastName: BuiltValueNullFieldError.checkNotNull(
-                lastName, r'Customer', 'lastName'),
-            initials: BuiltValueNullFieldError.checkNotNull(
-                initials, r'Customer', 'initials'),
+            firstName: firstName,
+            lastName: lastName,
+            initials: initials,
             company: company,
             profilePictureUrl: profilePictureUrl);
     replace(_$result);

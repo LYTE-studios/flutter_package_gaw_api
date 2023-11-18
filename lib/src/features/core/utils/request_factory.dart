@@ -13,6 +13,13 @@ class RequestFactory {
   };
 
   static Future<void> _authenticate() async {
+    if (Configuration.accessToken == null ||
+        Configuration.refreshToken == null) {
+      final tokens = await LocalStorageUtil.getTokens();
+      Configuration.accessToken = tokens[LocalStorageUtil.kToken];
+      Configuration.refreshToken = tokens[LocalStorageUtil.kRefreshToken];
+    }
+
     if (Configuration.accessToken == null) {
       throw Exception('No access token');
     }

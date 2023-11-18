@@ -17,13 +17,13 @@ abstract class Customer implements Built<Customer, CustomerBuilder> {
   String? get id;
 
   @BuiltValueField(wireName: 'first_name')
-  String get firstName;
+  String? get firstName;
 
   @BuiltValueField(wireName: 'last_name')
-  String get lastName;
+  String? get lastName;
 
   @BuiltValueField(wireName: 'initials')
-  String get initials;
+  String? get initials;
 
   @BuiltValueField(wireName: 'company')
   String? get company;

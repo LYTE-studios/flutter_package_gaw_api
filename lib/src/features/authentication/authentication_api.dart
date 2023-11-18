@@ -30,13 +30,18 @@ class AuthenticationApi {
     );
 
     if (response.statusCode == 200) {
-      JwtResponse jwt =
+      JwtResponse jwtResponse =
           JwtResponse.fromJson(FormattingUtil.decode(response.data))!;
 
-      Configuration.accessToken = jwt.accessToken;
-      Configuration.refreshToken = jwt.refreshToken;
+      Configuration.accessToken = jwtResponse.accessToken;
+      Configuration.refreshToken = jwtResponse.refreshToken;
 
-      return jwt;
+      await LocalStorageUtil.setTokens(
+        jwtResponse.accessToken,
+        jwtResponse.refreshToken,
+      );
+
+      return jwtResponse;
     }
 
     if (response.statusCode == 403) {
@@ -62,7 +67,19 @@ class AuthenticationApi {
     );
 
     if (response.statusCode == 200) {
-      return JwtResponse.fromJson(FormattingUtil.decode(response.data));
+      JwtResponse jwtResponse = JwtResponse.fromJson(
+        FormattingUtil.decode(response.data),
+      )!;
+
+      Configuration.accessToken = jwtResponse.accessToken;
+      Configuration.refreshToken = jwtResponse.refreshToken;
+
+      await LocalStorageUtil.setTokens(
+        jwtResponse.accessToken,
+        jwtResponse.refreshToken,
+      );
+
+      return jwtResponse;
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);
@@ -79,6 +96,12 @@ class AuthenticationApi {
     final expiry = DateTime.fromMillisecondsSinceEpoch(0)
         .add(Duration(seconds: int.tryParse(payload['exp'].toString()) ?? 0));
 
-    return expiry.isBefore(DateTime.now());
+    return expiry.isBefore(
+      DateTime.now().subtract(
+        const Duration(
+          minutes: 1,
+        ),
+      ),
+    );
   }
 }

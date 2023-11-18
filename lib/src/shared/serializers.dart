@@ -16,14 +16,7 @@ import 'package:flutter_package_gaw_api/src/users/request_models/update_language
 import 'package:flutter_package_gaw_api/src/users/request_models/update_user_request.dart';
 import 'package:flutter_package_gaw_api/src/users/response_models/me_response.dart';
 import 'package:flutter_package_gaw_api/src/users/response_models/update_user_response.dart';
-import 'package:flutter_package_gaw_api/src/features/washers/enums/time_frame.dart';
-import 'package:flutter_package_gaw_api/src/features/washers/models/statistics/daily_statistics.dart';
-import 'package:flutter_package_gaw_api/src/features/washers/models/statistics/monthly_statistics.dart';
-import 'package:flutter_package_gaw_api/src/features/washers/models/statistics/weekly_statistics.dart';
-import 'package:flutter_package_gaw_api/src/features/washers/models/statistics/yearly_statistics.dart';
-import 'package:flutter_package_gaw_api/src/features/washers/request_models/stats_request.dart';
-import 'package:flutter_package_gaw_api/src/features/washers/response_models/weekly_statistics_list_response.dart';
-import 'package:flutter_package_gaw_api/src/features/washers/response_models/yearly_statistics_list_response.dart';
+import 'package:flutter_package_gaw_api/src/features/jobs/transfer_models/application_list_response.dart';
 
 part 'serializers.g.dart';
 
@@ -60,7 +53,7 @@ part 'serializers.g.dart';
   WeeklyStatisticsListResponse,
   YearlyStatisticsListResponse,
   TimeFrame,
-  StatsRequest,
-])
+  StatsRequest, 
+  ApplicationListResponse,])
 final Serializers serializers =
     (_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();

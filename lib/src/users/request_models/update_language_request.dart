@@ -8,12 +8,12 @@ import 'package:flutter_package_gaw_api/src/shared/serializers.dart';
 
 part 'update_language_request.g.dart';
 
-abstract class UpdateLanguageRequest 
+abstract class UpdateLanguageRequest
     implements Built<UpdateLanguageRequest, UpdateLanguageRequestBuilder> {
-
   UpdateLanguageRequest._();
 
-  factory UpdateLanguageRequest([Function(UpdateLanguageRequestBuilder b) updates]) = 
+  factory UpdateLanguageRequest(
+          [Function(UpdateLanguageRequestBuilder b) updates]) =
       _$UpdateLanguageRequest;
 
   @BuiltValueField(wireName: 'language')
@@ -25,12 +25,13 @@ abstract class UpdateLanguageRequest
     );
   }
 
-  static UpdateLanguageRequest? fromJson(String jsonString) {
+  static UpdateLanguageRequest? fromJson(dynamic data) {
     return serializers.deserializeWith(
       UpdateLanguageRequest.serializer,
-      json.decode(jsonString),
+      data,
     );
   }
 
-  static Serializer<UpdateLanguageRequest> get serializer => _$updateLanguageRequestSerializer;
+  static Serializer<UpdateLanguageRequest> get serializer =>
+      _$updateLanguageRequestSerializer;
 }

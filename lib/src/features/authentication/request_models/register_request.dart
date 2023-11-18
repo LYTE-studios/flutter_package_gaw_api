@@ -33,10 +33,10 @@ abstract class RegisterRequest
     );
   }
 
-  static RegisterRequest? fromJson(Map<String, dynamic> json) {
+  static RegisterRequest? fromJson(dynamic data) {
     return serializers.deserializeWith(
       RegisterRequest.serializer,
-      json,
+      data,
     );
   }
 

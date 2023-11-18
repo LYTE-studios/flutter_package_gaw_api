@@ -10,10 +10,12 @@ import 'package:flutter_package_gaw_api/src/shared/serializers.dart';
 
 part 'create_job_request.g.dart';
 
-abstract class CreateJobRequest implements Built<CreateJobRequest, CreateJobRequestBuilder> {
+abstract class CreateJobRequest
+    implements Built<CreateJobRequest, CreateJobRequestBuilder> {
   CreateJobRequest._();
 
-  factory CreateJobRequest([Function(CreateJobRequestBuilder b) updates]) = _$CreateJobRequest;
+  factory CreateJobRequest([Function(CreateJobRequestBuilder b) updates]) =
+      _$CreateJobRequest;
 
   @BuiltValueField(wireName: 'title')
   String get title;
@@ -51,12 +53,13 @@ abstract class CreateJobRequest implements Built<CreateJobRequest, CreateJobRequ
     );
   }
 
-  static CreateJobRequest? fromJson(String jsonString) {
+  static CreateJobRequest? fromJson(dynamic data) {
     return serializers.deserializeWith(
       CreateJobRequest.serializer,
-      json.decode(jsonString),
+      data,
     );
   }
 
-  static Serializer<CreateJobRequest> get serializer => _$createJobRequestSerializer;
+  static Serializer<CreateJobRequest> get serializer =>
+      _$createJobRequestSerializer;
 }

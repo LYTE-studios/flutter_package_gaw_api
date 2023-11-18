@@ -12,8 +12,8 @@ part 'time_registration_list_response.g.dart';
 
 abstract class TimeRegistrationListResponse
     implements
-        Built<TimeRegistrationListResponse, TimeRegistrationListResponseBuilder> {
-
+        Built<TimeRegistrationListResponse,
+            TimeRegistrationListResponseBuilder> {
   TimeRegistrationListResponse._();
 
   factory TimeRegistrationListResponse(
@@ -29,10 +29,10 @@ abstract class TimeRegistrationListResponse
     );
   }
 
-  static TimeRegistrationListResponse? fromJson(String jsonString) {
+  static TimeRegistrationListResponse? fromJson(dynamic data) {
     return serializers.deserializeWith(
       TimeRegistrationListResponse.serializer,
-      json.decode(jsonString),
+      data,
     );
   }
 

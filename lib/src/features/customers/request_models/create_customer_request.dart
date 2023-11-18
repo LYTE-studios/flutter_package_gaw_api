@@ -10,7 +10,8 @@ abstract class CreateCustomerRequest
     implements Built<CreateCustomerRequest, CreateCustomerRequestBuilder> {
   CreateCustomerRequest._();
 
-  factory CreateCustomerRequest([Function(CreateCustomerRequestBuilder b) updates]) =
+  factory CreateCustomerRequest(
+          [Function(CreateCustomerRequestBuilder b) updates]) =
       _$CreateCustomerRequest;
 
   @BuiltValueField(wireName: 'first_name')
@@ -32,12 +33,17 @@ abstract class CreateCustomerRequest
   String? get taxNumber;
 
   String toJson() {
-    return json.encode(serializers.serializeWith(CreateCustomerRequest.serializer, this));
+    return json.encode(
+        serializers.serializeWith(CreateCustomerRequest.serializer, this));
   }
 
-  static CreateCustomerRequest? fromJson(Map<String, dynamic> json) {
-    return serializers.deserializeWith(CreateCustomerRequest.serializer, json);
+  static CreateCustomerRequest? fromJson(dynamic data) {
+    return serializers.deserializeWith(
+      CreateCustomerRequest.serializer,
+      data,
+    );
   }
 
-  static Serializer<CreateCustomerRequest> get serializer => _$createCustomerRequestSerializer;
+  static Serializer<CreateCustomerRequest> get serializer =>
+      _$createCustomerRequestSerializer;
 }

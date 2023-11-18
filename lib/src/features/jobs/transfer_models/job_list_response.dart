@@ -26,10 +26,10 @@ abstract class JobListResponse
     );
   }
 
-  static JobListResponse? fromJson(String jsonString) {
+  static JobListResponse? fromJson(dynamic data) {
     return serializers.deserializeWith(
       JobListResponse.serializer,
-      json.decode(jsonString),
+      data,
     );
   }
 

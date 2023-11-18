@@ -61,10 +61,10 @@ abstract class Job implements Built<Job, JobBuilder> {
     );
   }
 
-  static Job? fromJson(String jsonString) {
+  static Job? fromJson(dynamic data) {
     return serializers.deserializeWith(
       Job.serializer,
-      json.decode(jsonString),
+      data,
     );
   }
 

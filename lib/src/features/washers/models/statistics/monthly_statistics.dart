@@ -6,10 +6,12 @@ import 'package:flutter_package_gaw_api/src/shared/serializers.dart';
 
 part 'monthly_statistics.g.dart';
 
-abstract class MonthlyStatistics implements Built<MonthlyStatistics, MonthlyStatisticsBuilder> {
+abstract class MonthlyStatistics
+    implements Built<MonthlyStatistics, MonthlyStatisticsBuilder> {
   MonthlyStatistics._();
 
-  factory MonthlyStatistics([void Function(MonthlyStatisticsBuilder) updates]) = _$MonthlyStatistics;
+  factory MonthlyStatistics([void Function(MonthlyStatisticsBuilder) updates]) =
+      _$MonthlyStatistics;
 
   @BuiltValueField(wireName: 'average_hours')
   double get averageHours;
@@ -20,12 +22,13 @@ abstract class MonthlyStatistics implements Built<MonthlyStatistics, MonthlyStat
     );
   }
 
-  static MonthlyStatistics? fromJson(String jsonString) {
+  static MonthlyStatistics? fromJson(dynamic data) {
     return serializers.deserializeWith(
       MonthlyStatistics.serializer,
-      json.decode(jsonString),
+      data,
     );
   }
 
-  static Serializer<MonthlyStatistics> get serializer => _$monthlyStatisticsSerializer;
+  static Serializer<MonthlyStatistics> get serializer =>
+      _$monthlyStatisticsSerializer;
 }

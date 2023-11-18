@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_package_gaw_api/src/features/core/utils/request_factory.dart';
 import 'package:flutter_package_gaw_api/src/features/customers/request_models/create_customer_request.dart';
@@ -13,7 +15,7 @@ class CustomerApi {
     );
 
     if (response.statusCode == 200) {
-      return CreateCustomerResponse.fromJson(response.data);
+      return CreateCustomerResponse.fromJson(jsonDecode(response.data));
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);

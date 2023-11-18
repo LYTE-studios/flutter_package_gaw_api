@@ -1,6 +1,7 @@
 library customer;
 
 import 'dart:convert';
+
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:flutter_package_gaw_api/src/shared/serializers.dart';
@@ -40,10 +41,10 @@ abstract class Customer implements Built<Customer, CustomerBuilder> {
     return '$firstName $lastName';
   }
 
-  static Customer? fromJson(String jsonString) {
+  static Customer? fromJson(dynamic data) {
     return serializers.deserializeWith(
       Customer.serializer,
-      json.decode(jsonString),
+      data,
     );
   }
 

@@ -29,7 +29,7 @@ class AuthenticationApi {
     );
 
     if (response.statusCode == 200) {
-      JwtResponse jwt = JwtResponse.fromJson(response.data)!;
+      JwtResponse jwt = JwtResponse.fromJson(jsonDecode(response.data))!;
 
       Configuration.accessToken = jwt.accessToken;
       Configuration.refreshToken = jwt.refreshToken;
@@ -60,7 +60,7 @@ class AuthenticationApi {
     );
 
     if (response.statusCode == 200) {
-      return JwtResponse.fromJson(response.data);
+      return JwtResponse.fromJson(jsonDecode(response.data));
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);

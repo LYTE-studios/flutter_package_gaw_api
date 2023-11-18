@@ -1,6 +1,7 @@
 library washer;
 
 import 'dart:convert';
+
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:flutter_package_gaw_api/src/shared/serializers.dart';
@@ -33,10 +34,10 @@ abstract class Washer implements Built<Washer, WasherBuilder> {
     );
   }
 
-  static Washer? fromJson(String jsonString) {
+  static Washer? fromJson(dynamic data) {
     return serializers.deserializeWith(
       Washer.serializer,
-      json.decode(jsonString),
+      data,
     );
   }
 

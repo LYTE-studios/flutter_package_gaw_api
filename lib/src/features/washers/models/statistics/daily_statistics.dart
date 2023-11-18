@@ -42,7 +42,7 @@ abstract class DailyStatistics
     );
   }
 
-  static DailyStatistics? fromJson(dynamic data) {
+  static DailyStatistics? fromJson(Map<String, dynamic> data) {
     return serializers.deserializeWith(
       DailyStatistics.serializer,
       data,

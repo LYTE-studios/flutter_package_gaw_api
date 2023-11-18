@@ -44,7 +44,7 @@ abstract class MeResponse implements Built<MeResponse, MeResponseBuilder> {
     );
   }
 
-  static MeResponse? fromJson(dynamic data) {
+  static MeResponse? fromJson(Map<String, dynamic> data) {
     return serializers.deserializeWith(
       MeResponse.serializer,
       data,

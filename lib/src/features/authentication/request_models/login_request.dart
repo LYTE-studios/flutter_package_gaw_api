@@ -27,7 +27,7 @@ abstract class LoginRequest
     );
   }
 
-  static LoginRequest? fromJson(dynamic data) {
+  static LoginRequest? fromJson(Map<String, dynamic> data) {
     return serializers.deserializeWith(
       LoginRequest.serializer,
       data,

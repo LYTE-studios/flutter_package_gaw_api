@@ -27,7 +27,7 @@ abstract class WeeklyStatisticsListResponse
     );
   }
 
-  static WeeklyStatisticsListResponse? fromJson(dynamic data) {
+  static WeeklyStatisticsListResponse? fromJson(Map<String, dynamic> data) {
     return serializers.deserializeWith(
       WeeklyStatisticsListResponse.serializer,
       data,

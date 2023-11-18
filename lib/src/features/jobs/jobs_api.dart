@@ -1,9 +1,8 @@
 library jobs_api;
 
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter_package_gaw_api/flutter_package_gaw_api.dart';
+import 'package:flutter_package_gaw_api/src/features/core/utils/formatting_util.dart';
 import 'package:flutter_package_gaw_api/src/features/core/utils/request_factory.dart';
 import 'package:flutter_package_gaw_api/src/features/jobs/models/request/create_job_request.dart';
 import 'package:flutter_package_gaw_api/src/features/jobs/models/request/time_registration_request.dart';
@@ -19,7 +18,8 @@ class JobsApi {
     );
 
     if (response.statusCode == 200) {
-      return ApplicationListResponse.fromJson(jsonDecode(response.data));
+      return ApplicationListResponse.fromJson(
+          FormattingUtil.decode(response.data));
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);
@@ -31,7 +31,7 @@ class JobsApi {
     );
 
     if (response.statusCode == 200) {
-      return Job.fromJson(jsonDecode(response.data));
+      return Job.fromJson(FormattingUtil.decode(response.data));
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);
@@ -44,7 +44,7 @@ class JobsApi {
     );
 
     if (response.statusCode == 200) {
-      return JobListResponse.fromJson(jsonDecode(response.data));
+      return JobListResponse.fromJson(FormattingUtil.decode(response.data));
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);
@@ -56,7 +56,7 @@ class JobsApi {
     );
 
     if (response.statusCode == 200) {
-      return JobListResponse.fromJson(jsonDecode(response.data));
+      return JobListResponse.fromJson(FormattingUtil.decode(response.data));
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);
@@ -70,7 +70,7 @@ class JobsApi {
       body: request.toJson(),
     );
     if (response.statusCode == 200) {
-      return JobListResponse.fromJson(jsonDecode(response.data));
+      return JobListResponse.fromJson(FormattingUtil.decode(response.data));
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);
@@ -84,7 +84,8 @@ class JobsApi {
     );
 
     if (response.statusCode == 200) {
-      return TimeRegistrationListResponse.fromJson(jsonDecode(response.data));
+      return TimeRegistrationListResponse.fromJson(
+          FormattingUtil.decode(response.data));
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);
@@ -99,7 +100,8 @@ class JobsApi {
     );
 
     if (response.statusCode == 200) {
-      return TimeRegistrationResponse.fromJson(jsonDecode(response.data));
+      return TimeRegistrationResponse.fromJson(
+          FormattingUtil.decode(response.data));
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);
@@ -114,7 +116,8 @@ class JobsApi {
     );
 
     if (response.statusCode == 200) {
-      return TimeRegistrationResponse.fromJson(jsonDecode(response.data));
+      return TimeRegistrationResponse.fromJson(
+          FormattingUtil.decode(response.data));
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);

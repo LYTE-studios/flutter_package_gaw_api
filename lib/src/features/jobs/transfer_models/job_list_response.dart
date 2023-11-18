@@ -26,7 +26,7 @@ abstract class JobListResponse
     );
   }
 
-  static JobListResponse? fromJson(dynamic data) {
+  static JobListResponse? fromJson(Map<String, dynamic> data) {
     return serializers.deserializeWith(
       JobListResponse.serializer,
       data,

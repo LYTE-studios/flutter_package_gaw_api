@@ -23,7 +23,7 @@ abstract class JwtResponse implements Built<JwtResponse, JwtResponseBuilder> {
     return json.encode(serializers.serializeWith(JwtResponse.serializer, this));
   }
 
-  static JwtResponse? fromJson(dynamic data) {
+  static JwtResponse? fromJson(Map<String, dynamic> data) {
     return serializers.deserializeWith(JwtResponse.serializer, data);
   }
 

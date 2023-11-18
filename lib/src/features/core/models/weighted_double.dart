@@ -27,7 +27,7 @@ abstract class WeightedDouble
     );
   }
 
-  static WeightedDouble? fromJson(dynamic data) {
+  static WeightedDouble? fromJson(Map<String, dynamic> data) {
     return serializers.deserializeWith(
       WeightedDouble.serializer,
       data,

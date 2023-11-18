@@ -41,7 +41,7 @@ abstract class Customer implements Built<Customer, CustomerBuilder> {
     return '$firstName $lastName';
   }
 
-  static Customer? fromJson(dynamic data) {
+  static Customer? fromJson(Map<String, dynamic> data) {
     return serializers.deserializeWith(
       Customer.serializer,
       data,

@@ -25,7 +25,7 @@ abstract class UpdateLanguageRequest
     );
   }
 
-  static UpdateLanguageRequest? fromJson(dynamic data) {
+  static UpdateLanguageRequest? fromJson(Map<String, dynamic> data) {
     return serializers.deserializeWith(
       UpdateLanguageRequest.serializer,
       data,

@@ -26,7 +26,7 @@ abstract class StatsRequest
     );
   }
 
-  static StatsRequest? fromJson(dynamic data) {
+  static StatsRequest? fromJson(Map<String, dynamic> data) {
     return serializers.deserializeWith(
       StatsRequest.serializer,
       data,

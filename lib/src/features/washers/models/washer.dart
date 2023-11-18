@@ -34,7 +34,7 @@ abstract class Washer implements Built<Washer, WasherBuilder> {
     );
   }
 
-  static Washer? fromJson(dynamic data) {
+  static Washer? fromJson(Map<String, dynamic> data) {
     return serializers.deserializeWith(
       Washer.serializer,
       data,

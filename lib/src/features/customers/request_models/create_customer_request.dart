@@ -37,7 +37,7 @@ abstract class CreateCustomerRequest
         serializers.serializeWith(CreateCustomerRequest.serializer, this));
   }
 
-  static CreateCustomerRequest? fromJson(dynamic data) {
+  static CreateCustomerRequest? fromJson(Map<String, dynamic> data) {
     return serializers.deserializeWith(
       CreateCustomerRequest.serializer,
       data,

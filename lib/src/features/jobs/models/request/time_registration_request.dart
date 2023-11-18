@@ -31,7 +31,7 @@ abstract class TimeRegistrationRequest
     );
   }
 
-  static TimeRegistrationRequest? fromJson(dynamic data) {
+  static TimeRegistrationRequest? fromJson(Map<String, dynamic> data) {
     return serializers.deserializeWith(
       TimeRegistrationRequest.serializer,
       data,

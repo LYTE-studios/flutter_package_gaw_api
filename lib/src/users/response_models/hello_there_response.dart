@@ -33,7 +33,7 @@ abstract class HelloThereResponse
     );
   }
 
-  static HelloThereResponse? fromJson(dynamic data) {
+  static HelloThereResponse? fromJson(Map<String, dynamic> data) {
     return serializers.deserializeWith(
       HelloThereResponse.serializer,
       data,

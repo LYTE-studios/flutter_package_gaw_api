@@ -43,7 +43,7 @@ abstract class JobApplication
     );
   }
 
-  static JobApplication? fromJson(dynamic data) {
+  static JobApplication? fromJson(Map<String, dynamic> data) {
     return serializers.deserializeWith(
       JobApplication.serializer,
       data,

@@ -22,7 +22,7 @@ abstract class IdResponse implements Built<IdResponse, IdResponseBuilder> {
     );
   }
 
-  static IdResponse? fromJson(dynamic data) {
+  static IdResponse? fromJson(Map<String, dynamic> data) {
     return serializers.deserializeWith(
       IdResponse.serializer,
       data,

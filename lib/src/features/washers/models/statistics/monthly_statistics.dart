@@ -22,7 +22,7 @@ abstract class MonthlyStatistics
     );
   }
 
-  static MonthlyStatistics? fromJson(dynamic data) {
+  static MonthlyStatistics? fromJson(Map<String, dynamic> data) {
     return serializers.deserializeWith(
       MonthlyStatistics.serializer,
       data,

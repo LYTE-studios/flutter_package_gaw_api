@@ -29,7 +29,7 @@ abstract class YearlyStatisticsListResponse
     );
   }
 
-  static YearlyStatisticsListResponse? fromJson(dynamic data) {
+  static YearlyStatisticsListResponse? fromJson(Map<String, dynamic> data) {
     return serializers.deserializeWith(
       YearlyStatisticsListResponse.serializer,
       data,

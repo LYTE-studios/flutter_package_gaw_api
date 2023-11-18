@@ -67,7 +67,7 @@ abstract class Address implements Built<Address, AddressBuilder> {
     );
   }
 
-  static Address? fromJson(dynamic data) {
+  static Address? fromJson(Map<String, dynamic> data) {
     return serializers.deserializeWith(
       Address.serializer,
       data,

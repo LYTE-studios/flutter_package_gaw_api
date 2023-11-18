@@ -53,7 +53,7 @@ abstract class CreateJobRequest
     );
   }
 
-  static CreateJobRequest? fromJson(dynamic data) {
+  static CreateJobRequest? fromJson(Map<String, dynamic> data) {
     return serializers.deserializeWith(
       CreateJobRequest.serializer,
       data,

@@ -27,7 +27,7 @@ abstract class ApplicationListResponse
     );
   }
 
-  static ApplicationListResponse? fromJson(dynamic data) {
+  static ApplicationListResponse? fromJson(Map<String, dynamic> data) {
     return serializers.deserializeWith(
       ApplicationListResponse.serializer,
       data,

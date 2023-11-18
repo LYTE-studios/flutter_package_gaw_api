@@ -22,7 +22,7 @@ abstract class CreateCustomerResponse
         serializers.serializeWith(CreateCustomerResponse.serializer, this));
   }
 
-  static CreateCustomerResponse? fromJson(dynamic data) {
+  static CreateCustomerResponse? fromJson(Map<String, dynamic> data) {
     return serializers.deserializeWith(
       CreateCustomerResponse.serializer,
       data,

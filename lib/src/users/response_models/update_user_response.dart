@@ -24,7 +24,7 @@ abstract class UpdateUserResponse
     );
   }
 
-  static UpdateUserResponse? fromJson(dynamic data) {
+  static UpdateUserResponse? fromJson(Map<String, dynamic> data) {
     return serializers.deserializeWith(
       UpdateUserResponse.serializer,
       data,

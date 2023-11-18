@@ -1,6 +1,7 @@
 //library user_based_jobs_request;
 
 import 'dart:convert';
+
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:flutter_package_gaw_api/src/shared/serializers.dart';
@@ -32,7 +33,7 @@ abstract class UserBasedJobsRequest
   }
 
   // Deserialize from JSON
-  static UserBasedJobsRequest? fromJson(dynamic data) {
+  static UserBasedJobsRequest? fromJson(Map<String, dynamic> data) {
     return serializers.deserializeWith(
       UserBasedJobsRequest.serializer,
       data,

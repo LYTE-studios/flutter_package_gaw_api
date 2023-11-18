@@ -29,7 +29,7 @@ abstract class RefreshRequest
   }
 
   // Deserialize from JSON
-  static RefreshRequest? fromJson(dynamic data) {
+  static RefreshRequest? fromJson(Map<String, dynamic> data) {
     return serializers.deserializeWith(
       RefreshRequest.serializer,
       data,

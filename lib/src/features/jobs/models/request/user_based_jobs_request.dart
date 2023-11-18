@@ -1,19 +1,22 @@
 //library user_based_jobs_request;
 
 import 'dart:convert';
+
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:flutter_package_gaw_api/src/shared/serializers.dart';
 
 part 'user_based_jobs_request.g.dart';
 
-abstract class UserBasedJobsRequest 
-  implements Built<UserBasedJobsRequest, UserBasedJobsRequestBuilder> {
+abstract class UserBasedJobsRequest
+    implements Built<UserBasedJobsRequest, UserBasedJobsRequestBuilder> {
   // Constructor
   UserBasedJobsRequest._();
 
   // Factory constructor
-  factory UserBasedJobsRequest([Function(UserBasedJobsRequestBuilder b) updates]) = _$UserBasedJobsRequest;
+  factory UserBasedJobsRequest(
+          [Function(UserBasedJobsRequestBuilder b) updates]) =
+      _$UserBasedJobsRequest;
 
   // Fields
   @BuiltValueField(wireName: 'washer_id')
@@ -30,13 +33,14 @@ abstract class UserBasedJobsRequest
   }
 
   // Deserialize from JSON
-  static UserBasedJobsRequest? fromJson(Map<String, dynamic> json) {
+  static UserBasedJobsRequest? fromJson(Map<String, dynamic> data) {
     return serializers.deserializeWith(
       UserBasedJobsRequest.serializer,
-      json,
+      data,
     );
   }
 
   // Serializer
-  static Serializer<UserBasedJobsRequest> get serializer => _$userBasedJobsRequestSerializer;
+  static Serializer<UserBasedJobsRequest> get serializer =>
+      _$userBasedJobsRequestSerializer;
 }

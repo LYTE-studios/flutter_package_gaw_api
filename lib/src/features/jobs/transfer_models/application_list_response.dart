@@ -27,10 +27,10 @@ abstract class ApplicationListResponse
     );
   }
 
-  static ApplicationListResponse? fromJson(String jsonString) {
+  static ApplicationListResponse? fromJson(Map<String, dynamic> data) {
     return serializers.deserializeWith(
       ApplicationListResponse.serializer,
-      json.decode(jsonString),
+      data,
     );
   }
 

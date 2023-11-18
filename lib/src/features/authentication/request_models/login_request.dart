@@ -27,10 +27,10 @@ abstract class LoginRequest
     );
   }
 
-  static LoginRequest? fromJson(String jsonString) {
+  static LoginRequest? fromJson(Map<String, dynamic> data) {
     return serializers.deserializeWith(
       LoginRequest.serializer,
-      json.decode(jsonString),
+      data,
     );
   }
 

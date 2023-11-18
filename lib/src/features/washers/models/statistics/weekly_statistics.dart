@@ -8,10 +8,12 @@ import 'daily_statistics.dart';
 
 part 'weekly_statistics.g.dart';
 
-abstract class WeeklyStatistics implements Built<WeeklyStatistics, WeeklyStatisticsBuilder> {
+abstract class WeeklyStatistics
+    implements Built<WeeklyStatistics, WeeklyStatisticsBuilder> {
   WeeklyStatistics._();
 
-  factory WeeklyStatistics([void Function(WeeklyStatisticsBuilder) updates]) = _$WeeklyStatistics;
+  factory WeeklyStatistics([void Function(WeeklyStatisticsBuilder) updates]) =
+      _$WeeklyStatistics;
 
   @BuiltValueField(wireName: 'week_start')
   String get weekStart;
@@ -43,12 +45,13 @@ abstract class WeeklyStatistics implements Built<WeeklyStatistics, WeeklyStatist
     );
   }
 
-  static WeeklyStatistics? fromJson(String jsonString) {
+  static WeeklyStatistics? fromJson(Map<String, dynamic> data) {
     return serializers.deserializeWith(
       WeeklyStatistics.serializer,
-      json.decode(jsonString),
+      data,
     );
   }
 
-  static Serializer<WeeklyStatistics> get serializer => _$weeklyStatisticsSerializer;
+  static Serializer<WeeklyStatistics> get serializer =>
+      _$weeklyStatisticsSerializer;
 }

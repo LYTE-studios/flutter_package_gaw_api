@@ -9,10 +9,12 @@ import 'monthly_statistics.dart';
 
 part 'yearly_statistics.g.dart';
 
-abstract class YearlyStatistics implements Built<YearlyStatistics, YearlyStatisticsBuilder> {
+abstract class YearlyStatistics
+    implements Built<YearlyStatistics, YearlyStatisticsBuilder> {
   YearlyStatistics._();
 
-  factory YearlyStatistics([void Function(YearlyStatisticsBuilder) updates]) = _$YearlyStatistics;
+  factory YearlyStatistics([void Function(YearlyStatisticsBuilder) updates]) =
+      _$YearlyStatistics;
 
   @BuiltValueField(wireName: 'year')
   int get year;
@@ -32,12 +34,13 @@ abstract class YearlyStatistics implements Built<YearlyStatistics, YearlyStatist
     );
   }
 
-  static YearlyStatistics? fromJson(String jsonString) {
+  static YearlyStatistics? fromJson(Map<String, dynamic> data) {
     return serializers.deserializeWith(
       YearlyStatistics.serializer,
-      json.decode(jsonString),
+      data,
     );
   }
 
-  static Serializer<YearlyStatistics> get serializer => _$yearlyStatisticsSerializer;
+  static Serializer<YearlyStatistics> get serializer =>
+      _$yearlyStatisticsSerializer;
 }

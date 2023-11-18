@@ -10,10 +10,15 @@ import 'package:flutter_package_gaw_api/src/shared/serializers.dart';
 
 part 'yearly_statistics_list_response.g.dart';
 
-abstract class YearlyStatisticsListResponse implements Built<YearlyStatisticsListResponse, YearlyStatisticsListResponseBuilder> {
+abstract class YearlyStatisticsListResponse
+    implements
+        Built<YearlyStatisticsListResponse,
+            YearlyStatisticsListResponseBuilder> {
   YearlyStatisticsListResponse._();
 
-  factory YearlyStatisticsListResponse([void Function(YearlyStatisticsListResponseBuilder) updates]) = _$YearlyStatisticsListResponse;
+  factory YearlyStatisticsListResponse(
+          [void Function(YearlyStatisticsListResponseBuilder) updates]) =
+      _$YearlyStatisticsListResponse;
 
   @BuiltValueField(wireName: 'statistics')
   BuiltList<YearlyStatistics> get years;
@@ -24,12 +29,13 @@ abstract class YearlyStatisticsListResponse implements Built<YearlyStatisticsLis
     );
   }
 
-  static YearlyStatisticsListResponse? fromJson(String jsonString) {
+  static YearlyStatisticsListResponse? fromJson(Map<String, dynamic> data) {
     return serializers.deserializeWith(
       YearlyStatisticsListResponse.serializer,
-      json.decode(jsonString),
+      data,
     );
   }
 
-  static Serializer<YearlyStatisticsListResponse> get serializer => _$yearlyStatisticsListResponseSerializer;
+  static Serializer<YearlyStatisticsListResponse> get serializer =>
+      _$yearlyStatisticsListResponseSerializer;
 }

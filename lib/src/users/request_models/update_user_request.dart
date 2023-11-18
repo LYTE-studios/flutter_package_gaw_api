@@ -1,6 +1,7 @@
 library update_user_request;
 
 import 'dart:convert';
+
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:flutter_package_gaw_api/flutter_package_gaw_api.dart';
@@ -8,7 +9,7 @@ import 'package:flutter_package_gaw_api/src/shared/serializers.dart';
 
 part 'update_user_request.g.dart';
 
-abstract class UpdateUserRequest 
+abstract class UpdateUserRequest
     implements Built<UpdateUserRequest, UpdateUserRequestBuilder> {
   UpdateUserRequest._();
 
@@ -45,10 +46,10 @@ abstract class UpdateUserRequest
     );
   }
 
-  static UpdateUserRequest? fromJson(String jsonString) {
+  static UpdateUserRequest? fromJson(Map<String, dynamic> data) {
     return serializers.deserializeWith(
       UpdateUserRequest.serializer,
-      json.decode(jsonString),
+      data,
     );
   }
 

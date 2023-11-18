@@ -1,6 +1,7 @@
 library me_response;
 
 import 'dart:convert';
+
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:flutter_package_gaw_api/flutter_package_gaw_api.dart';
@@ -8,12 +9,10 @@ import 'package:flutter_package_gaw_api/src/shared/serializers.dart';
 
 part 'me_response.g.dart';
 
-abstract class MeResponse 
-    implements Built<MeResponse, MeResponseBuilder> {
+abstract class MeResponse implements Built<MeResponse, MeResponseBuilder> {
   MeResponse._();
 
-  factory MeResponse([Function(MeResponseBuilder b) updates]) =
-      _$MeResponse;
+  factory MeResponse([Function(MeResponseBuilder b) updates]) = _$MeResponse;
 
   @BuiltValueField(wireName: 'user_id')
   String get userId;
@@ -35,7 +34,7 @@ abstract class MeResponse
 
   @BuiltValueField(wireName: 'billing_address')
   Address? get billingAddress;
-  
+
   @BuiltValueField(wireName: 'phone_number')
   String? get phoneNumber;
 
@@ -45,13 +44,12 @@ abstract class MeResponse
     );
   }
 
-  static MeResponse? fromJson(String jsonString) {
+  static MeResponse? fromJson(Map<String, dynamic> data) {
     return serializers.deserializeWith(
       MeResponse.serializer,
-      json.decode(jsonString),
+      data,
     );
   }
 
-  static Serializer<MeResponse> get serializer =>
-      _$meResponseSerializer;
+  static Serializer<MeResponse> get serializer => _$meResponseSerializer;
 }

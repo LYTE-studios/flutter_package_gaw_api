@@ -31,13 +31,15 @@ class AuthenticationApi {
 
     if (response.statusCode == 200) {
       JwtResponse jwtResponse =
-      JwtResponse.fromJson(FormattingUtil.decode(response.data))!;
+          JwtResponse.fromJson(FormattingUtil.decode(response.data))!;
 
       Configuration.accessToken = jwtResponse.accessToken;
       Configuration.refreshToken = jwtResponse.refreshToken;
 
       await LocalStorageUtil.setTokens(
-        jwtResponse.accessToken, jwtResponse.refreshToken,);
+        jwtResponse.accessToken,
+        jwtResponse.refreshToken,
+      );
 
       return jwtResponse;
     }
@@ -57,7 +59,7 @@ class AuthenticationApi {
     }
 
     RefreshRequest refreshRequest =
-    RefreshRequest((b) => b..refreshToken = refreshToken);
+        RefreshRequest((b) => b..refreshToken = refreshToken);
     Response response = await RequestFactory.executePost(
       endpoint: '/token/refresh',
       body: refreshRequest.toJson(),
@@ -73,7 +75,9 @@ class AuthenticationApi {
       Configuration.refreshToken = jwtResponse.refreshToken;
 
       await LocalStorageUtil.setTokens(
-        jwtResponse.accessToken, jwtResponse.refreshToken,);
+        jwtResponse.accessToken,
+        jwtResponse.refreshToken,
+      );
 
       return jwtResponse;
     }
@@ -93,7 +97,11 @@ class AuthenticationApi {
         .add(Duration(seconds: int.tryParse(payload['exp'].toString()) ?? 0));
 
     return expiry.isBefore(
-      DateTime.now(),
+      DateTime.now().subtract(
+        const Duration(
+          minutes: 1,
+        ),
+      ),
     );
   }
 }

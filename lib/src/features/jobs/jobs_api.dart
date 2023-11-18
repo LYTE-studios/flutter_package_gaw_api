@@ -2,8 +2,10 @@ library jobs_api;
 
 import 'package:dio/dio.dart';
 import 'package:flutter_package_gaw_api/flutter_package_gaw_api.dart';
+import 'package:flutter_package_gaw_api/src/features/core/response_models/id_response.dart';
 import 'package:flutter_package_gaw_api/src/features/core/utils/formatting_util.dart';
 import 'package:flutter_package_gaw_api/src/features/core/utils/request_factory.dart';
+import 'package:flutter_package_gaw_api/src/features/jobs/models/request/apply_for_job_request.dart';
 import 'package:flutter_package_gaw_api/src/features/jobs/models/request/create_job_request.dart';
 import 'package:flutter_package_gaw_api/src/features/jobs/models/request/time_registration_request.dart';
 import 'package:flutter_package_gaw_api/src/features/jobs/models/request/user_based_jobs_request.dart';
@@ -20,6 +22,23 @@ class JobsApi {
     if (response.statusCode == 200) {
       return ApplicationListResponse.fromJson(
           FormattingUtil.decode(response.data));
+    }
+
+    throw DioException(requestOptions: RequestOptions(), response: response);
+  }
+
+  /// creates a new application
+  static Future<IdResponse?> createApplication(
+      {required ApplyForJobRequest request}) async {
+    Response response = await RequestFactory.executePost(
+      endpoint: '/applications/me',
+      body: request.toJson(),
+    );
+
+    if (response.statusCode == 200) {
+      return IdResponse.fromJson(
+        FormattingUtil.decode(response.data),
+      );
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);

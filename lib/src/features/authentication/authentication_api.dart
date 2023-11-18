@@ -30,13 +30,16 @@ class AuthenticationApi {
     );
 
     if (response.statusCode == 200) {
-      JwtResponse jwt =
-          JwtResponse.fromJson(FormattingUtil.decode(response.data))!;
+      JwtResponse jwtResponse =
+      JwtResponse.fromJson(FormattingUtil.decode(response.data))!;
 
-      Configuration.accessToken = jwt.accessToken;
-      Configuration.refreshToken = jwt.refreshToken;
+      Configuration.accessToken = jwtResponse.accessToken;
+      Configuration.refreshToken = jwtResponse.refreshToken;
 
-      return jwt;
+      await LocalStorageUtil.setTokens(
+        jwtResponse.accessToken, jwtResponse.refreshToken,);
+
+      return jwtResponse;
     }
 
     if (response.statusCode == 403) {
@@ -54,7 +57,7 @@ class AuthenticationApi {
     }
 
     RefreshRequest refreshRequest =
-        RefreshRequest((b) => b..refreshToken = refreshToken);
+    RefreshRequest((b) => b..refreshToken = refreshToken);
     Response response = await RequestFactory.executePost(
       endpoint: '/token/refresh',
       body: refreshRequest.toJson(),
@@ -62,7 +65,17 @@ class AuthenticationApi {
     );
 
     if (response.statusCode == 200) {
-      return JwtResponse.fromJson(FormattingUtil.decode(response.data));
+      JwtResponse jwtResponse = JwtResponse.fromJson(
+        FormattingUtil.decode(response.data),
+      )!;
+
+      Configuration.accessToken = jwtResponse.accessToken;
+      Configuration.refreshToken = jwtResponse.refreshToken;
+
+      await LocalStorageUtil.setTokens(
+        jwtResponse.accessToken, jwtResponse.refreshToken,);
+
+      return jwtResponse;
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);

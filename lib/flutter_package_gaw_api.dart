@@ -11,6 +11,7 @@ export 'src/features/customers/models/customer.dart';
 export 'src/features/jobs/enums/job_application_state.dart';
 export 'src/features/jobs/enums/job_state.dart';
 export 'src/features/jobs/jobs_api.dart';
+export 'src/shared/utils/local_storage_util.dart';
 export 'src/features/jobs/models/job.dart';
 export 'src/features/jobs/models/job_application.dart';
 export 'src/features/jobs/transfer_models/application_list_response.dart';

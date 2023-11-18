@@ -16,6 +16,8 @@ dependencies:
   dio: ^5.3.3
   mockito: ^5.4.2
   flutter_riverpod: ^2.3.10
+  localstorage: ^4.0.0+1
+  
 
 dev_dependencies:
   flutter_test:

@@ -60,10 +60,6 @@ class RequestFactory {
     Map<String, String> headers = baseHeaders;
 
     if (useToken) {
-      if (Configuration.accessToken == null) {
-        throw Exception('No token found');
-      }
-
       _authenticate();
       headers['Authorization'] = Configuration.accessToken!;
     }
@@ -86,10 +82,6 @@ class RequestFactory {
     Map<String, String> headers = baseHeaders;
 
     if (useToken) {
-      if (Configuration.accessToken == null) {
-        throw Exception('No token found');
-      }
-
       _authenticate();
       headers['Authorization'] = Configuration.accessToken!;
     }

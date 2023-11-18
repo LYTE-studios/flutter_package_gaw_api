@@ -13,7 +13,7 @@ abstract class RegisterRequest
   RegisterRequest._();
 
   factory RegisterRequest([Function(RegisterRequestBuilder b) updates]) =
-      _$RegisterRequest;
+  _$RegisterRequest;
 
   @BuiltValueField(wireName: 'first_name')
   String get firstName;
@@ -33,10 +33,10 @@ abstract class RegisterRequest
     );
   }
 
-  static RegisterRequest? fromJson(Map<String, dynamic> json) {
+  static RegisterRequest? fromJson(Map<String, dynamic> data) {
     return serializers.deserializeWith(
       RegisterRequest.serializer,
-      json,
+      data,
     );
   }
 

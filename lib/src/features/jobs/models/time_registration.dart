@@ -8,10 +8,12 @@ import 'package:flutter_package_gaw_api/src/shared/serializers.dart';
 
 part 'time_registration.g.dart';
 
-abstract class TimeRegistration implements Built<TimeRegistration, TimeRegistrationBuilder> {
+abstract class TimeRegistration
+    implements Built<TimeRegistration, TimeRegistrationBuilder> {
   TimeRegistration._();
 
-  factory TimeRegistration([Function(TimeRegistrationBuilder b) updates]) = _$TimeRegistration;
+  factory TimeRegistration([Function(TimeRegistrationBuilder b) updates]) =
+      _$TimeRegistration;
 
   @BuiltValueField(wireName: 'id')
   String get id;
@@ -28,12 +30,13 @@ abstract class TimeRegistration implements Built<TimeRegistration, TimeRegistrat
     );
   }
 
-  static TimeRegistration? fromJson(String jsonString) {
+  static TimeRegistration? fromJson(Map<String, dynamic> data) {
     return serializers.deserializeWith(
       TimeRegistration.serializer,
-      json.decode(jsonString),
+      data,
     );
   }
 
-  static Serializer<TimeRegistration> get serializer => _$timeRegistrationSerializer;
+  static Serializer<TimeRegistration> get serializer =>
+      _$timeRegistrationSerializer;
 }

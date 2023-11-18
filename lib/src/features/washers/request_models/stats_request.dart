@@ -7,12 +7,12 @@ import 'package:flutter_package_gaw_api/src/shared/serializers.dart';
 
 part 'stats_request.g.dart';
 
-abstract class StatsRequest implements 
-    Built<StatsRequest, StatsRequestBuilder> {
-
+abstract class StatsRequest
+    implements Built<StatsRequest, StatsRequestBuilder> {
   StatsRequest._();
 
-  factory StatsRequest([void Function(StatsRequestBuilder) updates]) = _$StatsRequest;
+  factory StatsRequest([void Function(StatsRequestBuilder) updates]) =
+      _$StatsRequest;
 
   @BuiltValueField(wireName: 'washer_id')
   String get washerId;
@@ -26,10 +26,10 @@ abstract class StatsRequest implements
     );
   }
 
-  static StatsRequest? fromJson(String jsonString) {
+  static StatsRequest? fromJson(Map<String, dynamic> data) {
     return serializers.deserializeWith(
       StatsRequest.serializer,
-      json.decode(jsonString),
+      data,
     );
   }
 

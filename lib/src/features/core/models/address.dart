@@ -1,6 +1,7 @@
 library address;
 
 import 'dart:convert';
+
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:flutter_package_gaw_api/src/shared/serializers.dart';
@@ -66,10 +67,10 @@ abstract class Address implements Built<Address, AddressBuilder> {
     );
   }
 
-  static Address? fromJson(String jsonString) {
+  static Address? fromJson(Map<String, dynamic> data) {
     return serializers.deserializeWith(
       Address.serializer,
-      json.decode(jsonString),
+      data,
     );
   }
 

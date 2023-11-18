@@ -8,10 +8,15 @@ import 'package:flutter_package_gaw_api/src/shared/serializers.dart';
 
 part 'weekly_statistics_list_response.g.dart';
 
-abstract class WeeklyStatisticsListResponse implements Built<WeeklyStatisticsListResponse, WeeklyStatisticsListResponseBuilder> {
+abstract class WeeklyStatisticsListResponse
+    implements
+        Built<WeeklyStatisticsListResponse,
+            WeeklyStatisticsListResponseBuilder> {
   WeeklyStatisticsListResponse._();
 
-  factory WeeklyStatisticsListResponse([void Function(WeeklyStatisticsListResponseBuilder) updates]) = _$WeeklyStatisticsListResponse;
+  factory WeeklyStatisticsListResponse(
+          [void Function(WeeklyStatisticsListResponseBuilder) updates]) =
+      _$WeeklyStatisticsListResponse;
 
   @BuiltValueField(wireName: 'statistics')
   BuiltList<WeeklyStatistics> get weeks;
@@ -22,12 +27,13 @@ abstract class WeeklyStatisticsListResponse implements Built<WeeklyStatisticsLis
     );
   }
 
-  static WeeklyStatisticsListResponse? fromJson(String jsonString) {
+  static WeeklyStatisticsListResponse? fromJson(Map<String, dynamic> data) {
     return serializers.deserializeWith(
       WeeklyStatisticsListResponse.serializer,
-      json.decode(jsonString),
+      data,
     );
   }
 
-  static Serializer<WeeklyStatisticsListResponse> get serializer => _$weeklyStatisticsListResponseSerializer;
+  static Serializer<WeeklyStatisticsListResponse> get serializer =>
+      _$weeklyStatisticsListResponseSerializer;
 }

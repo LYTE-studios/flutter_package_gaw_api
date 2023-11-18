@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_package_gaw_api/flutter_package_gaw_api.dart';
 import 'package:flutter_package_gaw_api/src/features/authentication/request_models/refresh_request.dart';
 import 'package:flutter_package_gaw_api/src/features/authentication/response_models/jwt_response.dart';
+import 'package:flutter_package_gaw_api/src/features/core/utils/formatting_util.dart';
 import 'package:flutter_package_gaw_api/src/features/core/utils/request_factory.dart';
 
 class AuthenticationApi {
@@ -29,7 +30,8 @@ class AuthenticationApi {
     );
 
     if (response.statusCode == 200) {
-      JwtResponse jwt = JwtResponse.fromJson(response.data)!;
+      JwtResponse jwt =
+          JwtResponse.fromJson(FormattingUtil.decode(response.data))!;
 
       Configuration.accessToken = jwt.accessToken;
       Configuration.refreshToken = jwt.refreshToken;
@@ -60,7 +62,7 @@ class AuthenticationApi {
     );
 
     if (response.statusCode == 200) {
-      return JwtResponse.fromJson(response.data);
+      return JwtResponse.fromJson(FormattingUtil.decode(response.data));
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);

@@ -8,9 +8,8 @@ import 'package:flutter_package_gaw_api/src/shared/serializers.dart';
 
 part 'update_user_response.g.dart';
 
-abstract class UpdateUserResponse 
+abstract class UpdateUserResponse
     implements Built<UpdateUserResponse, UpdateUserResponseBuilder> {
-
   UpdateUserResponse._();
 
   factory UpdateUserResponse([Function(UpdateUserResponseBuilder b) updates]) =
@@ -25,13 +24,13 @@ abstract class UpdateUserResponse
     );
   }
 
-  static UpdateUserResponse? fromJson(String jsonString) {
+  static UpdateUserResponse? fromJson(Map<String, dynamic> data) {
     return serializers.deserializeWith(
       UpdateUserResponse.serializer,
-      json.decode(jsonString),
+      data,
     );
   }
 
   static Serializer<UpdateUserResponse> get serializer =>
-      _$updateUserResponseSerializer;    
+      _$updateUserResponseSerializer;
 }

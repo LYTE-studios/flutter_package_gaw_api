@@ -1,9 +1,8 @@
 library jobs_api;
 
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter_package_gaw_api/flutter_package_gaw_api.dart';
+import 'package:flutter_package_gaw_api/src/features/core/utils/formatting_util.dart';
 import 'package:flutter_package_gaw_api/src/features/core/utils/request_factory.dart';
 import 'package:flutter_package_gaw_api/src/features/jobs/models/request/create_job_request.dart';
 import 'package:flutter_package_gaw_api/src/features/jobs/models/request/time_registration_request.dart';
@@ -12,7 +11,6 @@ import 'package:flutter_package_gaw_api/src/features/jobs/models/response/time_r
 import 'package:flutter_package_gaw_api/src/features/jobs/transfer_models/time_registration_list_response.dart';
 
 class JobsApi {
-
   /// Gets the washers job applications
   static Future<ApplicationListResponse?> getMyApplications() async {
     Response response = await RequestFactory.executeGet(
@@ -20,8 +18,8 @@ class JobsApi {
     );
 
     if (response.statusCode == 200) {
-      String responseData = json.encode(response.data);
-      return ApplicationListResponse.fromJson(responseData);
+      return ApplicationListResponse.fromJson(
+          FormattingUtil.decode(response.data));
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);
@@ -33,8 +31,7 @@ class JobsApi {
     );
 
     if (response.statusCode == 200) {
-      String responseData = json.encode(response.data);
-      return Job.fromJson(responseData);
+      return Job.fromJson(FormattingUtil.decode(response.data));
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);
@@ -47,8 +44,7 @@ class JobsApi {
     );
 
     if (response.statusCode == 200) {
-      String responseData = json.encode(response.data);
-      return JobListResponse.fromJson(responseData);
+      return JobListResponse.fromJson(FormattingUtil.decode(response.data));
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);
@@ -60,8 +56,7 @@ class JobsApi {
     );
 
     if (response.statusCode == 200) {
-      String responseData = json.encode(response.data);
-      return JobListResponse.fromJson(responseData);
+      return JobListResponse.fromJson(FormattingUtil.decode(response.data));
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);
@@ -75,8 +70,7 @@ class JobsApi {
       body: request.toJson(),
     );
     if (response.statusCode == 200) {
-      String responseData = json.encode(response.data);
-      return JobListResponse.fromJson(responseData);
+      return JobListResponse.fromJson(FormattingUtil.decode(response.data));
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);
@@ -90,8 +84,8 @@ class JobsApi {
     );
 
     if (response.statusCode == 200) {
-      String responseData = json.encode(response.data);
-      return TimeRegistrationListResponse.fromJson(responseData);
+      return TimeRegistrationListResponse.fromJson(
+          FormattingUtil.decode(response.data));
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);
@@ -106,8 +100,8 @@ class JobsApi {
     );
 
     if (response.statusCode == 200) {
-      String responseData = json.encode(response.data);
-      return TimeRegistrationResponse.fromJson(responseData);
+      return TimeRegistrationResponse.fromJson(
+          FormattingUtil.decode(response.data));
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);
@@ -122,8 +116,8 @@ class JobsApi {
     );
 
     if (response.statusCode == 200) {
-      String responseData = json.encode(response.data);
-      return TimeRegistrationResponse.fromJson(responseData);
+      return TimeRegistrationResponse.fromJson(
+          FormattingUtil.decode(response.data));
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);

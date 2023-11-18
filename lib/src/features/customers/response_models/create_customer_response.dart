@@ -10,18 +10,25 @@ abstract class CreateCustomerResponse
     implements Built<CreateCustomerResponse, CreateCustomerResponseBuilder> {
   CreateCustomerResponse._();
 
-  factory CreateCustomerResponse([Function(CreateCustomerResponseBuilder b) updates]) = _$CreateCustomerResponse;
+  factory CreateCustomerResponse(
+          [Function(CreateCustomerResponseBuilder b) updates]) =
+      _$CreateCustomerResponse;
 
   @BuiltValueField(wireName: 'customer_id')
   String get customerId;
 
   String toJson() {
-    return json.encode(serializers.serializeWith(CreateCustomerResponse.serializer, this));
+    return json.encode(
+        serializers.serializeWith(CreateCustomerResponse.serializer, this));
   }
 
-  static CreateCustomerResponse? fromJson(Map<String, dynamic> json) {
-    return serializers.deserializeWith(CreateCustomerResponse.serializer, json);
+  static CreateCustomerResponse? fromJson(Map<String, dynamic> data) {
+    return serializers.deserializeWith(
+      CreateCustomerResponse.serializer,
+      data,
+    );
   }
 
-  static Serializer<CreateCustomerResponse> get serializer => _$createCustomerResponseSerializer;
+  static Serializer<CreateCustomerResponse> get serializer =>
+      _$createCustomerResponseSerializer;
 }

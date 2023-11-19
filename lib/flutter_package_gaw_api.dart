@@ -13,6 +13,7 @@ export 'src/features/jobs/enums/job_state.dart';
 export 'src/features/jobs/jobs_api.dart';
 export 'src/shared/utils/local_storage_util.dart';
 export 'src/features/jobs/models/job.dart';
+export 'src/features/authentication/response_models/jwt_response.dart';
 export 'src/features/jobs/models/request/apply_for_job_request.dart';
 export 'src/features/jobs/models/job_application.dart';
 export 'src/features/core/response_models/id_response.dart';

@@ -73,6 +73,7 @@ class RequestFactory {
       options: Options(
         headers: headers,
         receiveTimeout: defaultTimeout,
+        persistentConnection: true,
       ),
     );
   }
@@ -101,6 +102,7 @@ class RequestFactory {
         contentType: 'application/json',
         headers: headers,
         receiveTimeout: defaultTimeout,
+        persistentConnection: true,
       ),
     );
   }

@@ -34,7 +34,7 @@ class GawDateUtil {
   }
 
   static DateTime fromApi(int dateTime) {
-    return DateTime.fromMillisecondsSinceEpoch(dateTime);
+    return DateTime.fromMillisecondsSinceEpoch(dateTime * 1000);
   }
 
   static String formatDate(DateTime dateTime) {

@@ -43,7 +43,7 @@ class _$AddressSerializer implements StructuredSerializer<Address> {
     value = object.postalCode;
     if (value != null) {
       result
-        ..add('postal_code')
+        ..add('zip_code')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
@@ -108,7 +108,7 @@ class _$AddressSerializer implements StructuredSerializer<Address> {
           result.boxNumber = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'postal_code':
+        case 'zip_code':
           result.postalCode = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;

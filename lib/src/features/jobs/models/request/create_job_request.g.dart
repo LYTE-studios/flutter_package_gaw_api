@@ -63,7 +63,7 @@ class _$CreateJobRequestSerializer
       result
         ..add('is_draft')
         ..add(
-            serializers.serialize(value, specifiedType: const FullType(Bool)));
+            serializers.serialize(value, specifiedType: const FullType(bool)));
     }
     return result;
   }
@@ -118,7 +118,7 @@ class _$CreateJobRequestSerializer
           break;
         case 'is_draft':
           result.isDraft = serializers.deserialize(value,
-              specifiedType: const FullType(Bool)) as Bool?;
+              specifiedType: const FullType(bool)) as bool?;
           break;
       }
     }
@@ -147,7 +147,7 @@ class _$CreateJobRequest extends CreateJobRequest {
   @override
   final int? applicationEndTime;
   @override
-  final Bool? isDraft;
+  final bool? isDraft;
 
   factory _$CreateJobRequest(
           [void Function(CreateJobRequestBuilder)? updates]) =>
@@ -278,9 +278,9 @@ class CreateJobRequestBuilder
   set applicationEndTime(int? applicationEndTime) =>
       _$this._applicationEndTime = applicationEndTime;
 
-  Bool? _isDraft;
-  Bool? get isDraft => _$this._isDraft;
-  set isDraft(Bool? isDraft) => _$this._isDraft = isDraft;
+  bool? _isDraft;
+  bool? get isDraft => _$this._isDraft;
+  set isDraft(bool? isDraft) => _$this._isDraft = isDraft;
 
   CreateJobRequestBuilder();
 

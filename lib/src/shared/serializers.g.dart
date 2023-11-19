@@ -9,6 +9,7 @@ part of 'serializers.dart';
 Serializers _$serializers = (new Serializers().toBuilder()
       ..add(Address.serializer)
       ..add(ApplicationListResponse.serializer)
+      ..add(ApplyForJobRequest.serializer)
       ..add(CreateCustomerRequest.serializer)
       ..add(CreateCustomerResponse.serializer)
       ..add(CreateJobRequest.serializer)

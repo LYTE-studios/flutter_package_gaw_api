@@ -30,3 +30,5 @@ export 'src/features/washers/washers_api.dart';
 export 'src/shared/utils/gaw_date_util.dart';
 export 'src/users/response_models/hello_there_response.dart';
 export 'src/users/users_api.dart';
+export 'src/features/jobs/models/request/apply_for_job_request.dart';
+export 'src/features/core/response_models/id_response.dart';

@@ -7,6 +7,7 @@ import 'package:flutter_package_gaw_api/src/features/authentication/response_mod
 import 'package:flutter_package_gaw_api/src/features/core/response_models/id_response.dart';
 import 'package:flutter_package_gaw_api/src/features/customers/request_models/create_customer_request.dart';
 import 'package:flutter_package_gaw_api/src/features/customers/response_models/create_customer_response.dart';
+import 'package:flutter_package_gaw_api/src/features/jobs/models/request/apply_for_job_request.dart';
 import 'package:flutter_package_gaw_api/src/features/jobs/models/request/create_job_request.dart';
 import 'package:flutter_package_gaw_api/src/features/jobs/models/request/time_registration_request.dart';
 import 'package:flutter_package_gaw_api/src/features/jobs/models/request/user_based_jobs_request.dart';
@@ -56,6 +57,7 @@ part 'serializers.g.dart';
   YearlyStatisticsListResponse,
   TimeFrame,
   StatsRequest,
+  ApplyForJobRequest,
 ])
 final Serializers serializers =
     (_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();

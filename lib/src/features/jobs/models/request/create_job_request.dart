@@ -1,7 +1,6 @@
 library create_job_request.dart;
 
 import 'dart:convert';
-import 'dart:ffi';
 
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
@@ -45,7 +44,7 @@ abstract class CreateJobRequest
   int? get applicationEndTime;
 
   @BuiltValueField(wireName: 'is_draft')
-  Bool? get isDraft;
+  bool? get isDraft;
 
   String toJson() {
     return json.encode(

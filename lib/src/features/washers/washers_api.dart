@@ -50,18 +50,4 @@ class WashersApi {
 
     throw DioException(requestOptions: RequestOptions(), response: response);
   }
-
-  static Future<Response?> uploadSignatures(
-    {required FormData formData}) async {
-    Response response = await RequestFactory.multiformPost(
-      endpoint: '/jobs/timeregistration/sign',
-      body: formData,
-    );
-
-    if (response.statusCode == 200) {
-      return response;
-    }
-
-    throw DioException(requestOptions: RequestOptions(), response: response);
-  }
 }

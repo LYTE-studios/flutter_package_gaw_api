@@ -22,7 +22,7 @@ abstract class Address implements Built<Address, AddressBuilder> {
   @BuiltValueField(wireName: 'box_number')
   String? get boxNumber;
 
-  @BuiltValueField(wireName: 'postal_code')
+  @BuiltValueField(wireName: 'zip_code')
   String? get postalCode;
 
   @BuiltValueField(wireName: 'city')

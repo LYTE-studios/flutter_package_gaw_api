@@ -106,4 +106,32 @@ class RequestFactory {
       ),
     );
   }
+
+  static Future<Response> multiformPost({
+    required String endpoint,
+    required FormData body,
+    bool useToken = true,
+    bool useRefreshToken = false,
+  }) async {
+    Map<String, String> headers = baseHeaders;
+
+    if (useToken) {
+      if (Configuration.accessToken == null) {
+        throw Exception('No token found');
+      }
+
+      _authenticate();
+      headers['Authorization'] = Configuration.accessToken!;
+    }
+
+    return await mainClient.post(
+      '${Configuration.apiUrl}$endpoint',
+      data: body,
+      options: Options(
+        contentType: 'multipart/form-data',
+        headers: headers,
+        receiveTimeout: defaultTimeout,
+      ),
+    );
+  }
 }

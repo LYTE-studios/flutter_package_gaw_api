@@ -45,8 +45,8 @@ class RequestFactory {
     );
 
     if (response.statusCode == 200) {
-      Configuration.accessToken = response.data['access_token'];
-      Configuration.refreshToken = response.data['refresh_token'];
+      Configuration.accessToken = response.data['access'];
+      Configuration.refreshToken = response.data['refresh'];
     } else {
       throw DioException(requestOptions: RequestOptions(), response: response);
     }
@@ -99,6 +99,34 @@ class RequestFactory {
       data: body,
       options: Options(
         contentType: 'application/json',
+        headers: headers,
+        receiveTimeout: defaultTimeout,
+      ),
+    );
+  }
+
+  static Future<Response> multiformPost({
+    required String endpoint,
+    required FormData body,
+    bool useToken = true,
+    bool useRefreshToken = false,
+  }) async {
+    Map<String, String> headers = baseHeaders;
+
+    if (useToken) {
+      if (Configuration.accessToken == null) {
+        throw Exception('No token found');
+      }
+
+      _authenticate();
+      headers['Authorization'] = Configuration.accessToken!;
+    }
+
+    return await mainClient.post(
+      '${Configuration.apiUrl}$endpoint',
+      data: body,
+      options: Options(
+        contentType: 'multipart/form-data',
         headers: headers,
         receiveTimeout: defaultTimeout,
       ),

@@ -2,8 +2,12 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_package_gaw_api/flutter_package_gaw_api.dart';
+import 'package:flutter_package_gaw_api/src/features/authentication/request_models/password/code_verification_request.dart';
+import 'package:flutter_package_gaw_api/src/features/authentication/request_models/password/email_request.dart';
+import 'package:flutter_package_gaw_api/src/features/authentication/request_models/password/password_reset_request.dart';
 import 'package:flutter_package_gaw_api/src/features/authentication/request_models/refresh_request.dart';
 import 'package:flutter_package_gaw_api/src/features/authentication/response_models/jwt_response.dart';
+import 'package:flutter_package_gaw_api/src/features/authentication/response_models/pass_token_response.dart';
 import 'package:flutter_package_gaw_api/src/features/core/utils/formatting_util.dart';
 import 'package:flutter_package_gaw_api/src/features/core/utils/request_factory.dart';
 
@@ -83,6 +87,57 @@ class AuthenticationApi {
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);
+  }
+
+  static Future<bool> sendPasswordResetEmail({
+    required EmailRequest request,
+  }) async {
+    Response response = await RequestFactory.executePost(
+      endpoint: '/password_reset/',
+      body: request.toJson(),
+      useToken: false,
+    );
+
+    if (response.statusCode == 200) {
+      return true;
+    }
+
+    return false;
+  }
+
+  static Future<PassTokenResponse?> verifyPasswordResetCode({
+    required CodeVerificationRequest request,
+  }) async {
+    Response response = await RequestFactory.executePost(
+      endpoint: '/password_reset/verify/',
+      body: request.toJson(),
+      useToken: false,
+    );
+
+    if (response.statusCode == 200) {
+      PassTokenResponse passTokenResponse =
+          PassTokenResponse.fromJson(FormattingUtil.decode(response.data))!;
+
+      return passTokenResponse;
+    }
+
+    throw DioException(requestOptions: RequestOptions(), response: response);
+  }
+
+  static Future<bool> resetPassword({
+    required PasswordResetRequest request,
+  }) async {
+    Response response = await RequestFactory.executePost(
+      endpoint: '/password_reset/reset/',
+      body: request.toJson(),
+      useToken: false,
+    );
+
+    if (response.statusCode == 200) {
+      return true;
+    }
+
+    return false;
   }
 
   static bool isRefreshTokenExpired(String tokenToCheck) {

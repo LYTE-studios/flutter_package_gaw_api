@@ -34,7 +34,6 @@ part 'serializers.g.dart';
   Washer,
   Job,
   ApplicationListResponse,
-  CustomerListResponse,
   JobApplication,
   JobState,
   JobApplicationState,

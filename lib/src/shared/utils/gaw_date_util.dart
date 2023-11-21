@@ -37,12 +37,19 @@ class GawDateUtil {
     return DateTime.fromMillisecondsSinceEpoch(dateTime * 1000);
   }
 
+  static String formatTime(int time) {
+    if (time < 10) {
+      return '0$time';
+    }
+    return time.toString();
+  }
+
   static String formatDate(DateTime dateTime) {
     return '${dateTime.day}/${dateTime.month}';
   }
 
   static String formatTimeInterval(DateTime startTime, DateTime endTime) {
-    return '${startTime.hour}:${startTime.minute} - ${endTime.hour}:${endTime.minute}';
+    return '${formatTime(startTime.hour)}:${formatTime(startTime.minute)} - ${formatTime(endTime.hour)}:${formatTime(endTime.minute)}';
   }
 
   static formatDateInterval(DateTime? startDate, DateTime? endDate) {

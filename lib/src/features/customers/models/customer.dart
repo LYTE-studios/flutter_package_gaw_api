@@ -16,6 +16,12 @@ abstract class Customer implements Built<Customer, CustomerBuilder> {
   @BuiltValueField(wireName: 'id')
   String? get id;
 
+  @BuiltValueField(wireName: 'email')
+  String? get email;
+
+  @BuiltValueField(wireName: 'phone_number')
+  String? get phoneNumber;
+
   @BuiltValueField(wireName: 'first_name')
   String? get firstName;
 

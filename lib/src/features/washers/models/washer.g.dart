@@ -36,6 +36,13 @@ class _$WasherSerializer implements StructuredSerializer<Washer> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.phoneNumber;
+    if (value != null) {
+      result
+        ..add('phone_number')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.profilePictureUrl;
     if (value != null) {
       result
@@ -69,6 +76,10 @@ class _$WasherSerializer implements StructuredSerializer<Washer> {
           result.lastName = serializers.deserialize(value,
               specifiedType: const FullType(String))! as String;
           break;
+        case 'phone_number':
+          result.phoneNumber = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
         case 'email':
           result.email = serializers.deserialize(value,
               specifiedType: const FullType(String))! as String;
@@ -92,6 +103,8 @@ class _$Washer extends Washer {
   @override
   final String lastName;
   @override
+  final String? phoneNumber;
+  @override
   final String email;
   @override
   final String? profilePictureUrl;
@@ -103,6 +116,7 @@ class _$Washer extends Washer {
       {this.id,
       required this.firstName,
       required this.lastName,
+      this.phoneNumber,
       required this.email,
       this.profilePictureUrl})
       : super._() {
@@ -125,6 +139,7 @@ class _$Washer extends Washer {
         id == other.id &&
         firstName == other.firstName &&
         lastName == other.lastName &&
+        phoneNumber == other.phoneNumber &&
         email == other.email &&
         profilePictureUrl == other.profilePictureUrl;
   }
@@ -135,6 +150,7 @@ class _$Washer extends Washer {
     _$hash = $jc(_$hash, id.hashCode);
     _$hash = $jc(_$hash, firstName.hashCode);
     _$hash = $jc(_$hash, lastName.hashCode);
+    _$hash = $jc(_$hash, phoneNumber.hashCode);
     _$hash = $jc(_$hash, email.hashCode);
     _$hash = $jc(_$hash, profilePictureUrl.hashCode);
     _$hash = $jf(_$hash);
@@ -147,6 +163,7 @@ class _$Washer extends Washer {
           ..add('id', id)
           ..add('firstName', firstName)
           ..add('lastName', lastName)
+          ..add('phoneNumber', phoneNumber)
           ..add('email', email)
           ..add('profilePictureUrl', profilePictureUrl))
         .toString();
@@ -168,6 +185,10 @@ class WasherBuilder implements Builder<Washer, WasherBuilder> {
   String? get lastName => _$this._lastName;
   set lastName(String? lastName) => _$this._lastName = lastName;
 
+  String? _phoneNumber;
+  String? get phoneNumber => _$this._phoneNumber;
+  set phoneNumber(String? phoneNumber) => _$this._phoneNumber = phoneNumber;
+
   String? _email;
   String? get email => _$this._email;
   set email(String? email) => _$this._email = email;
@@ -185,6 +206,7 @@ class WasherBuilder implements Builder<Washer, WasherBuilder> {
       _id = $v.id;
       _firstName = $v.firstName;
       _lastName = $v.lastName;
+      _phoneNumber = $v.phoneNumber;
       _email = $v.email;
       _profilePictureUrl = $v.profilePictureUrl;
       _$v = null;
@@ -214,6 +236,7 @@ class WasherBuilder implements Builder<Washer, WasherBuilder> {
                 firstName, r'Washer', 'firstName'),
             lastName: BuiltValueNullFieldError.checkNotNull(
                 lastName, r'Washer', 'lastName'),
+            phoneNumber: phoneNumber,
             email: BuiltValueNullFieldError.checkNotNull(
                 email, r'Washer', 'email'),
             profilePictureUrl: profilePictureUrl);

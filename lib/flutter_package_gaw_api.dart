@@ -23,6 +23,7 @@ export 'src/features/jobs/transfer_models/job_list_response.dart';
 export 'src/features/washers/enums/time_frame.dart';
 export 'src/features/washers/models/statistics/daily_statistics.dart';
 export 'src/features/washers/models/statistics/monthly_statistics.dart';
+export 'src/features/washers/response_models/washers_list_response.dart';
 export 'src/features/washers/models/statistics/weekly_statistics.dart';
 export 'src/features/washers/models/statistics/yearly_statistics.dart';
 export 'src/features/washers/models/washer.dart';

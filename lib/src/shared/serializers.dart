@@ -23,7 +23,12 @@ import 'package:flutter_package_gaw_api/src/users/response_models/update_user_re
 part 'serializers.g.dart';
 
 @SerializersFor([
+  CodeVerificationRequest,
+  EmailRequest,
+  PasswordResetRequest,
+  PassTokenResponse,
   ApplyForJobRequest,
+  WashersListResponse,
   IdResponse,
   Customer,
   Washer,
@@ -59,10 +64,7 @@ part 'serializers.g.dart';
   YearlyStatisticsListResponse,
   TimeFrame,
   StatsRequest,
-  CodeVerificationRequest,
-  EmailRequest,
-  PasswordResetRequest,
-  PassTokenResponse,
+  ApplyForJobRequest,
 ])
 final Serializers serializers =
     (_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();

@@ -1,11 +1,25 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_package_gaw_api/flutter_package_gaw_api.dart';
-import 'package:flutter_package_gaw_api/src/features/core/response_models/id_response.dart';
 import 'package:flutter_package_gaw_api/src/features/core/utils/formatting_util.dart';
+import 'package:flutter_package_gaw_api/src/features/washers/response_models/washers_list_response.dart';
 
 import '../core/utils/request_factory.dart';
 
 class WashersApi {
+
+  static Future<WashersListResponse?> getWashers() async {
+    Response response = await RequestFactory.executeGet(
+      endpoint: '/washers',
+    );
+
+    if (response.statusCode == 200) {
+      return WashersListResponse.fromJson(
+          FormattingUtil.decode(response.data));
+    }
+
+    throw DioException(requestOptions: RequestOptions(), response: response);
+  }
+
   static Future<IdResponse?> registerWasher(
       {required RegisterRequest request}) async {
     Response response = await RequestFactory.executePost(
@@ -52,7 +66,7 @@ class WashersApi {
   }
 
   static Future<Response?> uploadSignatures(
-    {required FormData formData}) async {
+      {required FormData formData}) async {
     Response response = await RequestFactory.multiformPost(
       endpoint: '/jobs/timeregistration/sign',
       body: formData,

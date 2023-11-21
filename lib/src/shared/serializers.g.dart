@@ -40,6 +40,7 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(UpdateUserResponse.serializer)
       ..add(UserBasedJobsRequest.serializer)
       ..add(Washer.serializer)
+      ..add(WashersListResponse.serializer)
       ..add(WeeklyStatistics.serializer)
       ..add(WeeklyStatisticsListResponse.serializer)
       ..add(YearlyStatistics.serializer)
@@ -56,6 +57,9 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(TimeRegistration)]),
           () => new ListBuilder<TimeRegistration>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(Washer)]),
+          () => new ListBuilder<Washer>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(WeeklyStatistics)]),
           () => new ListBuilder<WeeklyStatistics>())

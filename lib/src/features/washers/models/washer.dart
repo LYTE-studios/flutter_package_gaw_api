@@ -22,6 +22,9 @@ abstract class Washer implements Built<Washer, WasherBuilder> {
   @BuiltValueField(wireName: 'last_name')
   String get lastName;
 
+  @BuiltValueField(wireName: 'phone_number')
+  String? get phoneNumber;
+
   @BuiltValueField(wireName: 'email')
   String get email;
 
@@ -32,6 +35,10 @@ abstract class Washer implements Built<Washer, WasherBuilder> {
     return json.encode(
       serializers.serializeWith(Washer.serializer, this),
     );
+  }
+
+  String getFullName() {
+    return '$firstName $lastName';
   }
 
   static Washer? fromJson(Map<String, dynamic> data) {

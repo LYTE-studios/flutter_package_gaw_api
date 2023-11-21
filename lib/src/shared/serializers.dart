@@ -5,7 +5,6 @@ import 'package:flutter_package_gaw_api/flutter_package_gaw_api.dart';
 import 'package:flutter_package_gaw_api/src/features/authentication/request_models/refresh_request.dart';
 import 'package:flutter_package_gaw_api/src/features/customers/request_models/create_customer_request.dart';
 import 'package:flutter_package_gaw_api/src/features/customers/response_models/create_customer_response.dart';
-import 'package:flutter_package_gaw_api/src/features/customers/response_models/customer_list_response.dart';
 import 'package:flutter_package_gaw_api/src/features/jobs/models/request/create_job_request.dart';
 import 'package:flutter_package_gaw_api/src/features/jobs/models/request/time_registration_request.dart';
 import 'package:flutter_package_gaw_api/src/features/jobs/models/request/user_based_jobs_request.dart';
@@ -21,6 +20,7 @@ part 'serializers.g.dart';
 
 @SerializersFor([
   ApplyForJobRequest,
+  WashersListResponse,
   IdResponse,
   Customer,
   Washer,

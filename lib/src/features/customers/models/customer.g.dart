@@ -26,6 +26,20 @@ class _$CustomerSerializer implements StructuredSerializer<Customer> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.email;
+    if (value != null) {
+      result
+        ..add('email')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.phoneNumber;
+    if (value != null) {
+      result
+        ..add('phone_number')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.firstName;
     if (value != null) {
       result
@@ -79,6 +93,14 @@ class _$CustomerSerializer implements StructuredSerializer<Customer> {
           result.id = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'email':
+          result.email = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'phone_number':
+          result.phoneNumber = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
         case 'first_name':
           result.firstName = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
@@ -110,6 +132,10 @@ class _$Customer extends Customer {
   @override
   final String? id;
   @override
+  final String? email;
+  @override
+  final String? phoneNumber;
+  @override
   final String? firstName;
   @override
   final String? lastName;
@@ -125,6 +151,8 @@ class _$Customer extends Customer {
 
   _$Customer._(
       {this.id,
+      this.email,
+      this.phoneNumber,
       this.firstName,
       this.lastName,
       this.initials,
@@ -144,6 +172,8 @@ class _$Customer extends Customer {
     if (identical(other, this)) return true;
     return other is Customer &&
         id == other.id &&
+        email == other.email &&
+        phoneNumber == other.phoneNumber &&
         firstName == other.firstName &&
         lastName == other.lastName &&
         initials == other.initials &&
@@ -155,6 +185,8 @@ class _$Customer extends Customer {
   int get hashCode {
     var _$hash = 0;
     _$hash = $jc(_$hash, id.hashCode);
+    _$hash = $jc(_$hash, email.hashCode);
+    _$hash = $jc(_$hash, phoneNumber.hashCode);
     _$hash = $jc(_$hash, firstName.hashCode);
     _$hash = $jc(_$hash, lastName.hashCode);
     _$hash = $jc(_$hash, initials.hashCode);
@@ -168,6 +200,8 @@ class _$Customer extends Customer {
   String toString() {
     return (newBuiltValueToStringHelper(r'Customer')
           ..add('id', id)
+          ..add('email', email)
+          ..add('phoneNumber', phoneNumber)
           ..add('firstName', firstName)
           ..add('lastName', lastName)
           ..add('initials', initials)
@@ -183,6 +217,14 @@ class CustomerBuilder implements Builder<Customer, CustomerBuilder> {
   String? _id;
   String? get id => _$this._id;
   set id(String? id) => _$this._id = id;
+
+  String? _email;
+  String? get email => _$this._email;
+  set email(String? email) => _$this._email = email;
+
+  String? _phoneNumber;
+  String? get phoneNumber => _$this._phoneNumber;
+  set phoneNumber(String? phoneNumber) => _$this._phoneNumber = phoneNumber;
 
   String? _firstName;
   String? get firstName => _$this._firstName;
@@ -211,6 +253,8 @@ class CustomerBuilder implements Builder<Customer, CustomerBuilder> {
     final $v = _$v;
     if ($v != null) {
       _id = $v.id;
+      _email = $v.email;
+      _phoneNumber = $v.phoneNumber;
       _firstName = $v.firstName;
       _lastName = $v.lastName;
       _initials = $v.initials;
@@ -239,6 +283,8 @@ class CustomerBuilder implements Builder<Customer, CustomerBuilder> {
     final _$result = _$v ??
         new _$Customer._(
             id: id,
+            email: email,
+            phoneNumber: phoneNumber,
             firstName: firstName,
             lastName: lastName,
             initials: initials,

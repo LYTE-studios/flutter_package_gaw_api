@@ -17,7 +17,7 @@ abstract class CustomerListResponse
       _$CustomerListResponse;
 
   @BuiltValueField(wireName: 'customers')
-  BuiltList<Customer> get customerId;
+  BuiltList<Customer> get customers;
 
   @BuiltValueField(wireName: 'items_per_page')
   int get itemsPerPage;

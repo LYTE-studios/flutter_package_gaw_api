@@ -114,16 +114,13 @@ class RequestFactory {
     bool useRefreshToken = false,
   }) async {
     Map<String, String> headers = baseHeaders;
-
     if (useToken) {
       if (Configuration.accessToken == null) {
         throw Exception('No token found');
       }
-
       _authenticate();
       headers['Authorization'] = Configuration.accessToken!;
     }
-
     return await mainClient.post(
       '${Configuration.apiUrl}$endpoint',
       data: body,

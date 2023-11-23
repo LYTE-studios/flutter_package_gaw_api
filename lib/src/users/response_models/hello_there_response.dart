@@ -27,6 +27,9 @@ abstract class HelloThereResponse
   @BuiltValueField(wireName: 'email')
   String get email;
 
+  @BuiltValueField(wireName: 'profile_picture')
+  String get profilePictureUrl;
+
   String toJson() {
     return json.encode(
       serializers.serializeWith(HelloThereResponse.serializer, this),

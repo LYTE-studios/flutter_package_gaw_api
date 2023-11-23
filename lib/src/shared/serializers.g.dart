@@ -15,7 +15,6 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(CreateCustomerResponse.serializer)
       ..add(CreateJobRequest.serializer)
       ..add(Customer.serializer)
-      ..add(CustomerListResponse.serializer)
       ..add(DailyStatistics.serializer)
       ..add(EmailRequest.serializer)
       ..add(HelloThereResponse.serializer)
@@ -49,9 +48,6 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(WeeklyStatisticsListResponse.serializer)
       ..add(YearlyStatistics.serializer)
       ..add(YearlyStatisticsListResponse.serializer)
-      ..addBuilderFactory(
-          const FullType(BuiltList, const [const FullType(Customer)]),
-          () => new ListBuilder<Customer>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(Job)]),
           () => new ListBuilder<Job>())

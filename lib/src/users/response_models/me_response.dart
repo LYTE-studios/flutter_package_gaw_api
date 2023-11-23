@@ -1,6 +1,7 @@
 library me_response;
 
 import 'dart:convert';
+import 'dart:ffi';
 
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
@@ -32,11 +33,17 @@ abstract class MeResponse implements Built<MeResponse, MeResponseBuilder> {
   @BuiltValueField(wireName: 'address')
   Address? get address;
 
-  @BuiltValueField(wireName: 'billing_address')
-  Address? get billingAddress;
-
   @BuiltValueField(wireName: 'phone_number')
   String? get phoneNumber;
+
+  @BuiltValueField(wireName: 'description')
+  String? get description;
+
+  @BuiltValueField(wireName: 'profile_picture')
+  String? get profilePictureUrl;
+
+  @BuiltValueField(wireName: 'language')
+  String? get language;
 
   String toJson() {
     return json.encode(

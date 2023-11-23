@@ -32,6 +32,9 @@ class _$HelloThereResponseSerializer
       'email',
       serializers.serialize(object.email,
           specifiedType: const FullType(String)),
+      'profile_picture',
+      serializers.serialize(object.profilePictureUrl,
+          specifiedType: const FullType(String)),
     ];
 
     return result;
@@ -65,6 +68,10 @@ class _$HelloThereResponseSerializer
           result.email = serializers.deserialize(value,
               specifiedType: const FullType(String))! as String;
           break;
+        case 'profile_picture':
+          result.profilePictureUrl = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
       }
     }
 
@@ -81,6 +88,8 @@ class _$HelloThereResponse extends HelloThereResponse {
   final String lastName;
   @override
   final String email;
+  @override
+  final String profilePictureUrl;
 
   factory _$HelloThereResponse(
           [void Function(HelloThereResponseBuilder)? updates]) =>
@@ -90,7 +99,8 @@ class _$HelloThereResponse extends HelloThereResponse {
       {required this.id,
       required this.firstName,
       required this.lastName,
-      required this.email})
+      required this.email,
+      required this.profilePictureUrl})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(id, r'HelloThereResponse', 'id');
     BuiltValueNullFieldError.checkNotNull(
@@ -99,6 +109,8 @@ class _$HelloThereResponse extends HelloThereResponse {
         lastName, r'HelloThereResponse', 'lastName');
     BuiltValueNullFieldError.checkNotNull(
         email, r'HelloThereResponse', 'email');
+    BuiltValueNullFieldError.checkNotNull(
+        profilePictureUrl, r'HelloThereResponse', 'profilePictureUrl');
   }
 
   @override
@@ -117,7 +129,8 @@ class _$HelloThereResponse extends HelloThereResponse {
         id == other.id &&
         firstName == other.firstName &&
         lastName == other.lastName &&
-        email == other.email;
+        email == other.email &&
+        profilePictureUrl == other.profilePictureUrl;
   }
 
   @override
@@ -127,6 +140,7 @@ class _$HelloThereResponse extends HelloThereResponse {
     _$hash = $jc(_$hash, firstName.hashCode);
     _$hash = $jc(_$hash, lastName.hashCode);
     _$hash = $jc(_$hash, email.hashCode);
+    _$hash = $jc(_$hash, profilePictureUrl.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -137,7 +151,8 @@ class _$HelloThereResponse extends HelloThereResponse {
           ..add('id', id)
           ..add('firstName', firstName)
           ..add('lastName', lastName)
-          ..add('email', email))
+          ..add('email', email)
+          ..add('profilePictureUrl', profilePictureUrl))
         .toString();
   }
 }
@@ -162,6 +177,11 @@ class HelloThereResponseBuilder
   String? get email => _$this._email;
   set email(String? email) => _$this._email = email;
 
+  String? _profilePictureUrl;
+  String? get profilePictureUrl => _$this._profilePictureUrl;
+  set profilePictureUrl(String? profilePictureUrl) =>
+      _$this._profilePictureUrl = profilePictureUrl;
+
   HelloThereResponseBuilder();
 
   HelloThereResponseBuilder get _$this {
@@ -171,6 +191,7 @@ class HelloThereResponseBuilder
       _firstName = $v.firstName;
       _lastName = $v.lastName;
       _email = $v.email;
+      _profilePictureUrl = $v.profilePictureUrl;
       _$v = null;
     }
     return this;
@@ -200,7 +221,9 @@ class HelloThereResponseBuilder
             lastName: BuiltValueNullFieldError.checkNotNull(
                 lastName, r'HelloThereResponse', 'lastName'),
             email: BuiltValueNullFieldError.checkNotNull(
-                email, r'HelloThereResponse', 'email'));
+                email, r'HelloThereResponse', 'email'),
+            profilePictureUrl: BuiltValueNullFieldError.checkNotNull(
+                profilePictureUrl, r'HelloThereResponse', 'profilePictureUrl'));
     replace(_$result);
     return _$result;
   }

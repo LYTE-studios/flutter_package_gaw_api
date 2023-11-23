@@ -46,6 +46,19 @@ class _$UpdateUserRequestSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.dateOfBirth;
+    if (value != null) {
+      result
+        ..add('date_of_birth')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
+    value = object.description;
+    if (value != null) {
+      result
+        ..add('description')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.phoneNumber;
     if (value != null) {
       result
@@ -105,6 +118,14 @@ class _$UpdateUserRequestSerializer
           result.initials = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'date_of_birth':
+          result.dateOfBirth = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int?;
+          break;
+        case 'description':
+          result.description = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
         case 'phone_number':
           result.phoneNumber = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
@@ -138,6 +159,10 @@ class _$UpdateUserRequest extends UpdateUserRequest {
   @override
   final String? initials;
   @override
+  final int? dateOfBirth;
+  @override
+  final String? description;
+  @override
   final String? phoneNumber;
   @override
   final String? taxNumber;
@@ -155,6 +180,8 @@ class _$UpdateUserRequest extends UpdateUserRequest {
       this.firstName,
       this.lastName,
       this.initials,
+      this.dateOfBirth,
+      this.description,
       this.phoneNumber,
       this.taxNumber,
       this.address,
@@ -180,6 +207,8 @@ class _$UpdateUserRequest extends UpdateUserRequest {
         firstName == other.firstName &&
         lastName == other.lastName &&
         initials == other.initials &&
+        dateOfBirth == other.dateOfBirth &&
+        description == other.description &&
         phoneNumber == other.phoneNumber &&
         taxNumber == other.taxNumber &&
         address == other.address &&
@@ -193,6 +222,8 @@ class _$UpdateUserRequest extends UpdateUserRequest {
     _$hash = $jc(_$hash, firstName.hashCode);
     _$hash = $jc(_$hash, lastName.hashCode);
     _$hash = $jc(_$hash, initials.hashCode);
+    _$hash = $jc(_$hash, dateOfBirth.hashCode);
+    _$hash = $jc(_$hash, description.hashCode);
     _$hash = $jc(_$hash, phoneNumber.hashCode);
     _$hash = $jc(_$hash, taxNumber.hashCode);
     _$hash = $jc(_$hash, address.hashCode);
@@ -208,6 +239,8 @@ class _$UpdateUserRequest extends UpdateUserRequest {
           ..add('firstName', firstName)
           ..add('lastName', lastName)
           ..add('initials', initials)
+          ..add('dateOfBirth', dateOfBirth)
+          ..add('description', description)
           ..add('phoneNumber', phoneNumber)
           ..add('taxNumber', taxNumber)
           ..add('address', address)
@@ -236,6 +269,14 @@ class UpdateUserRequestBuilder
   String? get initials => _$this._initials;
   set initials(String? initials) => _$this._initials = initials;
 
+  int? _dateOfBirth;
+  int? get dateOfBirth => _$this._dateOfBirth;
+  set dateOfBirth(int? dateOfBirth) => _$this._dateOfBirth = dateOfBirth;
+
+  String? _description;
+  String? get description => _$this._description;
+  set description(String? description) => _$this._description = description;
+
   String? _phoneNumber;
   String? get phoneNumber => _$this._phoneNumber;
   set phoneNumber(String? phoneNumber) => _$this._phoneNumber = phoneNumber;
@@ -263,6 +304,8 @@ class UpdateUserRequestBuilder
       _firstName = $v.firstName;
       _lastName = $v.lastName;
       _initials = $v.initials;
+      _dateOfBirth = $v.dateOfBirth;
+      _description = $v.description;
       _phoneNumber = $v.phoneNumber;
       _taxNumber = $v.taxNumber;
       _address = $v.address?.toBuilder();
@@ -296,6 +339,8 @@ class UpdateUserRequestBuilder
               firstName: firstName,
               lastName: lastName,
               initials: initials,
+              dateOfBirth: dateOfBirth,
+              description: description,
               phoneNumber: phoneNumber,
               taxNumber: taxNumber,
               address: _address?.build(),

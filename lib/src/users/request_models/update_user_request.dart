@@ -1,6 +1,7 @@
 library update_user_request;
 
 import 'dart:convert';
+import 'dart:ffi';
 
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
@@ -27,6 +28,12 @@ abstract class UpdateUserRequest
 
   @BuiltValueField(wireName: 'initials')
   String? get initials;
+
+  @BuiltValueField(wireName: 'date_of_birth')
+  int? get dateOfBirth;
+
+  @BuiltValueField(wireName: 'description')
+  String? get description;
 
   @BuiltValueField(wireName: 'phone_number')
   String? get phoneNumber;

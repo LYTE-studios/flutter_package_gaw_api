@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_package_gaw_api/flutter_package_gaw_api.dart';
 import 'package:flutter_package_gaw_api/src/features/core/utils/formatting_util.dart';
@@ -38,7 +40,7 @@ class UsersApi {
   static Future<UpdateUserResponse?> update(
       UpdateUserRequest updateUser) async {
     Response response = await RequestFactory.executePost(
-      endpoint: '/users/detils/update',
+      endpoint: '/users/details/update',
       body: updateUser.toJson(),
     );
 
@@ -62,5 +64,19 @@ class UsersApi {
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);
+  }
+
+  static Future<Uint8List?> fetchProfilePicture(String profilePictureUrl) async {
+    try {
+      final dio = Dio();
+      
+      final responseImage = await dio.get(profilePictureUrl);
+      final bytes = responseImage.data;
+      
+      return bytes;
+    } on Exception catch (e) {
+      print(e);
+      return null;
+    }
   }
 }

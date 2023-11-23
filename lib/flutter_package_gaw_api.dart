@@ -36,3 +36,5 @@ export 'src/shared/utils/gaw_date_util.dart';
 export 'src/shared/utils/local_storage_util.dart';
 export 'src/users/response_models/hello_there_response.dart';
 export 'src/users/users_api.dart';
+export 'src/users/response_models/me_response.dart';
+export 'src/users/request_models/update_user_request.dart';

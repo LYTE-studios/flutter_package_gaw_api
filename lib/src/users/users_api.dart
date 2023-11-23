@@ -8,6 +8,7 @@ import 'package:flutter_package_gaw_api/src/users/request_models/update_user_req
 import 'package:flutter_package_gaw_api/src/users/response_models/hello_there_response.dart';
 import 'package:flutter_package_gaw_api/src/users/response_models/me_response.dart';
 import 'package:flutter_package_gaw_api/src/users/response_models/update_user_response.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../features/core/utils/request_factory.dart';
 
@@ -35,6 +36,17 @@ class UsersApi {
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);
+  }
+
+  static Future<void> uploadProfilePicture(XFile image) async {
+    var formData = FormData.fromMap({
+      "file": await MultipartFile.fromFile(image.path),
+    });
+
+    Response response = await RequestFactory.imagePost(endpoint: '/upload_image', body: formData);
+    if (response.statusCode != 204) {
+      throw DioException(requestOptions: RequestOptions(), response: response);
+    }
   }
 
   static Future<UpdateUserResponse?> update(
@@ -68,9 +80,10 @@ class UsersApi {
 
   static Future<Uint8List?> fetchProfilePicture(String profilePictureUrl) async {
     try {
-      final dio = Dio();
-      
-      final responseImage = await dio.get(profilePictureUrl);
+      final responseImage = await RequestFactory.executeGet(
+        endpoint: profilePictureUrl,
+        useToken: false,
+      );
       final bytes = responseImage.data;
       
       return bytes;
@@ -78,5 +91,17 @@ class UsersApi {
       print(e);
       return null;
     }
+  }
+
+  static Future<void> removeProfilePicture() async {
+    Response response = await RequestFactory.executePost(
+      endpoint: '/remove_profile_picture',
+    );
+
+    if (response.statusCode == 200) {
+      return;
+    }
+
+    throw DioException(requestOptions: RequestOptions(), response: response);
   }
 }

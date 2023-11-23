@@ -1,7 +1,6 @@
 library me_response;
 
 import 'dart:convert';
-import 'dart:ffi';
 
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';

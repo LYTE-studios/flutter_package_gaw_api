@@ -28,7 +28,7 @@ abstract class HelloThereResponse
   String get email;
 
   @BuiltValueField(wireName: 'profile_picture')
-  String get profilePictureUrl;
+  String? get profilePictureUrl;
 
   String toJson() {
     return json.encode(

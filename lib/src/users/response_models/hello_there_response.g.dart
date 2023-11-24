@@ -32,11 +32,15 @@ class _$HelloThereResponseSerializer
       'email',
       serializers.serialize(object.email,
           specifiedType: const FullType(String)),
-      'profile_picture',
-      serializers.serialize(object.profilePictureUrl,
-          specifiedType: const FullType(String)),
     ];
-
+    Object? value;
+    value = object.profilePictureUrl;
+    if (value != null) {
+      result
+        ..add('profile_picture')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     return result;
   }
 
@@ -70,7 +74,7 @@ class _$HelloThereResponseSerializer
           break;
         case 'profile_picture':
           result.profilePictureUrl = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+              specifiedType: const FullType(String)) as String?;
           break;
       }
     }
@@ -89,7 +93,7 @@ class _$HelloThereResponse extends HelloThereResponse {
   @override
   final String email;
   @override
-  final String profilePictureUrl;
+  final String? profilePictureUrl;
 
   factory _$HelloThereResponse(
           [void Function(HelloThereResponseBuilder)? updates]) =>
@@ -100,7 +104,7 @@ class _$HelloThereResponse extends HelloThereResponse {
       required this.firstName,
       required this.lastName,
       required this.email,
-      required this.profilePictureUrl})
+      this.profilePictureUrl})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(id, r'HelloThereResponse', 'id');
     BuiltValueNullFieldError.checkNotNull(
@@ -109,8 +113,6 @@ class _$HelloThereResponse extends HelloThereResponse {
         lastName, r'HelloThereResponse', 'lastName');
     BuiltValueNullFieldError.checkNotNull(
         email, r'HelloThereResponse', 'email');
-    BuiltValueNullFieldError.checkNotNull(
-        profilePictureUrl, r'HelloThereResponse', 'profilePictureUrl');
   }
 
   @override
@@ -222,8 +224,7 @@ class HelloThereResponseBuilder
                 lastName, r'HelloThereResponse', 'lastName'),
             email: BuiltValueNullFieldError.checkNotNull(
                 email, r'HelloThereResponse', 'email'),
-            profilePictureUrl: BuiltValueNullFieldError.checkNotNull(
-                profilePictureUrl, r'HelloThereResponse', 'profilePictureUrl'));
+            profilePictureUrl: profilePictureUrl);
     replace(_$result);
     return _$result;
   }

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
@@ -78,19 +79,18 @@ class UsersApi {
     throw DioException(requestOptions: RequestOptions(), response: response);
   }
 
-  static Future<Uint8List?> fetchProfilePicture(String profilePictureUrl) async {
-    try {
-      final responseImage = await RequestFactory.executeGet(
-        endpoint: profilePictureUrl,
-        useToken: false,
-      );
-      final bytes = responseImage.data;
-      
-      return bytes;
-    } on Exception catch (e) {
-      print(e);
-      return null;
+  static Future<Uint8List>? fetchProfilePicture(String profilePictureUrl) async {
+    var dio = Dio();
+    final response = await dio.get(
+      Configuration.apiUrl + profilePictureUrl,
+      options: Options(responseType: ResponseType.bytes),
+    );
+
+    if (response.statusCode != 200) {
+      throw Exception('Failed to load image');
     }
+
+    return Uint8List.fromList(response.data);
   }
 
   static Future<void> removeProfilePicture() async {

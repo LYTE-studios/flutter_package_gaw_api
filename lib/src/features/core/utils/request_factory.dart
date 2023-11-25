@@ -64,7 +64,7 @@ class RequestFactory {
         throw Exception('No token found');
       }
 
-      _authenticate();
+      await _authenticate();
       headers['Authorization'] = Configuration.accessToken!;
     }
 
@@ -91,7 +91,7 @@ class RequestFactory {
         throw Exception('No token found');
       }
 
-      _authenticate();
+      await _authenticate();
       headers['Authorization'] = Configuration.accessToken!;
     }
 
@@ -118,7 +118,7 @@ class RequestFactory {
       if (Configuration.accessToken == null) {
         throw Exception('No token found');
       }
-      _authenticate();
+      await _authenticate();
       headers['Authorization'] = Configuration.accessToken!;
     }
     return await mainClient.post(
@@ -143,7 +143,7 @@ class RequestFactory {
       if (Configuration.accessToken == null) {
         throw Exception('No token found');
       }
-      _authenticate();
+      await _authenticate();
       headers['Authorization'] = Configuration.accessToken!;
     }
     return await mainClient.post(

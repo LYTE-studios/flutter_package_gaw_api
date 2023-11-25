@@ -31,9 +31,6 @@ class _$JobApplicationSerializer
       'state',
       serializers.serialize(object.state,
           specifiedType: const FullType(JobApplicationState)),
-      'distance',
-      serializers.serialize(object.distance,
-          specifiedType: const FullType(double)),
       'no_travel_costs',
       serializers.serialize(object.noTravelCosts,
           specifiedType: const FullType(bool)),
@@ -45,6 +42,13 @@ class _$JobApplicationSerializer
         ..add('id')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
+    }
+    value = object.distance;
+    if (value != null) {
+      result
+        ..add('distance')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(double)));
     }
     return result;
   }
@@ -84,7 +88,7 @@ class _$JobApplicationSerializer
           break;
         case 'distance':
           result.distance = serializers.deserialize(value,
-              specifiedType: const FullType(double))! as double;
+              specifiedType: const FullType(double)) as double?;
           break;
         case 'no_travel_costs':
           result.noTravelCosts = serializers.deserialize(value,
@@ -109,7 +113,7 @@ class _$JobApplication extends JobApplication {
   @override
   final JobApplicationState state;
   @override
-  final double distance;
+  final double? distance;
   @override
   final bool noTravelCosts;
 
@@ -122,7 +126,7 @@ class _$JobApplication extends JobApplication {
       required this.job,
       required this.address,
       required this.state,
-      required this.distance,
+      this.distance,
       required this.noTravelCosts})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(washer, r'JobApplication', 'washer');
@@ -130,8 +134,6 @@ class _$JobApplication extends JobApplication {
     BuiltValueNullFieldError.checkNotNull(
         address, r'JobApplication', 'address');
     BuiltValueNullFieldError.checkNotNull(state, r'JobApplication', 'state');
-    BuiltValueNullFieldError.checkNotNull(
-        distance, r'JobApplication', 'distance');
     BuiltValueNullFieldError.checkNotNull(
         noTravelCosts, r'JobApplication', 'noTravelCosts');
   }
@@ -260,8 +262,7 @@ class JobApplicationBuilder
               address: address.build(),
               state: BuiltValueNullFieldError.checkNotNull(
                   state, r'JobApplication', 'state'),
-              distance: BuiltValueNullFieldError.checkNotNull(
-                  distance, r'JobApplication', 'distance'),
+              distance: distance,
               noTravelCosts: BuiltValueNullFieldError.checkNotNull(
                   noTravelCosts, r'JobApplication', 'noTravelCosts'));
     } catch (_) {

@@ -2,10 +2,8 @@ library jobs_api;
 
 import 'package:dio/dio.dart';
 import 'package:flutter_package_gaw_api/flutter_package_gaw_api.dart';
-import 'package:flutter_package_gaw_api/src/features/core/response_models/id_response.dart';
 import 'package:flutter_package_gaw_api/src/features/core/utils/formatting_util.dart';
 import 'package:flutter_package_gaw_api/src/features/core/utils/request_factory.dart';
-import 'package:flutter_package_gaw_api/src/features/jobs/models/request/apply_for_job_request.dart';
 import 'package:flutter_package_gaw_api/src/features/jobs/models/request/create_job_request.dart';
 import 'package:flutter_package_gaw_api/src/features/jobs/models/request/time_registration_request.dart';
 import 'package:flutter_package_gaw_api/src/features/jobs/models/request/user_based_jobs_request.dart';
@@ -22,6 +20,23 @@ class JobsApi {
     if (response.statusCode == 200) {
       return ApplicationListResponse.fromJson(
           FormattingUtil.decode(response.data));
+    }
+
+    throw DioException(requestOptions: RequestOptions(), response: response);
+  }
+
+  /// Gets the washers job applications
+  static Future<JobApplication?> getApplication(
+    String id,
+  ) async {
+    Response response = await RequestFactory.executeGet(
+      endpoint: '/applications/details/$id',
+    );
+
+    if (response.statusCode == 200) {
+      return JobApplication.fromJson(
+        FormattingUtil.decode(response.data),
+      );
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);

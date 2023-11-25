@@ -6,7 +6,6 @@ import 'package:flutter_package_gaw_api/src/features/authentication/request_mode
 import 'package:flutter_package_gaw_api/src/features/authentication/request_models/password/email_request.dart';
 import 'package:flutter_package_gaw_api/src/features/authentication/request_models/password/password_reset_request.dart';
 import 'package:flutter_package_gaw_api/src/features/authentication/request_models/refresh_request.dart';
-import 'package:flutter_package_gaw_api/src/features/authentication/response_models/jwt_response.dart';
 import 'package:flutter_package_gaw_api/src/features/authentication/response_models/pass_token_response.dart';
 import 'package:flutter_package_gaw_api/src/features/core/utils/formatting_util.dart';
 import 'package:flutter_package_gaw_api/src/features/core/utils/request_factory.dart';

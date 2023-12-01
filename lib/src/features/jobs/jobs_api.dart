@@ -156,4 +156,18 @@ class JobsApi {
 
     throw DioException(requestOptions: RequestOptions(), response: response);
   }
+
+  static Future<dynamic> fetchUrl(Map<String, String>? headers) async {
+    Dio dio = Dio();
+    Response response = await dio.get(
+      'https://maps.googleapis.com/maps/api/place/textsearch/json',
+      queryParameters: headers,
+    );
+
+    if (response.statusCode == 200) {
+      return response.data;
+    }
+
+    throw DioException(requestOptions: RequestOptions(), response: response);
+  }
 }

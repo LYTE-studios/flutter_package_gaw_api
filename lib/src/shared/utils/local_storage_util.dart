@@ -13,6 +13,8 @@ class LocalStorageUtil {
   }
 
   static Future<void> setTokens(String? token, String? refreshToken) async {
+    await mainStorage.ready;
+    
     await mainStorage.setItem(LocalStorageUtil.kToken, token);
     await mainStorage.setItem(LocalStorageUtil.kRefreshToken, refreshToken);
 
@@ -22,6 +24,8 @@ class LocalStorageUtil {
 
   static Future<Map<String, String?>> getTokens() async {
     Map<String, String?> tokens = {};
+
+    await mainStorage.ready;
 
     tokens[LocalStorageUtil.kToken] =
     await mainStorage.getItem(LocalStorageUtil.kToken);

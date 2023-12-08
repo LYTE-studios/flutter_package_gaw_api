@@ -1,5 +1,7 @@
 library jobs_api;
 
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_package_gaw_api/flutter_package_gaw_api.dart';
 import 'package:flutter_package_gaw_api/src/features/core/utils/formatting_util.dart';
@@ -169,5 +171,35 @@ class JobsApi {
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);
+  }
+
+  static Future<String> getReverseGeocodingAddress(double lt, double lg, String apiGoogleKey) async {
+    Dio dio = Dio();
+    // Replace YOUR_API_KEY with your actual Google Maps Geocoding API key
+    final String url =
+        'https://maps.googleapis.com/maps/api/geocode/json';
+    try {
+      var response = await dio.get(url, queryParameters: {
+      'latlng': '$lt,$lg',
+      'key': apiGoogleKey,
+    });
+      if (response.statusCode == 200) {
+        final data = response.data;
+
+        // Assuming the response format is correct and contains results
+        if (data['results'].isNotEmpty) {
+          // Typically, the first result is the most relevant address
+          String formattedAddress = data['results'][0]['formatted_address'];
+          return formattedAddress;
+        } else {
+          throw Exception('No results found for these coordinates.');
+        }
+      } else {
+        throw Exception('Failed to fetch reverse geocoding data.');
+      }
+    } catch (e) {
+      print(e.toString());
+      return 'Failed to get the address.';
+    }
   }
 }

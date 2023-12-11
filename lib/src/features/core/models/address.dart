@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:flutter_package_gaw_api/src/shared/serializers.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 part 'address.g.dart';
 
@@ -51,6 +52,10 @@ abstract class Address implements Built<Address, AddressBuilder> {
   String formattedAddres() {
     return '${streetName ?? ''} ${houseNumber ?? ''} ${boxNumber ?? ''} ${postalCode ?? ''} ${city ?? ''} ${country ?? ''}'
         .trim();
+  }
+
+  LatLng toLatLng() {
+    return LatLng(latitude!, longitude!);
   }
 
   String toJson() {

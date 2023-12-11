@@ -1,8 +1,8 @@
 class Configuration {
-  static String clientSecret = '321';
+  static String clientSecret = '';
 
-  static String apiUrl ='http://10.0.2.2:8000';
-    //'http://ec2-3-71-206-30.eu-central-1.compute.amazonaws.com';
+  // DEFAULT URL
+  static String apiUrl = 'https://api.getawash.lytestudios.be';
 
   static String? accessToken;
   static String? refreshToken;

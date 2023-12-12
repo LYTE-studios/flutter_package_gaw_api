@@ -6,7 +6,6 @@ import 'package:flutter_package_gaw_api/src/features/customers/response_models/c
 import 'package:flutter_package_gaw_api/src/features/customers/response_models/customer_list_response.dart';
 
 class CustomerApi {
-
   static Future<CustomerListResponse?> getCustomers() async {
     Response response = await RequestFactory.executeGet(
       endpoint: '/customers',
@@ -14,7 +13,8 @@ class CustomerApi {
 
     if (response.statusCode == 200) {
       return CustomerListResponse.fromJson(
-          FormattingUtil.decode(response.data));
+        FormattingUtil.decode(response.data),
+      );
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);

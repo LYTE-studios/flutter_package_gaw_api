@@ -35,7 +35,6 @@ export 'src/features/washers/request_models/stats_request.dart';
 export 'src/features/washers/response_models/weekly_statistics_list_response.dart';
 export 'src/features/washers/response_models/yearly_statistics_list_response.dart';
 export 'src/features/washers/washers_api.dart';
-export 'src/shared/utils/gaw_date_util.dart';
 export 'src/shared/utils/local_storage_util.dart';
 export 'src/users/response_models/hello_there_response.dart';
 export 'src/users/users_api.dart';

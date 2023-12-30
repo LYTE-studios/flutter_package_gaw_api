@@ -4,8 +4,7 @@ import 'dart:convert';
 
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
-import 'package:flutter_package_gaw_api/flutter_package_gaw_api.dart';
-import 'package:flutter_package_gaw_api/src/shared/serializers.dart';
+import 'package:gaw_api/gaw_api.dart';
 
 part 'update_user_request.g.dart';
 

@@ -1,17 +1,18 @@
-import 'dart:convert';
+library users_api;
+
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
-import 'package:flutter_package_gaw_api/flutter_package_gaw_api.dart';
-import 'package:flutter_package_gaw_api/src/features/core/utils/formatting_util.dart';
-import 'package:flutter_package_gaw_api/src/users/request_models/update_language_request.dart';
-import 'package:flutter_package_gaw_api/src/users/request_models/update_user_request.dart';
-import 'package:flutter_package_gaw_api/src/users/response_models/hello_there_response.dart';
-import 'package:flutter_package_gaw_api/src/users/response_models/me_response.dart';
-import 'package:flutter_package_gaw_api/src/users/response_models/update_user_response.dart';
+import 'package:gaw_api/gaw_api.dart';
+import 'package:gaw_api/src/core/utils/formatting_util.dart';
+import 'package:gaw_api/src/core/utils/request_factory.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../features/core/utils/request_factory.dart';
+export 'request_models/update_language_request.dart';
+export 'request_models/update_user_request.dart';
+export 'response_models/hello_there_response.dart';
+export 'response_models/me_response.dart';
+export 'response_models/update_user_response.dart';
 
 class UsersApi {
   /// Gets the hello there data for a user
@@ -44,7 +45,8 @@ class UsersApi {
       "file": await MultipartFile.fromFile(image.path),
     });
 
-    Response response = await RequestFactory.imagePost(endpoint: '/upload_image', body: formData);
+    Response response = await RequestFactory.imagePost(
+        endpoint: '/upload_image', body: formData);
     if (response.statusCode != 204) {
       throw DioException(requestOptions: RequestOptions(), response: response);
     }
@@ -79,7 +81,8 @@ class UsersApi {
     throw DioException(requestOptions: RequestOptions(), response: response);
   }
 
-  static Future<Uint8List>? fetchProfilePicture(String profilePictureUrl) async {
+  static Future<Uint8List>? fetchProfilePicture(
+      String profilePictureUrl) async {
     var dio = Dio();
     final response = await dio.get(
       Configuration.apiUrl + profilePictureUrl,

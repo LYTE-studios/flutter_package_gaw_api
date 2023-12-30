@@ -8,7 +8,9 @@ import 'package:gaw_api/src/core/utils/request_factory.dart';
 export 'models/washer.dart';
 export 'response_models/washers_list_response.dart';
 
+/// Washers API class
 class WashersApi {
+  /// Get a lis of all washers
   static Future<WashersListResponse?> getWashers() async {
     Response response = await RequestFactory.executeGet(
       endpoint: '/washers',
@@ -21,6 +23,7 @@ class WashersApi {
     throw DioException(requestOptions: RequestOptions(), response: response);
   }
 
+  /// Register a washer
   static Future<IdResponse?> registerWasher(
       {required RegisterRequest request}) async {
     Response response = await RequestFactory.executePost(

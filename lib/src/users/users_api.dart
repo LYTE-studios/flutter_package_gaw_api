@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:gaw_api/gaw_api.dart';
 import 'package:gaw_api/src/core/utils/formatting_util.dart';
 import 'package:gaw_api/src/core/utils/request_factory.dart';
+import 'package:gaw_api/src/users/request_models/update_fcm_token_request.dart';
 import 'package:image_picker/image_picker.dart';
 
 export 'request_models/update_language_request.dart';
@@ -99,6 +100,19 @@ class UsersApi {
   static Future<void> removeProfilePicture() async {
     Response response = await RequestFactory.executePost(
       endpoint: '/remove_profile_picture',
+    );
+
+    if (response.statusCode == 200) {
+      return;
+    }
+
+    throw DioException(requestOptions: RequestOptions(), response: response);
+  }
+
+  static Future<void> updateFcmToken({required UpdateFcmTokenRequest request}) async {
+    Response response = await RequestFactory.executePost(
+      endpoint: '/users/fcm_token/update',
+      body: request.toJson(),
     );
 
     if (response.statusCode == 200) {

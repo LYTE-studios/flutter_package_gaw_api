@@ -145,6 +145,8 @@ class AuthenticationApi {
     return false;
   }
 
+  
+
   static bool isRefreshTokenExpired(String tokenToCheck) {
     final parts = tokenToCheck.split('.');
     if (parts.length != 3) {

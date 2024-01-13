@@ -29,6 +29,10 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(LoginRequest.serializer)
       ..add(MeResponse.serializer)
       ..add(MonthlyStatistics.serializer)
+      ..add(Notification.serializer)
+      ..add(NotificationsListResponse.serializer)
+      ..add(NotificationsRequest.serializer)
+      ..add(NotificationsUpdateRequest.serializer)
       ..add(PassTokenResponse.serializer)
       ..add(PasswordResetRequest.serializer)
       ..add(RefreshRequest.serializer)
@@ -39,6 +43,7 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(TimeRegistrationListResponse.serializer)
       ..add(TimeRegistrationRequest.serializer)
       ..add(TimeRegistrationResponse.serializer)
+      ..add(UpdateFcmTokenRequest.serializer)
       ..add(UpdateLanguageRequest.serializer)
       ..add(UpdateUserRequest.serializer)
       ..add(UpdateUserResponse.serializer)
@@ -58,6 +63,9 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(JobApplication)]),
           () => new ListBuilder<JobApplication>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(Notification)]),
+          () => new ListBuilder<Notification>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(TimeRegistration)]),
           () => new ListBuilder<TimeRegistration>())

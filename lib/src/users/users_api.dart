@@ -14,6 +14,7 @@ export 'request_models/update_user_request.dart';
 export 'response_models/hello_there_response.dart';
 export 'response_models/me_response.dart';
 export 'response_models/update_user_response.dart';
+export 'request_models/update_fcm_token_request.dart';
 
 class UsersApi {
   /// Gets the hello there data for a user

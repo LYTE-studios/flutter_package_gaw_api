@@ -23,7 +23,7 @@ abstract class Notification implements Built<Notification, NotificationBuilder> 
   String get body;
 
   @BuiltValueField(wireName: 'sent')
-  DateTime? get sent;
+  int? get sent;
 
   @BuiltValueField(wireName: 'seen')
   bool? get seen;

@@ -37,8 +37,7 @@ class _$NotificationSerializer implements StructuredSerializer<Notification> {
     if (value != null) {
       result
         ..add('sent')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(DateTime)));
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
     }
     value = object.seen;
     if (value != null) {
@@ -76,7 +75,7 @@ class _$NotificationSerializer implements StructuredSerializer<Notification> {
           break;
         case 'sent':
           result.sent = serializers.deserialize(value,
-              specifiedType: const FullType(DateTime)) as DateTime?;
+              specifiedType: const FullType(int)) as int?;
           break;
         case 'seen':
           result.seen = serializers.deserialize(value,
@@ -97,7 +96,7 @@ class _$Notification extends Notification {
   @override
   final String body;
   @override
-  final DateTime? sent;
+  final int? sent;
   @override
   final bool? seen;
 
@@ -169,9 +168,9 @@ class NotificationBuilder
   String? get body => _$this._body;
   set body(String? body) => _$this._body = body;
 
-  DateTime? _sent;
-  DateTime? get sent => _$this._sent;
-  set sent(DateTime? sent) => _$this._sent = sent;
+  int? _sent;
+  int? get sent => _$this._sent;
+  set sent(int? sent) => _$this._sent = sent;
 
   bool? _seen;
   bool? get seen => _$this._seen;

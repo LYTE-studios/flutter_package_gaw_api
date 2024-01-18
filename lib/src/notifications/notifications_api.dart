@@ -8,7 +8,12 @@ import 'package:gaw_api/src/notifications/request_models/notifications_request.d
 import 'package:gaw_api/src/notifications/request_models/notifications_update_request.dart';
 import 'package:gaw_api/src/notifications/response_models/notifications_list_response.dart';
 
-class JobsApi {
+export 'request_models/notifications_request.dart';
+export 'request_models/notifications_update_request.dart';
+export 'response_models/notifications_list_response.dart';
+export 'models/notification.dart';
+
+class NotificationsApi {
   static Future<NotificationsListResponse?> getNotifications() async {
     Response response = await RequestFactory.executeGet(
       endpoint: '/notifications',

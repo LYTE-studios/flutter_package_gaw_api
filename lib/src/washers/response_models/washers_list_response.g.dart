@@ -28,13 +28,20 @@ class _$WashersListResponseSerializer
       serializers.serialize(object.washers,
           specifiedType:
               const FullType(BuiltList, const [const FullType(Washer)])),
-      'items_per_page',
-      serializers.serialize(object.itemsPerPage,
-          specifiedType: const FullType(int)),
-      'total',
-      serializers.serialize(object.total, specifiedType: const FullType(int)),
     ];
-
+    Object? value;
+    value = object.itemsPerPage;
+    if (value != null) {
+      result
+        ..add('items_per_page')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
+    value = object.total;
+    if (value != null) {
+      result
+        ..add('total')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
     return result;
   }
 
@@ -58,11 +65,11 @@ class _$WashersListResponseSerializer
           break;
         case 'items_per_page':
           result.itemsPerPage = serializers.deserialize(value,
-              specifiedType: const FullType(int))! as int;
+              specifiedType: const FullType(int)) as int?;
           break;
         case 'total':
           result.total = serializers.deserialize(value,
-              specifiedType: const FullType(int))! as int;
+              specifiedType: const FullType(int)) as int?;
           break;
       }
     }
@@ -75,23 +82,19 @@ class _$WashersListResponse extends WashersListResponse {
   @override
   final BuiltList<Washer> washers;
   @override
-  final int itemsPerPage;
+  final int? itemsPerPage;
   @override
-  final int total;
+  final int? total;
 
   factory _$WashersListResponse(
           [void Function(WashersListResponseBuilder)? updates]) =>
       (new WashersListResponseBuilder()..update(updates))._build();
 
   _$WashersListResponse._(
-      {required this.washers, required this.itemsPerPage, required this.total})
+      {required this.washers, this.itemsPerPage, this.total})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         washers, r'WashersListResponse', 'washers');
-    BuiltValueNullFieldError.checkNotNull(
-        itemsPerPage, r'WashersListResponse', 'itemsPerPage');
-    BuiltValueNullFieldError.checkNotNull(
-        total, r'WashersListResponse', 'total');
   }
 
   @override
@@ -182,10 +185,8 @@ class WashersListResponseBuilder
       _$result = _$v ??
           new _$WashersListResponse._(
               washers: washers.build(),
-              itemsPerPage: BuiltValueNullFieldError.checkNotNull(
-                  itemsPerPage, r'WashersListResponse', 'itemsPerPage'),
-              total: BuiltValueNullFieldError.checkNotNull(
-                  total, r'WashersListResponse', 'total'));
+              itemsPerPage: itemsPerPage,
+              total: total);
     } catch (_) {
       late String _$failedField;
       try {

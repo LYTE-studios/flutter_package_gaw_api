@@ -78,6 +78,34 @@ class RequestFactory {
     );
   }
 
+  static Future<Response> executePut({
+    required String endpoint,
+    dynamic body,
+    bool useToken = true,
+    bool useRefreshToken = false,
+  }) async {
+    Map<String, String> headers = baseHeaders;
+
+    if (useToken) {
+      if (Configuration.accessToken == null) {
+        throw Exception('No token found');
+      }
+
+      await _authenticate();
+      headers['Authorization'] = Configuration.accessToken!;
+    }
+
+    return await mainClient.put(
+      '${Configuration.apiUrl}$endpoint',
+      data: body,
+      options: Options(
+        headers: headers,
+        receiveTimeout: defaultTimeout,
+        persistentConnection: true,
+      ),
+    );
+  }
+
   static Future<Response> executePost({
     required String endpoint,
     dynamic body,

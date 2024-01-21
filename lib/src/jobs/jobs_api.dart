@@ -4,10 +4,12 @@ import 'package:dio/dio.dart';
 import 'package:gaw_api/gaw_api.dart';
 import 'package:gaw_api/src/core/utils/formatting_util.dart';
 import 'package:gaw_api/src/core/utils/request_factory.dart';
+import 'package:gaw_api/src/jobs/request_models/update_job_request.dart';
 
 export 'enums/job_application_state.dart';
 export 'enums/job_state.dart';
 export 'models/job.dart';
+export 'request_models/update_job_request.dart';
 export 'models/job_application.dart';
 export 'models/time_registration.dart';
 export 'request_models/apply_for_job_request.dart';
@@ -161,6 +163,34 @@ class JobsApi {
     if (response.statusCode == 200) {
       return TimeRegistrationResponse.fromJson(
           FormattingUtil.decode(response.data));
+    }
+
+    throw DioException(requestOptions: RequestOptions(), response: response);
+  }
+
+  static Future<WashersListResponse?> getWashersForJob({
+    required String jobId,
+  }) async {
+    Response response = await RequestFactory.executeGet(
+      endpoint: '/jobs/$jobId/washers',
+    );
+
+    if (response.statusCode == 200) {
+      return WashersListResponse.fromJson(
+          FormattingUtil.decode(response.data),);
+    }
+
+    throw DioException(requestOptions: RequestOptions(), response: response);
+  }
+
+  static Future<Job?> updateJob({required String id, required UpdateJobRequest request,}) async {
+    Response response = await RequestFactory.executePut(
+      endpoint: '/jobs/details/$id',
+      body: request.toJson(),
+    );
+
+    if (response.statusCode == 200) {
+      return Job.fromJson(FormattingUtil.decode(response.data));
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);

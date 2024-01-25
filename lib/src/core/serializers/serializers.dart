@@ -11,6 +11,7 @@ import 'package:gaw_api/src/users/request_models/update_fcm_token_request.dart';
 part 'serializers.g.dart';
 
 @SerializersFor([
+  AdminStatisticsOverviewResponse,
   CodeVerificationRequest,
   EmailRequest,
   PasswordResetRequest,

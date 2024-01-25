@@ -25,6 +25,21 @@ class CustomerApi {
     throw DioException(requestOptions: RequestOptions(), response: response);
   }
 
+  static Future<CustomerListResponse?> getCustomersQuery(
+      {required String query}) async {
+    Response response = await RequestFactory.executeGet(
+      endpoint: '/customers/$query',
+    );
+
+    if (response.statusCode == 200) {
+      return CustomerListResponse.fromJson(
+        FormattingUtil.decode(response.data),
+      );
+    }
+
+    throw DioException(requestOptions: RequestOptions(), response: response);
+  }
+
   static Future<CreateCustomerResponse?> createCustomer({
     required CreateCustomerRequest request,
   }) async {

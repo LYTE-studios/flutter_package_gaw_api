@@ -10,6 +10,7 @@ class RequestFactory {
 
   static Map<String, String> baseHeaders = {
     'Client': Configuration.clientSecret,
+    'Access-Control-Allow-Origin': '*',
   };
 
   static Future<void> _authenticate() async {
@@ -50,6 +51,32 @@ class RequestFactory {
     } else {
       throw DioException(requestOptions: RequestOptions(), response: response);
     }
+  }
+
+  static Future<Response> executeDelete({
+    required String endpoint,
+    bool useToken = true,
+    bool useRefreshToken = false,
+  }) async {
+    Map<String, String> headers = baseHeaders;
+
+    if (useToken) {
+      if (Configuration.accessToken == null) {
+        throw Exception('No token found');
+      }
+
+      await _authenticate();
+      headers['Authorization'] = Configuration.accessToken!;
+    }
+
+    return await mainClient.delete(
+      '${Configuration.apiUrl}$endpoint',
+      options: Options(
+        headers: headers,
+        receiveTimeout: defaultTimeout,
+        persistentConnection: true,
+      ),
+    );
   }
 
   static Future<Response> executeGet({

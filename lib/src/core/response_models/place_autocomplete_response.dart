@@ -17,8 +17,11 @@ class PlaceAutocompleteResponse {
     return PlaceAutocompleteResponse(
       status: json['status'],
       predictions: json['results'] != null
-          ? List<PlaceAddress>.from((json['results'] as List)
-              .map<PlaceAddress>((e) => PlaceAddress.fromJson(e)))
+          ? List<PlaceAddress>.from(
+              (json['results'] as List).map<PlaceAddress>(
+                (e) => PlaceAddress.fromJson(e),
+              ),
+            )
           : null,
     );
   }

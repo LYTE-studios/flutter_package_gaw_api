@@ -8,4 +8,5 @@ export 'response_models/place_autocomplete_response.dart';
 export 'response_models/id_response.dart';
 export 'serializers/serializers.dart';
 export 'utils/configuration.dart';
+export 'utils/formatting_util.dart';
 export 'utils/local_storage_util.dart';

@@ -2,7 +2,6 @@ library jobs_api;
 
 import 'package:dio/dio.dart';
 import 'package:gaw_api/gaw_api.dart';
-import 'package:gaw_api/src/core/utils/formatting_util.dart';
 import 'package:gaw_api/src/core/utils/request_factory.dart';
 
 export 'enums/job_application_state.dart';
@@ -106,9 +105,18 @@ class JobsApi {
     throw DioException(requestOptions: RequestOptions(), response: response);
   }
 
-  static Future<JobListResponse?> getHistoryJobs() async {
+  static Future<JobListResponse?> getHistoryJobs({
+    int? start,
+    int? end,
+  }) async {
+    String url = '/jobs/history';
+
+    if (start != null && end != null) {
+      url = '/jobs/history/$start/$end';
+    }
+
     Response response = await RequestFactory.executeGet(
-      endpoint: '/jobs/history',
+      endpoint: url,
     );
 
     if (response.statusCode == 200) {

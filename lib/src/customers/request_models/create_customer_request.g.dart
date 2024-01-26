@@ -35,19 +35,26 @@ class _$CreateCustomerRequestSerializer
           specifiedType: const FullType(String)),
     ];
     Object? value;
+    value = object.company;
+    if (value != null) {
+      result
+        ..add('company')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.address;
     if (value != null) {
       result
         ..add('address')
         ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
+            specifiedType: const FullType(Address)));
     }
     value = object.billingAddress;
     if (value != null) {
       result
         ..add('billing_address')
         ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
+            specifiedType: const FullType(Address)));
     }
     value = object.taxNumber;
     if (value != null) {
@@ -83,13 +90,17 @@ class _$CreateCustomerRequestSerializer
           result.email = serializers.deserialize(value,
               specifiedType: const FullType(String))! as String;
           break;
-        case 'address':
-          result.address = serializers.deserialize(value,
+        case 'company':
+          result.company = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'address':
+          result.address.replace(serializers.deserialize(value,
+              specifiedType: const FullType(Address))! as Address);
+          break;
         case 'billing_address':
-          result.billingAddress = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
+          result.billingAddress.replace(serializers.deserialize(value,
+              specifiedType: const FullType(Address))! as Address);
           break;
         case 'tax_number':
           result.taxNumber = serializers.deserialize(value,
@@ -110,9 +121,11 @@ class _$CreateCustomerRequest extends CreateCustomerRequest {
   @override
   final String email;
   @override
-  final String? address;
+  final String? company;
   @override
-  final String? billingAddress;
+  final Address? address;
+  @override
+  final Address? billingAddress;
   @override
   final String? taxNumber;
 
@@ -124,6 +137,7 @@ class _$CreateCustomerRequest extends CreateCustomerRequest {
       {required this.firstName,
       required this.lastName,
       required this.email,
+      this.company,
       this.address,
       this.billingAddress,
       this.taxNumber})
@@ -152,6 +166,7 @@ class _$CreateCustomerRequest extends CreateCustomerRequest {
         firstName == other.firstName &&
         lastName == other.lastName &&
         email == other.email &&
+        company == other.company &&
         address == other.address &&
         billingAddress == other.billingAddress &&
         taxNumber == other.taxNumber;
@@ -163,6 +178,7 @@ class _$CreateCustomerRequest extends CreateCustomerRequest {
     _$hash = $jc(_$hash, firstName.hashCode);
     _$hash = $jc(_$hash, lastName.hashCode);
     _$hash = $jc(_$hash, email.hashCode);
+    _$hash = $jc(_$hash, company.hashCode);
     _$hash = $jc(_$hash, address.hashCode);
     _$hash = $jc(_$hash, billingAddress.hashCode);
     _$hash = $jc(_$hash, taxNumber.hashCode);
@@ -176,6 +192,7 @@ class _$CreateCustomerRequest extends CreateCustomerRequest {
           ..add('firstName', firstName)
           ..add('lastName', lastName)
           ..add('email', email)
+          ..add('company', company)
           ..add('address', address)
           ..add('billingAddress', billingAddress)
           ..add('taxNumber', taxNumber))
@@ -199,13 +216,18 @@ class CreateCustomerRequestBuilder
   String? get email => _$this._email;
   set email(String? email) => _$this._email = email;
 
-  String? _address;
-  String? get address => _$this._address;
-  set address(String? address) => _$this._address = address;
+  String? _company;
+  String? get company => _$this._company;
+  set company(String? company) => _$this._company = company;
 
-  String? _billingAddress;
-  String? get billingAddress => _$this._billingAddress;
-  set billingAddress(String? billingAddress) =>
+  AddressBuilder? _address;
+  AddressBuilder get address => _$this._address ??= new AddressBuilder();
+  set address(AddressBuilder? address) => _$this._address = address;
+
+  AddressBuilder? _billingAddress;
+  AddressBuilder get billingAddress =>
+      _$this._billingAddress ??= new AddressBuilder();
+  set billingAddress(AddressBuilder? billingAddress) =>
       _$this._billingAddress = billingAddress;
 
   String? _taxNumber;
@@ -220,8 +242,9 @@ class CreateCustomerRequestBuilder
       _firstName = $v.firstName;
       _lastName = $v.lastName;
       _email = $v.email;
-      _address = $v.address;
-      _billingAddress = $v.billingAddress;
+      _company = $v.company;
+      _address = $v.address?.toBuilder();
+      _billingAddress = $v.billingAddress?.toBuilder();
       _taxNumber = $v.taxNumber;
       _$v = null;
     }
@@ -243,17 +266,33 @@ class CreateCustomerRequestBuilder
   CreateCustomerRequest build() => _build();
 
   _$CreateCustomerRequest _build() {
-    final _$result = _$v ??
-        new _$CreateCustomerRequest._(
-            firstName: BuiltValueNullFieldError.checkNotNull(
-                firstName, r'CreateCustomerRequest', 'firstName'),
-            lastName: BuiltValueNullFieldError.checkNotNull(
-                lastName, r'CreateCustomerRequest', 'lastName'),
-            email: BuiltValueNullFieldError.checkNotNull(
-                email, r'CreateCustomerRequest', 'email'),
-            address: address,
-            billingAddress: billingAddress,
-            taxNumber: taxNumber);
+    _$CreateCustomerRequest _$result;
+    try {
+      _$result = _$v ??
+          new _$CreateCustomerRequest._(
+              firstName: BuiltValueNullFieldError.checkNotNull(
+                  firstName, r'CreateCustomerRequest', 'firstName'),
+              lastName: BuiltValueNullFieldError.checkNotNull(
+                  lastName, r'CreateCustomerRequest', 'lastName'),
+              email: BuiltValueNullFieldError.checkNotNull(
+                  email, r'CreateCustomerRequest', 'email'),
+              company: company,
+              address: _address?.build(),
+              billingAddress: _billingAddress?.build(),
+              taxNumber: taxNumber);
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'address';
+        _address?.build();
+        _$failedField = 'billingAddress';
+        _billingAddress?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            r'CreateCustomerRequest', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

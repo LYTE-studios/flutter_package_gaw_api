@@ -43,6 +43,9 @@ class _$AdminStatisticsOverviewResponseSerializer
       'unserviced_jobs_count',
       serializers.serialize(object.unservicedJobCount,
           specifiedType: const FullType(int)),
+      'hours_worked_stats',
+      serializers.serialize(object.hoursWorkedStats,
+          specifiedType: const FullType(GeneralStatistics)),
     ];
 
     return result;
@@ -84,6 +87,11 @@ class _$AdminStatisticsOverviewResponseSerializer
           result.unservicedJobCount = serializers.deserialize(value,
               specifiedType: const FullType(int))! as int;
           break;
+        case 'hours_worked_stats':
+          result.hoursWorkedStats.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(GeneralStatistics))!
+              as GeneralStatistics);
+          break;
       }
     }
 
@@ -105,6 +113,8 @@ class _$AdminStatisticsOverviewResponse
   final int completedJobCount;
   @override
   final int unservicedJobCount;
+  @override
+  final GeneralStatistics hoursWorkedStats;
 
   factory _$AdminStatisticsOverviewResponse(
           [void Function(AdminStatisticsOverviewResponseBuilder)? updates]) =>
@@ -116,7 +126,8 @@ class _$AdminStatisticsOverviewResponse
       required this.comingJobCount,
       required this.ongoingJobCount,
       required this.completedJobCount,
-      required this.unservicedJobCount})
+      required this.unservicedJobCount,
+      required this.hoursWorkedStats})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         jobCount, r'AdminStatisticsOverviewResponse', 'jobCount');
@@ -130,6 +141,8 @@ class _$AdminStatisticsOverviewResponse
         r'AdminStatisticsOverviewResponse', 'completedJobCount');
     BuiltValueNullFieldError.checkNotNull(unservicedJobCount,
         r'AdminStatisticsOverviewResponse', 'unservicedJobCount');
+    BuiltValueNullFieldError.checkNotNull(hoursWorkedStats,
+        r'AdminStatisticsOverviewResponse', 'hoursWorkedStats');
   }
 
   @override
@@ -150,7 +163,8 @@ class _$AdminStatisticsOverviewResponse
         comingJobCount == other.comingJobCount &&
         ongoingJobCount == other.ongoingJobCount &&
         completedJobCount == other.completedJobCount &&
-        unservicedJobCount == other.unservicedJobCount;
+        unservicedJobCount == other.unservicedJobCount &&
+        hoursWorkedStats == other.hoursWorkedStats;
   }
 
   @override
@@ -162,6 +176,7 @@ class _$AdminStatisticsOverviewResponse
     _$hash = $jc(_$hash, ongoingJobCount.hashCode);
     _$hash = $jc(_$hash, completedJobCount.hashCode);
     _$hash = $jc(_$hash, unservicedJobCount.hashCode);
+    _$hash = $jc(_$hash, hoursWorkedStats.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -174,7 +189,8 @@ class _$AdminStatisticsOverviewResponse
           ..add('comingJobCount', comingJobCount)
           ..add('ongoingJobCount', ongoingJobCount)
           ..add('completedJobCount', completedJobCount)
-          ..add('unservicedJobCount', unservicedJobCount))
+          ..add('unservicedJobCount', unservicedJobCount)
+          ..add('hoursWorkedStats', hoursWorkedStats))
         .toString();
   }
 }
@@ -214,6 +230,12 @@ class AdminStatisticsOverviewResponseBuilder
   set unservicedJobCount(int? unservicedJobCount) =>
       _$this._unservicedJobCount = unservicedJobCount;
 
+  GeneralStatisticsBuilder? _hoursWorkedStats;
+  GeneralStatisticsBuilder get hoursWorkedStats =>
+      _$this._hoursWorkedStats ??= new GeneralStatisticsBuilder();
+  set hoursWorkedStats(GeneralStatisticsBuilder? hoursWorkedStats) =>
+      _$this._hoursWorkedStats = hoursWorkedStats;
+
   AdminStatisticsOverviewResponseBuilder();
 
   AdminStatisticsOverviewResponseBuilder get _$this {
@@ -225,6 +247,7 @@ class AdminStatisticsOverviewResponseBuilder
       _ongoingJobCount = $v.ongoingJobCount;
       _completedJobCount = $v.completedJobCount;
       _unservicedJobCount = $v.unservicedJobCount;
+      _hoursWorkedStats = $v.hoursWorkedStats.toBuilder();
       _$v = null;
     }
     return this;
@@ -245,24 +268,38 @@ class AdminStatisticsOverviewResponseBuilder
   AdminStatisticsOverviewResponse build() => _build();
 
   _$AdminStatisticsOverviewResponse _build() {
-    final _$result = _$v ??
-        new _$AdminStatisticsOverviewResponse._(
-            jobCount: BuiltValueNullFieldError.checkNotNull(
-                jobCount, r'AdminStatisticsOverviewResponse', 'jobCount'),
-            plannedJobCount: BuiltValueNullFieldError.checkNotNull(
-                plannedJobCount, r'AdminStatisticsOverviewResponse', 'plannedJobCount'),
-            comingJobCount: BuiltValueNullFieldError.checkNotNull(
-                comingJobCount, r'AdminStatisticsOverviewResponse', 'comingJobCount'),
-            ongoingJobCount: BuiltValueNullFieldError.checkNotNull(
-                ongoingJobCount, r'AdminStatisticsOverviewResponse', 'ongoingJobCount'),
-            completedJobCount: BuiltValueNullFieldError.checkNotNull(
-                completedJobCount,
-                r'AdminStatisticsOverviewResponse',
-                'completedJobCount'),
-            unservicedJobCount: BuiltValueNullFieldError.checkNotNull(
-                unservicedJobCount,
-                r'AdminStatisticsOverviewResponse',
-                'unservicedJobCount'));
+    _$AdminStatisticsOverviewResponse _$result;
+    try {
+      _$result = _$v ??
+          new _$AdminStatisticsOverviewResponse._(
+              jobCount: BuiltValueNullFieldError.checkNotNull(
+                  jobCount, r'AdminStatisticsOverviewResponse', 'jobCount'),
+              plannedJobCount: BuiltValueNullFieldError.checkNotNull(
+                  plannedJobCount, r'AdminStatisticsOverviewResponse', 'plannedJobCount'),
+              comingJobCount: BuiltValueNullFieldError.checkNotNull(
+                  comingJobCount, r'AdminStatisticsOverviewResponse', 'comingJobCount'),
+              ongoingJobCount: BuiltValueNullFieldError.checkNotNull(
+                  ongoingJobCount, r'AdminStatisticsOverviewResponse', 'ongoingJobCount'),
+              completedJobCount: BuiltValueNullFieldError.checkNotNull(
+                  completedJobCount,
+                  r'AdminStatisticsOverviewResponse',
+                  'completedJobCount'),
+              unservicedJobCount: BuiltValueNullFieldError.checkNotNull(
+                  unservicedJobCount,
+                  r'AdminStatisticsOverviewResponse',
+                  'unservicedJobCount'),
+              hoursWorkedStats: hoursWorkedStats.build());
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'hoursWorkedStats';
+        hoursWorkedStats.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            r'AdminStatisticsOverviewResponse', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

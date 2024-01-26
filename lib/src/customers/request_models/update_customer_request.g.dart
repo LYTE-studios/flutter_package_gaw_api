@@ -1,31 +1,30 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'customer.dart';
+part of 'update_customer_request.dart';
 
 // **************************************************************************
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<Customer> _$customerSerializer = new _$CustomerSerializer();
+Serializer<UpdateCustomerRequest> _$updateCustomerRequestSerializer =
+    new _$UpdateCustomerRequestSerializer();
 
-class _$CustomerSerializer implements StructuredSerializer<Customer> {
+class _$UpdateCustomerRequestSerializer
+    implements StructuredSerializer<UpdateCustomerRequest> {
   @override
-  final Iterable<Type> types = const [Customer, _$Customer];
+  final Iterable<Type> types = const [
+    UpdateCustomerRequest,
+    _$UpdateCustomerRequest
+  ];
   @override
-  final String wireName = 'Customer';
+  final String wireName = 'UpdateCustomerRequest';
 
   @override
-  Iterable<Object?> serialize(Serializers serializers, Customer object,
+  Iterable<Object?> serialize(
+      Serializers serializers, UpdateCustomerRequest object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[];
     Object? value;
-    value = object.id;
-    if (value != null) {
-      result
-        ..add('id')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
     value = object.email;
     if (value != null) {
       result
@@ -100,9 +99,10 @@ class _$CustomerSerializer implements StructuredSerializer<Customer> {
   }
 
   @override
-  Customer deserialize(Serializers serializers, Iterable<Object?> serialized,
+  UpdateCustomerRequest deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new CustomerBuilder();
+    final result = new UpdateCustomerRequestBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -110,10 +110,6 @@ class _$CustomerSerializer implements StructuredSerializer<Customer> {
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
-        case 'id':
-          result.id = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
-          break;
         case 'email':
           result.email = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
@@ -161,9 +157,7 @@ class _$CustomerSerializer implements StructuredSerializer<Customer> {
   }
 }
 
-class _$Customer extends Customer {
-  @override
-  final String? id;
+class _$UpdateCustomerRequest extends UpdateCustomerRequest {
   @override
   final String? email;
   @override
@@ -185,12 +179,12 @@ class _$Customer extends Customer {
   @override
   final String? taxNumber;
 
-  factory _$Customer([void Function(CustomerBuilder)? updates]) =>
-      (new CustomerBuilder()..update(updates))._build();
+  factory _$UpdateCustomerRequest(
+          [void Function(UpdateCustomerRequestBuilder)? updates]) =>
+      (new UpdateCustomerRequestBuilder()..update(updates))._build();
 
-  _$Customer._(
-      {this.id,
-      this.email,
+  _$UpdateCustomerRequest._(
+      {this.email,
       this.phoneNumber,
       this.firstName,
       this.lastName,
@@ -203,17 +197,18 @@ class _$Customer extends Customer {
       : super._();
 
   @override
-  Customer rebuild(void Function(CustomerBuilder) updates) =>
+  UpdateCustomerRequest rebuild(
+          void Function(UpdateCustomerRequestBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  CustomerBuilder toBuilder() => new CustomerBuilder()..replace(this);
+  UpdateCustomerRequestBuilder toBuilder() =>
+      new UpdateCustomerRequestBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is Customer &&
-        id == other.id &&
+    return other is UpdateCustomerRequest &&
         email == other.email &&
         phoneNumber == other.phoneNumber &&
         firstName == other.firstName &&
@@ -229,7 +224,6 @@ class _$Customer extends Customer {
   @override
   int get hashCode {
     var _$hash = 0;
-    _$hash = $jc(_$hash, id.hashCode);
     _$hash = $jc(_$hash, email.hashCode);
     _$hash = $jc(_$hash, phoneNumber.hashCode);
     _$hash = $jc(_$hash, firstName.hashCode);
@@ -246,8 +240,7 @@ class _$Customer extends Customer {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(r'Customer')
-          ..add('id', id)
+    return (newBuiltValueToStringHelper(r'UpdateCustomerRequest')
           ..add('email', email)
           ..add('phoneNumber', phoneNumber)
           ..add('firstName', firstName)
@@ -262,12 +255,9 @@ class _$Customer extends Customer {
   }
 }
 
-class CustomerBuilder implements Builder<Customer, CustomerBuilder> {
-  _$Customer? _$v;
-
-  String? _id;
-  String? get id => _$this._id;
-  set id(String? id) => _$this._id = id;
+class UpdateCustomerRequestBuilder
+    implements Builder<UpdateCustomerRequest, UpdateCustomerRequestBuilder> {
+  _$UpdateCustomerRequest? _$v;
 
   String? _email;
   String? get email => _$this._email;
@@ -312,12 +302,11 @@ class CustomerBuilder implements Builder<Customer, CustomerBuilder> {
   String? get taxNumber => _$this._taxNumber;
   set taxNumber(String? taxNumber) => _$this._taxNumber = taxNumber;
 
-  CustomerBuilder();
+  UpdateCustomerRequestBuilder();
 
-  CustomerBuilder get _$this {
+  UpdateCustomerRequestBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _id = $v.id;
       _email = $v.email;
       _phoneNumber = $v.phoneNumber;
       _firstName = $v.firstName;
@@ -334,25 +323,24 @@ class CustomerBuilder implements Builder<Customer, CustomerBuilder> {
   }
 
   @override
-  void replace(Customer other) {
+  void replace(UpdateCustomerRequest other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$Customer;
+    _$v = other as _$UpdateCustomerRequest;
   }
 
   @override
-  void update(void Function(CustomerBuilder)? updates) {
+  void update(void Function(UpdateCustomerRequestBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  Customer build() => _build();
+  UpdateCustomerRequest build() => _build();
 
-  _$Customer _build() {
-    _$Customer _$result;
+  _$UpdateCustomerRequest _build() {
+    _$UpdateCustomerRequest _$result;
     try {
       _$result = _$v ??
-          new _$Customer._(
-              id: id,
+          new _$UpdateCustomerRequest._(
               email: email,
               phoneNumber: phoneNumber,
               firstName: firstName,
@@ -372,7 +360,7 @@ class CustomerBuilder implements Builder<Customer, CustomerBuilder> {
         _billingAddress?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            r'Customer', _$failedField, e.toString());
+            r'UpdateCustomerRequest', _$failedField, e.toString());
       }
       rethrow;
     }

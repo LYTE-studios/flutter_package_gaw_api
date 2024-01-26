@@ -4,6 +4,7 @@ import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:gaw_api/gaw_api.dart';
+import 'package:gaw_api/src/statistics/models/general_statistics.dart';
 
 part 'admin_statistics_overview_response.g.dart';
 
@@ -14,8 +15,8 @@ abstract class AdminStatisticsOverviewResponse
   AdminStatisticsOverviewResponse._();
 
   factory AdminStatisticsOverviewResponse(
-      [void Function(AdminStatisticsOverviewResponseBuilder) updates]) =
-  _$AdminStatisticsOverviewResponse;
+          [void Function(AdminStatisticsOverviewResponseBuilder) updates]) =
+      _$AdminStatisticsOverviewResponse;
 
   @BuiltValueField(wireName: 'jobs_count')
   int get jobCount;
@@ -35,9 +36,13 @@ abstract class AdminStatisticsOverviewResponse
   @BuiltValueField(wireName: 'unserviced_jobs_count')
   int get unservicedJobCount;
 
+  @BuiltValueField(wireName: 'hours_worked_stats')
+  GeneralStatistics get hoursWorkedStats;
+
   String toJson() {
     return json.encode(
-      serializers.serializeWith(AdminStatisticsOverviewResponse.serializer, this),
+      serializers.serializeWith(
+          AdminStatisticsOverviewResponse.serializer, this),
     );
   }
 

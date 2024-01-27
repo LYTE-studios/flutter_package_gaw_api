@@ -25,8 +25,14 @@ abstract class Washer implements Built<Washer, WasherBuilder> {
   @BuiltValueField(wireName: 'phone_number')
   String? get phoneNumber;
 
+  @BuiltValueField(wireName: 'tax_number')
+  String? get taxNumber;
+
   @BuiltValueField(wireName: 'email')
   String get email;
+  
+  @BuiltValueField(wireName: 'address')
+  Address? get address;
 
   @BuiltValueField(wireName: 'profile_picture_url')
   String? get profilePictureUrl;

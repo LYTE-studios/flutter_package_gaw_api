@@ -4,8 +4,10 @@ import 'package:dio/dio.dart';
 import 'package:gaw_api/gaw_api.dart';
 import 'package:gaw_api/src/core/utils/formatting_util.dart';
 import 'package:gaw_api/src/core/utils/request_factory.dart';
+import 'package:gaw_api/src/washers/request_models/washer_update_request.dart';
 
 export 'models/washer.dart';
+export 'request_models/washer_update_request.dart';
 export 'response_models/washers_list_response.dart';
 
 /// Washers API class
@@ -34,6 +36,36 @@ class WashersApi {
 
     if (response.statusCode == 200) {
       return IdResponse.fromJson(FormattingUtil.decode(response.data));
+    }
+
+    throw DioException(requestOptions: RequestOptions(), response: response);
+  }
+
+  static Future<void> updateWasher({
+    required String id,
+    required WasherUpdateRequest request,
+  }) async {
+    Response response = await RequestFactory.executePut(
+      endpoint: '/washers/$id',
+      body: request.toJson(),
+    );
+
+    if (response.statusCode == 200) {
+      return;
+    }
+
+    throw DioException(requestOptions: RequestOptions(), response: response);
+  }
+
+  static Future<Washer?> getWasher({required String id}) async {
+    Response response = await RequestFactory.executeGet(
+      endpoint: '/washers/details/$id',
+    );
+
+    if (response.statusCode == 200) {
+      return Washer.fromJson(
+        FormattingUtil.decode(response.data),
+      );
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);

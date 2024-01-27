@@ -1,10 +1,8 @@
 import 'dart:convert';
 
-import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:gaw_api/gaw_api.dart';
-import 'package:gaw_api/src/statistics/models/general_statistics.dart';
 
 part 'admin_statistics_overview_response.g.dart';
 
@@ -36,8 +34,32 @@ abstract class AdminStatisticsOverviewResponse
   @BuiltValueField(wireName: 'unserviced_jobs_count')
   int get unservicedJobCount;
 
+  @BuiltValueField(wireName: 'trend_job_count')
+  int? get trendJobCount;
+
+  @BuiltValueField(wireName: 'trend_hours_worked')
+  int? get trendHoursWorked;
+
   @BuiltValueField(wireName: 'hours_worked_stats')
   GeneralStatistics get hoursWorkedStats;
+
+  int getHoursWorkedTrend() {
+    if (trendHoursWorked == 0 || trendHoursWorked == null) {
+      return hoursWorkedStats.averageHours.round();
+    }
+
+    return (hoursWorkedStats.averageHours -
+            (trendHoursWorked! / hoursWorkedStats.dailyHours.values.length))
+        .round();
+  }
+
+  double getJobCountTrend() {
+    if (trendJobCount == 0 || trendJobCount == null) {
+      return 100;
+    }
+
+    return ((completedJobCount - trendJobCount!) / completedJobCount) * 100;
+  }
 
   String toJson() {
     return json.encode(

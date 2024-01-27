@@ -47,7 +47,19 @@ class _$AdminStatisticsOverviewResponseSerializer
       serializers.serialize(object.hoursWorkedStats,
           specifiedType: const FullType(GeneralStatistics)),
     ];
-
+    Object? value;
+    value = object.trendJobCount;
+    if (value != null) {
+      result
+        ..add('trend_job_count')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
+    value = object.trendHoursWorked;
+    if (value != null) {
+      result
+        ..add('trend_hours_worked')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
     return result;
   }
 
@@ -87,6 +99,14 @@ class _$AdminStatisticsOverviewResponseSerializer
           result.unservicedJobCount = serializers.deserialize(value,
               specifiedType: const FullType(int))! as int;
           break;
+        case 'trend_job_count':
+          result.trendJobCount = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int?;
+          break;
+        case 'trend_hours_worked':
+          result.trendHoursWorked = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int?;
+          break;
         case 'hours_worked_stats':
           result.hoursWorkedStats.replace(serializers.deserialize(value,
                   specifiedType: const FullType(GeneralStatistics))!
@@ -114,6 +134,10 @@ class _$AdminStatisticsOverviewResponse
   @override
   final int unservicedJobCount;
   @override
+  final int? trendJobCount;
+  @override
+  final int? trendHoursWorked;
+  @override
   final GeneralStatistics hoursWorkedStats;
 
   factory _$AdminStatisticsOverviewResponse(
@@ -127,6 +151,8 @@ class _$AdminStatisticsOverviewResponse
       required this.ongoingJobCount,
       required this.completedJobCount,
       required this.unservicedJobCount,
+      this.trendJobCount,
+      this.trendHoursWorked,
       required this.hoursWorkedStats})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
@@ -164,6 +190,8 @@ class _$AdminStatisticsOverviewResponse
         ongoingJobCount == other.ongoingJobCount &&
         completedJobCount == other.completedJobCount &&
         unservicedJobCount == other.unservicedJobCount &&
+        trendJobCount == other.trendJobCount &&
+        trendHoursWorked == other.trendHoursWorked &&
         hoursWorkedStats == other.hoursWorkedStats;
   }
 
@@ -176,6 +204,8 @@ class _$AdminStatisticsOverviewResponse
     _$hash = $jc(_$hash, ongoingJobCount.hashCode);
     _$hash = $jc(_$hash, completedJobCount.hashCode);
     _$hash = $jc(_$hash, unservicedJobCount.hashCode);
+    _$hash = $jc(_$hash, trendJobCount.hashCode);
+    _$hash = $jc(_$hash, trendHoursWorked.hashCode);
     _$hash = $jc(_$hash, hoursWorkedStats.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -190,6 +220,8 @@ class _$AdminStatisticsOverviewResponse
           ..add('ongoingJobCount', ongoingJobCount)
           ..add('completedJobCount', completedJobCount)
           ..add('unservicedJobCount', unservicedJobCount)
+          ..add('trendJobCount', trendJobCount)
+          ..add('trendHoursWorked', trendHoursWorked)
           ..add('hoursWorkedStats', hoursWorkedStats))
         .toString();
   }
@@ -230,6 +262,16 @@ class AdminStatisticsOverviewResponseBuilder
   set unservicedJobCount(int? unservicedJobCount) =>
       _$this._unservicedJobCount = unservicedJobCount;
 
+  int? _trendJobCount;
+  int? get trendJobCount => _$this._trendJobCount;
+  set trendJobCount(int? trendJobCount) =>
+      _$this._trendJobCount = trendJobCount;
+
+  int? _trendHoursWorked;
+  int? get trendHoursWorked => _$this._trendHoursWorked;
+  set trendHoursWorked(int? trendHoursWorked) =>
+      _$this._trendHoursWorked = trendHoursWorked;
+
   GeneralStatisticsBuilder? _hoursWorkedStats;
   GeneralStatisticsBuilder get hoursWorkedStats =>
       _$this._hoursWorkedStats ??= new GeneralStatisticsBuilder();
@@ -247,6 +289,8 @@ class AdminStatisticsOverviewResponseBuilder
       _ongoingJobCount = $v.ongoingJobCount;
       _completedJobCount = $v.completedJobCount;
       _unservicedJobCount = $v.unservicedJobCount;
+      _trendJobCount = $v.trendJobCount;
+      _trendHoursWorked = $v.trendHoursWorked;
       _hoursWorkedStats = $v.hoursWorkedStats.toBuilder();
       _$v = null;
     }
@@ -288,6 +332,8 @@ class AdminStatisticsOverviewResponseBuilder
                   unservicedJobCount,
                   r'AdminStatisticsOverviewResponse',
                   'unservicedJobCount'),
+              trendJobCount: trendJobCount,
+              trendHoursWorked: trendHoursWorked,
               hoursWorkedStats: hoursWorkedStats.build());
     } catch (_) {
       late String _$failedField;

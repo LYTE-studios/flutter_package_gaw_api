@@ -46,7 +46,7 @@ class WashersApi {
     required WasherUpdateRequest request,
   }) async {
     Response response = await RequestFactory.executePut(
-      endpoint: '/washers/$id',
+      endpoint: '/washers/details/$id',
       body: request.toJson(),
     );
 

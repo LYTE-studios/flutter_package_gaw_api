@@ -3,7 +3,6 @@ library users_api;
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:gaw_api/gaw_api.dart';
 import 'package:gaw_api/src/core/utils/request_factory.dart';
 
@@ -50,18 +49,15 @@ class UsersApi {
       url += '/$userId';
     }
 
-    Uint8List compressedBytes = await FlutterImageCompress.compressWithList(
-      image,
-      format: CompressFormat.png,
-    );
-
     final formData = FormData.fromMap(
       {
-        "file": MultipartFile.fromBytes(compressedBytes),
+        "file": MultipartFile.fromBytes(
+          image.toList(),
+        ),
       },
     );
 
-    Response response = await RequestFactory.multiformPost(
+    Response response = await RequestFactory.imagePost(
       endpoint: url,
       body: formData,
     );
@@ -94,7 +90,8 @@ class UsersApi {
 
     if (response.statusCode == 200) {
       return UpdateLanguageRequest.fromJson(
-          FormattingUtil.decode(response.data));
+        FormattingUtil.decode(response.data),
+      );
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);

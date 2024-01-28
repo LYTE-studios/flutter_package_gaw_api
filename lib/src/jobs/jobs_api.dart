@@ -68,6 +68,30 @@ class JobsApi {
     throw DioException(requestOptions: RequestOptions(), response: response);
   }
 
+  static Future<void> denyApplication({required String id}) async {
+    Response response = await RequestFactory.executePost(
+      endpoint: '/applications/details/$id/deny',
+    );
+
+    if (response.statusCode == 200) {
+      return;
+    }
+
+    throw DioException(requestOptions: RequestOptions(), response: response);
+  }
+
+  static Future<void> approveApplication({required String id}) async {
+    Response response = await RequestFactory.executePost(
+      endpoint: '/applications/details/$id/approve',
+    );
+
+    if (response.statusCode == 200) {
+      return;
+    }
+
+    throw DioException(requestOptions: RequestOptions(), response: response);
+  }
+
   static Future<Job?> getJob({required String id}) async {
     Response response = await RequestFactory.executeGet(
       endpoint: '/jobs/details/$id',

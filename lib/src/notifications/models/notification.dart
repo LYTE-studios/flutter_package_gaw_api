@@ -22,6 +22,12 @@ abstract class Notification implements Built<Notification, NotificationBuilder> 
   @BuiltValueField(wireName: 'description')
   String get body;
 
+  @BuiltValueField(wireName: 'profile_picture')
+  String? get profilePicture;
+
+  @BuiltValueField(wireName: 'archived')
+  bool get archived;
+
   @BuiltValueField(wireName: 'sent')
   int? get sent;
 

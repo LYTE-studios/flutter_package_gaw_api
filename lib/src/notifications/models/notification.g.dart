@@ -24,12 +24,22 @@ class _$NotificationSerializer implements StructuredSerializer<Notification> {
           specifiedType: const FullType(String)),
       'description',
       serializers.serialize(object.body, specifiedType: const FullType(String)),
+      'archived',
+      serializers.serialize(object.archived,
+          specifiedType: const FullType(bool)),
     ];
     Object? value;
     value = object.id;
     if (value != null) {
       result
         ..add('id')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.profilePicture;
+    if (value != null) {
+      result
+        ..add('profile_picture')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
@@ -73,6 +83,14 @@ class _$NotificationSerializer implements StructuredSerializer<Notification> {
           result.body = serializers.deserialize(value,
               specifiedType: const FullType(String))! as String;
           break;
+        case 'profile_picture':
+          result.profilePicture = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'archived':
+          result.archived = serializers.deserialize(value,
+              specifiedType: const FullType(bool))! as bool;
+          break;
         case 'sent':
           result.sent = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int?;
@@ -96,6 +114,10 @@ class _$Notification extends Notification {
   @override
   final String body;
   @override
+  final String? profilePicture;
+  @override
+  final bool archived;
+  @override
   final int? sent;
   @override
   final bool? seen;
@@ -104,10 +126,18 @@ class _$Notification extends Notification {
       (new NotificationBuilder()..update(updates))._build();
 
   _$Notification._(
-      {this.id, required this.title, required this.body, this.sent, this.seen})
+      {this.id,
+      required this.title,
+      required this.body,
+      this.profilePicture,
+      required this.archived,
+      this.sent,
+      this.seen})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(title, r'Notification', 'title');
     BuiltValueNullFieldError.checkNotNull(body, r'Notification', 'body');
+    BuiltValueNullFieldError.checkNotNull(
+        archived, r'Notification', 'archived');
   }
 
   @override
@@ -124,6 +154,8 @@ class _$Notification extends Notification {
         id == other.id &&
         title == other.title &&
         body == other.body &&
+        profilePicture == other.profilePicture &&
+        archived == other.archived &&
         sent == other.sent &&
         seen == other.seen;
   }
@@ -134,6 +166,8 @@ class _$Notification extends Notification {
     _$hash = $jc(_$hash, id.hashCode);
     _$hash = $jc(_$hash, title.hashCode);
     _$hash = $jc(_$hash, body.hashCode);
+    _$hash = $jc(_$hash, profilePicture.hashCode);
+    _$hash = $jc(_$hash, archived.hashCode);
     _$hash = $jc(_$hash, sent.hashCode);
     _$hash = $jc(_$hash, seen.hashCode);
     _$hash = $jf(_$hash);
@@ -146,6 +180,8 @@ class _$Notification extends Notification {
           ..add('id', id)
           ..add('title', title)
           ..add('body', body)
+          ..add('profilePicture', profilePicture)
+          ..add('archived', archived)
           ..add('sent', sent)
           ..add('seen', seen))
         .toString();
@@ -168,6 +204,15 @@ class NotificationBuilder
   String? get body => _$this._body;
   set body(String? body) => _$this._body = body;
 
+  String? _profilePicture;
+  String? get profilePicture => _$this._profilePicture;
+  set profilePicture(String? profilePicture) =>
+      _$this._profilePicture = profilePicture;
+
+  bool? _archived;
+  bool? get archived => _$this._archived;
+  set archived(bool? archived) => _$this._archived = archived;
+
   int? _sent;
   int? get sent => _$this._sent;
   set sent(int? sent) => _$this._sent = sent;
@@ -184,6 +229,8 @@ class NotificationBuilder
       _id = $v.id;
       _title = $v.title;
       _body = $v.body;
+      _profilePicture = $v.profilePicture;
+      _archived = $v.archived;
       _sent = $v.sent;
       _seen = $v.seen;
       _$v = null;
@@ -213,6 +260,9 @@ class NotificationBuilder
                 title, r'Notification', 'title'),
             body: BuiltValueNullFieldError.checkNotNull(
                 body, r'Notification', 'body'),
+            profilePicture: profilePicture,
+            archived: BuiltValueNullFieldError.checkNotNull(
+                archived, r'Notification', 'archived'),
             sent: sent,
             seen: seen);
     replace(_$result);

@@ -30,7 +30,7 @@ class GoogleApi {
   ) async {
     Dio dio = Dio();
 
-    String url = '${Configuration.googleApiUrl}/geocode/json';
+    String url = '${Configuration.googleApiUrl}/maps/api/geocode/json';
 
     try {
       var response = await dio.get(

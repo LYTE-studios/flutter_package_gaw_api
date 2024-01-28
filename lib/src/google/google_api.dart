@@ -23,6 +23,42 @@ class GoogleApi {
     throw DioException(requestOptions: RequestOptions(), response: response);
   }
 
+  /// Get the reverse geocoding for an address
+  static Future<String> getReverseGeocodingAddress(
+    double latitude,
+    double longitude,
+  ) async {
+    Dio dio = Dio();
+
+    String url = '${Configuration.googleApiUrl}/geocode/json';
+
+    try {
+      var response = await dio.get(
+        url,
+        queryParameters: {
+          'latlng': '$latitude,$longitude',
+          'key': Configuration.googleApiKey,
+        },
+      );
+      if (response.statusCode == 200) {
+        final data = response.data;
+
+        // Assuming the response format is correct and contains results
+        if (data['results'].isNotEmpty) {
+          // Typically, the first result is the most relevant address
+          String formattedAddress = data['results'][0]['formatted_address'];
+          return formattedAddress;
+        } else {
+          throw Exception('No results found for these coordinates.');
+        }
+      } else {
+        throw Exception('Failed to fetch reverse geocoding data.');
+      }
+    } catch (e) {
+      return 'Failed to get the address.';
+    }
+  }
+
   static Future<List<LatLng>> getDirections({
     required LatLng from,
     required LatLng to,

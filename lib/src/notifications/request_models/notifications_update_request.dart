@@ -23,6 +23,9 @@ abstract class NotificationsUpdateRequest
   @BuiltValueField(wireName: 'seen')
   bool get seen;
 
+  @BuiltValueField(wireName: 'archived')
+  bool get archived;
+
   String toJson() {
     return json.encode(
       serializers.serializeWith(NotificationsUpdateRequest.serializer, this),

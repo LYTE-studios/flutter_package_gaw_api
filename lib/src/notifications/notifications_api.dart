@@ -40,19 +40,29 @@ class NotificationsApi {
     throw DioException(requestOptions: RequestOptions(), response: response);
   }
 
-  // static Future<void> updateNotification(
-  //   {required NotificationsUpdateRequest request}) async {
-  //   Response response = await RequestFactory.executePut(
-  //     endpoint: '/notifications/$id',
-  //     body: {
-  //       'seen': seen,
-  //     },
-  //   );
+  static Future<void> readAllNotifications() async {
+    Response response = await RequestFactory.executePut(
+      endpoint: '/notifications/read-all',
+    );
 
-  //   if (response.statusCode == 200) {
-  //     return;
-  //   }
+    if (response.statusCode == 200) {
+      return;
+    }
 
-  //   throw DioException(requestOptions: RequestOptions(), response: response);
-  // } 
+    throw DioException(requestOptions: RequestOptions(), response: response);
+  }
+
+  static Future<void> updateNotification(
+    {required NotificationsUpdateRequest request}) async {
+    Response response = await RequestFactory.executePut(
+      endpoint: '/notifications',
+      body: request.toJson(),
+    );
+
+    if (response.statusCode == 200) {
+      return;
+    }
+
+    throw DioException(requestOptions: RequestOptions(), response: response);
+  } 
 }

@@ -28,6 +28,9 @@ class _$NotificationsUpdateRequestSerializer
       serializers.serialize(object.id, specifiedType: const FullType(String)),
       'seen',
       serializers.serialize(object.seen, specifiedType: const FullType(bool)),
+      'archived',
+      serializers.serialize(object.archived,
+          specifiedType: const FullType(bool)),
     ];
 
     return result;
@@ -53,6 +56,10 @@ class _$NotificationsUpdateRequestSerializer
           result.seen = serializers.deserialize(value,
               specifiedType: const FullType(bool))! as bool;
           break;
+        case 'archived':
+          result.archived = serializers.deserialize(value,
+              specifiedType: const FullType(bool))! as bool;
+          break;
       }
     }
 
@@ -65,17 +72,22 @@ class _$NotificationsUpdateRequest extends NotificationsUpdateRequest {
   final String id;
   @override
   final bool seen;
+  @override
+  final bool archived;
 
   factory _$NotificationsUpdateRequest(
           [void Function(NotificationsUpdateRequestBuilder)? updates]) =>
       (new NotificationsUpdateRequestBuilder()..update(updates))._build();
 
-  _$NotificationsUpdateRequest._({required this.id, required this.seen})
+  _$NotificationsUpdateRequest._(
+      {required this.id, required this.seen, required this.archived})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         id, r'NotificationsUpdateRequest', 'id');
     BuiltValueNullFieldError.checkNotNull(
         seen, r'NotificationsUpdateRequest', 'seen');
+    BuiltValueNullFieldError.checkNotNull(
+        archived, r'NotificationsUpdateRequest', 'archived');
   }
 
   @override
@@ -92,7 +104,8 @@ class _$NotificationsUpdateRequest extends NotificationsUpdateRequest {
     if (identical(other, this)) return true;
     return other is NotificationsUpdateRequest &&
         id == other.id &&
-        seen == other.seen;
+        seen == other.seen &&
+        archived == other.archived;
   }
 
   @override
@@ -100,6 +113,7 @@ class _$NotificationsUpdateRequest extends NotificationsUpdateRequest {
     var _$hash = 0;
     _$hash = $jc(_$hash, id.hashCode);
     _$hash = $jc(_$hash, seen.hashCode);
+    _$hash = $jc(_$hash, archived.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -108,7 +122,8 @@ class _$NotificationsUpdateRequest extends NotificationsUpdateRequest {
   String toString() {
     return (newBuiltValueToStringHelper(r'NotificationsUpdateRequest')
           ..add('id', id)
-          ..add('seen', seen))
+          ..add('seen', seen)
+          ..add('archived', archived))
         .toString();
   }
 }
@@ -126,6 +141,10 @@ class NotificationsUpdateRequestBuilder
   bool? get seen => _$this._seen;
   set seen(bool? seen) => _$this._seen = seen;
 
+  bool? _archived;
+  bool? get archived => _$this._archived;
+  set archived(bool? archived) => _$this._archived = archived;
+
   NotificationsUpdateRequestBuilder();
 
   NotificationsUpdateRequestBuilder get _$this {
@@ -133,6 +152,7 @@ class NotificationsUpdateRequestBuilder
     if ($v != null) {
       _id = $v.id;
       _seen = $v.seen;
+      _archived = $v.archived;
       _$v = null;
     }
     return this;
@@ -158,7 +178,9 @@ class NotificationsUpdateRequestBuilder
             id: BuiltValueNullFieldError.checkNotNull(
                 id, r'NotificationsUpdateRequest', 'id'),
             seen: BuiltValueNullFieldError.checkNotNull(
-                seen, r'NotificationsUpdateRequest', 'seen'));
+                seen, r'NotificationsUpdateRequest', 'seen'),
+            archived: BuiltValueNullFieldError.checkNotNull(
+                archived, r'NotificationsUpdateRequest', 'archived'));
     replace(_$result);
     return _$result;
   }

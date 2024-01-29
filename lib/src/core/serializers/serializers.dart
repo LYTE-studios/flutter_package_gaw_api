@@ -2,7 +2,6 @@ import 'package:built_collection/built_collection.dart';
 import 'package:built_value/serializer.dart';
 import 'package:built_value/standard_json_plugin.dart';
 import 'package:gaw_api/gaw_api.dart';
-import 'package:gaw_api/src/washers/request_models/washer_update_request.dart';
 
 part 'serializers.g.dart';
 
@@ -58,6 +57,7 @@ part 'serializers.g.dart';
   NotificationsListResponse,
   NotificationsUpdateRequest,
   NotificationsRequest,
+  UpdateJobRequest,
 ])
 final Serializers serializers =
     (_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();

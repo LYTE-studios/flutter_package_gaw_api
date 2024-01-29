@@ -18,6 +18,7 @@ export 'response_models/application_list_response.dart';
 export 'response_models/job_list_response.dart';
 export 'response_models/time_registration_list_response.dart';
 export 'response_models/time_registration_response.dart';
+export 'utils/job_utils.dart';
 
 class JobsApi {
   /// Gets the washers job applications
@@ -288,7 +289,7 @@ class JobsApi {
     throw DioException(requestOptions: RequestOptions(), response: response);
   }
 
-  static Future<Job?> updateJob({
+  static Future<void> updateJob({
     required String id,
     required UpdateJobRequest request,
   }) async {
@@ -298,7 +299,7 @@ class JobsApi {
     );
 
     if (response.statusCode == 200) {
-      return Job.fromJson(FormattingUtil.decode(response.data));
+      return;
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);

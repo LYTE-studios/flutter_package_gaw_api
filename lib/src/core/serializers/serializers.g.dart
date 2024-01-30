@@ -8,6 +8,7 @@ part of 'serializers.dart';
 
 Serializers _$serializers = (new Serializers().toBuilder()
       ..add(Address.serializer)
+      ..add(AdminStatisticsOverviewResponse.serializer)
       ..add(ApplicationListResponse.serializer)
       ..add(ApplyForJobRequest.serializer)
       ..add(CodeVerificationRequest.serializer)
@@ -18,6 +19,7 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(CustomerListResponse.serializer)
       ..add(DailyStatistics.serializer)
       ..add(EmailRequest.serializer)
+      ..add(GeneralStatistics.serializer)
       ..add(HelloThereResponse.serializer)
       ..add(IdResponse.serializer)
       ..add(Job.serializer)
@@ -43,12 +45,15 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(TimeRegistrationListResponse.serializer)
       ..add(TimeRegistrationRequest.serializer)
       ..add(TimeRegistrationResponse.serializer)
+      ..add(UpdateCustomerRequest.serializer)
       ..add(UpdateFcmTokenRequest.serializer)
+      ..add(UpdateJobRequest.serializer)
       ..add(UpdateLanguageRequest.serializer)
       ..add(UpdateUserRequest.serializer)
       ..add(UpdateUserResponse.serializer)
       ..add(UserBasedJobsRequest.serializer)
       ..add(Washer.serializer)
+      ..add(WasherUpdateRequest.serializer)
       ..add(WashersListResponse.serializer)
       ..add(WeeklyStatistics.serializer)
       ..add(WeeklyStatisticsListResponse.serializer)
@@ -83,7 +88,11 @@ Serializers _$serializers = (new Serializers().toBuilder()
             const FullType(String),
             const FullType(MonthlyStatistics)
           ]),
-          () => new MapBuilder<String, MonthlyStatistics>()))
+          () => new MapBuilder<String, MonthlyStatistics>())
+      ..addBuilderFactory(
+          const FullType(
+              BuiltMap, const [const FullType(int), const FullType(int)]),
+          () => new MapBuilder<int, int>()))
     .build();
 
 // ignore_for_file: deprecated_member_use_from_same_package,type=lint

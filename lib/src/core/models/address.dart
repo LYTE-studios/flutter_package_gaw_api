@@ -41,6 +41,26 @@ abstract class Address implements Built<Address, AddressBuilder> {
   @BuiltValueField(wireName: 'longitude')
   double? get longitude;
 
+  static Address fromPlaceAddress(PlaceAddress placeAddress) {
+    ParsedAddress parsedAddress = ParsedAddress.parseAddress(
+      placeAddress.formattedAddress,
+    );
+
+    return Address(
+      (b) => b
+        ..latitude = placeAddress.latitude
+        ..longitude = placeAddress.longitude
+        ..streetName = parsedAddress.streetName
+        ..houseNumber = parsedAddress.streetNumber
+        ..city = parsedAddress.city
+        ..postalCode = parsedAddress.postalCode,
+    );
+  }
+
+  String formattedLatLong() {
+    return 'Latitude: ${latitude ?? ''} Longitude: ${longitude ?? ''}'.trim();
+  }
+
   String shortAddress() {
     return '${postalCode ?? ''} ${city ?? ''}'.trim();
   }

@@ -28,13 +28,20 @@ class _$CustomerListResponseSerializer
       serializers.serialize(object.customers,
           specifiedType:
               const FullType(BuiltList, const [const FullType(Customer)])),
-      'items_per_page',
-      serializers.serialize(object.itemsPerPage,
-          specifiedType: const FullType(int)),
-      'total',
-      serializers.serialize(object.total, specifiedType: const FullType(int)),
     ];
-
+    Object? value;
+    value = object.itemsPerPage;
+    if (value != null) {
+      result
+        ..add('items_per_page')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
+    value = object.total;
+    if (value != null) {
+      result
+        ..add('total')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
     return result;
   }
 
@@ -58,11 +65,11 @@ class _$CustomerListResponseSerializer
           break;
         case 'items_per_page':
           result.itemsPerPage = serializers.deserialize(value,
-              specifiedType: const FullType(int))! as int;
+              specifiedType: const FullType(int)) as int?;
           break;
         case 'total':
           result.total = serializers.deserialize(value,
-              specifiedType: const FullType(int))! as int;
+              specifiedType: const FullType(int)) as int?;
           break;
       }
     }
@@ -75,25 +82,19 @@ class _$CustomerListResponse extends CustomerListResponse {
   @override
   final BuiltList<Customer> customers;
   @override
-  final int itemsPerPage;
+  final int? itemsPerPage;
   @override
-  final int total;
+  final int? total;
 
   factory _$CustomerListResponse(
           [void Function(CustomerListResponseBuilder)? updates]) =>
       (new CustomerListResponseBuilder()..update(updates))._build();
 
   _$CustomerListResponse._(
-      {required this.customers,
-      required this.itemsPerPage,
-      required this.total})
+      {required this.customers, this.itemsPerPage, this.total})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         customers, r'CustomerListResponse', 'customers');
-    BuiltValueNullFieldError.checkNotNull(
-        itemsPerPage, r'CustomerListResponse', 'itemsPerPage');
-    BuiltValueNullFieldError.checkNotNull(
-        total, r'CustomerListResponse', 'total');
   }
 
   @override
@@ -185,10 +186,8 @@ class CustomerListResponseBuilder
       _$result = _$v ??
           new _$CustomerListResponse._(
               customers: customers.build(),
-              itemsPerPage: BuiltValueNullFieldError.checkNotNull(
-                  itemsPerPage, r'CustomerListResponse', 'itemsPerPage'),
-              total: BuiltValueNullFieldError.checkNotNull(
-                  total, r'CustomerListResponse', 'total'));
+              itemsPerPage: itemsPerPage,
+              total: total);
     } catch (_) {
       late String _$failedField;
       try {

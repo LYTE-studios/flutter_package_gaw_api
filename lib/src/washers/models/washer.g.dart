@@ -43,6 +43,20 @@ class _$WasherSerializer implements StructuredSerializer<Washer> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.taxNumber;
+    if (value != null) {
+      result
+        ..add('tax_number')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.address;
+    if (value != null) {
+      result
+        ..add('address')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(Address)));
+    }
     value = object.profilePictureUrl;
     if (value != null) {
       result
@@ -80,9 +94,17 @@ class _$WasherSerializer implements StructuredSerializer<Washer> {
           result.phoneNumber = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'tax_number':
+          result.taxNumber = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
         case 'email':
           result.email = serializers.deserialize(value,
               specifiedType: const FullType(String))! as String;
+          break;
+        case 'address':
+          result.address.replace(serializers.deserialize(value,
+              specifiedType: const FullType(Address))! as Address);
           break;
         case 'profile_picture_url':
           result.profilePictureUrl = serializers.deserialize(value,
@@ -105,7 +127,11 @@ class _$Washer extends Washer {
   @override
   final String? phoneNumber;
   @override
+  final String? taxNumber;
+  @override
   final String email;
+  @override
+  final Address? address;
   @override
   final String? profilePictureUrl;
 
@@ -117,7 +143,9 @@ class _$Washer extends Washer {
       required this.firstName,
       required this.lastName,
       this.phoneNumber,
+      this.taxNumber,
       required this.email,
+      this.address,
       this.profilePictureUrl})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(firstName, r'Washer', 'firstName');
@@ -140,7 +168,9 @@ class _$Washer extends Washer {
         firstName == other.firstName &&
         lastName == other.lastName &&
         phoneNumber == other.phoneNumber &&
+        taxNumber == other.taxNumber &&
         email == other.email &&
+        address == other.address &&
         profilePictureUrl == other.profilePictureUrl;
   }
 
@@ -151,7 +181,9 @@ class _$Washer extends Washer {
     _$hash = $jc(_$hash, firstName.hashCode);
     _$hash = $jc(_$hash, lastName.hashCode);
     _$hash = $jc(_$hash, phoneNumber.hashCode);
+    _$hash = $jc(_$hash, taxNumber.hashCode);
     _$hash = $jc(_$hash, email.hashCode);
+    _$hash = $jc(_$hash, address.hashCode);
     _$hash = $jc(_$hash, profilePictureUrl.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -164,7 +196,9 @@ class _$Washer extends Washer {
           ..add('firstName', firstName)
           ..add('lastName', lastName)
           ..add('phoneNumber', phoneNumber)
+          ..add('taxNumber', taxNumber)
           ..add('email', email)
+          ..add('address', address)
           ..add('profilePictureUrl', profilePictureUrl))
         .toString();
   }
@@ -189,9 +223,17 @@ class WasherBuilder implements Builder<Washer, WasherBuilder> {
   String? get phoneNumber => _$this._phoneNumber;
   set phoneNumber(String? phoneNumber) => _$this._phoneNumber = phoneNumber;
 
+  String? _taxNumber;
+  String? get taxNumber => _$this._taxNumber;
+  set taxNumber(String? taxNumber) => _$this._taxNumber = taxNumber;
+
   String? _email;
   String? get email => _$this._email;
   set email(String? email) => _$this._email = email;
+
+  AddressBuilder? _address;
+  AddressBuilder get address => _$this._address ??= new AddressBuilder();
+  set address(AddressBuilder? address) => _$this._address = address;
 
   String? _profilePictureUrl;
   String? get profilePictureUrl => _$this._profilePictureUrl;
@@ -207,7 +249,9 @@ class WasherBuilder implements Builder<Washer, WasherBuilder> {
       _firstName = $v.firstName;
       _lastName = $v.lastName;
       _phoneNumber = $v.phoneNumber;
+      _taxNumber = $v.taxNumber;
       _email = $v.email;
+      _address = $v.address?.toBuilder();
       _profilePictureUrl = $v.profilePictureUrl;
       _$v = null;
     }
@@ -229,17 +273,32 @@ class WasherBuilder implements Builder<Washer, WasherBuilder> {
   Washer build() => _build();
 
   _$Washer _build() {
-    final _$result = _$v ??
-        new _$Washer._(
-            id: id,
-            firstName: BuiltValueNullFieldError.checkNotNull(
-                firstName, r'Washer', 'firstName'),
-            lastName: BuiltValueNullFieldError.checkNotNull(
-                lastName, r'Washer', 'lastName'),
-            phoneNumber: phoneNumber,
-            email: BuiltValueNullFieldError.checkNotNull(
-                email, r'Washer', 'email'),
-            profilePictureUrl: profilePictureUrl);
+    _$Washer _$result;
+    try {
+      _$result = _$v ??
+          new _$Washer._(
+              id: id,
+              firstName: BuiltValueNullFieldError.checkNotNull(
+                  firstName, r'Washer', 'firstName'),
+              lastName: BuiltValueNullFieldError.checkNotNull(
+                  lastName, r'Washer', 'lastName'),
+              phoneNumber: phoneNumber,
+              taxNumber: taxNumber,
+              email: BuiltValueNullFieldError.checkNotNull(
+                  email, r'Washer', 'email'),
+              address: _address?.build(),
+              profilePictureUrl: profilePictureUrl);
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'address';
+        _address?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            r'Washer', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

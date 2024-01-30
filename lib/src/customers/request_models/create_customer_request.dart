@@ -23,11 +23,14 @@ abstract class CreateCustomerRequest
   @BuiltValueField(wireName: 'email')
   String get email;
 
+  @BuiltValueField(wireName: 'company')
+  String? get company;
+
   @BuiltValueField(wireName: 'address')
-  String? get address;
+  Address? get address;
 
   @BuiltValueField(wireName: 'billing_address')
-  String? get billingAddress;
+  Address? get billingAddress;
 
   @BuiltValueField(wireName: 'tax_number')
   String? get taxNumber;

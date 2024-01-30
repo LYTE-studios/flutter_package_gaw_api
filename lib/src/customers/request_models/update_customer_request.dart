@@ -1,20 +1,18 @@
-library customer;
-
 import 'dart:convert';
 
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:gaw_api/gaw_api.dart';
 
-part 'customer.g.dart';
+part 'update_customer_request.g.dart';
 
-abstract class Customer implements Built<Customer, CustomerBuilder> {
-  Customer._();
+abstract class UpdateCustomerRequest
+    implements Built<UpdateCustomerRequest, UpdateCustomerRequestBuilder> {
+  UpdateCustomerRequest._();
 
-  factory Customer([Function(CustomerBuilder b) updates]) = _$Customer;
-
-  @BuiltValueField(wireName: 'id')
-  String? get id;
+  factory UpdateCustomerRequest(
+          [Function(UpdateCustomerRequestBuilder b) updates]) =
+      _$UpdateCustomerRequest;
 
   @BuiltValueField(wireName: 'email')
   String? get email;
@@ -48,20 +46,16 @@ abstract class Customer implements Built<Customer, CustomerBuilder> {
 
   String toJson() {
     return json.encode(
-      serializers.serializeWith(Customer.serializer, this),
-    );
+        serializers.serializeWith(UpdateCustomerRequest.serializer, this));
   }
 
-  String getFullName() {
-    return '$firstName $lastName';
-  }
-
-  static Customer? fromJson(Map<String, dynamic> data) {
+  static UpdateCustomerRequest? fromJson(Map<String, dynamic> data) {
     return serializers.deserializeWith(
-      Customer.serializer,
+      UpdateCustomerRequest.serializer,
       data,
     );
   }
 
-  static Serializer<Customer> get serializer => _$customerSerializer;
+  static Serializer<UpdateCustomerRequest> get serializer =>
+      _$updateCustomerRequestSerializer;
 }

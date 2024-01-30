@@ -19,10 +19,10 @@ abstract class CustomerListResponse
   BuiltList<Customer> get customers;
 
   @BuiltValueField(wireName: 'items_per_page')
-  int get itemsPerPage;
+  int? get itemsPerPage;
 
   @BuiltValueField(wireName: 'total')
-  int get total;
+  int? get total;
 
   String toJson() {
     return json.encode(

@@ -6,7 +6,8 @@ class Configuration {
   static String apiUrl = 'https://api.getawash.lytestudios.be';
 
   // Google API
-  static String googleApiUrl = 'https://maps.googleapis.com/maps/api';
+  static String googleApiUrl = 'https://maps.googleapis.com';
+  static String routesGoogleApiUrl = 'https://routes.googleapis.com';
   static String googleApiKey = '';
 
   // AUTHENTICATION

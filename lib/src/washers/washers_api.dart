@@ -103,7 +103,7 @@ class WashersApi {
 
   static Future<Response?> uploadSignatures(
       {required FormData formData}) async {
-    Response response = await RequestFactory.multiformPost(
+    Response response = await RequestFactory.imagePost(
       endpoint: '/jobs/timeregistration/sign',
       body: formData,
     );

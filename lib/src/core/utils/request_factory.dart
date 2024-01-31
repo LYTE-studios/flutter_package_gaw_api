@@ -13,6 +13,26 @@ class RequestFactory {
     'Access-Control-Allow-Origin': '*',
   };
 
+  static Future<Response> _performCall(
+    Future<Response> Function(Options options) call, {
+    bool authorize = true,
+    bool isMultiform = false,
+  }) async {
+    Map<String, String> headers = baseHeaders;
+
+    if (authorize) {
+      await _authenticate();
+      headers['Authorization'] = Configuration.accessToken!;
+    }
+
+    return await call.call(Options(
+      headers: headers,
+      receiveTimeout: defaultTimeout,
+      persistentConnection: true,
+      contentType: isMultiform ? 'multipart/form-data' : null,
+    ));
+  }
+
   static Future<void> _authenticate() async {
     if (Configuration.accessToken == null ||
         Configuration.refreshToken == null) {
@@ -33,16 +53,12 @@ class RequestFactory {
       return;
     }
 
-    Response response = await mainClient.post(
-      '${Configuration.apiUrl}/token/refresh/',
-      data: {
+    Response response = await executePost(
+      endpoint: '${Configuration.apiUrl}/token/refresh/',
+      body: {
         'refresh': Configuration.refreshToken,
       },
-      options: Options(
-        contentType: 'application/json',
-        headers: baseHeaders,
-        receiveTimeout: defaultTimeout,
-      ),
+      useToken: false,
     );
 
     if (response.statusCode == 200) {
@@ -53,55 +69,34 @@ class RequestFactory {
     }
   }
 
-  static Future<Response> executeDelete({
-    required String endpoint,
-    bool useToken = true,
-    bool useRefreshToken = false,
-  }) async {
-    Map<String, String> headers = baseHeaders;
-
-    if (useToken) {
-      if (Configuration.accessToken == null) {
-        throw Exception('No token found');
-      }
-
-      await _authenticate();
-      headers['Authorization'] = Configuration.accessToken!;
-    }
-
-    return await mainClient.delete(
-      '${Configuration.apiUrl}$endpoint',
-      options: Options(
-        headers: headers,
-        receiveTimeout: defaultTimeout,
-        persistentConnection: true,
-      ),
-    );
-  }
-
   static Future<Response> executeGet({
     required String endpoint,
     bool useToken = true,
     bool useRefreshToken = false,
   }) async {
-    Map<String, String> headers = baseHeaders;
+    return await _performCall(
+      (Options options) {
+        return mainClient.get(
+          '${Configuration.apiUrl}$endpoint',
+          options: options,
+        );
+      },
+      authorize: useToken,
+    );
+  }
 
-    if (useToken) {
-      if (Configuration.accessToken == null) {
-        throw Exception('No token found');
-      }
-
-      await _authenticate();
-      headers['Authorization'] = Configuration.accessToken!;
-    }
-
-    return await mainClient.get(
-      '${Configuration.apiUrl}$endpoint',
-      options: Options(
-        headers: headers,
-        receiveTimeout: defaultTimeout,
-        persistentConnection: true,
-      ),
+  static Future<Response> executeDelete({
+    required String endpoint,
+    bool useToken = true,
+  }) async {
+    return await _performCall(
+      (Options options) {
+        return mainClient.delete(
+          '${Configuration.apiUrl}$endpoint',
+          options: options,
+        );
+      },
+      authorize: useToken,
     );
   }
 
@@ -109,27 +104,16 @@ class RequestFactory {
     required String endpoint,
     dynamic body,
     bool useToken = true,
-    bool useRefreshToken = false,
   }) async {
-    Map<String, String> headers = baseHeaders;
-
-    if (useToken) {
-      if (Configuration.accessToken == null) {
-        throw Exception('No token found');
-      }
-
-      await _authenticate();
-      headers['Authorization'] = Configuration.accessToken!;
-    }
-
-    return await mainClient.put(
-      '${Configuration.apiUrl}$endpoint',
-      data: body,
-      options: Options(
-        headers: headers,
-        receiveTimeout: defaultTimeout,
-        persistentConnection: true,
-      ),
+    return await _performCall(
+      (Options options) {
+        return mainClient.put(
+          '${Configuration.apiUrl}$endpoint',
+          data: body,
+          options: options,
+        );
+      },
+      authorize: useToken,
     );
   }
 
@@ -137,28 +121,16 @@ class RequestFactory {
     required String endpoint,
     dynamic body,
     bool useToken = true,
-    bool useRefreshToken = false,
   }) async {
-    Map<String, String> headers = baseHeaders;
-
-    if (useToken) {
-      if (Configuration.accessToken == null) {
-        throw Exception('No token found');
-      }
-
-      await _authenticate();
-      headers['Authorization'] = Configuration.accessToken!;
-    }
-
-    return await mainClient.post(
-      '${Configuration.apiUrl}$endpoint',
-      data: body,
-      options: Options(
-        contentType: 'application/json',
-        headers: headers,
-        receiveTimeout: defaultTimeout,
-        persistentConnection: true,
-      ),
+    return await _performCall(
+      (Options options) {
+        return mainClient.post(
+          '${Configuration.apiUrl}$endpoint',
+          data: body,
+          options: options,
+        );
+      },
+      authorize: useToken,
     );
   }
 
@@ -168,47 +140,16 @@ class RequestFactory {
     bool useToken = true,
     bool useRefreshToken = false,
   }) async {
-    Map<String, String> headers = baseHeaders;
-    if (useToken) {
-      if (Configuration.accessToken == null) {
-        throw Exception('No token found');
-      }
-      await _authenticate();
-      headers['Authorization'] = Configuration.accessToken!;
-    }
-    return await mainClient.post(
-      '${Configuration.apiUrl}$endpoint',
-      data: body,
-      options: Options(
-        contentType: 'multipart/form-data',
-        headers: headers,
-        receiveTimeout: defaultTimeout,
-      ),
-    );
-  }
-
-  static Future<Response> multiformPost({
-    required String endpoint,
-    required FormData body,
-    bool useToken = true,
-    bool useRefreshToken = false,
-  }) async {
-    Map<String, String> headers = baseHeaders;
-    if (useToken) {
-      if (Configuration.accessToken == null) {
-        throw Exception('No token found');
-      }
-      await _authenticate();
-      headers['Authorization'] = Configuration.accessToken!;
-    }
-    return await mainClient.post(
-      '${Configuration.apiUrl}$endpoint',
-      data: body,
-      options: Options(
-        contentType: 'multipart/form-data',
-        headers: headers,
-        receiveTimeout: defaultTimeout,
-      ),
+    return await _performCall(
+      (Options options) {
+        return mainClient.post(
+          '${Configuration.apiUrl}$endpoint',
+          data: body,
+          options: options,
+        );
+      },
+      authorize: useToken,
+      isMultiform: true,
     );
   }
 }

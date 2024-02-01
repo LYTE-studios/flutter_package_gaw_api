@@ -14,11 +14,16 @@ class CustomerApi {
   static Future<CustomerListResponse?> getCustomers({
     int? page,
     int? itemCount,
+    String? searchTerm,
   }) async {
     String url = '/customers';
 
     if (page != null && itemCount != null) {
       url = '/customers/$itemCount/$page';
+
+      if (searchTerm?.isNotEmpty ?? false) {
+        url = '/customers/$itemCount/$page/$searchTerm';
+      }
     }
 
     Response response = await RequestFactory.executeGet(

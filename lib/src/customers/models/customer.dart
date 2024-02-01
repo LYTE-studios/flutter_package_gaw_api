@@ -46,6 +46,9 @@ abstract class Customer implements Built<Customer, CustomerBuilder> {
   @BuiltValueField(wireName: 'tax_number')
   String? get taxNumber;
 
+  @BuiltValueField(wireName: 'created_at')
+  int? get createdAt;
+
   String toJson() {
     return json.encode(
       serializers.serializeWith(Customer.serializer, this),

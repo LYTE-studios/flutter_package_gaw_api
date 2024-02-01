@@ -18,7 +18,7 @@ class RequestFactory {
     bool authorize = true,
     bool isMultiform = false,
   }) async {
-    Map<String, String> headers = baseHeaders;
+    Map<String, String> headers = {...baseHeaders};
 
     if (authorize) {
       await _authenticate();
@@ -54,7 +54,7 @@ class RequestFactory {
     }
 
     Response response = await executePost(
-      endpoint: '${Configuration.apiUrl}/token/refresh/',
+      endpoint: '/token/refresh/',
       body: {
         'refresh': Configuration.refreshToken,
       },

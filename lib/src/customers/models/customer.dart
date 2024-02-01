@@ -49,6 +49,21 @@ abstract class Customer implements Built<Customer, CustomerBuilder> {
   @BuiltValueField(wireName: 'created_at')
   int? get createdAt;
 
+  @BuiltValueField(wireName: 'hours')
+  double? get hours;
+
+  String formatHours() {
+    if (hours == null) {
+      return '';
+    }
+
+    if (hours! < 0.01) {
+      return '';
+    }
+
+    return hours!.toStringAsFixed(hours! < 0.5 ? 2 : (hours! < 5 ? 1 : 0));
+  }
+
   String toJson() {
     return json.encode(
       serializers.serializeWith(Customer.serializer, this),

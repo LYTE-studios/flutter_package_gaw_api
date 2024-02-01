@@ -35,6 +35,13 @@ class _$CreateCustomerRequestSerializer
           specifiedType: const FullType(String)),
     ];
     Object? value;
+    value = object.phoneNumber;
+    if (value != null) {
+      result
+        ..add('phone_number')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.company;
     if (value != null) {
       result
@@ -90,6 +97,10 @@ class _$CreateCustomerRequestSerializer
           result.email = serializers.deserialize(value,
               specifiedType: const FullType(String))! as String;
           break;
+        case 'phone_number':
+          result.phoneNumber = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
         case 'company':
           result.company = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
@@ -121,6 +132,8 @@ class _$CreateCustomerRequest extends CreateCustomerRequest {
   @override
   final String email;
   @override
+  final String? phoneNumber;
+  @override
   final String? company;
   @override
   final Address? address;
@@ -137,6 +150,7 @@ class _$CreateCustomerRequest extends CreateCustomerRequest {
       {required this.firstName,
       required this.lastName,
       required this.email,
+      this.phoneNumber,
       this.company,
       this.address,
       this.billingAddress,
@@ -166,6 +180,7 @@ class _$CreateCustomerRequest extends CreateCustomerRequest {
         firstName == other.firstName &&
         lastName == other.lastName &&
         email == other.email &&
+        phoneNumber == other.phoneNumber &&
         company == other.company &&
         address == other.address &&
         billingAddress == other.billingAddress &&
@@ -178,6 +193,7 @@ class _$CreateCustomerRequest extends CreateCustomerRequest {
     _$hash = $jc(_$hash, firstName.hashCode);
     _$hash = $jc(_$hash, lastName.hashCode);
     _$hash = $jc(_$hash, email.hashCode);
+    _$hash = $jc(_$hash, phoneNumber.hashCode);
     _$hash = $jc(_$hash, company.hashCode);
     _$hash = $jc(_$hash, address.hashCode);
     _$hash = $jc(_$hash, billingAddress.hashCode);
@@ -192,6 +208,7 @@ class _$CreateCustomerRequest extends CreateCustomerRequest {
           ..add('firstName', firstName)
           ..add('lastName', lastName)
           ..add('email', email)
+          ..add('phoneNumber', phoneNumber)
           ..add('company', company)
           ..add('address', address)
           ..add('billingAddress', billingAddress)
@@ -215,6 +232,10 @@ class CreateCustomerRequestBuilder
   String? _email;
   String? get email => _$this._email;
   set email(String? email) => _$this._email = email;
+
+  String? _phoneNumber;
+  String? get phoneNumber => _$this._phoneNumber;
+  set phoneNumber(String? phoneNumber) => _$this._phoneNumber = phoneNumber;
 
   String? _company;
   String? get company => _$this._company;
@@ -242,6 +263,7 @@ class CreateCustomerRequestBuilder
       _firstName = $v.firstName;
       _lastName = $v.lastName;
       _email = $v.email;
+      _phoneNumber = $v.phoneNumber;
       _company = $v.company;
       _address = $v.address?.toBuilder();
       _billingAddress = $v.billingAddress?.toBuilder();
@@ -276,6 +298,7 @@ class CreateCustomerRequestBuilder
                   lastName, r'CreateCustomerRequest', 'lastName'),
               email: BuiltValueNullFieldError.checkNotNull(
                   email, r'CreateCustomerRequest', 'email'),
+              phoneNumber: phoneNumber,
               company: company,
               address: _address?.build(),
               billingAddress: _billingAddress?.build(),

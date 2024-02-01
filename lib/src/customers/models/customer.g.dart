@@ -102,6 +102,13 @@ class _$CustomerSerializer implements StructuredSerializer<Customer> {
         ..add('created_at')
         ..add(serializers.serialize(value, specifiedType: const FullType(int)));
     }
+    value = object.hours;
+    if (value != null) {
+      result
+        ..add('hours')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(double)));
+    }
     return result;
   }
 
@@ -164,6 +171,10 @@ class _$CustomerSerializer implements StructuredSerializer<Customer> {
           result.createdAt = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int?;
           break;
+        case 'hours':
+          result.hours = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double?;
+          break;
       }
     }
 
@@ -196,6 +207,8 @@ class _$Customer extends Customer {
   final String? taxNumber;
   @override
   final int? createdAt;
+  @override
+  final double? hours;
 
   factory _$Customer([void Function(CustomerBuilder)? updates]) =>
       (new CustomerBuilder()..update(updates))._build();
@@ -212,7 +225,8 @@ class _$Customer extends Customer {
       this.address,
       this.billingAddress,
       this.taxNumber,
-      this.createdAt})
+      this.createdAt,
+      this.hours})
       : super._();
 
   @override
@@ -237,7 +251,8 @@ class _$Customer extends Customer {
         address == other.address &&
         billingAddress == other.billingAddress &&
         taxNumber == other.taxNumber &&
-        createdAt == other.createdAt;
+        createdAt == other.createdAt &&
+        hours == other.hours;
   }
 
   @override
@@ -255,6 +270,7 @@ class _$Customer extends Customer {
     _$hash = $jc(_$hash, billingAddress.hashCode);
     _$hash = $jc(_$hash, taxNumber.hashCode);
     _$hash = $jc(_$hash, createdAt.hashCode);
+    _$hash = $jc(_$hash, hours.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -273,7 +289,8 @@ class _$Customer extends Customer {
           ..add('address', address)
           ..add('billingAddress', billingAddress)
           ..add('taxNumber', taxNumber)
-          ..add('createdAt', createdAt))
+          ..add('createdAt', createdAt)
+          ..add('hours', hours))
         .toString();
   }
 }
@@ -332,6 +349,10 @@ class CustomerBuilder implements Builder<Customer, CustomerBuilder> {
   int? get createdAt => _$this._createdAt;
   set createdAt(int? createdAt) => _$this._createdAt = createdAt;
 
+  double? _hours;
+  double? get hours => _$this._hours;
+  set hours(double? hours) => _$this._hours = hours;
+
   CustomerBuilder();
 
   CustomerBuilder get _$this {
@@ -349,6 +370,7 @@ class CustomerBuilder implements Builder<Customer, CustomerBuilder> {
       _billingAddress = $v.billingAddress?.toBuilder();
       _taxNumber = $v.taxNumber;
       _createdAt = $v.createdAt;
+      _hours = $v.hours;
       _$v = null;
     }
     return this;
@@ -384,7 +406,8 @@ class CustomerBuilder implements Builder<Customer, CustomerBuilder> {
               address: _address?.build(),
               billingAddress: _billingAddress?.build(),
               taxNumber: taxNumber,
-              createdAt: createdAt);
+              createdAt: createdAt,
+              hours: hours);
     } catch (_) {
       late String _$failedField;
       try {

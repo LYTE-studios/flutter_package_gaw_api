@@ -23,6 +23,9 @@ abstract class CreateCustomerRequest
   @BuiltValueField(wireName: 'email')
   String get email;
 
+  @BuiltValueField(wireName: 'phone_number')
+  String? get phoneNumber;
+
   @BuiltValueField(wireName: 'company')
   String? get company;
 

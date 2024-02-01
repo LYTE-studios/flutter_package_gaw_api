@@ -15,11 +15,21 @@ class CustomerApi {
     int? page,
     int? itemCount,
     String? searchTerm,
+    String? sortTerm,
+    bool ascending = false,
   }) async {
     String url = '/customers';
 
     if (page != null && itemCount != null) {
       url = '/customers/$itemCount/$page';
+
+      if (sortTerm?.isNotEmpty ?? false) {
+        if (ascending) {
+          url = '/customers/$sortTerm/ascending/$itemCount/$page';
+        } else {
+          url = '/customers/$sortTerm/descending/$itemCount/$page';
+        }
+      }
 
       if (searchTerm?.isNotEmpty ?? false) {
         url = '/customers/$itemCount/$page/$searchTerm';
@@ -63,6 +73,18 @@ class CustomerApi {
       return Customer.fromJson(
         FormattingUtil.decode(response.data),
       );
+    }
+
+    throw DioException(requestOptions: RequestOptions(), response: response);
+  }
+
+  static Future<void> deleteCustomer({required String id}) async {
+    Response response = await RequestFactory.executeDelete(
+      endpoint: '/customers/details/$id',
+    );
+
+    if (response.statusCode == 200) {
+      return;
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);

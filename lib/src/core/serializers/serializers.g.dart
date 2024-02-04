@@ -39,6 +39,8 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(PasswordResetRequest.serializer)
       ..add(RefreshRequest.serializer)
       ..add(RegisterRequest.serializer)
+      ..add(SessionExpiryRequest.serializer)
+      ..add(SessionExpiryResponse.serializer)
       ..add(StatsRequest.serializer)
       ..add(TimeFrame.serializer)
       ..add(TimeRegistration.serializer)
@@ -71,6 +73,9 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(Notification)]),
           () => new ListBuilder<Notification>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(TimeRegistration)]),
+          () => new ListBuilder<TimeRegistration>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(TimeRegistration)]),
           () => new ListBuilder<TimeRegistration>())

@@ -39,6 +39,8 @@ class RequestFactory {
       final tokens = await LocalStorageUtil.getTokens();
       Configuration.accessToken = tokens[LocalStorageUtil.kToken];
       Configuration.refreshToken = tokens[LocalStorageUtil.kRefreshToken];
+      Configuration.sessionExpiry =
+          int.tryParse(tokens[LocalStorageUtil.kSessionExpiry] ?? '');
     }
 
     if (Configuration.accessToken == null) {
@@ -47,6 +49,11 @@ class RequestFactory {
 
     if (Configuration.refreshToken == null) {
       throw Exception('No refresh token');
+    }
+
+    if (AuthenticationApi.isExpiredSession()) {
+      Configuration.onExpireSession?.call();
+      return;
     }
 
     if (!AuthenticationApi.isRefreshTokenExpired(Configuration.accessToken!)) {

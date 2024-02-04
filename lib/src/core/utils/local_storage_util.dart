@@ -8,18 +8,29 @@ class LocalStorageUtil {
 
   static const String kRefreshToken = 'refresh_token';
 
+  static const String kSessionExpiry = 'session_expiry';
+
   static Future<void> reset() async {
     await mainStorage.clear();
   }
 
-  static Future<void> setTokens(String? token, String? refreshToken) async {
+  static Future<void> setTokens(
+    String? token,
+    String? refreshToken, {
+    int? sessionExpiry,
+  }) async {
     await mainStorage.ready;
 
     await mainStorage.setItem(LocalStorageUtil.kToken, token);
     await mainStorage.setItem(LocalStorageUtil.kRefreshToken, refreshToken);
+    if (sessionExpiry != null) {
+      await mainStorage.setItem(
+          LocalStorageUtil.kSessionExpiry, sessionExpiry.toString());
+    }
 
     Configuration.accessToken = token;
     Configuration.refreshToken = refreshToken;
+    Configuration.sessionExpiry = sessionExpiry;
   }
 
   static Future<Map<String, String?>> getTokens() async {
@@ -31,6 +42,8 @@ class LocalStorageUtil {
         await mainStorage.getItem(LocalStorageUtil.kToken);
     tokens[LocalStorageUtil.kRefreshToken] =
         await mainStorage.getItem(LocalStorageUtil.kRefreshToken);
+    tokens[LocalStorageUtil.kSessionExpiry] =
+        await mainStorage.getItem(LocalStorageUtil.kSessionExpiry);
 
     return tokens;
   }

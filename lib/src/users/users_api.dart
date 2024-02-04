@@ -49,17 +49,16 @@ class UsersApi {
       url += '/$userId';
     }
 
-    final formData = FormData.fromMap(
-      {
-        "file": MultipartFile.fromBytes(
-          image.toList(),
-        ),
-      },
-    );
-
-    Response response = await RequestFactory.imagePost(
+    Response response = await RequestFactory.executePost(
       endpoint: url,
-      body: formData,
+      body: FormData.fromMap(
+        {
+          'file': MultipartFile.fromBytes(
+            image.toList(),
+            filename: "image.png",
+          ),
+        },
+      ),
     );
 
     if (response.statusCode != 204) {

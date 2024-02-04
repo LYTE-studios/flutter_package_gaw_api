@@ -4,7 +4,8 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:gaw_api/gaw_api.dart';
-import 'package:gaw_api/src/core/utils/formatting_util.dart';
+import 'package:gaw_api/src/authentication/request_models/settings/session_expiry_request.dart';
+import 'package:gaw_api/src/authentication/response_models/session_expiry_response.dart';
 import 'package:gaw_api/src/core/utils/request_factory.dart';
 
 export 'request_models/password/code_verification_request.dart';
@@ -23,6 +24,12 @@ class AuthenticationApi {
     );
 
     if (response.statusCode == 200) {
+      SessionExpiryResponse? expiryResponse = SessionExpiryResponse.fromJson(
+        FormattingUtil.decode(response.data),
+      );
+
+      Configuration.sessionDuration = expiryResponse?.sessionDuration;
+
       return true;
     }
 
@@ -44,10 +51,12 @@ class AuthenticationApi {
 
       Configuration.accessToken = jwtResponse.accessToken;
       Configuration.refreshToken = jwtResponse.refreshToken;
+      Configuration.sessionExpiry = jwtResponse.sessionExpiry;
 
       await LocalStorageUtil.setTokens(
         jwtResponse.accessToken,
         jwtResponse.refreshToken,
+        sessionExpiry: jwtResponse.sessionExpiry,
       );
 
       return jwtResponse;
@@ -86,6 +95,7 @@ class AuthenticationApi {
       await LocalStorageUtil.setTokens(
         jwtResponse.accessToken,
         jwtResponse.refreshToken,
+        sessionExpiry: jwtResponse.sessionExpiry,
       );
 
       return jwtResponse;
@@ -129,6 +139,49 @@ class AuthenticationApi {
     throw DioException(requestOptions: RequestOptions(), response: response);
   }
 
+  static Future<SessionExpiryResponse?> getExpirySession() async {
+    Response response = await RequestFactory.executeGet(
+      endpoint: '/auth/settings/session',
+    );
+
+    if (response.statusCode == 200) {
+      return SessionExpiryResponse.fromJson(
+        FormattingUtil.decode(response.data),
+      );
+    }
+
+    throw DioException(requestOptions: RequestOptions(), response: response);
+  }
+
+  static Future<SessionExpiryResponse?> updateExpirySession({
+    required int? duration,
+  }) async {
+    Response response = await RequestFactory.executePost(
+      endpoint: '/auth/settings/session',
+      body: SessionExpiryRequest(
+        (b) => b..sessionDuration = duration,
+      ).toJson(),
+    );
+
+    if (response.statusCode == 200) {
+      SessionExpiryResponse? expiryResponse = SessionExpiryResponse.fromJson(
+        FormattingUtil.decode(response.data),
+      );
+
+      Configuration.sessionExpiry = expiryResponse?.sessionExpiry;
+
+      LocalStorageUtil.setTokens(
+        Configuration.accessToken,
+        Configuration.refreshToken,
+        sessionExpiry: Configuration.sessionExpiry,
+      );
+
+      return expiryResponse;
+    }
+
+    throw DioException(requestOptions: RequestOptions(), response: response);
+  }
+
   static Future<bool> resetPassword({
     required PasswordResetRequest request,
   }) async {
@@ -145,12 +198,32 @@ class AuthenticationApi {
     return false;
   }
 
-  
+  static bool isExpiredSession() {
+    int? expirySeconds = Configuration.sessionExpiry;
+
+    if (expirySeconds == null) {
+      return false;
+    }
+
+    if (expirySeconds == 0) {
+      return false;
+    }
+
+    final expiry = DateTime.fromMillisecondsSinceEpoch(0).add(
+      Duration(
+        seconds: expirySeconds,
+      ),
+    );
+
+    return expiry.isBefore(
+      DateTime.now(),
+    );
+  }
 
   static bool isRefreshTokenExpired(String tokenToCheck) {
     final parts = tokenToCheck.split('.');
     if (parts.length != 3) {
-      return true; // Not a valid token format
+      return false; // Not a valid token format
     }
 
     final payload = json
@@ -159,7 +232,7 @@ class AuthenticationApi {
         .add(Duration(seconds: int.tryParse(payload['exp'].toString()) ?? 0));
 
     return expiry.isBefore(
-      DateTime.now().subtract(
+      DateTime.now().add(
         const Duration(
           minutes: 1,
         ),

@@ -2,6 +2,7 @@ library job;
 
 import 'dart:convert';
 
+import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:gaw_api/gaw_api.dart';
@@ -51,6 +52,9 @@ abstract class Job implements Built<Job, JobBuilder> {
 
   @BuiltValueField(wireName: 'customer')
   Customer get customer;
+
+  @BuiltValueField(wireName: 'time_registrations')
+  BuiltList<TimeRegistration>? get registrations;
 
   String toJson() {
     return json.encode(

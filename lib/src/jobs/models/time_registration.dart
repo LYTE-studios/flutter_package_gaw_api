@@ -19,10 +19,19 @@ abstract class TimeRegistration
   String get id;
 
   @BuiltValueField(wireName: 'start_time')
-  String get startTime;
+  int? get startTime;
 
   @BuiltValueField(wireName: 'end_time')
-  String get endTime;
+  int? get endTime;
+
+  @BuiltValueField(wireName: 'washer')
+  Washer? get washer;
+
+  @BuiltValueField(wireName: 'washer_signature')
+  String? get washerSignatureUrl;
+
+  @BuiltValueField(wireName: 'customer_signature')
+  String? get customerSignatureUrl;
 
   String toJson() {
     return json.encode(

@@ -60,7 +60,7 @@ class _$WasherSerializer implements StructuredSerializer<Washer> {
     value = object.profilePictureUrl;
     if (value != null) {
       result
-        ..add('profile_picture_url')
+        ..add('profile_picture')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
@@ -140,7 +140,7 @@ class _$WasherSerializer implements StructuredSerializer<Washer> {
           result.address.replace(serializers.deserialize(value,
               specifiedType: const FullType(Address))! as Address);
           break;
-        case 'profile_picture_url':
+        case 'profile_picture':
           result.profilePictureUrl = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;

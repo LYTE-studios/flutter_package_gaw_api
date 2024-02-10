@@ -78,6 +78,10 @@ abstract class Address implements Built<Address, AddressBuilder> {
     return LatLng(latitude!, longitude!);
   }
 
+  LatLng toViewLatLng() {
+    return LatLng(latitude! - 0.0024, longitude!);
+  }
+
   String toJson() {
     return json.encode(
       serializers.serializeWith(Address.serializer, this),

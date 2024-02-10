@@ -34,7 +34,7 @@ abstract class Washer implements Built<Washer, WasherBuilder> {
   @BuiltValueField(wireName: 'address')
   Address? get address;
 
-  @BuiltValueField(wireName: 'profile_picture_url')
+  @BuiltValueField(wireName: 'profile_picture')
   String? get profilePictureUrl;
 
   @BuiltValueField(wireName: 'initials')

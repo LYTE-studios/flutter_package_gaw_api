@@ -5,6 +5,7 @@ import 'dart:typed_data';
 import 'package:dio/dio.dart';
 import 'package:gaw_api/gaw_api.dart';
 import 'package:gaw_api/src/core/utils/request_factory.dart';
+import 'package:image/image.dart';
 
 export 'request_models/update_fcm_token_request.dart';
 export 'request_models/update_language_request.dart';
@@ -49,12 +50,29 @@ class UsersApi {
       url += '/$userId';
     }
 
+    Image? parsedImage = decodeImage(image);
+
+    if (parsedImage == null) {
+      throw Exception('Image could not be loaded');
+    }
+
+    int size = parsedImage.height > parsedImage.width
+        ? parsedImage.width
+        : parsedImage.height;
+
+    Image compressed = copyResizeCropSquare(
+      parsedImage,
+      size: size > 256 ? 256 : size,
+    );
+
+    Uint8List bytes = encodePng(compressed);
+
     Response response = await RequestFactory.executePost(
       endpoint: url,
       body: FormData.fromMap(
         {
           'file': MultipartFile.fromBytes(
-            image.toList(),
+            bytes.toList(),
             filename: "image.png",
           ),
         },

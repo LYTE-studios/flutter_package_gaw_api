@@ -52,6 +52,9 @@ abstract class Customer implements Built<Customer, CustomerBuilder> {
   @BuiltValueField(wireName: 'hours')
   double? get hours;
 
+  @BuiltValueField(wireName: 'has_active_job')
+  bool? get hasActiveJob;
+
   String formatHours() {
     if (hours == null) {
       return '';

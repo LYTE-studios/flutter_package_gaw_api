@@ -60,9 +60,43 @@ class _$WasherSerializer implements StructuredSerializer<Washer> {
     value = object.profilePictureUrl;
     if (value != null) {
       result
-        ..add('profile_picture_url')
+        ..add('profile_picture')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
+    }
+    value = object.initials;
+    if (value != null) {
+      result
+        ..add('initials')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.company;
+    if (value != null) {
+      result
+        ..add('company')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.billingAddress;
+    if (value != null) {
+      result
+        ..add('billing_address')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(Address)));
+    }
+    value = object.createdAt;
+    if (value != null) {
+      result
+        ..add('created_at')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
+    value = object.hours;
+    if (value != null) {
+      result
+        ..add('hours')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(double)));
     }
     return result;
   }
@@ -106,9 +140,29 @@ class _$WasherSerializer implements StructuredSerializer<Washer> {
           result.address.replace(serializers.deserialize(value,
               specifiedType: const FullType(Address))! as Address);
           break;
-        case 'profile_picture_url':
+        case 'profile_picture':
           result.profilePictureUrl = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
+          break;
+        case 'initials':
+          result.initials = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'company':
+          result.company = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'billing_address':
+          result.billingAddress.replace(serializers.deserialize(value,
+              specifiedType: const FullType(Address))! as Address);
+          break;
+        case 'created_at':
+          result.createdAt = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int?;
+          break;
+        case 'hours':
+          result.hours = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double?;
           break;
       }
     }
@@ -134,6 +188,16 @@ class _$Washer extends Washer {
   final Address? address;
   @override
   final String? profilePictureUrl;
+  @override
+  final String? initials;
+  @override
+  final String? company;
+  @override
+  final Address? billingAddress;
+  @override
+  final int? createdAt;
+  @override
+  final double? hours;
 
   factory _$Washer([void Function(WasherBuilder)? updates]) =>
       (new WasherBuilder()..update(updates))._build();
@@ -146,7 +210,12 @@ class _$Washer extends Washer {
       this.taxNumber,
       required this.email,
       this.address,
-      this.profilePictureUrl})
+      this.profilePictureUrl,
+      this.initials,
+      this.company,
+      this.billingAddress,
+      this.createdAt,
+      this.hours})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(firstName, r'Washer', 'firstName');
     BuiltValueNullFieldError.checkNotNull(lastName, r'Washer', 'lastName');
@@ -171,7 +240,12 @@ class _$Washer extends Washer {
         taxNumber == other.taxNumber &&
         email == other.email &&
         address == other.address &&
-        profilePictureUrl == other.profilePictureUrl;
+        profilePictureUrl == other.profilePictureUrl &&
+        initials == other.initials &&
+        company == other.company &&
+        billingAddress == other.billingAddress &&
+        createdAt == other.createdAt &&
+        hours == other.hours;
   }
 
   @override
@@ -185,6 +259,11 @@ class _$Washer extends Washer {
     _$hash = $jc(_$hash, email.hashCode);
     _$hash = $jc(_$hash, address.hashCode);
     _$hash = $jc(_$hash, profilePictureUrl.hashCode);
+    _$hash = $jc(_$hash, initials.hashCode);
+    _$hash = $jc(_$hash, company.hashCode);
+    _$hash = $jc(_$hash, billingAddress.hashCode);
+    _$hash = $jc(_$hash, createdAt.hashCode);
+    _$hash = $jc(_$hash, hours.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -199,7 +278,12 @@ class _$Washer extends Washer {
           ..add('taxNumber', taxNumber)
           ..add('email', email)
           ..add('address', address)
-          ..add('profilePictureUrl', profilePictureUrl))
+          ..add('profilePictureUrl', profilePictureUrl)
+          ..add('initials', initials)
+          ..add('company', company)
+          ..add('billingAddress', billingAddress)
+          ..add('createdAt', createdAt)
+          ..add('hours', hours))
         .toString();
   }
 }
@@ -240,6 +324,28 @@ class WasherBuilder implements Builder<Washer, WasherBuilder> {
   set profilePictureUrl(String? profilePictureUrl) =>
       _$this._profilePictureUrl = profilePictureUrl;
 
+  String? _initials;
+  String? get initials => _$this._initials;
+  set initials(String? initials) => _$this._initials = initials;
+
+  String? _company;
+  String? get company => _$this._company;
+  set company(String? company) => _$this._company = company;
+
+  AddressBuilder? _billingAddress;
+  AddressBuilder get billingAddress =>
+      _$this._billingAddress ??= new AddressBuilder();
+  set billingAddress(AddressBuilder? billingAddress) =>
+      _$this._billingAddress = billingAddress;
+
+  int? _createdAt;
+  int? get createdAt => _$this._createdAt;
+  set createdAt(int? createdAt) => _$this._createdAt = createdAt;
+
+  double? _hours;
+  double? get hours => _$this._hours;
+  set hours(double? hours) => _$this._hours = hours;
+
   WasherBuilder();
 
   WasherBuilder get _$this {
@@ -253,6 +359,11 @@ class WasherBuilder implements Builder<Washer, WasherBuilder> {
       _email = $v.email;
       _address = $v.address?.toBuilder();
       _profilePictureUrl = $v.profilePictureUrl;
+      _initials = $v.initials;
+      _company = $v.company;
+      _billingAddress = $v.billingAddress?.toBuilder();
+      _createdAt = $v.createdAt;
+      _hours = $v.hours;
       _$v = null;
     }
     return this;
@@ -287,12 +398,20 @@ class WasherBuilder implements Builder<Washer, WasherBuilder> {
               email: BuiltValueNullFieldError.checkNotNull(
                   email, r'Washer', 'email'),
               address: _address?.build(),
-              profilePictureUrl: profilePictureUrl);
+              profilePictureUrl: profilePictureUrl,
+              initials: initials,
+              company: company,
+              billingAddress: _billingAddress?.build(),
+              createdAt: createdAt,
+              hours: hours);
     } catch (_) {
       late String _$failedField;
       try {
         _$failedField = 'address';
         _address?.build();
+
+        _$failedField = 'billingAddress';
+        _billingAddress?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             r'Washer', _$failedField, e.toString());

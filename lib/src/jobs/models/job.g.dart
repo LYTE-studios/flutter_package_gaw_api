@@ -80,6 +80,14 @@ class _$JobSerializer implements StructuredSerializer<Job> {
         ..add(
             serializers.serialize(value, specifiedType: const FullType(bool)));
     }
+    value = object.registrations;
+    if (value != null) {
+      result
+        ..add('time_registrations')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(
+                BuiltList, const [const FullType(TimeRegistration)])));
+    }
     return result;
   }
 
@@ -146,6 +154,12 @@ class _$JobSerializer implements StructuredSerializer<Job> {
           result.customer.replace(serializers.deserialize(value,
               specifiedType: const FullType(Customer))! as Customer);
           break;
+        case 'time_registrations':
+          result.registrations.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(TimeRegistration)]))!
+              as BuiltList<Object?>);
+          break;
       }
     }
 
@@ -180,6 +194,8 @@ class _$Job extends Job {
   final JobState state;
   @override
   final Customer customer;
+  @override
+  final BuiltList<TimeRegistration>? registrations;
 
   factory _$Job([void Function(JobBuilder)? updates]) =>
       (new JobBuilder()..update(updates))._build();
@@ -197,7 +213,8 @@ class _$Job extends Job {
       required this.selectedWashers,
       this.isDraft,
       required this.state,
-      required this.customer})
+      required this.customer,
+      this.registrations})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(address, r'Job', 'address');
     BuiltValueNullFieldError.checkNotNull(startTime, r'Job', 'startTime');
@@ -232,7 +249,8 @@ class _$Job extends Job {
         selectedWashers == other.selectedWashers &&
         isDraft == other.isDraft &&
         state == other.state &&
-        customer == other.customer;
+        customer == other.customer &&
+        registrations == other.registrations;
   }
 
   @override
@@ -251,6 +269,7 @@ class _$Job extends Job {
     _$hash = $jc(_$hash, isDraft.hashCode);
     _$hash = $jc(_$hash, state.hashCode);
     _$hash = $jc(_$hash, customer.hashCode);
+    _$hash = $jc(_$hash, registrations.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -270,7 +289,8 @@ class _$Job extends Job {
           ..add('selectedWashers', selectedWashers)
           ..add('isDraft', isDraft)
           ..add('state', state)
-          ..add('customer', customer))
+          ..add('customer', customer)
+          ..add('registrations', registrations))
         .toString();
   }
 }
@@ -333,6 +353,12 @@ class JobBuilder implements Builder<Job, JobBuilder> {
   CustomerBuilder get customer => _$this._customer ??= new CustomerBuilder();
   set customer(CustomerBuilder? customer) => _$this._customer = customer;
 
+  ListBuilder<TimeRegistration>? _registrations;
+  ListBuilder<TimeRegistration> get registrations =>
+      _$this._registrations ??= new ListBuilder<TimeRegistration>();
+  set registrations(ListBuilder<TimeRegistration>? registrations) =>
+      _$this._registrations = registrations;
+
   JobBuilder();
 
   JobBuilder get _$this {
@@ -351,6 +377,7 @@ class JobBuilder implements Builder<Job, JobBuilder> {
       _isDraft = $v.isDraft;
       _state = $v.state;
       _customer = $v.customer.toBuilder();
+      _registrations = $v.registrations?.toBuilder();
       _$v = null;
     }
     return this;
@@ -392,7 +419,8 @@ class JobBuilder implements Builder<Job, JobBuilder> {
               isDraft: isDraft,
               state:
                   BuiltValueNullFieldError.checkNotNull(state, r'Job', 'state'),
-              customer: customer.build());
+              customer: customer.build(),
+              registrations: _registrations?.build());
     } catch (_) {
       late String _$failedField;
       try {
@@ -401,6 +429,8 @@ class JobBuilder implements Builder<Job, JobBuilder> {
 
         _$failedField = 'customer';
         customer.build();
+        _$failedField = 'registrations';
+        _registrations?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             r'Job', _$failedField, e.toString());

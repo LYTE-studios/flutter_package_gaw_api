@@ -33,6 +33,12 @@ class _$JwtResponseSerializer implements StructuredSerializer<JwtResponse> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.sessionExpiry;
+    if (value != null) {
+      result
+        ..add('session_expiry')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
     return result;
   }
 
@@ -55,6 +61,10 @@ class _$JwtResponseSerializer implements StructuredSerializer<JwtResponse> {
           result.refreshToken = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'session_expiry':
+          result.sessionExpiry = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int?;
+          break;
       }
     }
 
@@ -67,11 +77,14 @@ class _$JwtResponse extends JwtResponse {
   final String? accessToken;
   @override
   final String? refreshToken;
+  @override
+  final int? sessionExpiry;
 
   factory _$JwtResponse([void Function(JwtResponseBuilder)? updates]) =>
       (new JwtResponseBuilder()..update(updates))._build();
 
-  _$JwtResponse._({this.accessToken, this.refreshToken}) : super._();
+  _$JwtResponse._({this.accessToken, this.refreshToken, this.sessionExpiry})
+      : super._();
 
   @override
   JwtResponse rebuild(void Function(JwtResponseBuilder) updates) =>
@@ -85,7 +98,8 @@ class _$JwtResponse extends JwtResponse {
     if (identical(other, this)) return true;
     return other is JwtResponse &&
         accessToken == other.accessToken &&
-        refreshToken == other.refreshToken;
+        refreshToken == other.refreshToken &&
+        sessionExpiry == other.sessionExpiry;
   }
 
   @override
@@ -93,6 +107,7 @@ class _$JwtResponse extends JwtResponse {
     var _$hash = 0;
     _$hash = $jc(_$hash, accessToken.hashCode);
     _$hash = $jc(_$hash, refreshToken.hashCode);
+    _$hash = $jc(_$hash, sessionExpiry.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -101,7 +116,8 @@ class _$JwtResponse extends JwtResponse {
   String toString() {
     return (newBuiltValueToStringHelper(r'JwtResponse')
           ..add('accessToken', accessToken)
-          ..add('refreshToken', refreshToken))
+          ..add('refreshToken', refreshToken)
+          ..add('sessionExpiry', sessionExpiry))
         .toString();
   }
 }
@@ -117,6 +133,11 @@ class JwtResponseBuilder implements Builder<JwtResponse, JwtResponseBuilder> {
   String? get refreshToken => _$this._refreshToken;
   set refreshToken(String? refreshToken) => _$this._refreshToken = refreshToken;
 
+  int? _sessionExpiry;
+  int? get sessionExpiry => _$this._sessionExpiry;
+  set sessionExpiry(int? sessionExpiry) =>
+      _$this._sessionExpiry = sessionExpiry;
+
   JwtResponseBuilder();
 
   JwtResponseBuilder get _$this {
@@ -124,6 +145,7 @@ class JwtResponseBuilder implements Builder<JwtResponse, JwtResponseBuilder> {
     if ($v != null) {
       _accessToken = $v.accessToken;
       _refreshToken = $v.refreshToken;
+      _sessionExpiry = $v.sessionExpiry;
       _$v = null;
     }
     return this;
@@ -146,7 +168,9 @@ class JwtResponseBuilder implements Builder<JwtResponse, JwtResponseBuilder> {
   _$JwtResponse _build() {
     final _$result = _$v ??
         new _$JwtResponse._(
-            accessToken: accessToken, refreshToken: refreshToken);
+            accessToken: accessToken,
+            refreshToken: refreshToken,
+            sessionExpiry: sessionExpiry);
     replace(_$result);
     return _$result;
   }

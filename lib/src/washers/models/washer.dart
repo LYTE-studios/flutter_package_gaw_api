@@ -30,17 +30,44 @@ abstract class Washer implements Built<Washer, WasherBuilder> {
 
   @BuiltValueField(wireName: 'email')
   String get email;
-  
+
   @BuiltValueField(wireName: 'address')
   Address? get address;
 
-  @BuiltValueField(wireName: 'profile_picture_url')
+  @BuiltValueField(wireName: 'profile_picture')
   String? get profilePictureUrl;
+
+  @BuiltValueField(wireName: 'initials')
+  String? get initials;
+
+  @BuiltValueField(wireName: 'company')
+  String? get company;
+
+  @BuiltValueField(wireName: 'billing_address')
+  Address? get billingAddress;
+
+  @BuiltValueField(wireName: 'created_at')
+  int? get createdAt;
+
+  @BuiltValueField(wireName: 'hours')
+  double? get hours;
 
   String toJson() {
     return json.encode(
       serializers.serializeWith(Washer.serializer, this),
     );
+  }
+
+  String formatHours() {
+    if (hours == null) {
+      return '';
+    }
+
+    if (hours! < 0.01) {
+      return '';
+    }
+
+    return hours!.toStringAsFixed(hours! < 0.5 ? 2 : (hours! < 5 ? 1 : 0));
   }
 
   String getFullName() {

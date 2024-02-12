@@ -19,6 +19,9 @@ abstract class JwtResponse implements Built<JwtResponse, JwtResponseBuilder> {
   @BuiltValueField(wireName: 'refresh_token')
   String? get refreshToken;
 
+  @BuiltValueField(wireName: 'session_expiry')
+  int? get sessionExpiry;
+
   String toJson() {
     return json.encode(serializers.serializeWith(JwtResponse.serializer, this));
   }

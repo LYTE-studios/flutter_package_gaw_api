@@ -13,4 +13,8 @@ class Configuration {
   // AUTHENTICATION
   static String? accessToken;
   static String? refreshToken;
+
+  static int? sessionExpiry;
+  static int? sessionDuration;
+  static Function()? onExpireSession;
 }

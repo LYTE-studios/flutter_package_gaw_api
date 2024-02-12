@@ -18,7 +18,7 @@ class RequestFactory {
     bool authorize = true,
     bool isMultiform = false,
   }) async {
-    Map<String, String> headers = baseHeaders;
+    Map<String, String> headers = {...baseHeaders};
 
     if (authorize) {
       await _authenticate();
@@ -39,6 +39,8 @@ class RequestFactory {
       final tokens = await LocalStorageUtil.getTokens();
       Configuration.accessToken = tokens[LocalStorageUtil.kToken];
       Configuration.refreshToken = tokens[LocalStorageUtil.kRefreshToken];
+      Configuration.sessionExpiry =
+          int.tryParse(tokens[LocalStorageUtil.kSessionExpiry] ?? '');
     }
 
     if (Configuration.accessToken == null) {
@@ -49,12 +51,17 @@ class RequestFactory {
       throw Exception('No refresh token');
     }
 
+    if (AuthenticationApi.isExpiredSession()) {
+      Configuration.onExpireSession?.call();
+      return;
+    }
+
     if (!AuthenticationApi.isRefreshTokenExpired(Configuration.accessToken!)) {
       return;
     }
 
     Response response = await executePost(
-      endpoint: '${Configuration.apiUrl}/token/refresh/',
+      endpoint: '/token/refresh/',
       body: {
         'refresh': Configuration.refreshToken,
       },

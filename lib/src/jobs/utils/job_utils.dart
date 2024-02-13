@@ -1,6 +1,15 @@
 import 'package:gaw_api/gaw_api.dart';
 
 class JobUtils {
+  static List<JobApplication> staticSortApplications(
+      List<JobApplication> applications) {
+    applications.sort(
+      (a, b) => a.job.startTime.compareTo(b.job.startTime),
+    );
+
+    return applications;
+  }
+
   static List<JobApplication> sortApplications(
       List<JobApplication> applications) {
     List<JobApplication> approvedJobs = [];
@@ -15,11 +24,11 @@ class JobUtils {
     }
 
     approvedJobs.sort(
-      (a, b) => b.job.startTime.compareTo(a.job.startTime),
+      (a, b) => a.job.startTime.compareTo(b.job.startTime),
     );
 
     otherJobs.sort(
-      (a, b) => b.job.startTime.compareTo(a.job.startTime),
+      (a, b) => a.job.startTime.compareTo(b.job.startTime),
     );
 
     approvedJobs.addAll(otherJobs);

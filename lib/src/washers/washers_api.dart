@@ -16,22 +16,29 @@ class WashersApi {
     String? searchTerm,
     String? sortTerm,
     bool ascending = false,
+    bool showRegistered = false,
   }) async {
-    String url = '/washers';
+    String prefix = '';
+
+    if (showRegistered) {
+      prefix = '/registered';
+    }
+
+    String url = '$prefix/washers';
 
     if (page != null && itemCount != null) {
-      url = '/washers/$itemCount/$page';
+      url = '$prefix/washers/$itemCount/$page';
 
       if (sortTerm?.isNotEmpty ?? false) {
         if (ascending) {
-          url = '/washers/$sortTerm/ascending/$itemCount/$page';
+          url = '$prefix/washers/$sortTerm/ascending/$itemCount/$page';
         } else {
-          url = '/washers/$sortTerm/descending/$itemCount/$page';
+          url = '$prefix/washers/$sortTerm/descending/$itemCount/$page';
         }
       }
 
       if (searchTerm?.isNotEmpty ?? false) {
-        url = '/washers/$itemCount/$page/$searchTerm';
+        url = '$prefix/washers/$itemCount/$page/$searchTerm';
       }
     }
 
@@ -43,6 +50,18 @@ class WashersApi {
       return WashersListResponse.fromJson(
         FormattingUtil.decode(response.data),
       );
+    }
+
+    throw DioException(requestOptions: RequestOptions(), response: response);
+  }
+
+  static Future<void> acceptWasher({required String id}) async {
+    Response response = await RequestFactory.executePost(
+      endpoint: '/accept/washers/$id',
+    );
+
+    if (response.statusCode == 200) {
+      return;
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);

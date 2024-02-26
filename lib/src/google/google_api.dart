@@ -23,6 +23,37 @@ class GoogleApi {
     throw DioException(requestOptions: RequestOptions(), response: response);
   }
 
+  static Future<LatLng?> geocodeAddress(String request) async {
+    Dio dio = Dio();
+
+    String url = '${Configuration.googleApiUrl}/maps/api/geocode/json';
+
+    try {
+      var response = await dio.get(
+        url,
+        queryParameters: {
+          'address': request,
+          'key': Configuration.googleApiKey,
+        },
+      );
+
+      if (response.statusCode == 200) {
+        final data = response.data;
+        if (data['results'].isNotEmpty) {
+          try {
+            final latLng = data['results'][0]['geometry']['location'];
+
+            return LatLng(latLng['lat'], latLng['lng']);
+          } catch (e) {
+            throw Exception('Coordinates found, but could not parse');
+          }
+        }
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
   /// Get the reverse geocoding for an address
   static Future<String> getReverseGeocodingAddress(
     double latitude,

@@ -1,6 +1,7 @@
 library time_registration_request;
 
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
@@ -20,10 +21,16 @@ abstract class TimeRegistrationRequest
   String get jobId;
 
   @BuiltValueField(wireName: 'start_time')
-  String get startTime;
+  int get startTime;
 
   @BuiltValueField(wireName: 'end_time')
-  String get endTime;
+  int get endTime;
+
+  @BuiltValueField(wireName: 'customer_signature')
+  Uint8List get customerSignature;
+
+  @BuiltValueField(wireName: 'washer_signature')
+  Uint8List get washerSignature;
 
   String toJson() {
     return json.encode(

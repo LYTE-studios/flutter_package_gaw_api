@@ -17,6 +17,7 @@ part 'serializers.g.dart';
   WashersListResponse,
   UpdateCustomerRequest,
   WasherUpdateRequest,
+  ApplicationResponse,
   IdResponse,
   Customer,
   Washer,

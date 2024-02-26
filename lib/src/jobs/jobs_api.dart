@@ -1,8 +1,11 @@
 library jobs_api;
 
+import 'dart:typed_data';
+
 import 'package:dio/dio.dart';
 import 'package:gaw_api/gaw_api.dart';
 import 'package:gaw_api/src/core/utils/request_factory.dart';
+import 'package:image/image.dart';
 
 export 'enums/job_application_state.dart';
 export 'enums/job_state.dart';
@@ -15,6 +18,7 @@ export 'request_models/time_registration_request.dart';
 export 'request_models/update_job_request.dart';
 export 'request_models/user_based_jobs_request.dart';
 export 'response_models/application_list_response.dart';
+export 'response_models/application_response.dart';
 export 'response_models/job_list_response.dart';
 export 'response_models/time_registration_list_response.dart';
 export 'response_models/time_registration_response.dart';
@@ -226,6 +230,18 @@ class JobsApi {
     throw DioException(requestOptions: RequestOptions(), response: response);
   }
 
+  static Future<ApplicationResponse?> getActiveJob() async {
+    Response response = await RequestFactory.executeGet(
+      endpoint: '/jobs/me/active',
+    );
+
+    if (response.statusCode == 200) {
+      return ApplicationResponse.fromJson(FormattingUtil.decode(response.data));
+    }
+
+    throw DioException(requestOptions: RequestOptions(), response: response);
+  }
+
   static Future<TimeRegistrationListResponse?> getTimeRegistrations({
     required String jobId,
   }) async {
@@ -244,14 +260,34 @@ class JobsApi {
   static Future<TimeRegistrationResponse?> createTimeRegistration({
     required TimeRegistrationRequest request,
   }) async {
+    Uint8List washerSignature =
+        encodePng(decodeImage(request.washerSignature)!);
+    Uint8List customerSignature =
+        encodePng(decodeImage(request.customerSignature)!);
+
     Response response = await RequestFactory.executePost(
       endpoint: '/jobs/timeregistration',
-      body: request.toJson(),
+      body: FormData.fromMap(
+        {
+          'job_id': request.jobId,
+          'start_time': request.startTime,
+          'end_time': request.endTime,
+          'washer_signature': MultipartFile.fromBytes(
+            washerSignature.toList(),
+            filename: "washer.png",
+          ),
+          'customer_signature': MultipartFile.fromBytes(
+            customerSignature.toList(),
+            filename: "customer.png",
+          ),
+        },
+      ),
     );
 
     if (response.statusCode == 200) {
       return TimeRegistrationResponse.fromJson(
-          FormattingUtil.decode(response.data));
+        FormattingUtil.decode(response.data),
+      );
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);

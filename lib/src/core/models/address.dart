@@ -57,6 +57,24 @@ abstract class Address implements Built<Address, AddressBuilder> {
     );
   }
 
+  Future<LatLng?> regionCoordinates() async {
+    String request = '';
+
+    if (city != null) {
+      request += city!;
+    }
+
+    if (postalCode != null) {
+      request += '+$postalCode';
+    }
+
+    if (country != null) {
+      request += '+$country';
+    }
+
+    return await GoogleApi.geocodeAddress(request);
+  }
+
   String formattedLatLong() {
     return 'Latitude: ${latitude ?? ''} Longitude: ${longitude ?? ''}'.trim();
   }
@@ -69,7 +87,7 @@ abstract class Address implements Built<Address, AddressBuilder> {
     return '${streetName ?? ''} ${houseNumber ?? ''} ${boxNumber ?? ''}'.trim();
   }
 
-  String formattedAddres() {
+  String formattedAddress() {
     return '${streetName ?? ''} ${houseNumber ?? ''} ${boxNumber ?? ''} ${postalCode ?? ''} ${city ?? ''} ${country ?? ''}'
         .trim();
   }

@@ -45,6 +45,13 @@ class _$NotificationsRequestSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.language;
+    if (value != null) {
+      result
+        ..add('language')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     return result;
   }
 
@@ -80,6 +87,10 @@ class _$NotificationsRequestSerializer
           result.sendMail = serializers.deserialize(value,
               specifiedType: const FullType(bool))! as bool;
           break;
+        case 'language':
+          result.language = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
       }
     }
 
@@ -98,6 +109,8 @@ class _$NotificationsRequest extends NotificationsRequest {
   final bool isGlobal;
   @override
   final bool sendMail;
+  @override
+  final String? language;
 
   factory _$NotificationsRequest(
           [void Function(NotificationsRequestBuilder)? updates]) =>
@@ -108,7 +121,8 @@ class _$NotificationsRequest extends NotificationsRequest {
       required this.description,
       this.userId,
       required this.isGlobal,
-      required this.sendMail})
+      required this.sendMail,
+      this.language})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         title, r'NotificationsRequest', 'title');
@@ -137,7 +151,8 @@ class _$NotificationsRequest extends NotificationsRequest {
         description == other.description &&
         userId == other.userId &&
         isGlobal == other.isGlobal &&
-        sendMail == other.sendMail;
+        sendMail == other.sendMail &&
+        language == other.language;
   }
 
   @override
@@ -148,6 +163,7 @@ class _$NotificationsRequest extends NotificationsRequest {
     _$hash = $jc(_$hash, userId.hashCode);
     _$hash = $jc(_$hash, isGlobal.hashCode);
     _$hash = $jc(_$hash, sendMail.hashCode);
+    _$hash = $jc(_$hash, language.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -159,7 +175,8 @@ class _$NotificationsRequest extends NotificationsRequest {
           ..add('description', description)
           ..add('userId', userId)
           ..add('isGlobal', isGlobal)
-          ..add('sendMail', sendMail))
+          ..add('sendMail', sendMail)
+          ..add('language', language))
         .toString();
   }
 }
@@ -188,6 +205,10 @@ class NotificationsRequestBuilder
   bool? get sendMail => _$this._sendMail;
   set sendMail(bool? sendMail) => _$this._sendMail = sendMail;
 
+  String? _language;
+  String? get language => _$this._language;
+  set language(String? language) => _$this._language = language;
+
   NotificationsRequestBuilder();
 
   NotificationsRequestBuilder get _$this {
@@ -198,6 +219,7 @@ class NotificationsRequestBuilder
       _userId = $v.userId;
       _isGlobal = $v.isGlobal;
       _sendMail = $v.sendMail;
+      _language = $v.language;
       _$v = null;
     }
     return this;
@@ -228,7 +250,8 @@ class NotificationsRequestBuilder
             isGlobal: BuiltValueNullFieldError.checkNotNull(
                 isGlobal, r'NotificationsRequest', 'isGlobal'),
             sendMail: BuiltValueNullFieldError.checkNotNull(
-                sendMail, r'NotificationsRequest', 'sendMail'));
+                sendMail, r'NotificationsRequest', 'sendMail'),
+            language: language);
     replace(_$result);
     return _$result;
   }

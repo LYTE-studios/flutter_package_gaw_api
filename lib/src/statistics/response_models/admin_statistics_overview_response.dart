@@ -22,6 +22,9 @@ abstract class AdminStatisticsOverviewResponse
   @BuiltValueField(wireName: 'planned_jobs_count')
   int get plannedJobCount;
 
+  @BuiltValueField(wireName: 'jobs_without_candidates_count')
+  int? get jobsWithoutCandidatesCount;
+
   @BuiltValueField(wireName: 'coming_jobs_count')
   int get comingJobCount;
 

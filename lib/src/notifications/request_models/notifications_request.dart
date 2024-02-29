@@ -31,6 +31,9 @@ abstract class NotificationsRequest
   @BuiltValueField(wireName: 'send_mail')
   bool get sendMail;
 
+  @BuiltValueField(wireName: 'language')
+  String? get language;
+
   String toJson() {
     return json.encode(
       serializers.serializeWith(NotificationsRequest.serializer, this),

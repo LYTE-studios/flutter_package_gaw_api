@@ -63,6 +63,7 @@ part 'serializers.g.dart';
   NotificationsRequest,
   UpdateJobRequest,
   SessionExpiryRequest,
+  WashersForJobResponse,
 ])
 final Serializers serializers =
     (_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();

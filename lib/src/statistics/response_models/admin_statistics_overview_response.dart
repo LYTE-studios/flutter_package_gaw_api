@@ -61,7 +61,11 @@ abstract class AdminStatisticsOverviewResponse
       return 100;
     }
 
-    return ((completedJobCount - trendJobCount!) / completedJobCount) * 100;
+    if (jobCount == 0 || jobCount == null) {
+      return -100;
+    }
+
+    return (((jobCount - trendJobCount!) / jobCount) * 100).roundToDouble();
   }
 
   String toJson() {

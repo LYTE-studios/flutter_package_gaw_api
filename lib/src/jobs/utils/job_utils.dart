@@ -10,6 +10,22 @@ class JobUtils {
     return applications;
   }
 
+  static List<Job> sortJobs(List<Job> jobs) {
+    if(jobs.first.state == JobState.done){
+      jobs.sort(
+            (a, b) => b.startTime.compareTo(a.startTime),
+      );
+
+      return jobs;
+    }
+
+    jobs.sort(
+      (a, b) => a.startTime.compareTo(b.startTime),
+    );
+
+    return jobs;
+  }
+
   static List<JobApplication> sortApplications(
       List<JobApplication> applications) {
     List<JobApplication> approvedJobs = [];

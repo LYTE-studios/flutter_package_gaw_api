@@ -22,6 +22,7 @@ export 'response_models/application_response.dart';
 export 'response_models/job_list_response.dart';
 export 'response_models/time_registration_list_response.dart';
 export 'response_models/time_registration_response.dart';
+export 'response_models/washers_for_job_response.dart';
 export 'utils/job_utils.dart';
 
 class JobsApi {
@@ -309,7 +310,7 @@ class JobsApi {
     throw DioException(requestOptions: RequestOptions(), response: response);
   }
 
-  static Future<WashersListResponse?> getWashersForJob({
+  static Future<WashersForJobResponse?> getWashersForJob({
     required String jobId,
   }) async {
     Response response = await RequestFactory.executeGet(
@@ -317,7 +318,7 @@ class JobsApi {
     );
 
     if (response.statusCode == 200) {
-      return WashersListResponse.fromJson(
+      return WashersForJobResponse.fromJson(
         FormattingUtil.decode(response.data),
       );
     }

@@ -5,6 +5,9 @@ import 'package:gaw_api/gaw_api.dart';
 class FormattingUtil {
   static Map<String, dynamic> decode(dynamic data) {
     if (data is String) {
+      if (data.isEmpty || data == '{}') {
+        return {};
+      }
       return jsonDecode(data);
     }
     if (data is Map) {

@@ -92,6 +92,13 @@ class WashersApi {
       return IdResponse.fromJson(FormattingUtil.decode(response.data));
     }
 
+    if (response.statusCode == 405) {
+      throw const GawException(
+        message: 'A user with this email address has already registered',
+        title: 'Email in use!',
+      );
+    }
+
     throw DioException(requestOptions: RequestOptions(), response: response);
   }
 

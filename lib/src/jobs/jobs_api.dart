@@ -258,6 +258,22 @@ class JobsApi {
     throw DioException(requestOptions: RequestOptions(), response: response);
   }
 
+  static Future<TimeRegistration?> getTimeRegistrationForJob({
+    required String jobId,
+  }) async {
+    Response response = await RequestFactory.executeGet(
+      endpoint: '/jobs/me/$jobId/time_registration',
+    );
+
+    if (response.statusCode == 200) {
+      return TimeRegistration.fromJson(
+        FormattingUtil.decode(response.data),
+      );
+    }
+
+    throw DioException(requestOptions: RequestOptions(), response: response);
+  }
+
   static Future<TimeRegistrationResponse?> createTimeRegistration({
     required TimeRegistrationRequest request,
   }) async {

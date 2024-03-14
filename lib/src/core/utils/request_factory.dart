@@ -27,6 +27,17 @@ class RequestFactory {
 
     return await call.call(Options(
       headers: headers,
+      validateStatus: (int? status) {
+        if (status == 500) {
+          return false;
+        }
+
+        if (status == 503) {
+          return false;
+        }
+
+        return true;
+      },
       receiveTimeout: defaultTimeout,
       persistentConnection: true,
       contentType: isMultiform ? 'multipart/form-data' : null,

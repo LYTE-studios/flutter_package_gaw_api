@@ -62,8 +62,18 @@ class AuthenticationApi {
       return jwtResponse;
     }
 
+    if (response.statusCode == 405) {
+      throw const GawException(
+        title: 'Not yet accepted!',
+        message: 'Please await for an admin to approve your application',
+      );
+    }
+
     if (response.statusCode == 403) {
-      return null;
+      throw const GawException(
+        title: 'Invalid credentials!',
+        message: 'Please check your email password combination.',
+      );
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);
@@ -130,8 +140,9 @@ class AuthenticationApi {
     );
 
     if (response.statusCode == 200) {
-      PassTokenResponse passTokenResponse =
-          PassTokenResponse.fromJson(FormattingUtil.decode(response.data))!;
+      PassTokenResponse passTokenResponse = PassTokenResponse.fromJson(
+        FormattingUtil.decode(response.data),
+      )!;
 
       return passTokenResponse;
     }

@@ -27,6 +27,9 @@ abstract class HelloThereResponse
   @BuiltValueField(wireName: 'email')
   String get email;
 
+  @BuiltValueField(wireName: 'language')
+  String? get language;
+
   @BuiltValueField(wireName: 'profile_picture')
   String? get profilePictureUrl;
 

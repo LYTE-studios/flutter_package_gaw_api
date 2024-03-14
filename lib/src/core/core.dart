@@ -10,3 +10,4 @@ export 'serializers/serializers.dart';
 export 'utils/configuration.dart';
 export 'utils/formatting_util.dart';
 export 'utils/local_storage_util.dart';
+export 'exceptions/gaw_exception.dart';

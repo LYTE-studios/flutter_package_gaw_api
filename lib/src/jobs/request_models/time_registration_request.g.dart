@@ -32,14 +32,22 @@ class _$TimeRegistrationRequestSerializer
           specifiedType: const FullType(int)),
       'end_time',
       serializers.serialize(object.endTime, specifiedType: const FullType(int)),
-      'customer_signature',
-      serializers.serialize(object.customerSignature,
-          specifiedType: const FullType(Uint8List)),
-      'washer_signature',
-      serializers.serialize(object.washerSignature,
-          specifiedType: const FullType(Uint8List)),
     ];
-
+    Object? value;
+    value = object.customerSignature;
+    if (value != null) {
+      result
+        ..add('customer_signature')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(Uint8List)));
+    }
+    value = object.washerSignature;
+    if (value != null) {
+      result
+        ..add('washer_signature')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(Uint8List)));
+    }
     return result;
   }
 
@@ -69,11 +77,11 @@ class _$TimeRegistrationRequestSerializer
           break;
         case 'customer_signature':
           result.customerSignature = serializers.deserialize(value,
-              specifiedType: const FullType(Uint8List))! as Uint8List;
+              specifiedType: const FullType(Uint8List)) as Uint8List?;
           break;
         case 'washer_signature':
           result.washerSignature = serializers.deserialize(value,
-              specifiedType: const FullType(Uint8List))! as Uint8List;
+              specifiedType: const FullType(Uint8List)) as Uint8List?;
           break;
       }
     }
@@ -90,9 +98,9 @@ class _$TimeRegistrationRequest extends TimeRegistrationRequest {
   @override
   final int endTime;
   @override
-  final Uint8List customerSignature;
+  final Uint8List? customerSignature;
   @override
-  final Uint8List washerSignature;
+  final Uint8List? washerSignature;
 
   factory _$TimeRegistrationRequest(
           [void Function(TimeRegistrationRequestBuilder)? updates]) =>
@@ -102,8 +110,8 @@ class _$TimeRegistrationRequest extends TimeRegistrationRequest {
       {required this.jobId,
       required this.startTime,
       required this.endTime,
-      required this.customerSignature,
-      required this.washerSignature})
+      this.customerSignature,
+      this.washerSignature})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         jobId, r'TimeRegistrationRequest', 'jobId');
@@ -111,10 +119,6 @@ class _$TimeRegistrationRequest extends TimeRegistrationRequest {
         startTime, r'TimeRegistrationRequest', 'startTime');
     BuiltValueNullFieldError.checkNotNull(
         endTime, r'TimeRegistrationRequest', 'endTime');
-    BuiltValueNullFieldError.checkNotNull(
-        customerSignature, r'TimeRegistrationRequest', 'customerSignature');
-    BuiltValueNullFieldError.checkNotNull(
-        washerSignature, r'TimeRegistrationRequest', 'washerSignature');
   }
 
   @override
@@ -226,14 +230,8 @@ class TimeRegistrationRequestBuilder
                 startTime, r'TimeRegistrationRequest', 'startTime'),
             endTime: BuiltValueNullFieldError.checkNotNull(
                 endTime, r'TimeRegistrationRequest', 'endTime'),
-            customerSignature: BuiltValueNullFieldError.checkNotNull(
-                customerSignature,
-                r'TimeRegistrationRequest',
-                'customerSignature'),
-            washerSignature: BuiltValueNullFieldError.checkNotNull(
-                washerSignature,
-                r'TimeRegistrationRequest',
-                'washerSignature'));
+            customerSignature: customerSignature,
+            washerSignature: washerSignature);
     replace(_$result);
     return _$result;
   }

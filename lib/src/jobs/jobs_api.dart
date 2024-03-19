@@ -276,27 +276,41 @@ class JobsApi {
 
   static Future<TimeRegistrationResponse?> createTimeRegistration({
     required TimeRegistrationRequest request,
+    String? userId,
   }) async {
-    Uint8List washerSignature =
-        encodePng(decodeImage(request.washerSignature)!);
-    Uint8List customerSignature =
-        encodePng(decodeImage(request.customerSignature)!);
+    Uint8List? customerSignature;
+    Uint8List? washerSignature;
+
+    if (request.washerSignature != null && request.customerSignature != null) {
+      washerSignature = encodePng(decodeImage(request.washerSignature!)!);
+      customerSignature = encodePng(decodeImage(request.customerSignature!)!);
+    }
+
+    String url = '/jobs/timeregistration';
+
+    if (userId != null) {
+      url += '/$userId';
+    }
 
     Response response = await RequestFactory.executePost(
-      endpoint: '/jobs/timeregistration',
+      endpoint: url,
       body: FormData.fromMap(
         {
           'job_id': request.jobId,
           'start_time': request.startTime,
           'end_time': request.endTime,
-          'washer_signature': MultipartFile.fromBytes(
-            washerSignature.toList(),
-            filename: "washer.png",
-          ),
-          'customer_signature': MultipartFile.fromBytes(
-            customerSignature.toList(),
-            filename: "customer.png",
-          ),
+          'washer_signature': washerSignature == null
+              ? null
+              : MultipartFile.fromBytes(
+                  washerSignature.toList(),
+                  filename: "washer.png",
+                ),
+          'customer_signature': customerSignature == null
+              ? null
+              : MultipartFile.fromBytes(
+                  customerSignature.toList(),
+                  filename: "customer.png",
+                ),
         },
       ),
     );

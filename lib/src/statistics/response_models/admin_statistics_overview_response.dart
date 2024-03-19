@@ -48,12 +48,10 @@ abstract class AdminStatisticsOverviewResponse
 
   int getHoursWorkedTrend() {
     if (trendHoursWorked == 0 || trendHoursWorked == null) {
-      return hoursWorkedStats.averageHours.round();
+      return hoursWorkedStats.totalWorkedHours.round();
     }
 
-    return (hoursWorkedStats.averageHours -
-            (trendHoursWorked! / hoursWorkedStats.dailyHours.values.length))
-        .round();
+    return (hoursWorkedStats.averageHours - trendHoursWorked!).round().toInt();
   }
 
   double getJobCountTrend() {

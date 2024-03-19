@@ -133,6 +133,10 @@ class GoogleApi {
     );
 
     if (response.statusCode == 200) {
+      if (response.data == {}) {
+        return [];
+      }
+
       List<PointLatLng> pointList = PolylinePoints().decodePolyline(
           response.data["routes"][0]["polyline"]["encodedPolyline"]);
       List<LatLng> data = [];

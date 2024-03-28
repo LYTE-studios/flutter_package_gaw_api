@@ -46,9 +46,9 @@ abstract class AdminStatisticsOverviewResponse
   @BuiltValueField(wireName: 'hours_worked_stats')
   GeneralStatistics get hoursWorkedStats;
 
-  int getHoursWorkedTrend() {
+  int? getHoursWorkedTrend() {
     if (trendHoursWorked == 0 || trendHoursWorked == null) {
-      return hoursWorkedStats.totalWorkedHours.round();
+      return null;
     }
 
     return (hoursWorkedStats.averageHours - trendHoursWorked!).round().toInt();

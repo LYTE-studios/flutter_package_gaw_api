@@ -34,6 +34,12 @@ abstract class WasherUpdateRequest
   @BuiltValueField(wireName: 'tax_number')
   String? get taxNumber;
 
+  @BuiltValueField(wireName: 'date_of_birth')
+  int? get dateOfBirth;
+
+  @BuiltValueField(wireName: 'company')
+  String? get company;
+
   String toJson() {
     return json.encode(
         serializers.serializeWith(WasherUpdateRequest.serializer, this));

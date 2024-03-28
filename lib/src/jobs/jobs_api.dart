@@ -125,11 +125,17 @@ class JobsApi {
   /// Gets the upcoming jobs for which a washer can apply
   static Future<JobListResponse?> getUpcomingJobs({
     bool isAdmin = false,
+    int? startTime,
+    int? endTime,
   }) async {
     String url = '/jobs/upcoming';
 
     if (isAdmin) {
       url = '/jobs/upcoming/all';
+
+      if (startTime != null && endTime != null) {
+        url += '/$startTime/$endTime';
+      }
     }
 
     Response response = await RequestFactory.executeGet(
@@ -209,9 +215,18 @@ class JobsApi {
     throw DioException(requestOptions: RequestOptions(), response: response);
   }
 
-  static Future<JobListResponse?> getDoneJobs() async {
+  static Future<JobListResponse?> getDoneJobs({
+    int? startTime,
+    int? endTime,
+  }) async {
+    String url = '/jobs/done';
+
+    if (startTime != null && endTime != null) {
+      url += '/$startTime/$endTime';
+    }
+
     Response response = await RequestFactory.executeGet(
-      endpoint: '/jobs/done',
+      endpoint: url,
     );
     if (response.statusCode == 200) {
       return JobListResponse.fromJson(FormattingUtil.decode(response.data));

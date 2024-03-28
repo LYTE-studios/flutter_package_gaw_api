@@ -74,6 +74,19 @@ class _$WasherUpdateRequestSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.dateOfBirth;
+    if (value != null) {
+      result
+        ..add('date_of_birth')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
+    value = object.company;
+    if (value != null) {
+      result
+        ..add('company')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     return result;
   }
 
@@ -117,6 +130,14 @@ class _$WasherUpdateRequestSerializer
           result.taxNumber = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'date_of_birth':
+          result.dateOfBirth = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int?;
+          break;
+        case 'company':
+          result.company = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
       }
     }
 
@@ -139,6 +160,10 @@ class _$WasherUpdateRequest extends WasherUpdateRequest {
   final Address? address;
   @override
   final String? taxNumber;
+  @override
+  final int? dateOfBirth;
+  @override
+  final String? company;
 
   factory _$WasherUpdateRequest(
           [void Function(WasherUpdateRequestBuilder)? updates]) =>
@@ -151,7 +176,9 @@ class _$WasherUpdateRequest extends WasherUpdateRequest {
       this.lastName,
       this.profilePictureUrl,
       this.address,
-      this.taxNumber})
+      this.taxNumber,
+      this.dateOfBirth,
+      this.company})
       : super._();
 
   @override
@@ -173,7 +200,9 @@ class _$WasherUpdateRequest extends WasherUpdateRequest {
         lastName == other.lastName &&
         profilePictureUrl == other.profilePictureUrl &&
         address == other.address &&
-        taxNumber == other.taxNumber;
+        taxNumber == other.taxNumber &&
+        dateOfBirth == other.dateOfBirth &&
+        company == other.company;
   }
 
   @override
@@ -186,6 +215,8 @@ class _$WasherUpdateRequest extends WasherUpdateRequest {
     _$hash = $jc(_$hash, profilePictureUrl.hashCode);
     _$hash = $jc(_$hash, address.hashCode);
     _$hash = $jc(_$hash, taxNumber.hashCode);
+    _$hash = $jc(_$hash, dateOfBirth.hashCode);
+    _$hash = $jc(_$hash, company.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -199,7 +230,9 @@ class _$WasherUpdateRequest extends WasherUpdateRequest {
           ..add('lastName', lastName)
           ..add('profilePictureUrl', profilePictureUrl)
           ..add('address', address)
-          ..add('taxNumber', taxNumber))
+          ..add('taxNumber', taxNumber)
+          ..add('dateOfBirth', dateOfBirth)
+          ..add('company', company))
         .toString();
   }
 }
@@ -237,6 +270,14 @@ class WasherUpdateRequestBuilder
   String? get taxNumber => _$this._taxNumber;
   set taxNumber(String? taxNumber) => _$this._taxNumber = taxNumber;
 
+  int? _dateOfBirth;
+  int? get dateOfBirth => _$this._dateOfBirth;
+  set dateOfBirth(int? dateOfBirth) => _$this._dateOfBirth = dateOfBirth;
+
+  String? _company;
+  String? get company => _$this._company;
+  set company(String? company) => _$this._company = company;
+
   WasherUpdateRequestBuilder();
 
   WasherUpdateRequestBuilder get _$this {
@@ -249,6 +290,8 @@ class WasherUpdateRequestBuilder
       _profilePictureUrl = $v.profilePictureUrl;
       _address = $v.address?.toBuilder();
       _taxNumber = $v.taxNumber;
+      _dateOfBirth = $v.dateOfBirth;
+      _company = $v.company;
       _$v = null;
     }
     return this;
@@ -279,7 +322,9 @@ class WasherUpdateRequestBuilder
               lastName: lastName,
               profilePictureUrl: profilePictureUrl,
               address: _address?.build(),
-              taxNumber: taxNumber);
+              taxNumber: taxNumber,
+              dateOfBirth: dateOfBirth,
+              company: company);
     } catch (_) {
       late String _$failedField;
       try {

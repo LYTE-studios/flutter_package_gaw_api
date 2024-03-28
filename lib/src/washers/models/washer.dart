@@ -49,6 +49,9 @@ abstract class Washer implements Built<Washer, WasherBuilder> {
   @BuiltValueField(wireName: 'created_at')
   int? get createdAt;
 
+  @BuiltValueField(wireName: 'date_of_birth')
+  int? get dateOfBirth;
+
   @BuiltValueField(wireName: 'hours')
   double? get hours;
 

@@ -91,6 +91,12 @@ class _$WasherSerializer implements StructuredSerializer<Washer> {
         ..add('created_at')
         ..add(serializers.serialize(value, specifiedType: const FullType(int)));
     }
+    value = object.dateOfBirth;
+    if (value != null) {
+      result
+        ..add('date_of_birth')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
     value = object.hours;
     if (value != null) {
       result
@@ -160,6 +166,10 @@ class _$WasherSerializer implements StructuredSerializer<Washer> {
           result.createdAt = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int?;
           break;
+        case 'date_of_birth':
+          result.dateOfBirth = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int?;
+          break;
         case 'hours':
           result.hours = serializers.deserialize(value,
               specifiedType: const FullType(double)) as double?;
@@ -197,6 +207,8 @@ class _$Washer extends Washer {
   @override
   final int? createdAt;
   @override
+  final int? dateOfBirth;
+  @override
   final double? hours;
 
   factory _$Washer([void Function(WasherBuilder)? updates]) =>
@@ -215,6 +227,7 @@ class _$Washer extends Washer {
       this.company,
       this.billingAddress,
       this.createdAt,
+      this.dateOfBirth,
       this.hours})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(firstName, r'Washer', 'firstName');
@@ -245,6 +258,7 @@ class _$Washer extends Washer {
         company == other.company &&
         billingAddress == other.billingAddress &&
         createdAt == other.createdAt &&
+        dateOfBirth == other.dateOfBirth &&
         hours == other.hours;
   }
 
@@ -263,6 +277,7 @@ class _$Washer extends Washer {
     _$hash = $jc(_$hash, company.hashCode);
     _$hash = $jc(_$hash, billingAddress.hashCode);
     _$hash = $jc(_$hash, createdAt.hashCode);
+    _$hash = $jc(_$hash, dateOfBirth.hashCode);
     _$hash = $jc(_$hash, hours.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -283,6 +298,7 @@ class _$Washer extends Washer {
           ..add('company', company)
           ..add('billingAddress', billingAddress)
           ..add('createdAt', createdAt)
+          ..add('dateOfBirth', dateOfBirth)
           ..add('hours', hours))
         .toString();
   }
@@ -342,6 +358,10 @@ class WasherBuilder implements Builder<Washer, WasherBuilder> {
   int? get createdAt => _$this._createdAt;
   set createdAt(int? createdAt) => _$this._createdAt = createdAt;
 
+  int? _dateOfBirth;
+  int? get dateOfBirth => _$this._dateOfBirth;
+  set dateOfBirth(int? dateOfBirth) => _$this._dateOfBirth = dateOfBirth;
+
   double? _hours;
   double? get hours => _$this._hours;
   set hours(double? hours) => _$this._hours = hours;
@@ -363,6 +383,7 @@ class WasherBuilder implements Builder<Washer, WasherBuilder> {
       _company = $v.company;
       _billingAddress = $v.billingAddress?.toBuilder();
       _createdAt = $v.createdAt;
+      _dateOfBirth = $v.dateOfBirth;
       _hours = $v.hours;
       _$v = null;
     }
@@ -403,6 +424,7 @@ class WasherBuilder implements Builder<Washer, WasherBuilder> {
               company: company,
               billingAddress: _billingAddress?.build(),
               createdAt: createdAt,
+              dateOfBirth: dateOfBirth,
               hours: hours);
     } catch (_) {
       late String _$failedField;

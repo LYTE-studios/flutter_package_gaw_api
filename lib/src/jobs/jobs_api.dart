@@ -314,6 +314,7 @@ class JobsApi {
           'job_id': request.jobId,
           'start_time': request.startTime,
           'end_time': request.endTime,
+          'break_time': request.breakTime,
           'washer_signature': washerSignature == null
               ? null
               : MultipartFile.fromBytes(

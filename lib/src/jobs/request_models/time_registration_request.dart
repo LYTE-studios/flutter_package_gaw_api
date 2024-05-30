@@ -26,6 +26,9 @@ abstract class TimeRegistrationRequest
   @BuiltValueField(wireName: 'end_time')
   int get endTime;
 
+  @BuiltValueField(wireName: 'break_time')
+  int get breakTime;
+
   @BuiltValueField(wireName: 'customer_signature')
   Uint8List? get customerSignature;
 

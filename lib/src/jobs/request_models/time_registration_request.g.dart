@@ -32,6 +32,9 @@ class _$TimeRegistrationRequestSerializer
           specifiedType: const FullType(int)),
       'end_time',
       serializers.serialize(object.endTime, specifiedType: const FullType(int)),
+      'break_time',
+      serializers.serialize(object.breakTime,
+          specifiedType: const FullType(int)),
     ];
     Object? value;
     value = object.customerSignature;
@@ -75,6 +78,10 @@ class _$TimeRegistrationRequestSerializer
           result.endTime = serializers.deserialize(value,
               specifiedType: const FullType(int))! as int;
           break;
+        case 'break_time':
+          result.breakTime = serializers.deserialize(value,
+              specifiedType: const FullType(int))! as int;
+          break;
         case 'customer_signature':
           result.customerSignature = serializers.deserialize(value,
               specifiedType: const FullType(Uint8List)) as Uint8List?;
@@ -98,6 +105,8 @@ class _$TimeRegistrationRequest extends TimeRegistrationRequest {
   @override
   final int endTime;
   @override
+  final int breakTime;
+  @override
   final Uint8List? customerSignature;
   @override
   final Uint8List? washerSignature;
@@ -110,6 +119,7 @@ class _$TimeRegistrationRequest extends TimeRegistrationRequest {
       {required this.jobId,
       required this.startTime,
       required this.endTime,
+      required this.breakTime,
       this.customerSignature,
       this.washerSignature})
       : super._() {
@@ -119,6 +129,8 @@ class _$TimeRegistrationRequest extends TimeRegistrationRequest {
         startTime, r'TimeRegistrationRequest', 'startTime');
     BuiltValueNullFieldError.checkNotNull(
         endTime, r'TimeRegistrationRequest', 'endTime');
+    BuiltValueNullFieldError.checkNotNull(
+        breakTime, r'TimeRegistrationRequest', 'breakTime');
   }
 
   @override
@@ -137,6 +149,7 @@ class _$TimeRegistrationRequest extends TimeRegistrationRequest {
         jobId == other.jobId &&
         startTime == other.startTime &&
         endTime == other.endTime &&
+        breakTime == other.breakTime &&
         customerSignature == other.customerSignature &&
         washerSignature == other.washerSignature;
   }
@@ -147,6 +160,7 @@ class _$TimeRegistrationRequest extends TimeRegistrationRequest {
     _$hash = $jc(_$hash, jobId.hashCode);
     _$hash = $jc(_$hash, startTime.hashCode);
     _$hash = $jc(_$hash, endTime.hashCode);
+    _$hash = $jc(_$hash, breakTime.hashCode);
     _$hash = $jc(_$hash, customerSignature.hashCode);
     _$hash = $jc(_$hash, washerSignature.hashCode);
     _$hash = $jf(_$hash);
@@ -159,6 +173,7 @@ class _$TimeRegistrationRequest extends TimeRegistrationRequest {
           ..add('jobId', jobId)
           ..add('startTime', startTime)
           ..add('endTime', endTime)
+          ..add('breakTime', breakTime)
           ..add('customerSignature', customerSignature)
           ..add('washerSignature', washerSignature))
         .toString();
@@ -182,6 +197,10 @@ class TimeRegistrationRequestBuilder
   int? get endTime => _$this._endTime;
   set endTime(int? endTime) => _$this._endTime = endTime;
 
+  int? _breakTime;
+  int? get breakTime => _$this._breakTime;
+  set breakTime(int? breakTime) => _$this._breakTime = breakTime;
+
   Uint8List? _customerSignature;
   Uint8List? get customerSignature => _$this._customerSignature;
   set customerSignature(Uint8List? customerSignature) =>
@@ -200,6 +219,7 @@ class TimeRegistrationRequestBuilder
       _jobId = $v.jobId;
       _startTime = $v.startTime;
       _endTime = $v.endTime;
+      _breakTime = $v.breakTime;
       _customerSignature = $v.customerSignature;
       _washerSignature = $v.washerSignature;
       _$v = null;
@@ -230,6 +250,8 @@ class TimeRegistrationRequestBuilder
                 startTime, r'TimeRegistrationRequest', 'startTime'),
             endTime: BuiltValueNullFieldError.checkNotNull(
                 endTime, r'TimeRegistrationRequest', 'endTime'),
+            breakTime: BuiltValueNullFieldError.checkNotNull(
+                breakTime, r'TimeRegistrationRequest', 'breakTime'),
             customerSignature: customerSignature,
             washerSignature: washerSignature);
     replace(_$result);

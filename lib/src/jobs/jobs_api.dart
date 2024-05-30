@@ -289,6 +289,20 @@ class JobsApi {
     throw DioException(requestOptions: RequestOptions(), response: response);
   }
 
+  static Future<void> removeApplication({
+    required String applicationId,
+  }) async {
+    Response response = await RequestFactory.executeDelete(
+      endpoint: '/applications/details/$applicationId',
+    );
+
+    if (response.statusCode == 200) {
+      return;
+    }
+
+    throw DioException(requestOptions: RequestOptions(), response: response);
+  }
+
   static Future<TimeRegistrationResponse?> createTimeRegistration({
     required TimeRegistrationRequest request,
     String? userId,

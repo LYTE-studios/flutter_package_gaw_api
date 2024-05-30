@@ -25,7 +25,7 @@ class RequestFactory {
       headers['Authorization'] = Configuration.accessToken!;
     }
 
-    return await call.call(Options(
+    Response response = await call.call(Options(
       headers: headers,
       validateStatus: (int? status) {
         if (status == 500) {
@@ -42,6 +42,8 @@ class RequestFactory {
       persistentConnection: true,
       contentType: isMultiform ? 'multipart/form-data' : null,
     ));
+
+    return response;
   }
 
   static Future<void> _authenticate() async {
@@ -139,6 +141,7 @@ class RequestFactory {
     required String endpoint,
     dynamic body,
     bool useToken = true,
+    bool isMultiform = false,
   }) async {
     return await _performCall(
       (Options options) {
@@ -149,6 +152,7 @@ class RequestFactory {
         );
       },
       authorize: useToken,
+      isMultiform: isMultiform,
     );
   }
 

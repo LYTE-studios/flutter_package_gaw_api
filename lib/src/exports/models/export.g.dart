@@ -23,6 +23,9 @@ class _$ExportSerializer implements StructuredSerializer<Export> {
       'file_url',
       serializers.serialize(object.fileUrl,
           specifiedType: const FullType(String)),
+      'file_name',
+      serializers.serialize(object.fileName,
+          specifiedType: const FullType(String)),
       'created_at',
       serializers.serialize(object.createdAt,
           specifiedType: const FullType(int)),
@@ -61,6 +64,10 @@ class _$ExportSerializer implements StructuredSerializer<Export> {
           result.fileUrl = serializers.deserialize(value,
               specifiedType: const FullType(String))! as String;
           break;
+        case 'file_name':
+          result.fileName = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
         case 'created_at':
           result.createdAt = serializers.deserialize(value,
               specifiedType: const FullType(int))! as int;
@@ -80,6 +87,8 @@ class _$Export extends Export {
   @override
   final String fileUrl;
   @override
+  final String fileName;
+  @override
   final int createdAt;
 
   factory _$Export([void Function(ExportBuilder)? updates]) =>
@@ -89,10 +98,12 @@ class _$Export extends Export {
       {required this.name,
       this.description,
       required this.fileUrl,
+      required this.fileName,
       required this.createdAt})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(name, r'Export', 'name');
     BuiltValueNullFieldError.checkNotNull(fileUrl, r'Export', 'fileUrl');
+    BuiltValueNullFieldError.checkNotNull(fileName, r'Export', 'fileName');
     BuiltValueNullFieldError.checkNotNull(createdAt, r'Export', 'createdAt');
   }
 
@@ -110,6 +121,7 @@ class _$Export extends Export {
         name == other.name &&
         description == other.description &&
         fileUrl == other.fileUrl &&
+        fileName == other.fileName &&
         createdAt == other.createdAt;
   }
 
@@ -119,6 +131,7 @@ class _$Export extends Export {
     _$hash = $jc(_$hash, name.hashCode);
     _$hash = $jc(_$hash, description.hashCode);
     _$hash = $jc(_$hash, fileUrl.hashCode);
+    _$hash = $jc(_$hash, fileName.hashCode);
     _$hash = $jc(_$hash, createdAt.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -130,6 +143,7 @@ class _$Export extends Export {
           ..add('name', name)
           ..add('description', description)
           ..add('fileUrl', fileUrl)
+          ..add('fileName', fileName)
           ..add('createdAt', createdAt))
         .toString();
   }
@@ -150,6 +164,10 @@ class ExportBuilder implements Builder<Export, ExportBuilder> {
   String? get fileUrl => _$this._fileUrl;
   set fileUrl(String? fileUrl) => _$this._fileUrl = fileUrl;
 
+  String? _fileName;
+  String? get fileName => _$this._fileName;
+  set fileName(String? fileName) => _$this._fileName = fileName;
+
   int? _createdAt;
   int? get createdAt => _$this._createdAt;
   set createdAt(int? createdAt) => _$this._createdAt = createdAt;
@@ -162,6 +180,7 @@ class ExportBuilder implements Builder<Export, ExportBuilder> {
       _name = $v.name;
       _description = $v.description;
       _fileUrl = $v.fileUrl;
+      _fileName = $v.fileName;
       _createdAt = $v.createdAt;
       _$v = null;
     }
@@ -190,6 +209,8 @@ class ExportBuilder implements Builder<Export, ExportBuilder> {
             description: description,
             fileUrl: BuiltValueNullFieldError.checkNotNull(
                 fileUrl, r'Export', 'fileUrl'),
+            fileName: BuiltValueNullFieldError.checkNotNull(
+                fileName, r'Export', 'fileName'),
             createdAt: BuiltValueNullFieldError.checkNotNull(
                 createdAt, r'Export', 'createdAt'));
     replace(_$result);

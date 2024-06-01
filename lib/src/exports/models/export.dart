@@ -23,6 +23,9 @@ abstract class Export implements Built<Export, ExportBuilder> {
   @BuiltValueField(wireName: 'file_url')
   String get fileUrl;
 
+  @BuiltValueField(wireName: 'file_name')
+  String get fileName;
+
   @BuiltValueField(wireName: 'created_at')
   int get createdAt;
 

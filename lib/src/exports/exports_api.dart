@@ -9,11 +9,16 @@ class ExportsApi {
   static Future<ExportsListResponse?> getExports({
     int? page,
     int? itemCount,
-    String? searchTerm,
     String? sortTerm,
     bool ascending = false,
   }) async {
-    String url = '/exports';
+    String url = FormattingUtil.formatUrlParameters(
+      '/exports',
+      page: page,
+      itemCount: itemCount,
+      sortTerm: sortTerm,
+      ascending: ascending,
+    );
 
     Response response = await RequestFactory.executeGet(
       endpoint: url,

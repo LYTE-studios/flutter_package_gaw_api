@@ -33,6 +33,18 @@ class _$ExportsListResponseSerializer
             specifiedType:
                 const FullType(BuiltList, const [const FullType(Export)])));
     }
+    value = object.itemsPerPage;
+    if (value != null) {
+      result
+        ..add('items_per_page')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
+    value = object.total;
+    if (value != null) {
+      result
+        ..add('total')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
     return result;
   }
 
@@ -54,6 +66,14 @@ class _$ExportsListResponseSerializer
                       BuiltList, const [const FullType(Export)]))!
               as BuiltList<Object?>);
           break;
+        case 'items_per_page':
+          result.itemsPerPage = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int?;
+          break;
+        case 'total':
+          result.total = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int?;
+          break;
       }
     }
 
@@ -64,12 +84,17 @@ class _$ExportsListResponseSerializer
 class _$ExportsListResponse extends ExportsListResponse {
   @override
   final BuiltList<Export>? exports;
+  @override
+  final int? itemsPerPage;
+  @override
+  final int? total;
 
   factory _$ExportsListResponse(
           [void Function(ExportsListResponseBuilder)? updates]) =>
       (new ExportsListResponseBuilder()..update(updates))._build();
 
-  _$ExportsListResponse._({this.exports}) : super._();
+  _$ExportsListResponse._({this.exports, this.itemsPerPage, this.total})
+      : super._();
 
   @override
   ExportsListResponse rebuild(
@@ -83,13 +108,18 @@ class _$ExportsListResponse extends ExportsListResponse {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is ExportsListResponse && exports == other.exports;
+    return other is ExportsListResponse &&
+        exports == other.exports &&
+        itemsPerPage == other.itemsPerPage &&
+        total == other.total;
   }
 
   @override
   int get hashCode {
     var _$hash = 0;
     _$hash = $jc(_$hash, exports.hashCode);
+    _$hash = $jc(_$hash, itemsPerPage.hashCode);
+    _$hash = $jc(_$hash, total.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -97,7 +127,9 @@ class _$ExportsListResponse extends ExportsListResponse {
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'ExportsListResponse')
-          ..add('exports', exports))
+          ..add('exports', exports)
+          ..add('itemsPerPage', itemsPerPage)
+          ..add('total', total))
         .toString();
   }
 }
@@ -111,12 +143,22 @@ class ExportsListResponseBuilder
       _$this._exports ??= new ListBuilder<Export>();
   set exports(ListBuilder<Export>? exports) => _$this._exports = exports;
 
+  int? _itemsPerPage;
+  int? get itemsPerPage => _$this._itemsPerPage;
+  set itemsPerPage(int? itemsPerPage) => _$this._itemsPerPage = itemsPerPage;
+
+  int? _total;
+  int? get total => _$this._total;
+  set total(int? total) => _$this._total = total;
+
   ExportsListResponseBuilder();
 
   ExportsListResponseBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _exports = $v.exports?.toBuilder();
+      _itemsPerPage = $v.itemsPerPage;
+      _total = $v.total;
       _$v = null;
     }
     return this;
@@ -139,7 +181,11 @@ class ExportsListResponseBuilder
   _$ExportsListResponse _build() {
     _$ExportsListResponse _$result;
     try {
-      _$result = _$v ?? new _$ExportsListResponse._(exports: _exports?.build());
+      _$result = _$v ??
+          new _$ExportsListResponse._(
+              exports: _exports?.build(),
+              itemsPerPage: itemsPerPage,
+              total: total);
     } catch (_) {
       late String _$failedField;
       try {

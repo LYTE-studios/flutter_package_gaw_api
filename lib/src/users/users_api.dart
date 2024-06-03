@@ -115,7 +115,8 @@ class UsersApi {
   }
 
   static Future<Uint8List?> fetchProfilePicture(
-      String profilePictureUrl) async {
+    String profilePictureUrl,
+  ) async {
     var dio = Dio();
     final response = await dio.get(
       Configuration.apiUrl + profilePictureUrl,

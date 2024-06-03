@@ -20,6 +20,8 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(CustomerListResponse.serializer)
       ..add(DailyStatistics.serializer)
       ..add(EmailRequest.serializer)
+      ..add(Export.serializer)
+      ..add(ExportsListResponse.serializer)
       ..add(GeneralStatistics.serializer)
       ..add(HelloThereResponse.serializer)
       ..add(IdResponse.serializer)
@@ -66,6 +68,9 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(Customer)]),
           () => new ListBuilder<Customer>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(Export)]),
+          () => new ListBuilder<Export>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(Job)]),
           () => new ListBuilder<Job>())

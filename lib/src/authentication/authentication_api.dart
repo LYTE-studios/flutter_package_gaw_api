@@ -4,18 +4,18 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:gaw_api/gaw_api.dart';
-import 'package:gaw_api/src/authentication/request_models/settings/session_expiry_request.dart';
-import 'package:gaw_api/src/authentication/response_models/session_expiry_response.dart';
 import 'package:gaw_api/src/core/utils/request_factory.dart';
 
 export 'request_models/password/code_verification_request.dart';
 export 'request_models/password/email_request.dart';
 export 'request_models/password/password_reset_request.dart';
+export 'request_models/settings/session_expiry_request.dart';
 export 'request_models/sign_in/login_request.dart';
 export 'request_models/sign_in/refresh_request.dart';
 export 'request_models/sign_in/register_request.dart';
 export 'response_models/jwt_response.dart';
 export 'response_models/pass_token_response.dart';
+export 'response_models/session_expiry_response.dart';
 
 class AuthenticationApi {
   static Future<bool> testConnection() async {

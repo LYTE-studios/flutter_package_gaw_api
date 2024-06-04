@@ -32,6 +32,20 @@ class _$RegisterRequestSerializer
       'password',
       serializers.serialize(object.password,
           specifiedType: const FullType(String)),
+      'phone_number',
+      serializers.serialize(object.phoneNumber,
+          specifiedType: const FullType(String)),
+      'tax_number',
+      serializers.serialize(object.taxNumber,
+          specifiedType: const FullType(String)),
+      'place_of_birth',
+      serializers.serialize(object.placeOfBirth,
+          specifiedType: const FullType(String)),
+      'date_of_birth',
+      serializers.serialize(object.dateOfBirth,
+          specifiedType: const FullType(int)),
+      'company',
+      serializers.serialize(object.ssn, specifiedType: const FullType(String)),
     ];
 
     return result;
@@ -65,6 +79,26 @@ class _$RegisterRequestSerializer
           result.password = serializers.deserialize(value,
               specifiedType: const FullType(String))! as String;
           break;
+        case 'phone_number':
+          result.phoneNumber = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'tax_number':
+          result.taxNumber = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'place_of_birth':
+          result.placeOfBirth = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'date_of_birth':
+          result.dateOfBirth = serializers.deserialize(value,
+              specifiedType: const FullType(int))! as int;
+          break;
+        case 'company':
+          result.ssn = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
       }
     }
 
@@ -81,6 +115,16 @@ class _$RegisterRequest extends RegisterRequest {
   final String email;
   @override
   final String password;
+  @override
+  final String phoneNumber;
+  @override
+  final String taxNumber;
+  @override
+  final String placeOfBirth;
+  @override
+  final int dateOfBirth;
+  @override
+  final String ssn;
 
   factory _$RegisterRequest([void Function(RegisterRequestBuilder)? updates]) =>
       (new RegisterRequestBuilder()..update(updates))._build();
@@ -89,7 +133,12 @@ class _$RegisterRequest extends RegisterRequest {
       {required this.firstName,
       required this.lastName,
       required this.email,
-      required this.password})
+      required this.password,
+      required this.phoneNumber,
+      required this.taxNumber,
+      required this.placeOfBirth,
+      required this.dateOfBirth,
+      required this.ssn})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         firstName, r'RegisterRequest', 'firstName');
@@ -98,6 +147,15 @@ class _$RegisterRequest extends RegisterRequest {
     BuiltValueNullFieldError.checkNotNull(email, r'RegisterRequest', 'email');
     BuiltValueNullFieldError.checkNotNull(
         password, r'RegisterRequest', 'password');
+    BuiltValueNullFieldError.checkNotNull(
+        phoneNumber, r'RegisterRequest', 'phoneNumber');
+    BuiltValueNullFieldError.checkNotNull(
+        taxNumber, r'RegisterRequest', 'taxNumber');
+    BuiltValueNullFieldError.checkNotNull(
+        placeOfBirth, r'RegisterRequest', 'placeOfBirth');
+    BuiltValueNullFieldError.checkNotNull(
+        dateOfBirth, r'RegisterRequest', 'dateOfBirth');
+    BuiltValueNullFieldError.checkNotNull(ssn, r'RegisterRequest', 'ssn');
   }
 
   @override
@@ -115,7 +173,12 @@ class _$RegisterRequest extends RegisterRequest {
         firstName == other.firstName &&
         lastName == other.lastName &&
         email == other.email &&
-        password == other.password;
+        password == other.password &&
+        phoneNumber == other.phoneNumber &&
+        taxNumber == other.taxNumber &&
+        placeOfBirth == other.placeOfBirth &&
+        dateOfBirth == other.dateOfBirth &&
+        ssn == other.ssn;
   }
 
   @override
@@ -125,6 +188,11 @@ class _$RegisterRequest extends RegisterRequest {
     _$hash = $jc(_$hash, lastName.hashCode);
     _$hash = $jc(_$hash, email.hashCode);
     _$hash = $jc(_$hash, password.hashCode);
+    _$hash = $jc(_$hash, phoneNumber.hashCode);
+    _$hash = $jc(_$hash, taxNumber.hashCode);
+    _$hash = $jc(_$hash, placeOfBirth.hashCode);
+    _$hash = $jc(_$hash, dateOfBirth.hashCode);
+    _$hash = $jc(_$hash, ssn.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -135,7 +203,12 @@ class _$RegisterRequest extends RegisterRequest {
           ..add('firstName', firstName)
           ..add('lastName', lastName)
           ..add('email', email)
-          ..add('password', password))
+          ..add('password', password)
+          ..add('phoneNumber', phoneNumber)
+          ..add('taxNumber', taxNumber)
+          ..add('placeOfBirth', placeOfBirth)
+          ..add('dateOfBirth', dateOfBirth)
+          ..add('ssn', ssn))
         .toString();
   }
 }
@@ -160,6 +233,26 @@ class RegisterRequestBuilder
   String? get password => _$this._password;
   set password(String? password) => _$this._password = password;
 
+  String? _phoneNumber;
+  String? get phoneNumber => _$this._phoneNumber;
+  set phoneNumber(String? phoneNumber) => _$this._phoneNumber = phoneNumber;
+
+  String? _taxNumber;
+  String? get taxNumber => _$this._taxNumber;
+  set taxNumber(String? taxNumber) => _$this._taxNumber = taxNumber;
+
+  String? _placeOfBirth;
+  String? get placeOfBirth => _$this._placeOfBirth;
+  set placeOfBirth(String? placeOfBirth) => _$this._placeOfBirth = placeOfBirth;
+
+  int? _dateOfBirth;
+  int? get dateOfBirth => _$this._dateOfBirth;
+  set dateOfBirth(int? dateOfBirth) => _$this._dateOfBirth = dateOfBirth;
+
+  String? _ssn;
+  String? get ssn => _$this._ssn;
+  set ssn(String? ssn) => _$this._ssn = ssn;
+
   RegisterRequestBuilder();
 
   RegisterRequestBuilder get _$this {
@@ -169,6 +262,11 @@ class RegisterRequestBuilder
       _lastName = $v.lastName;
       _email = $v.email;
       _password = $v.password;
+      _phoneNumber = $v.phoneNumber;
+      _taxNumber = $v.taxNumber;
+      _placeOfBirth = $v.placeOfBirth;
+      _dateOfBirth = $v.dateOfBirth;
+      _ssn = $v.ssn;
       _$v = null;
     }
     return this;
@@ -198,7 +296,17 @@ class RegisterRequestBuilder
             email: BuiltValueNullFieldError.checkNotNull(
                 email, r'RegisterRequest', 'email'),
             password: BuiltValueNullFieldError.checkNotNull(
-                password, r'RegisterRequest', 'password'));
+                password, r'RegisterRequest', 'password'),
+            phoneNumber: BuiltValueNullFieldError.checkNotNull(
+                phoneNumber, r'RegisterRequest', 'phoneNumber'),
+            taxNumber: BuiltValueNullFieldError.checkNotNull(
+                taxNumber, r'RegisterRequest', 'taxNumber'),
+            placeOfBirth: BuiltValueNullFieldError.checkNotNull(
+                placeOfBirth, r'RegisterRequest', 'placeOfBirth'),
+            dateOfBirth: BuiltValueNullFieldError.checkNotNull(
+                dateOfBirth, r'RegisterRequest', 'dateOfBirth'),
+            ssn: BuiltValueNullFieldError.checkNotNull(
+                ssn, r'RegisterRequest', 'ssn'));
     replace(_$result);
     return _$result;
   }

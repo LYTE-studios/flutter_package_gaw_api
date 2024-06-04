@@ -27,6 +27,21 @@ abstract class RegisterRequest
   @BuiltValueField(wireName: 'password')
   String get password;
 
+  @BuiltValueField(wireName: 'phone_number')
+  String get phoneNumber;
+
+  @BuiltValueField(wireName: 'tax_number')
+  String get taxNumber;
+
+  @BuiltValueField(wireName: 'place_of_birth')
+  String get placeOfBirth;
+
+  @BuiltValueField(wireName: 'date_of_birth')
+  int get dateOfBirth;
+
+  @BuiltValueField(wireName: 'company')
+  String get ssn;
+
   String toJson() {
     return json.encode(
       serializers.serializeWith(RegisterRequest.serializer, this),

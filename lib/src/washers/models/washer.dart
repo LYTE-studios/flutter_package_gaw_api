@@ -55,6 +55,9 @@ abstract class Washer implements Built<Washer, WasherBuilder> {
   @BuiltValueField(wireName: 'hours')
   double? get hours;
 
+  @BuiltValueField(wireName: 'place_of_birth')
+  String? get placeOfBirth;
+
   String toJson() {
     return json.encode(
       serializers.serializeWith(Washer.serializer, this),

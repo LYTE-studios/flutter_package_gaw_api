@@ -31,7 +31,14 @@ class _$ApplyForJobRequestSerializer
       serializers.serialize(object.noTravelCosts,
           specifiedType: const FullType(bool)),
     ];
-
+    Object? value;
+    value = object.note;
+    if (value != null) {
+      result
+        ..add('note')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     return result;
   }
 
@@ -59,6 +66,10 @@ class _$ApplyForJobRequestSerializer
           result.noTravelCosts = serializers.deserialize(value,
               specifiedType: const FullType(bool))! as bool;
           break;
+        case 'note':
+          result.note = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
       }
     }
 
@@ -73,13 +84,18 @@ class _$ApplyForJobRequest extends ApplyForJobRequest {
   final Address address;
   @override
   final bool noTravelCosts;
+  @override
+  final String? note;
 
   factory _$ApplyForJobRequest(
           [void Function(ApplyForJobRequestBuilder)? updates]) =>
       (new ApplyForJobRequestBuilder()..update(updates))._build();
 
   _$ApplyForJobRequest._(
-      {required this.jobId, required this.address, required this.noTravelCosts})
+      {required this.jobId,
+      required this.address,
+      required this.noTravelCosts,
+      this.note})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         jobId, r'ApplyForJobRequest', 'jobId');
@@ -104,7 +120,8 @@ class _$ApplyForJobRequest extends ApplyForJobRequest {
     return other is ApplyForJobRequest &&
         jobId == other.jobId &&
         address == other.address &&
-        noTravelCosts == other.noTravelCosts;
+        noTravelCosts == other.noTravelCosts &&
+        note == other.note;
   }
 
   @override
@@ -113,6 +130,7 @@ class _$ApplyForJobRequest extends ApplyForJobRequest {
     _$hash = $jc(_$hash, jobId.hashCode);
     _$hash = $jc(_$hash, address.hashCode);
     _$hash = $jc(_$hash, noTravelCosts.hashCode);
+    _$hash = $jc(_$hash, note.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -122,7 +140,8 @@ class _$ApplyForJobRequest extends ApplyForJobRequest {
     return (newBuiltValueToStringHelper(r'ApplyForJobRequest')
           ..add('jobId', jobId)
           ..add('address', address)
-          ..add('noTravelCosts', noTravelCosts))
+          ..add('noTravelCosts', noTravelCosts)
+          ..add('note', note))
         .toString();
   }
 }
@@ -144,6 +163,10 @@ class ApplyForJobRequestBuilder
   set noTravelCosts(bool? noTravelCosts) =>
       _$this._noTravelCosts = noTravelCosts;
 
+  String? _note;
+  String? get note => _$this._note;
+  set note(String? note) => _$this._note = note;
+
   ApplyForJobRequestBuilder();
 
   ApplyForJobRequestBuilder get _$this {
@@ -152,6 +175,7 @@ class ApplyForJobRequestBuilder
       _jobId = $v.jobId;
       _address = $v.address.toBuilder();
       _noTravelCosts = $v.noTravelCosts;
+      _note = $v.note;
       _$v = null;
     }
     return this;
@@ -180,7 +204,8 @@ class ApplyForJobRequestBuilder
                   jobId, r'ApplyForJobRequest', 'jobId'),
               address: address.build(),
               noTravelCosts: BuiltValueNullFieldError.checkNotNull(
-                  noTravelCosts, r'ApplyForJobRequest', 'noTravelCosts'));
+                  noTravelCosts, r'ApplyForJobRequest', 'noTravelCosts'),
+              note: note);
     } catch (_) {
       late String _$failedField;
       try {

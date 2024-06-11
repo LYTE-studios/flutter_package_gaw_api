@@ -39,6 +39,9 @@ abstract class JobApplication
   @BuiltValueField(wireName: 'created_at')
   int? get createdAt;
 
+  @BuiltValueField(wireName: 'note')
+  String? get note;
+
   String toJson() {
     return json.encode(
       serializers.serializeWith(JobApplication.serializer, this),

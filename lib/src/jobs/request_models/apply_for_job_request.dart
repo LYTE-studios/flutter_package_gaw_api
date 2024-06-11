@@ -24,6 +24,9 @@ abstract class ApplyForJobRequest
   @BuiltValueField(wireName: 'no_travel_costs')
   bool get noTravelCosts;
 
+  @BuiltValueField(wireName: 'note')
+  String? get note;
+
   String toJson() {
     return json.encode(
       serializers.serializeWith(ApplyForJobRequest.serializer, this),

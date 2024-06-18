@@ -78,11 +78,7 @@ abstract class Customer implements Built<Customer, CustomerBuilder> {
   }
 
   String getInitials() {
-    if (initials?.isEmpty ?? true) {
-      return '${firstName ?? ''} \n${lastName ?? ''}';
-    }
-
-    return initials ?? '';
+    return '${firstName ?? ''} \n${lastName ?? ''}';
   }
 
   static Customer? fromJson(Map<String, dynamic> data) {

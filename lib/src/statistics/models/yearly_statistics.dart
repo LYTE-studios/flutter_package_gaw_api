@@ -58,7 +58,7 @@ abstract class YearlyStatistics
     for (var i = 0; i < months.length; i++) {
       total += months.values.elementAt(i).averageHours;
     }
-    return (total / 12).roundToDouble();
+    return total.roundToDouble();
   }
 
   String toJson() {

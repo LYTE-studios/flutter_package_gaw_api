@@ -25,8 +25,11 @@ abstract class NotificationsRequest
   @BuiltValueField(wireName: 'user_id')
   String? get userId;
 
-  @BuiltValueField(wireName: 'is_global')
-  bool get isGlobal;
+  @BuiltValueField(wireName: 'send_notification')
+  bool get sendNotification;
+
+  @BuiltValueField(wireName: 'send_push')
+  bool get sendPush;
 
   @BuiltValueField(wireName: 'send_mail')
   bool get sendMail;

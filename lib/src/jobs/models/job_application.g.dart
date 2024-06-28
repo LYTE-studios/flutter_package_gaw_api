@@ -63,6 +63,13 @@ class _$JobApplicationSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.contract;
+    if (value != null) {
+      result
+        ..add('contract')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     return result;
   }
 
@@ -115,6 +122,10 @@ class _$JobApplicationSerializer
           result.note = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'contract':
+          result.contract = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
       }
     }
 
@@ -141,6 +152,8 @@ class _$JobApplication extends JobApplication {
   final int? createdAt;
   @override
   final String? note;
+  @override
+  final String? contract;
 
   factory _$JobApplication([void Function(JobApplicationBuilder)? updates]) =>
       (new JobApplicationBuilder()..update(updates))._build();
@@ -154,7 +167,8 @@ class _$JobApplication extends JobApplication {
       this.distance,
       required this.noTravelCosts,
       this.createdAt,
-      this.note})
+      this.note,
+      this.contract})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(washer, r'JobApplication', 'washer');
     BuiltValueNullFieldError.checkNotNull(job, r'JobApplication', 'job');
@@ -185,7 +199,8 @@ class _$JobApplication extends JobApplication {
         distance == other.distance &&
         noTravelCosts == other.noTravelCosts &&
         createdAt == other.createdAt &&
-        note == other.note;
+        note == other.note &&
+        contract == other.contract;
   }
 
   @override
@@ -200,6 +215,7 @@ class _$JobApplication extends JobApplication {
     _$hash = $jc(_$hash, noTravelCosts.hashCode);
     _$hash = $jc(_$hash, createdAt.hashCode);
     _$hash = $jc(_$hash, note.hashCode);
+    _$hash = $jc(_$hash, contract.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -215,7 +231,8 @@ class _$JobApplication extends JobApplication {
           ..add('distance', distance)
           ..add('noTravelCosts', noTravelCosts)
           ..add('createdAt', createdAt)
-          ..add('note', note))
+          ..add('note', note)
+          ..add('contract', contract))
         .toString();
   }
 }
@@ -261,6 +278,10 @@ class JobApplicationBuilder
   String? get note => _$this._note;
   set note(String? note) => _$this._note = note;
 
+  String? _contract;
+  String? get contract => _$this._contract;
+  set contract(String? contract) => _$this._contract = contract;
+
   JobApplicationBuilder();
 
   JobApplicationBuilder get _$this {
@@ -275,6 +296,7 @@ class JobApplicationBuilder
       _noTravelCosts = $v.noTravelCosts;
       _createdAt = $v.createdAt;
       _note = $v.note;
+      _contract = $v.contract;
       _$v = null;
     }
     return this;
@@ -309,7 +331,8 @@ class JobApplicationBuilder
               noTravelCosts: BuiltValueNullFieldError.checkNotNull(
                   noTravelCosts, r'JobApplication', 'noTravelCosts'),
               createdAt: createdAt,
-              note: note);
+              note: note,
+              contract: contract);
     } catch (_) {
       late String _$failedField;
       try {

@@ -30,8 +30,11 @@ class _$NotificationsRequestSerializer
       'description',
       serializers.serialize(object.description,
           specifiedType: const FullType(String)),
-      'is_global',
-      serializers.serialize(object.isGlobal,
+      'send_notification',
+      serializers.serialize(object.sendNotification,
+          specifiedType: const FullType(bool)),
+      'send_push',
+      serializers.serialize(object.sendPush,
           specifiedType: const FullType(bool)),
       'send_mail',
       serializers.serialize(object.sendMail,
@@ -79,8 +82,12 @@ class _$NotificationsRequestSerializer
           result.userId = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'is_global':
-          result.isGlobal = serializers.deserialize(value,
+        case 'send_notification':
+          result.sendNotification = serializers.deserialize(value,
+              specifiedType: const FullType(bool))! as bool;
+          break;
+        case 'send_push':
+          result.sendPush = serializers.deserialize(value,
               specifiedType: const FullType(bool))! as bool;
           break;
         case 'send_mail':
@@ -106,7 +113,9 @@ class _$NotificationsRequest extends NotificationsRequest {
   @override
   final String? userId;
   @override
-  final bool isGlobal;
+  final bool sendNotification;
+  @override
+  final bool sendPush;
   @override
   final bool sendMail;
   @override
@@ -120,7 +129,8 @@ class _$NotificationsRequest extends NotificationsRequest {
       {required this.title,
       required this.description,
       this.userId,
-      required this.isGlobal,
+      required this.sendNotification,
+      required this.sendPush,
       required this.sendMail,
       this.language})
       : super._() {
@@ -129,7 +139,9 @@ class _$NotificationsRequest extends NotificationsRequest {
     BuiltValueNullFieldError.checkNotNull(
         description, r'NotificationsRequest', 'description');
     BuiltValueNullFieldError.checkNotNull(
-        isGlobal, r'NotificationsRequest', 'isGlobal');
+        sendNotification, r'NotificationsRequest', 'sendNotification');
+    BuiltValueNullFieldError.checkNotNull(
+        sendPush, r'NotificationsRequest', 'sendPush');
     BuiltValueNullFieldError.checkNotNull(
         sendMail, r'NotificationsRequest', 'sendMail');
   }
@@ -150,7 +162,8 @@ class _$NotificationsRequest extends NotificationsRequest {
         title == other.title &&
         description == other.description &&
         userId == other.userId &&
-        isGlobal == other.isGlobal &&
+        sendNotification == other.sendNotification &&
+        sendPush == other.sendPush &&
         sendMail == other.sendMail &&
         language == other.language;
   }
@@ -161,7 +174,8 @@ class _$NotificationsRequest extends NotificationsRequest {
     _$hash = $jc(_$hash, title.hashCode);
     _$hash = $jc(_$hash, description.hashCode);
     _$hash = $jc(_$hash, userId.hashCode);
-    _$hash = $jc(_$hash, isGlobal.hashCode);
+    _$hash = $jc(_$hash, sendNotification.hashCode);
+    _$hash = $jc(_$hash, sendPush.hashCode);
     _$hash = $jc(_$hash, sendMail.hashCode);
     _$hash = $jc(_$hash, language.hashCode);
     _$hash = $jf(_$hash);
@@ -174,7 +188,8 @@ class _$NotificationsRequest extends NotificationsRequest {
           ..add('title', title)
           ..add('description', description)
           ..add('userId', userId)
-          ..add('isGlobal', isGlobal)
+          ..add('sendNotification', sendNotification)
+          ..add('sendPush', sendPush)
           ..add('sendMail', sendMail)
           ..add('language', language))
         .toString();
@@ -197,9 +212,14 @@ class NotificationsRequestBuilder
   String? get userId => _$this._userId;
   set userId(String? userId) => _$this._userId = userId;
 
-  bool? _isGlobal;
-  bool? get isGlobal => _$this._isGlobal;
-  set isGlobal(bool? isGlobal) => _$this._isGlobal = isGlobal;
+  bool? _sendNotification;
+  bool? get sendNotification => _$this._sendNotification;
+  set sendNotification(bool? sendNotification) =>
+      _$this._sendNotification = sendNotification;
+
+  bool? _sendPush;
+  bool? get sendPush => _$this._sendPush;
+  set sendPush(bool? sendPush) => _$this._sendPush = sendPush;
 
   bool? _sendMail;
   bool? get sendMail => _$this._sendMail;
@@ -217,7 +237,8 @@ class NotificationsRequestBuilder
       _title = $v.title;
       _description = $v.description;
       _userId = $v.userId;
-      _isGlobal = $v.isGlobal;
+      _sendNotification = $v.sendNotification;
+      _sendPush = $v.sendPush;
       _sendMail = $v.sendMail;
       _language = $v.language;
       _$v = null;
@@ -247,8 +268,10 @@ class NotificationsRequestBuilder
             description: BuiltValueNullFieldError.checkNotNull(
                 description, r'NotificationsRequest', 'description'),
             userId: userId,
-            isGlobal: BuiltValueNullFieldError.checkNotNull(
-                isGlobal, r'NotificationsRequest', 'isGlobal'),
+            sendNotification: BuiltValueNullFieldError.checkNotNull(
+                sendNotification, r'NotificationsRequest', 'sendNotification'),
+            sendPush: BuiltValueNullFieldError.checkNotNull(
+                sendPush, r'NotificationsRequest', 'sendPush'),
             sendMail: BuiltValueNullFieldError.checkNotNull(
                 sendMail, r'NotificationsRequest', 'sendMail'),
             language: language);

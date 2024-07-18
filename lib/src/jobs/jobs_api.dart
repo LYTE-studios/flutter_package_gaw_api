@@ -184,6 +184,38 @@ class JobsApi {
     throw DioException(requestOptions: RequestOptions(), response: response);
   }
 
+  static Future<JobListResponse?> getHistoryForCustomer(
+    String customerId, {
+    required int page,
+    required int itemCount,
+  }) async {
+    Response response = await RequestFactory.executeGet(
+      endpoint: '/history/customers/$customerId/$itemCount/$page',
+    );
+    if (response.statusCode == 200) {
+      return JobListResponse.fromJson(FormattingUtil.decode(response.data));
+    }
+
+    throw DioException(requestOptions: RequestOptions(), response: response);
+  }
+
+  static Future<ApplicationListResponse?> getHistoryForWasher(
+    String washerId, {
+    required int page,
+    required int itemCount,
+  }) async {
+    Response response = await RequestFactory.executeGet(
+      endpoint: '/history/washers/$washerId/$itemCount/$page',
+    );
+    if (response.statusCode == 200) {
+      return ApplicationListResponse.fromJson(
+        FormattingUtil.decode(response.data),
+      );
+    }
+
+    throw DioException(requestOptions: RequestOptions(), response: response);
+  }
+
   static Future<ApplicationListResponse?> getApplications(
       {String? jobId}) async {
     String url = '/applications';

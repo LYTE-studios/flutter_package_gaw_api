@@ -57,6 +57,12 @@ class _$TimeRegistrationSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.breakTime;
+    if (value != null) {
+      result
+        ..add('break_time')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
     return result;
   }
 
@@ -96,6 +102,10 @@ class _$TimeRegistrationSerializer
           result.customerSignatureUrl = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'break_time':
+          result.breakTime = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int?;
+          break;
       }
     }
 
@@ -116,6 +126,8 @@ class _$TimeRegistration extends TimeRegistration {
   final String? washerSignatureUrl;
   @override
   final String? customerSignatureUrl;
+  @override
+  final int? breakTime;
 
   factory _$TimeRegistration(
           [void Function(TimeRegistrationBuilder)? updates]) =>
@@ -127,7 +139,8 @@ class _$TimeRegistration extends TimeRegistration {
       this.endTime,
       this.washer,
       this.washerSignatureUrl,
-      this.customerSignatureUrl})
+      this.customerSignatureUrl,
+      this.breakTime})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(id, r'TimeRegistration', 'id');
   }
@@ -149,7 +162,8 @@ class _$TimeRegistration extends TimeRegistration {
         endTime == other.endTime &&
         washer == other.washer &&
         washerSignatureUrl == other.washerSignatureUrl &&
-        customerSignatureUrl == other.customerSignatureUrl;
+        customerSignatureUrl == other.customerSignatureUrl &&
+        breakTime == other.breakTime;
   }
 
   @override
@@ -161,6 +175,7 @@ class _$TimeRegistration extends TimeRegistration {
     _$hash = $jc(_$hash, washer.hashCode);
     _$hash = $jc(_$hash, washerSignatureUrl.hashCode);
     _$hash = $jc(_$hash, customerSignatureUrl.hashCode);
+    _$hash = $jc(_$hash, breakTime.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -173,7 +188,8 @@ class _$TimeRegistration extends TimeRegistration {
           ..add('endTime', endTime)
           ..add('washer', washer)
           ..add('washerSignatureUrl', washerSignatureUrl)
-          ..add('customerSignatureUrl', customerSignatureUrl))
+          ..add('customerSignatureUrl', customerSignatureUrl)
+          ..add('breakTime', breakTime))
         .toString();
   }
 }
@@ -208,6 +224,10 @@ class TimeRegistrationBuilder
   set customerSignatureUrl(String? customerSignatureUrl) =>
       _$this._customerSignatureUrl = customerSignatureUrl;
 
+  int? _breakTime;
+  int? get breakTime => _$this._breakTime;
+  set breakTime(int? breakTime) => _$this._breakTime = breakTime;
+
   TimeRegistrationBuilder();
 
   TimeRegistrationBuilder get _$this {
@@ -219,6 +239,7 @@ class TimeRegistrationBuilder
       _washer = $v.washer?.toBuilder();
       _washerSignatureUrl = $v.washerSignatureUrl;
       _customerSignatureUrl = $v.customerSignatureUrl;
+      _breakTime = $v.breakTime;
       _$v = null;
     }
     return this;
@@ -249,7 +270,8 @@ class TimeRegistrationBuilder
               endTime: endTime,
               washer: _washer?.build(),
               washerSignatureUrl: washerSignatureUrl,
-              customerSignatureUrl: customerSignatureUrl);
+              customerSignatureUrl: customerSignatureUrl,
+              breakTime: breakTime);
     } catch (_) {
       late String _$failedField;
       try {

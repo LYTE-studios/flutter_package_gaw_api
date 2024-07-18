@@ -23,12 +23,15 @@ class _$TimeRegistrationResponseSerializer
   Iterable<Object?> serialize(
       Serializers serializers, TimeRegistrationResponse object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object?>[
-      'job_id',
-      serializers.serialize(object.jobId,
-          specifiedType: const FullType(String)),
-    ];
-
+    final result = <Object?>[];
+    Object? value;
+    value = object.timeRegistration;
+    if (value != null) {
+      result
+        ..add('time_registration')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(TimeRegistration)));
+    }
     return result;
   }
 
@@ -44,9 +47,10 @@ class _$TimeRegistrationResponseSerializer
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
-        case 'job_id':
-          result.jobId = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+        case 'time_registration':
+          result.timeRegistration.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(TimeRegistration))!
+              as TimeRegistration);
           break;
       }
     }
@@ -57,16 +61,13 @@ class _$TimeRegistrationResponseSerializer
 
 class _$TimeRegistrationResponse extends TimeRegistrationResponse {
   @override
-  final String jobId;
+  final TimeRegistration? timeRegistration;
 
   factory _$TimeRegistrationResponse(
           [void Function(TimeRegistrationResponseBuilder)? updates]) =>
       (new TimeRegistrationResponseBuilder()..update(updates))._build();
 
-  _$TimeRegistrationResponse._({required this.jobId}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        jobId, r'TimeRegistrationResponse', 'jobId');
-  }
+  _$TimeRegistrationResponse._({this.timeRegistration}) : super._();
 
   @override
   TimeRegistrationResponse rebuild(
@@ -80,13 +81,14 @@ class _$TimeRegistrationResponse extends TimeRegistrationResponse {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is TimeRegistrationResponse && jobId == other.jobId;
+    return other is TimeRegistrationResponse &&
+        timeRegistration == other.timeRegistration;
   }
 
   @override
   int get hashCode {
     var _$hash = 0;
-    _$hash = $jc(_$hash, jobId.hashCode);
+    _$hash = $jc(_$hash, timeRegistration.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -94,7 +96,7 @@ class _$TimeRegistrationResponse extends TimeRegistrationResponse {
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'TimeRegistrationResponse')
-          ..add('jobId', jobId))
+          ..add('timeRegistration', timeRegistration))
         .toString();
   }
 }
@@ -104,16 +106,18 @@ class TimeRegistrationResponseBuilder
         Builder<TimeRegistrationResponse, TimeRegistrationResponseBuilder> {
   _$TimeRegistrationResponse? _$v;
 
-  String? _jobId;
-  String? get jobId => _$this._jobId;
-  set jobId(String? jobId) => _$this._jobId = jobId;
+  TimeRegistrationBuilder? _timeRegistration;
+  TimeRegistrationBuilder get timeRegistration =>
+      _$this._timeRegistration ??= new TimeRegistrationBuilder();
+  set timeRegistration(TimeRegistrationBuilder? timeRegistration) =>
+      _$this._timeRegistration = timeRegistration;
 
   TimeRegistrationResponseBuilder();
 
   TimeRegistrationResponseBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _jobId = $v.jobId;
+      _timeRegistration = $v.timeRegistration?.toBuilder();
       _$v = null;
     }
     return this;
@@ -134,10 +138,22 @@ class TimeRegistrationResponseBuilder
   TimeRegistrationResponse build() => _build();
 
   _$TimeRegistrationResponse _build() {
-    final _$result = _$v ??
-        new _$TimeRegistrationResponse._(
-            jobId: BuiltValueNullFieldError.checkNotNull(
-                jobId, r'TimeRegistrationResponse', 'jobId'));
+    _$TimeRegistrationResponse _$result;
+    try {
+      _$result = _$v ??
+          new _$TimeRegistrationResponse._(
+              timeRegistration: _timeRegistration?.build());
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'timeRegistration';
+        _timeRegistration?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            r'TimeRegistrationResponse', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

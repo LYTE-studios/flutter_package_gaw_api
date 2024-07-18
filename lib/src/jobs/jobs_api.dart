@@ -216,6 +216,22 @@ class JobsApi {
     throw DioException(requestOptions: RequestOptions(), response: response);
   }
 
+  static Future<TimeRegistrationResponse?> getRegistrationForJob({
+    required String washerId,
+    required String jobId,
+  }) async {
+    Response response = await RequestFactory.executeGet(
+      endpoint: '/time_registrations/$jobId/$washerId',
+    );
+    if (response.statusCode == 200) {
+      return TimeRegistrationResponse.fromJson(
+        FormattingUtil.decode(response.data),
+      );
+    }
+
+    throw DioException(requestOptions: RequestOptions(), response: response);
+  }
+
   static Future<ApplicationListResponse?> getApplications(
       {String? jobId}) async {
     String url = '/applications';
@@ -305,7 +321,7 @@ class JobsApi {
     throw DioException(requestOptions: RequestOptions(), response: response);
   }
 
-  static Future<TimeRegistration?> getTimeRegistrationForJob({
+  static Future<TimeRegistrationResponse?> getTimeRegistrationForJob({
     required String jobId,
   }) async {
     Response response = await RequestFactory.executeGet(
@@ -313,7 +329,7 @@ class JobsApi {
     );
 
     if (response.statusCode == 200) {
-      return TimeRegistration.fromJson(
+      return TimeRegistrationResponse.fromJson(
         FormattingUtil.decode(response.data),
       );
     }

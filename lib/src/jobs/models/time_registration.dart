@@ -33,6 +33,9 @@ abstract class TimeRegistration
   @BuiltValueField(wireName: 'customer_signature')
   String? get customerSignatureUrl;
 
+  @BuiltValueField(wireName: 'break_time')
+  int? get breakTime;
+
   String toJson() {
     return json.encode(
       serializers.serializeWith(TimeRegistration.serializer, this),

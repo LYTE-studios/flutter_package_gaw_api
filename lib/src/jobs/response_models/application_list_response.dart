@@ -20,6 +20,12 @@ abstract class ApplicationListResponse
   @BuiltValueField(wireName: 'applications')
   BuiltList<JobApplication> get applications;
 
+  @BuiltValueField(wireName: 'items_per_page')
+  int? get itemsPerPage;
+
+  @BuiltValueField(wireName: 'total')
+  int? get total;
+
   String toJson() {
     return json.encode(
       serializers.serializeWith(ApplicationListResponse.serializer, this),

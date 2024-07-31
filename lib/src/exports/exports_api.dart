@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:gaw_api/gaw_api.dart';
 import 'package:gaw_api/src/core/utils/request_factory.dart';
@@ -30,11 +32,24 @@ class ExportsApi {
     throw DioException(requestOptions: RequestOptions(), response: response);
   }
 
-  static Future<void> refreshExports() async {
+  static Future<void> refreshExports({
+    int? startTime,
+    int? endTime,
+  }) async {
     String url = '/exports';
+
+    String? body;
+
+    if (startTime != null && endTime != null) {
+      body = jsonEncode({
+        'start_time': startTime,
+        'end_time': endTime,
+      });
+    }
 
     Response response = await RequestFactory.executePost(
       endpoint: url,
+      body: body,
     );
 
     if (response.statusCode == 200) {

@@ -321,7 +321,7 @@ class JobsApi {
     throw DioException(requestOptions: RequestOptions(), response: response);
   }
 
-  static Future<TimeRegistrationResponse?> getTimeRegistrationForJob({
+  static Future<TimeRegistration?> getTimeRegistrationForJob({
     required String jobId,
   }) async {
     Response response = await RequestFactory.executeGet(
@@ -329,7 +329,7 @@ class JobsApi {
     );
 
     if (response.statusCode == 200) {
-      return TimeRegistrationResponse.fromJson(
+      return TimeRegistration.fromJson(
         FormattingUtil.decode(response.data),
       );
     }

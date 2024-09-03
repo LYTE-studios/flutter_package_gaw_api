@@ -1,57 +1,51 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:gaw_api/gaw_api.dart';
+import 'package:gaw_api/src/core/utils/request_factory.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class GoogleApi {
-  static Future<dynamic> fetchUrl(Map<String, String>? headers) async {
-    Dio dio = Dio();
+  static Future<PlaceAutocompleteResponse?> autocomplete(String query) async {
+    if (query.isEmpty) {
+      return null;
+    }
 
-    String url = '${Configuration.googleApiUrl}/maps/api/place/textsearch/json';
+    String url = '/locations/autocomplete/$query';
 
-    Response response = await dio.get(
-      url,
-      queryParameters: headers,
+    Response response = await RequestFactory.executeGet(
+      endpoint: url,
     );
 
     if (response.statusCode == 200) {
-      return response.data;
+      return PlaceAutocompleteResponse.fromJson(
+        FormattingUtil.decode(response.data),
+      );
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);
   }
 
   static Future<LatLng?> geocodeAddress(String request) async {
-    Dio dio = Dio();
+    String url = '/locations/geocode/$request';
 
-    String url = '${Configuration.googleApiUrl}/maps/api/geocode/json';
+    Response response = await RequestFactory.executeGet(
+      endpoint: url,
+    );
 
-    try {
-      var response = await dio.get(
-        url,
-        queryParameters: {
-          'address': request,
-          'key': Configuration.googleApiKey,
-        },
-      );
+    if (response.statusCode == 200) {
+      final data = FormattingUtil.decode(response.data);
 
-      if (response.statusCode == 200) {
-        final data = response.data;
-        if (data['results'].isNotEmpty) {
-          try {
-            final latLng = data['results'][0]['geometry']['location'];
+      if (data['results'].isNotEmpty) {
+        try {
+          final latLng = data['results'][0]['geometry']['location'];
 
-            return LatLng(latLng['lat'], latLng['lng']);
-          } catch (e) {
-            throw Exception('Coordinates found, but could not parse');
-          }
+          return LatLng(latLng['lat'], latLng['lng']);
+        } catch (e) {
+          throw Exception('Coordinates found, but could not parse');
         }
       }
-    } catch (e) {
-      return null;
     }
+    return null;
   }
 
   /// Get the reverse geocoding for an address
@@ -59,34 +53,25 @@ class GoogleApi {
     double latitude,
     double longitude,
   ) async {
-    Dio dio = Dio();
+    String url = '/locations/reverse-geocode/$latitude,$longitude';
 
-    String url = '${Configuration.googleApiUrl}/maps/api/geocode/json';
+    Response response = await RequestFactory.executeGet(
+      endpoint: url,
+    );
 
-    try {
-      var response = await dio.get(
-        url,
-        queryParameters: {
-          'latlng': '$latitude,$longitude',
-          'key': Configuration.googleApiKey,
-        },
-      );
-      if (response.statusCode == 200) {
-        final data = response.data;
+    if (response.statusCode == 200) {
+      final data = FormattingUtil.decode(response.data);
 
-        // Assuming the response format is correct and contains results
-        if (data['results'].isNotEmpty) {
-          // Typically, the first result is the most relevant address
-          String formattedAddress = data['results'][0]['formatted_address'];
-          return formattedAddress;
-        } else {
-          throw Exception('No results found for these coordinates.');
-        }
+      // Assuming the response format is correct and contains results
+      if (data['results'].isNotEmpty) {
+        // Typically, the first result is the most relevant address
+        String formattedAddress = data['results'][0]['formatted_address'];
+        return formattedAddress;
       } else {
-        throw Exception('Failed to fetch reverse geocoding data.');
+        throw Exception('No results found for these coordinates.');
       }
-    } catch (e) {
-      return 'Failed to get the address.';
+    } else {
+      throw Exception('Failed to fetch reverse geocoding data.');
     }
   }
 
@@ -94,51 +79,31 @@ class GoogleApi {
     required LatLng from,
     required LatLng to,
   }) async {
-    Dio dio = Dio();
+    int parseInt(double value) {
+      return (value * 1000000).toInt();
+    }
 
-    String url =
-        '${Configuration.routesGoogleApiUrl}/directions/v2:computeRoutes';
+    int fromLat = parseInt(from.latitude);
+    int fromLon = parseInt(from.longitude);
+    int toLat = parseInt(to.latitude);
+    int toLon = parseInt(to.longitude);
 
-    Response response = await dio.post(
-      url,
-      queryParameters: {
-        "key": Configuration.googleApiKey,
-      },
-      options: Options(
-        headers: {
-          "X-Goog-FieldMask": "routes.polyline",
-        },
-      ),
-      data: jsonEncode(
-        {
-          "origin": {
-            "location": {
-              "latLng": {
-                "latitude": from.latitude,
-                "longitude": from.longitude,
-              }
-            }
-          },
-          "destination": {
-            "location": {
-              "latLng": {
-                "latitude": to.latitude,
-                "longitude": to.longitude,
-              }
-            }
-          },
-          "travelMode": "DRIVE",
-        },
-      ),
+    String url = '/locations/directions/$fromLat/$fromLon/$toLat/$toLon';
+
+    Response response = await RequestFactory.executeGet(
+      endpoint: url,
     );
 
     if (response.statusCode == 200) {
-      if (response.data == {}) {
+      final result = FormattingUtil.decode(response.data);
+
+      if (result == {}) {
         return [];
       }
 
       List<PointLatLng> pointList = PolylinePoints().decodePolyline(
-          response.data["routes"][0]["polyline"]["encodedPolyline"]);
+        result["routes"][0]["polyline"]["encodedPolyline"],
+      );
       List<LatLng> data = [];
 
       for (PointLatLng point in pointList) {

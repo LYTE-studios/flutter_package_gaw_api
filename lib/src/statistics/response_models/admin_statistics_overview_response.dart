@@ -19,6 +19,9 @@ abstract class AdminStatisticsOverviewResponse
   @BuiltValueField(wireName: 'jobs_count')
   int get jobCount;
 
+  @BuiltValueField(wireName: 'candidates_count')
+  int get candidatesCount;
+
   @BuiltValueField(wireName: 'planned_jobs_count')
   int get plannedJobCount;
 

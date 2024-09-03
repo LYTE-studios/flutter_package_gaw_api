@@ -28,6 +28,9 @@ class _$AdminStatisticsOverviewResponseSerializer
       'jobs_count',
       serializers.serialize(object.jobCount,
           specifiedType: const FullType(int)),
+      'candidates_count',
+      serializers.serialize(object.candidatesCount,
+          specifiedType: const FullType(int)),
       'planned_jobs_count',
       serializers.serialize(object.plannedJobCount,
           specifiedType: const FullType(int)),
@@ -85,6 +88,10 @@ class _$AdminStatisticsOverviewResponseSerializer
           result.jobCount = serializers.deserialize(value,
               specifiedType: const FullType(int))! as int;
           break;
+        case 'candidates_count':
+          result.candidatesCount = serializers.deserialize(value,
+              specifiedType: const FullType(int))! as int;
+          break;
         case 'planned_jobs_count':
           result.plannedJobCount = serializers.deserialize(value,
               specifiedType: const FullType(int))! as int;
@@ -134,6 +141,8 @@ class _$AdminStatisticsOverviewResponse
   @override
   final int jobCount;
   @override
+  final int candidatesCount;
+  @override
   final int plannedJobCount;
   @override
   final int? jobsWithoutCandidatesCount;
@@ -158,6 +167,7 @@ class _$AdminStatisticsOverviewResponse
 
   _$AdminStatisticsOverviewResponse._(
       {required this.jobCount,
+      required this.candidatesCount,
       required this.plannedJobCount,
       this.jobsWithoutCandidatesCount,
       required this.comingJobCount,
@@ -170,6 +180,8 @@ class _$AdminStatisticsOverviewResponse
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         jobCount, r'AdminStatisticsOverviewResponse', 'jobCount');
+    BuiltValueNullFieldError.checkNotNull(
+        candidatesCount, r'AdminStatisticsOverviewResponse', 'candidatesCount');
     BuiltValueNullFieldError.checkNotNull(
         plannedJobCount, r'AdminStatisticsOverviewResponse', 'plannedJobCount');
     BuiltValueNullFieldError.checkNotNull(
@@ -198,6 +210,7 @@ class _$AdminStatisticsOverviewResponse
     if (identical(other, this)) return true;
     return other is AdminStatisticsOverviewResponse &&
         jobCount == other.jobCount &&
+        candidatesCount == other.candidatesCount &&
         plannedJobCount == other.plannedJobCount &&
         jobsWithoutCandidatesCount == other.jobsWithoutCandidatesCount &&
         comingJobCount == other.comingJobCount &&
@@ -213,6 +226,7 @@ class _$AdminStatisticsOverviewResponse
   int get hashCode {
     var _$hash = 0;
     _$hash = $jc(_$hash, jobCount.hashCode);
+    _$hash = $jc(_$hash, candidatesCount.hashCode);
     _$hash = $jc(_$hash, plannedJobCount.hashCode);
     _$hash = $jc(_$hash, jobsWithoutCandidatesCount.hashCode);
     _$hash = $jc(_$hash, comingJobCount.hashCode);
@@ -230,6 +244,7 @@ class _$AdminStatisticsOverviewResponse
   String toString() {
     return (newBuiltValueToStringHelper(r'AdminStatisticsOverviewResponse')
           ..add('jobCount', jobCount)
+          ..add('candidatesCount', candidatesCount)
           ..add('plannedJobCount', plannedJobCount)
           ..add('jobsWithoutCandidatesCount', jobsWithoutCandidatesCount)
           ..add('comingJobCount', comingJobCount)
@@ -252,6 +267,11 @@ class AdminStatisticsOverviewResponseBuilder
   int? _jobCount;
   int? get jobCount => _$this._jobCount;
   set jobCount(int? jobCount) => _$this._jobCount = jobCount;
+
+  int? _candidatesCount;
+  int? get candidatesCount => _$this._candidatesCount;
+  set candidatesCount(int? candidatesCount) =>
+      _$this._candidatesCount = candidatesCount;
 
   int? _plannedJobCount;
   int? get plannedJobCount => _$this._plannedJobCount;
@@ -305,6 +325,7 @@ class AdminStatisticsOverviewResponseBuilder
     final $v = _$v;
     if ($v != null) {
       _jobCount = $v.jobCount;
+      _candidatesCount = $v.candidatesCount;
       _plannedJobCount = $v.plannedJobCount;
       _jobsWithoutCandidatesCount = $v.jobsWithoutCandidatesCount;
       _comingJobCount = $v.comingJobCount;
@@ -340,6 +361,8 @@ class AdminStatisticsOverviewResponseBuilder
           new _$AdminStatisticsOverviewResponse._(
               jobCount: BuiltValueNullFieldError.checkNotNull(
                   jobCount, r'AdminStatisticsOverviewResponse', 'jobCount'),
+              candidatesCount: BuiltValueNullFieldError.checkNotNull(
+                  candidatesCount, r'AdminStatisticsOverviewResponse', 'candidatesCount'),
               plannedJobCount: BuiltValueNullFieldError.checkNotNull(
                   plannedJobCount, r'AdminStatisticsOverviewResponse', 'plannedJobCount'),
               jobsWithoutCandidatesCount: jobsWithoutCandidatesCount,
@@ -348,13 +371,9 @@ class AdminStatisticsOverviewResponseBuilder
               ongoingJobCount: BuiltValueNullFieldError.checkNotNull(
                   ongoingJobCount, r'AdminStatisticsOverviewResponse', 'ongoingJobCount'),
               completedJobCount: BuiltValueNullFieldError.checkNotNull(
-                  completedJobCount,
-                  r'AdminStatisticsOverviewResponse',
-                  'completedJobCount'),
+                  completedJobCount, r'AdminStatisticsOverviewResponse', 'completedJobCount'),
               unservicedJobCount: BuiltValueNullFieldError.checkNotNull(
-                  unservicedJobCount,
-                  r'AdminStatisticsOverviewResponse',
-                  'unservicedJobCount'),
+                  unservicedJobCount, r'AdminStatisticsOverviewResponse', 'unservicedJobCount'),
               trendJobCount: trendJobCount,
               trendHoursWorked: trendHoursWorked,
               hoursWorkedStats: hoursWorkedStats.build());

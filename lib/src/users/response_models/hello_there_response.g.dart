@@ -48,6 +48,13 @@ class _$HelloThereResponseSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.hours;
+    if (value != null) {
+      result
+        ..add('hours')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(double)));
+    }
     return result;
   }
 
@@ -87,6 +94,10 @@ class _$HelloThereResponseSerializer
           result.profilePictureUrl = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'hours':
+          result.hours = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double?;
+          break;
       }
     }
 
@@ -107,6 +118,8 @@ class _$HelloThereResponse extends HelloThereResponse {
   final String? language;
   @override
   final String? profilePictureUrl;
+  @override
+  final double? hours;
 
   factory _$HelloThereResponse(
           [void Function(HelloThereResponseBuilder)? updates]) =>
@@ -118,7 +131,8 @@ class _$HelloThereResponse extends HelloThereResponse {
       required this.lastName,
       required this.email,
       this.language,
-      this.profilePictureUrl})
+      this.profilePictureUrl,
+      this.hours})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(id, r'HelloThereResponse', 'id');
     BuiltValueNullFieldError.checkNotNull(
@@ -147,7 +161,8 @@ class _$HelloThereResponse extends HelloThereResponse {
         lastName == other.lastName &&
         email == other.email &&
         language == other.language &&
-        profilePictureUrl == other.profilePictureUrl;
+        profilePictureUrl == other.profilePictureUrl &&
+        hours == other.hours;
   }
 
   @override
@@ -159,6 +174,7 @@ class _$HelloThereResponse extends HelloThereResponse {
     _$hash = $jc(_$hash, email.hashCode);
     _$hash = $jc(_$hash, language.hashCode);
     _$hash = $jc(_$hash, profilePictureUrl.hashCode);
+    _$hash = $jc(_$hash, hours.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -171,7 +187,8 @@ class _$HelloThereResponse extends HelloThereResponse {
           ..add('lastName', lastName)
           ..add('email', email)
           ..add('language', language)
-          ..add('profilePictureUrl', profilePictureUrl))
+          ..add('profilePictureUrl', profilePictureUrl)
+          ..add('hours', hours))
         .toString();
   }
 }
@@ -205,6 +222,10 @@ class HelloThereResponseBuilder
   set profilePictureUrl(String? profilePictureUrl) =>
       _$this._profilePictureUrl = profilePictureUrl;
 
+  double? _hours;
+  double? get hours => _$this._hours;
+  set hours(double? hours) => _$this._hours = hours;
+
   HelloThereResponseBuilder();
 
   HelloThereResponseBuilder get _$this {
@@ -216,6 +237,7 @@ class HelloThereResponseBuilder
       _email = $v.email;
       _language = $v.language;
       _profilePictureUrl = $v.profilePictureUrl;
+      _hours = $v.hours;
       _$v = null;
     }
     return this;
@@ -247,7 +269,8 @@ class HelloThereResponseBuilder
             email: BuiltValueNullFieldError.checkNotNull(
                 email, r'HelloThereResponse', 'email'),
             language: language,
-            profilePictureUrl: profilePictureUrl);
+            profilePictureUrl: profilePictureUrl,
+            hours: hours);
     replace(_$result);
     return _$result;
   }

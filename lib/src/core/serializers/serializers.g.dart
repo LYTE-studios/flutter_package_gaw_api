@@ -19,6 +19,8 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(Customer.serializer)
       ..add(CustomerListResponse.serializer)
       ..add(DailyStatistics.serializer)
+      ..add(Dimona.serializer)
+      ..add(DimonaListResponse.serializer)
       ..add(EmailRequest.serializer)
       ..add(Export.serializer)
       ..add(ExportsListResponse.serializer)
@@ -68,6 +70,9 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(Customer)]),
           () => new ListBuilder<Customer>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(Dimona)]),
+          () => new ListBuilder<Dimona>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(Export)]),
           () => new ListBuilder<Export>())

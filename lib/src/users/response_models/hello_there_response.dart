@@ -13,7 +13,7 @@ abstract class HelloThereResponse
   HelloThereResponse._();
 
   factory HelloThereResponse([Function(HelloThereResponseBuilder b) updates]) =
-      _$HelloThereResponse;
+  _$HelloThereResponse;
 
   @BuiltValueField(wireName: 'id')
   String get id;
@@ -32,6 +32,9 @@ abstract class HelloThereResponse
 
   @BuiltValueField(wireName: 'profile_picture')
   String? get profilePictureUrl;
+
+  @BuiltValueField(wireName: 'hours')
+  double? get hours;
 
   String toJson() {
     return json.encode(

@@ -27,6 +27,9 @@ abstract class ApplyForJobRequest
   @BuiltValueField(wireName: 'note')
   String? get note;
 
+  @BuiltValueField(wireName: 'distance')
+  double? get distance;
+
   String toJson() {
     return json.encode(
       serializers.serializeWith(ApplyForJobRequest.serializer, this),

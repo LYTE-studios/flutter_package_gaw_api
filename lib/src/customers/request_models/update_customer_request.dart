@@ -44,6 +44,9 @@ abstract class UpdateCustomerRequest
   @BuiltValueField(wireName: 'tax_number')
   String? get taxNumber;
 
+  @BuiltValueField(wireName: 'special_committee')
+  String? get specialCommittee;
+
   String toJson() {
     return json.encode(
         serializers.serializeWith(UpdateCustomerRequest.serializer, this));

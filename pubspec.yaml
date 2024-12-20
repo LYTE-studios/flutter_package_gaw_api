@@ -9,12 +9,15 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.2
+
+  
   built_value: ^8.6.2
   built_value_generator: ^8.6.2
   built_collection: ^5.1.1
+
+
   dio: ^5.3.3
-  mockito: ^5.4.2
+  
   flutter_riverpod: ^2.3.10
   localstorage: ^4.0.0+1
   image_picker: ^1.0.4

@@ -95,6 +95,13 @@ class _$UpdateCustomerRequestSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.specialCommittee;
+    if (value != null) {
+      result
+        ..add('special_committee')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     return result;
   }
 
@@ -150,6 +157,10 @@ class _$UpdateCustomerRequestSerializer
           result.taxNumber = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'special_committee':
+          result.specialCommittee = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
       }
     }
 
@@ -178,6 +189,8 @@ class _$UpdateCustomerRequest extends UpdateCustomerRequest {
   final Address? billingAddress;
   @override
   final String? taxNumber;
+  @override
+  final String? specialCommittee;
 
   factory _$UpdateCustomerRequest(
           [void Function(UpdateCustomerRequestBuilder)? updates]) =>
@@ -193,7 +206,8 @@ class _$UpdateCustomerRequest extends UpdateCustomerRequest {
       this.profilePictureUrl,
       this.address,
       this.billingAddress,
-      this.taxNumber})
+      this.taxNumber,
+      this.specialCommittee})
       : super._();
 
   @override
@@ -218,7 +232,8 @@ class _$UpdateCustomerRequest extends UpdateCustomerRequest {
         profilePictureUrl == other.profilePictureUrl &&
         address == other.address &&
         billingAddress == other.billingAddress &&
-        taxNumber == other.taxNumber;
+        taxNumber == other.taxNumber &&
+        specialCommittee == other.specialCommittee;
   }
 
   @override
@@ -234,6 +249,7 @@ class _$UpdateCustomerRequest extends UpdateCustomerRequest {
     _$hash = $jc(_$hash, address.hashCode);
     _$hash = $jc(_$hash, billingAddress.hashCode);
     _$hash = $jc(_$hash, taxNumber.hashCode);
+    _$hash = $jc(_$hash, specialCommittee.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -250,7 +266,8 @@ class _$UpdateCustomerRequest extends UpdateCustomerRequest {
           ..add('profilePictureUrl', profilePictureUrl)
           ..add('address', address)
           ..add('billingAddress', billingAddress)
-          ..add('taxNumber', taxNumber))
+          ..add('taxNumber', taxNumber)
+          ..add('specialCommittee', specialCommittee))
         .toString();
   }
 }
@@ -302,6 +319,11 @@ class UpdateCustomerRequestBuilder
   String? get taxNumber => _$this._taxNumber;
   set taxNumber(String? taxNumber) => _$this._taxNumber = taxNumber;
 
+  String? _specialCommittee;
+  String? get specialCommittee => _$this._specialCommittee;
+  set specialCommittee(String? specialCommittee) =>
+      _$this._specialCommittee = specialCommittee;
+
   UpdateCustomerRequestBuilder();
 
   UpdateCustomerRequestBuilder get _$this {
@@ -317,6 +339,7 @@ class UpdateCustomerRequestBuilder
       _address = $v.address?.toBuilder();
       _billingAddress = $v.billingAddress?.toBuilder();
       _taxNumber = $v.taxNumber;
+      _specialCommittee = $v.specialCommittee;
       _$v = null;
     }
     return this;
@@ -350,7 +373,8 @@ class UpdateCustomerRequestBuilder
               profilePictureUrl: profilePictureUrl,
               address: _address?.build(),
               billingAddress: _billingAddress?.build(),
-              taxNumber: taxNumber);
+              taxNumber: taxNumber,
+              specialCommittee: specialCommittee);
     } catch (_) {
       late String _$failedField;
       try {

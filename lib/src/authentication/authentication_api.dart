@@ -20,7 +20,7 @@ export 'response_models/session_expiry_response.dart';
 class AuthenticationApi {
   static Future<bool> testConnection() async {
     Response response = await RequestFactory.executeGet(
-      endpoint: '/',
+      endpoint: 'auth/hello/there',
     );
 
     if (response.statusCode == 200) {
@@ -40,14 +40,15 @@ class AuthenticationApi {
     required LoginRequest request,
   }) async {
     Response response = await RequestFactory.executePost(
-      endpoint: '/auth',
+      endpoint: '/auth/token',
       body: request.toJson(),
       useToken: false,
     );
 
     if (response.statusCode == 200) {
-      JwtResponse jwtResponse =
-          JwtResponse.fromJson(FormattingUtil.decode(response.data))!;
+      JwtResponse jwtResponse = JwtResponse.fromJson(
+        FormattingUtil.decode(response.data),
+      )!;
 
       Configuration.accessToken = jwtResponse.accessToken;
       Configuration.refreshToken = jwtResponse.refreshToken;
@@ -69,7 +70,7 @@ class AuthenticationApi {
       );
     }
 
-    if (response.statusCode == 403) {
+    if (response.statusCode == 301) {
       throw const GawException(
         title: 'Invalid credentials!',
         message: 'Please check your email password combination.',
@@ -118,7 +119,7 @@ class AuthenticationApi {
     required EmailRequest request,
   }) async {
     Response response = await RequestFactory.executePost(
-      endpoint: '/password_reset/',
+      endpoint: '/auth/password_reset',
       body: request.toJson(),
       useToken: false,
     );
@@ -127,14 +128,14 @@ class AuthenticationApi {
       return true;
     }
 
-    return false;
+    throw Exception('Something went wrong');
   }
 
   static Future<PassTokenResponse?> verifyPasswordResetCode({
     required CodeVerificationRequest request,
   }) async {
     Response response = await RequestFactory.executePost(
-      endpoint: '/password_reset/verify/',
+      endpoint: '/auth/password_reset/verify',
       body: request.toJson(),
       useToken: false,
     );
@@ -197,7 +198,7 @@ class AuthenticationApi {
     required PasswordResetRequest request,
   }) async {
     Response response = await RequestFactory.executePost(
-      endpoint: '/password_reset/reset/',
+      endpoint: '/auth/password_reset/reset/',
       body: request.toJson(),
       useToken: false,
     );

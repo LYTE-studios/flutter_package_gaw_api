@@ -83,7 +83,7 @@ class WashersApi {
   static Future<IdResponse?> registerWasher(
       {required RegisterRequest request}) async {
     Response response = await RequestFactory.executePost(
-      endpoint: '/washers/register',
+      endpoint: '/auth/workers/register',
       useToken: false,
       body: request.toJson(),
     );

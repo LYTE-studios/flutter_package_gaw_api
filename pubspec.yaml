@@ -15,8 +15,6 @@ dependencies:
   built_value_generator: ^8.6.2
   built_collection: ^5.1.1
   dio: ^5.3.3
-  
-  flutter_riverpod: ^2.3.10
   localstorage: ^4.0.0+1
   image_picker: ^1.0.4
   google_maps_flutter: ^2.5.0

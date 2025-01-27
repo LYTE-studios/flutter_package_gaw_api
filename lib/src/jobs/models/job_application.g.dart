@@ -20,9 +20,9 @@ class _$JobApplicationSerializer
   Iterable<Object?> serialize(Serializers serializers, JobApplication object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
-      'washer',
-      serializers.serialize(object.washer,
-          specifiedType: const FullType(Washer)),
+      'worker',
+      serializers.serialize(object.worker,
+          specifiedType: const FullType(Worker)),
       'job',
       serializers.serialize(object.job, specifiedType: const FullType(Job)),
       'address',
@@ -89,9 +89,9 @@ class _$JobApplicationSerializer
           result.id = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'washer':
-          result.washer.replace(serializers.deserialize(value,
-              specifiedType: const FullType(Washer))! as Washer);
+        case 'worker':
+          result.worker.replace(serializers.deserialize(value,
+              specifiedType: const FullType(Worker))! as Worker);
           break;
         case 'job':
           result.job.replace(serializers.deserialize(value,
@@ -137,7 +137,7 @@ class _$JobApplication extends JobApplication {
   @override
   final String? id;
   @override
-  final Washer washer;
+  final Worker worker;
   @override
   final Job job;
   @override
@@ -160,7 +160,7 @@ class _$JobApplication extends JobApplication {
 
   _$JobApplication._(
       {this.id,
-      required this.washer,
+      required this.worker,
       required this.job,
       required this.address,
       required this.state,
@@ -170,7 +170,7 @@ class _$JobApplication extends JobApplication {
       this.note,
       this.contract})
       : super._() {
-    BuiltValueNullFieldError.checkNotNull(washer, r'JobApplication', 'washer');
+    BuiltValueNullFieldError.checkNotNull(worker, r'JobApplication', 'worker');
     BuiltValueNullFieldError.checkNotNull(job, r'JobApplication', 'job');
     BuiltValueNullFieldError.checkNotNull(
         address, r'JobApplication', 'address');
@@ -192,7 +192,7 @@ class _$JobApplication extends JobApplication {
     if (identical(other, this)) return true;
     return other is JobApplication &&
         id == other.id &&
-        washer == other.washer &&
+        worker == other.worker &&
         job == other.job &&
         address == other.address &&
         state == other.state &&
@@ -207,7 +207,7 @@ class _$JobApplication extends JobApplication {
   int get hashCode {
     var _$hash = 0;
     _$hash = $jc(_$hash, id.hashCode);
-    _$hash = $jc(_$hash, washer.hashCode);
+    _$hash = $jc(_$hash, worker.hashCode);
     _$hash = $jc(_$hash, job.hashCode);
     _$hash = $jc(_$hash, address.hashCode);
     _$hash = $jc(_$hash, state.hashCode);
@@ -224,7 +224,7 @@ class _$JobApplication extends JobApplication {
   String toString() {
     return (newBuiltValueToStringHelper(r'JobApplication')
           ..add('id', id)
-          ..add('washer', washer)
+          ..add('worker', worker)
           ..add('job', job)
           ..add('address', address)
           ..add('state', state)
@@ -245,9 +245,9 @@ class JobApplicationBuilder
   String? get id => _$this._id;
   set id(String? id) => _$this._id = id;
 
-  WasherBuilder? _washer;
-  WasherBuilder get washer => _$this._washer ??= new WasherBuilder();
-  set washer(WasherBuilder? washer) => _$this._washer = washer;
+  WorkerBuilder? _worker;
+  WorkerBuilder get worker => _$this._worker ??= new WorkerBuilder();
+  set worker(WorkerBuilder? worker) => _$this._worker = worker;
 
   JobBuilder? _job;
   JobBuilder get job => _$this._job ??= new JobBuilder();
@@ -288,7 +288,7 @@ class JobApplicationBuilder
     final $v = _$v;
     if ($v != null) {
       _id = $v.id;
-      _washer = $v.washer.toBuilder();
+      _worker = $v.worker.toBuilder();
       _job = $v.job.toBuilder();
       _address = $v.address.toBuilder();
       _state = $v.state;
@@ -322,7 +322,7 @@ class JobApplicationBuilder
       _$result = _$v ??
           new _$JobApplication._(
               id: id,
-              washer: washer.build(),
+              worker: worker.build(),
               job: job.build(),
               address: address.build(),
               state: BuiltValueNullFieldError.checkNotNull(
@@ -336,8 +336,8 @@ class JobApplicationBuilder
     } catch (_) {
       late String _$failedField;
       try {
-        _$failedField = 'washer';
-        washer.build();
+        _$failedField = 'worker';
+        worker.build();
         _$failedField = 'job';
         job.build();
         _$failedField = 'address';

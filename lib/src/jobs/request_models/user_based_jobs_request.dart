@@ -19,8 +19,8 @@ abstract class UserBasedJobsRequest
       _$UserBasedJobsRequest;
 
   // Fields
-  @BuiltValueField(wireName: 'washer_id')
-  String? get washerId;
+  @BuiltValueField(wireName: 'worker_id')
+  String? get workerId;
 
   @BuiltValueField(wireName: 'customer_id')
   String? get customerId;

@@ -1,4 +1,3 @@
-import 'package:built_collection/built_collection.dart';
 import 'package:built_value/serializer.dart';
 import 'package:built_value/standard_json_plugin.dart';
 import 'package:gaw_api/gaw_api.dart';
@@ -12,13 +11,13 @@ part 'serializers.g.dart';
   PasswordResetRequest,
   PassTokenResponse,
   ApplyForJobRequest,
-  WashersListResponse,
+  WorkersListResponse,
   UpdateCustomerRequest,
-  WasherUpdateRequest,
+  WorkerUpdateRequest,
   ApplicationResponse,
   IdResponse,
   Customer,
-  Washer,
+  Worker,
   Job,
   ApplicationListResponse,
   JobApplication,
@@ -61,7 +60,7 @@ part 'serializers.g.dart';
   NotificationsRequest,
   UpdateJobRequest,
   SessionExpiryRequest,
-  WashersForJobResponse,
+  WorkersForJobResponse,
   ExportsListResponse,
   TimeRegistrationResponse,
   Dimona,

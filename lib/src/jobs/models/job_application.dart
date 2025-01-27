@@ -18,8 +18,8 @@ abstract class JobApplication
   @BuiltValueField(wireName: 'id')
   String? get id;
 
-  @BuiltValueField(wireName: 'washer')
-  Washer get washer;
+  @BuiltValueField(wireName: 'worker')
+  Worker get worker;
 
   @BuiltValueField(wireName: 'job')
   Job get job;

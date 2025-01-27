@@ -11,10 +11,10 @@ abstract class StatsRequest
   StatsRequest._();
 
   factory StatsRequest([void Function(StatsRequestBuilder) updates]) =
-  _$StatsRequest;
+      _$StatsRequest;
 
-  @BuiltValueField(wireName: 'washer_id')
-  String get washerId;
+  @BuiltValueField(wireName: 'worker_id')
+  String get workerId;
 
   @BuiltValueField(wireName: 'time_frame')
   TimeFrame get timeFrame;

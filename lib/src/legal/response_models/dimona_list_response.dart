@@ -5,7 +5,7 @@ import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:gaw_api/gaw_api.dart';
 import 'package:gaw_api/src/legal/models/dimona.dart';
-import 'package:gaw_api/src/washers/models/washer.dart';
+import 'package:gaw_api/src/workers/models/worker.dart';
 
 part 'dimona_list_response.g.dart';
 

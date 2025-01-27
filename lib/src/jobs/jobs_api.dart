@@ -22,14 +22,14 @@ export 'response_models/application_response.dart';
 export 'response_models/job_list_response.dart';
 export 'response_models/time_registration_list_response.dart';
 export 'response_models/time_registration_response.dart';
-export 'response_models/washers_for_job_response.dart';
+export 'response_models/workers_for_job_response.dart';
 export 'utils/job_utils.dart';
 
 class JobsApi {
   /// Gets the washers job applications
   static Future<ApplicationListResponse?> getMyApplications() async {
     Response response = await RequestFactory.executeGet(
-      endpoint: '/applications/me',
+      endpoint: '/jobs/applications/me',
     );
 
     if (response.statusCode == 200) {
@@ -61,7 +61,7 @@ class JobsApi {
   static Future<IdResponse?> createApplication(
       {required ApplyForJobRequest request}) async {
     Response response = await RequestFactory.executePost(
-      endpoint: '/applications/me',
+      endpoint: '/jobs/applications/me',
       body: request.toJson(),
     );
 
@@ -76,7 +76,7 @@ class JobsApi {
 
   static Future<void> denyApplication({required String id}) async {
     Response response = await RequestFactory.executePost(
-      endpoint: '/applications/details/$id/deny',
+      endpoint: '/jobs/applications/details/$id/deny',
     );
 
     if (response.statusCode == 200) {
@@ -88,7 +88,7 @@ class JobsApi {
 
   static Future<void> approveApplication({required String id}) async {
     Response response = await RequestFactory.executePost(
-      endpoint: '/applications/details/$id/approve',
+      endpoint: '/jobs/applications/details/$id/approve',
     );
 
     if (response.statusCode == 200) {
@@ -100,7 +100,7 @@ class JobsApi {
 
   static Future<Job?> getJob({required String id}) async {
     Response response = await RequestFactory.executeGet(
-      endpoint: '/jobs/details/$id',
+      endpoint: '/jobs/jobs/details/$id',
     );
 
     if (response.statusCode == 200) {
@@ -112,7 +112,7 @@ class JobsApi {
 
   static Future<void> deleteJob({required String id}) async {
     Response response = await RequestFactory.executeDelete(
-      endpoint: '/jobs/details/$id',
+      endpoint: '/jobs/jobs/details/$id',
     );
 
     if (response.statusCode == 200) {
@@ -128,10 +128,10 @@ class JobsApi {
     int? startTime,
     int? endTime,
   }) async {
-    String url = '/jobs/upcoming';
+    String url = '/jobs/jobs/upcoming';
 
     if (isAdmin) {
-      url = '/jobs/upcoming/all';
+      url = '/jobs/jobs/upcoming/all';
 
       if (startTime != null && endTime != null) {
         url += '/$startTime/$endTime';
@@ -153,10 +153,10 @@ class JobsApi {
     int? start,
     int? end,
   }) async {
-    String url = '/jobs/history';
+    String url = '/jobs/jobs/history';
 
     if (start != null && end != null) {
-      url = '/jobs/history/$start/$end';
+      url = '/jobs/jobs/history/$start/$end';
     }
 
     Response response = await RequestFactory.executeGet(
@@ -174,7 +174,7 @@ class JobsApi {
     required UserBasedJobsRequest request,
   }) async {
     Response response = await RequestFactory.executePost(
-      endpoint: '/jobs/get',
+      endpoint: '/jobs/jobs/get',
       body: request.toJson(),
     );
     if (response.statusCode == 200) {
@@ -190,7 +190,7 @@ class JobsApi {
     required int itemCount,
   }) async {
     Response response = await RequestFactory.executeGet(
-      endpoint: '/history/customers/$customerId/$itemCount/$page',
+      endpoint: '/jobs/history/customers/$customerId/$itemCount/$page',
     );
     if (response.statusCode == 200) {
       return JobListResponse.fromJson(FormattingUtil.decode(response.data));
@@ -205,7 +205,7 @@ class JobsApi {
     required int itemCount,
   }) async {
     Response response = await RequestFactory.executeGet(
-      endpoint: '/history/washers/$washerId/$itemCount/$page',
+      endpoint: '/jobs/history/washers/$washerId/$itemCount/$page',
     );
     if (response.statusCode == 200) {
       return ApplicationListResponse.fromJson(
@@ -221,7 +221,7 @@ class JobsApi {
     required String jobId,
   }) async {
     Response response = await RequestFactory.executeGet(
-      endpoint: '/time_registrations/$jobId/$washerId',
+      endpoint: '/jobs/time_registrations/$jobId/$washerId',
     );
     if (response.statusCode == 200) {
       return TimeRegistrationResponse.fromJson(
@@ -234,10 +234,10 @@ class JobsApi {
 
   static Future<ApplicationListResponse?> getApplications(
       {String? jobId}) async {
-    String url = '/applications';
+    String url = '/jobs/applications';
 
     if (jobId != null) {
-      url = '/applications/$jobId';
+      url = '/jobs/applications/$jobId';
     }
 
     Response response = await RequestFactory.executeGet(
@@ -254,7 +254,7 @@ class JobsApi {
 
   static Future<JobListResponse?> getActiveJobs() async {
     Response response = await RequestFactory.executeGet(
-      endpoint: '/jobs/active',
+      endpoint: '/jobs/jobs/active',
     );
     if (response.statusCode == 200) {
       return JobListResponse.fromJson(FormattingUtil.decode(response.data));
@@ -267,7 +267,7 @@ class JobsApi {
     int? startTime,
     int? endTime,
   }) async {
-    String url = '/jobs/done';
+    String url = '/jobs/jobs/done';
 
     if (startTime != null && endTime != null) {
       url += '/$startTime/$endTime';
@@ -285,7 +285,7 @@ class JobsApi {
 
   static Future<JobListResponse?> getDraftJobs() async {
     Response response = await RequestFactory.executeGet(
-      endpoint: '/jobs/drafts',
+      endpoint: '/jobs/jobs/drafts',
     );
     if (response.statusCode == 200) {
       return JobListResponse.fromJson(FormattingUtil.decode(response.data));
@@ -296,7 +296,7 @@ class JobsApi {
 
   static Future<ApplicationResponse?> getActiveJob() async {
     Response response = await RequestFactory.executeGet(
-      endpoint: '/jobs/me/active',
+      endpoint: '/jobs/jobs/me/active',
     );
 
     if (response.statusCode == 200) {
@@ -310,7 +310,7 @@ class JobsApi {
     required String jobId,
   }) async {
     Response response = await RequestFactory.executeGet(
-      endpoint: '/jobs/timeregistration?job_id=$jobId',
+      endpoint: '/jobs/jobs/timeregistration?job_id=$jobId',
     );
 
     if (response.statusCode == 200) {
@@ -325,7 +325,7 @@ class JobsApi {
     required String jobId,
   }) async {
     Response response = await RequestFactory.executeGet(
-      endpoint: '/jobs/me/$jobId/time_registration',
+      endpoint: '/jobs/jobs/me/$jobId/time_registration',
     );
 
     if (response.statusCode == 200) {
@@ -341,7 +341,7 @@ class JobsApi {
     required String applicationId,
   }) async {
     Response response = await RequestFactory.executeDelete(
-      endpoint: '/applications/details/$applicationId',
+      endpoint: '/jobs/applications/details/$applicationId',
     );
 
     if (response.statusCode == 200) {
@@ -358,12 +358,12 @@ class JobsApi {
     Uint8List? customerSignature;
     Uint8List? washerSignature;
 
-    if (request.washerSignature != null && request.customerSignature != null) {
-      washerSignature = encodePng(decodeImage(request.washerSignature!)!);
+    if (request.workerSignature != null && request.customerSignature != null) {
+      washerSignature = encodePng(decodeImage(request.workerSignature!)!);
       customerSignature = encodePng(decodeImage(request.customerSignature!)!);
     }
 
-    String url = '/jobs/timeregistration';
+    String url = '/jobs/jobs/timeregistration';
 
     if (userId != null) {
       url += '/$userId';
@@ -406,7 +406,7 @@ class JobsApi {
     required CreateJobRequest request,
   }) async {
     Response response = await RequestFactory.executePost(
-      endpoint: '/jobs/create',
+      endpoint: '/jobs/jobs/create',
       body: request.toJson(),
     );
 
@@ -418,15 +418,15 @@ class JobsApi {
     throw DioException(requestOptions: RequestOptions(), response: response);
   }
 
-  static Future<WashersForJobResponse?> getWashersForJob({
+  static Future<WorkersForJobResponse?> getWashersForJob({
     required String jobId,
   }) async {
     Response response = await RequestFactory.executeGet(
-      endpoint: '/jobs/$jobId/washers',
+      endpoint: '/jobs/jobs/$jobId/washers',
     );
 
     if (response.statusCode == 200) {
-      return WashersForJobResponse.fromJson(
+      return WorkersForJobResponse.fromJson(
         FormattingUtil.decode(response.data),
       );
     }
@@ -439,7 +439,7 @@ class JobsApi {
     required UpdateJobRequest request,
   }) async {
     Response response = await RequestFactory.executePut(
-      endpoint: '/jobs/details/$id',
+      endpoint: '/jobs/jobs/details/$id',
       body: request.toJson(),
     );
 

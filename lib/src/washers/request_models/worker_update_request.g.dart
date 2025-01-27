@@ -1,27 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'washer_update_request.dart';
+part of 'worker_update_request.dart';
 
 // **************************************************************************
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<WasherUpdateRequest> _$washerUpdateRequestSerializer =
-    new _$WasherUpdateRequestSerializer();
+Serializer<WorkerUpdateRequest> _$workerUpdateRequestSerializer =
+    new _$WorkerUpdateRequestSerializer();
 
-class _$WasherUpdateRequestSerializer
-    implements StructuredSerializer<WasherUpdateRequest> {
+class _$WorkerUpdateRequestSerializer
+    implements StructuredSerializer<WorkerUpdateRequest> {
   @override
   final Iterable<Type> types = const [
-    WasherUpdateRequest,
-    _$WasherUpdateRequest
+    WorkerUpdateRequest,
+    _$WorkerUpdateRequest
   ];
   @override
-  final String wireName = 'WasherUpdateRequest';
+  final String wireName = 'WorkerUpdateRequest';
 
   @override
   Iterable<Object?> serialize(
-      Serializers serializers, WasherUpdateRequest object,
+      Serializers serializers, WorkerUpdateRequest object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[];
     Object? value;
@@ -91,10 +91,10 @@ class _$WasherUpdateRequestSerializer
   }
 
   @override
-  WasherUpdateRequest deserialize(
+  WorkerUpdateRequest deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new WasherUpdateRequestBuilder();
+    final result = new WorkerUpdateRequestBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -145,7 +145,7 @@ class _$WasherUpdateRequestSerializer
   }
 }
 
-class _$WasherUpdateRequest extends WasherUpdateRequest {
+class _$WorkerUpdateRequest extends WorkerUpdateRequest {
   @override
   final String? email;
   @override
@@ -165,11 +165,11 @@ class _$WasherUpdateRequest extends WasherUpdateRequest {
   @override
   final String? company;
 
-  factory _$WasherUpdateRequest(
-          [void Function(WasherUpdateRequestBuilder)? updates]) =>
-      (new WasherUpdateRequestBuilder()..update(updates))._build();
+  factory _$WorkerUpdateRequest(
+          [void Function(WorkerUpdateRequestBuilder)? updates]) =>
+      (new WorkerUpdateRequestBuilder()..update(updates))._build();
 
-  _$WasherUpdateRequest._(
+  _$WorkerUpdateRequest._(
       {this.email,
       this.phoneNumber,
       this.firstName,
@@ -182,18 +182,18 @@ class _$WasherUpdateRequest extends WasherUpdateRequest {
       : super._();
 
   @override
-  WasherUpdateRequest rebuild(
-          void Function(WasherUpdateRequestBuilder) updates) =>
+  WorkerUpdateRequest rebuild(
+          void Function(WorkerUpdateRequestBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  WasherUpdateRequestBuilder toBuilder() =>
-      new WasherUpdateRequestBuilder()..replace(this);
+  WorkerUpdateRequestBuilder toBuilder() =>
+      new WorkerUpdateRequestBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is WasherUpdateRequest &&
+    return other is WorkerUpdateRequest &&
         email == other.email &&
         phoneNumber == other.phoneNumber &&
         firstName == other.firstName &&
@@ -223,7 +223,7 @@ class _$WasherUpdateRequest extends WasherUpdateRequest {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(r'WasherUpdateRequest')
+    return (newBuiltValueToStringHelper(r'WorkerUpdateRequest')
           ..add('email', email)
           ..add('phoneNumber', phoneNumber)
           ..add('firstName', firstName)
@@ -237,9 +237,9 @@ class _$WasherUpdateRequest extends WasherUpdateRequest {
   }
 }
 
-class WasherUpdateRequestBuilder
-    implements Builder<WasherUpdateRequest, WasherUpdateRequestBuilder> {
-  _$WasherUpdateRequest? _$v;
+class WorkerUpdateRequestBuilder
+    implements Builder<WorkerUpdateRequest, WorkerUpdateRequestBuilder> {
+  _$WorkerUpdateRequest? _$v;
 
   String? _email;
   String? get email => _$this._email;
@@ -278,9 +278,9 @@ class WasherUpdateRequestBuilder
   String? get company => _$this._company;
   set company(String? company) => _$this._company = company;
 
-  WasherUpdateRequestBuilder();
+  WorkerUpdateRequestBuilder();
 
-  WasherUpdateRequestBuilder get _$this {
+  WorkerUpdateRequestBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _email = $v.email;
@@ -298,24 +298,24 @@ class WasherUpdateRequestBuilder
   }
 
   @override
-  void replace(WasherUpdateRequest other) {
+  void replace(WorkerUpdateRequest other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$WasherUpdateRequest;
+    _$v = other as _$WorkerUpdateRequest;
   }
 
   @override
-  void update(void Function(WasherUpdateRequestBuilder)? updates) {
+  void update(void Function(WorkerUpdateRequestBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  WasherUpdateRequest build() => _build();
+  WorkerUpdateRequest build() => _build();
 
-  _$WasherUpdateRequest _build() {
-    _$WasherUpdateRequest _$result;
+  _$WorkerUpdateRequest _build() {
+    _$WorkerUpdateRequest _$result;
     try {
       _$result = _$v ??
-          new _$WasherUpdateRequest._(
+          new _$WorkerUpdateRequest._(
               email: email,
               phoneNumber: phoneNumber,
               firstName: firstName,
@@ -332,7 +332,7 @@ class WasherUpdateRequestBuilder
         _address?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            r'WasherUpdateRequest', _$failedField, e.toString());
+            r'WorkerUpdateRequest', _$failedField, e.toString());
       }
       rethrow;
     }

@@ -32,8 +32,8 @@ abstract class TimeRegistrationRequest
   @BuiltValueField(wireName: 'customer_signature')
   Uint8List? get customerSignature;
 
-  @BuiltValueField(wireName: 'washer_signature')
-  Uint8List? get washerSignature;
+  @BuiltValueField(wireName: 'worker_signature')
+  Uint8List? get workerSignature;
 
   String toJson() {
     return json.encode(

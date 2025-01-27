@@ -74,7 +74,7 @@ class RequestFactory {
     }
 
     Response response = await executePost(
-      endpoint: '/token/refresh/',
+      endpoint: '/auth/token/refresh/',
       body: {
         'refresh': Configuration.refreshToken,
       },
@@ -89,6 +89,22 @@ class RequestFactory {
     }
   }
 
+  /// Formats the URL to be used in the request.
+  static String formatUrl(String endpoint) {
+    // Add a trailing Backslash if none was set.
+    if (endpoint.endsWith('/')) {
+      endpoint =
+          endpoint.replaceRange(endpoint.length - 1, endpoint.length, '');
+    }
+
+    if (!endpoint.startsWith('/')) {
+      endpoint = '/$endpoint';
+    }
+
+    // Add the configured Api Url
+    return '${Configuration.apiUrl}$endpoint';
+  }
+
   static Future<Response> executeGet({
     required String endpoint,
     bool useToken = true,
@@ -97,7 +113,7 @@ class RequestFactory {
     return await _performCall(
       (Options options) {
         return mainClient.get(
-          '${Configuration.apiUrl}$endpoint',
+          formatUrl(endpoint),
           options: options,
         );
       },
@@ -112,7 +128,7 @@ class RequestFactory {
     return await _performCall(
       (Options options) {
         return mainClient.delete(
-          '${Configuration.apiUrl}$endpoint',
+          formatUrl(endpoint),
           options: options,
         );
       },
@@ -128,7 +144,7 @@ class RequestFactory {
     return await _performCall(
       (Options options) {
         return mainClient.put(
-          '${Configuration.apiUrl}$endpoint',
+          formatUrl(endpoint),
           data: body,
           options: options,
         );
@@ -146,7 +162,7 @@ class RequestFactory {
     return await _performCall(
       (Options options) {
         return mainClient.post(
-          '${Configuration.apiUrl}$endpoint',
+          formatUrl(endpoint),
           data: body,
           options: options,
         );
@@ -165,7 +181,7 @@ class RequestFactory {
     return await _performCall(
       (Options options) {
         return mainClient.post(
-          '${Configuration.apiUrl}$endpoint',
+          formatUrl(endpoint),
           data: body,
           options: options,
         );

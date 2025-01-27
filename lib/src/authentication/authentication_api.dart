@@ -20,7 +20,7 @@ export 'response_models/session_expiry_response.dart';
 class AuthenticationApi {
   static Future<bool> testConnection() async {
     Response response = await RequestFactory.executeGet(
-      endpoint: 'auth/hello/there',
+      endpoint: '/auth/hello/there',
     );
 
     if (response.statusCode == 200) {
@@ -40,7 +40,7 @@ class AuthenticationApi {
     required LoginRequest request,
   }) async {
     Response response = await RequestFactory.executePost(
-      endpoint: '/auth/token',
+      endpoint: '/auth/token/',
       body: request.toJson(),
       useToken: false,
     );
@@ -70,7 +70,7 @@ class AuthenticationApi {
       );
     }
 
-    if (response.statusCode == 301) {
+    if (response.statusCode == 401) {
       throw const GawException(
         title: 'Invalid credentials!',
         message: 'Please check your email password combination.',
@@ -90,7 +90,7 @@ class AuthenticationApi {
     RefreshRequest refreshRequest =
         RefreshRequest((b) => b..refreshToken = refreshToken);
     Response response = await RequestFactory.executePost(
-      endpoint: '/token/refresh',
+      endpoint: '/auth/token/refresh/',
       body: refreshRequest.toJson(),
       useToken: false,
     );
@@ -119,7 +119,7 @@ class AuthenticationApi {
     required EmailRequest request,
   }) async {
     Response response = await RequestFactory.executePost(
-      endpoint: '/auth/password_reset',
+      endpoint: '/auth/password_reset/',
       body: request.toJson(),
       useToken: false,
     );
@@ -135,7 +135,7 @@ class AuthenticationApi {
     required CodeVerificationRequest request,
   }) async {
     Response response = await RequestFactory.executePost(
-      endpoint: '/auth/password_reset/verify',
+      endpoint: '/auth/password_reset/verify/',
       body: request.toJson(),
       useToken: false,
     );
@@ -153,7 +153,7 @@ class AuthenticationApi {
 
   static Future<SessionExpiryResponse?> getExpirySession() async {
     Response response = await RequestFactory.executeGet(
-      endpoint: '/auth/settings/session',
+      endpoint: '/auth/settings/session/',
     );
 
     if (response.statusCode == 200) {
@@ -169,7 +169,7 @@ class AuthenticationApi {
     required int? duration,
   }) async {
     Response response = await RequestFactory.executePost(
-      endpoint: '/auth/settings/session',
+      endpoint: '/auth/settings/session/',
       body: SessionExpiryRequest(
         (b) => b..sessionDuration = duration,
       ).toJson(),

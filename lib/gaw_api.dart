@@ -14,5 +14,5 @@ export 'src/jobs/jobs_api.dart';
 export 'src/notifications/notifications_api.dart';
 export 'src/statistics/statistics_api.dart';
 export 'src/users/users_api.dart';
-export 'src/washers/washers_api.dart';
+export 'src/workers/washers_api.dart';
 export 'src/legal/legal_api.dart';

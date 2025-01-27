@@ -61,10 +61,10 @@ class _$UpdateJobRequestSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.maxWashers;
+    value = object.maxworkers;
     if (value != null) {
       result
-        ..add('max_washers')
+        ..add('max_workers')
         ..add(serializers.serialize(value, specifiedType: const FullType(int)));
     }
     value = object.applicationStartTime;
@@ -125,8 +125,8 @@ class _$UpdateJobRequestSerializer
           result.customerId = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'max_washers':
-          result.maxWashers = serializers.deserialize(value,
+        case 'max_workers':
+          result.maxworkers = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int?;
           break;
         case 'application_start_time':
@@ -162,7 +162,7 @@ class _$UpdateJobRequest extends UpdateJobRequest {
   @override
   final String? customerId;
   @override
-  final int? maxWashers;
+  final int? maxworkers;
   @override
   final int? applicationStartTime;
   @override
@@ -181,7 +181,7 @@ class _$UpdateJobRequest extends UpdateJobRequest {
       this.startTime,
       this.endTime,
       this.customerId,
-      this.maxWashers,
+      this.maxworkers,
       this.applicationStartTime,
       this.applicationEndTime,
       this.isDraft})
@@ -205,7 +205,7 @@ class _$UpdateJobRequest extends UpdateJobRequest {
         startTime == other.startTime &&
         endTime == other.endTime &&
         customerId == other.customerId &&
-        maxWashers == other.maxWashers &&
+        maxworkers == other.maxworkers &&
         applicationStartTime == other.applicationStartTime &&
         applicationEndTime == other.applicationEndTime &&
         isDraft == other.isDraft;
@@ -220,7 +220,7 @@ class _$UpdateJobRequest extends UpdateJobRequest {
     _$hash = $jc(_$hash, startTime.hashCode);
     _$hash = $jc(_$hash, endTime.hashCode);
     _$hash = $jc(_$hash, customerId.hashCode);
-    _$hash = $jc(_$hash, maxWashers.hashCode);
+    _$hash = $jc(_$hash, maxworkers.hashCode);
     _$hash = $jc(_$hash, applicationStartTime.hashCode);
     _$hash = $jc(_$hash, applicationEndTime.hashCode);
     _$hash = $jc(_$hash, isDraft.hashCode);
@@ -237,7 +237,7 @@ class _$UpdateJobRequest extends UpdateJobRequest {
           ..add('startTime', startTime)
           ..add('endTime', endTime)
           ..add('customerId', customerId)
-          ..add('maxWashers', maxWashers)
+          ..add('maxworkers', maxworkers)
           ..add('applicationStartTime', applicationStartTime)
           ..add('applicationEndTime', applicationEndTime)
           ..add('isDraft', isDraft))
@@ -273,9 +273,9 @@ class UpdateJobRequestBuilder
   String? get customerId => _$this._customerId;
   set customerId(String? customerId) => _$this._customerId = customerId;
 
-  int? _maxWashers;
-  int? get maxWashers => _$this._maxWashers;
-  set maxWashers(int? maxWashers) => _$this._maxWashers = maxWashers;
+  int? _maxworkers;
+  int? get maxworkers => _$this._maxworkers;
+  set maxworkers(int? maxworkers) => _$this._maxworkers = maxworkers;
 
   int? _applicationStartTime;
   int? get applicationStartTime => _$this._applicationStartTime;
@@ -302,7 +302,7 @@ class UpdateJobRequestBuilder
       _startTime = $v.startTime;
       _endTime = $v.endTime;
       _customerId = $v.customerId;
-      _maxWashers = $v.maxWashers;
+      _maxworkers = $v.maxworkers;
       _applicationStartTime = $v.applicationStartTime;
       _applicationEndTime = $v.applicationEndTime;
       _isDraft = $v.isDraft;
@@ -336,7 +336,7 @@ class UpdateJobRequestBuilder
               startTime: startTime,
               endTime: endTime,
               customerId: customerId,
-              maxWashers: maxWashers,
+              maxworkers: maxworkers,
               applicationStartTime: applicationStartTime,
               applicationEndTime: applicationEndTime,
               isDraft: isDraft);

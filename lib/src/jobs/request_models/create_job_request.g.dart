@@ -34,8 +34,8 @@ class _$CreateJobRequestSerializer
       'customer_id',
       serializers.serialize(object.customerId,
           specifiedType: const FullType(String)),
-      'max_washers',
-      serializers.serialize(object.maxWashers,
+      'max_workers',
+      serializers.serialize(object.maxworkers,
           specifiedType: const FullType(int)),
     ];
     Object? value;
@@ -104,8 +104,8 @@ class _$CreateJobRequestSerializer
           result.customerId = serializers.deserialize(value,
               specifiedType: const FullType(String))! as String;
           break;
-        case 'max_washers':
-          result.maxWashers = serializers.deserialize(value,
+        case 'max_workers':
+          result.maxworkers = serializers.deserialize(value,
               specifiedType: const FullType(int))! as int;
           break;
         case 'application_start_time':
@@ -141,7 +141,7 @@ class _$CreateJobRequest extends CreateJobRequest {
   @override
   final String customerId;
   @override
-  final int maxWashers;
+  final int maxworkers;
   @override
   final int? applicationStartTime;
   @override
@@ -160,7 +160,7 @@ class _$CreateJobRequest extends CreateJobRequest {
       required this.startTime,
       required this.endTime,
       required this.customerId,
-      required this.maxWashers,
+      required this.maxworkers,
       this.applicationStartTime,
       this.applicationEndTime,
       this.isDraft})
@@ -175,7 +175,7 @@ class _$CreateJobRequest extends CreateJobRequest {
     BuiltValueNullFieldError.checkNotNull(
         customerId, r'CreateJobRequest', 'customerId');
     BuiltValueNullFieldError.checkNotNull(
-        maxWashers, r'CreateJobRequest', 'maxWashers');
+        maxworkers, r'CreateJobRequest', 'maxworkers');
   }
 
   @override
@@ -196,7 +196,7 @@ class _$CreateJobRequest extends CreateJobRequest {
         startTime == other.startTime &&
         endTime == other.endTime &&
         customerId == other.customerId &&
-        maxWashers == other.maxWashers &&
+        maxworkers == other.maxworkers &&
         applicationStartTime == other.applicationStartTime &&
         applicationEndTime == other.applicationEndTime &&
         isDraft == other.isDraft;
@@ -211,7 +211,7 @@ class _$CreateJobRequest extends CreateJobRequest {
     _$hash = $jc(_$hash, startTime.hashCode);
     _$hash = $jc(_$hash, endTime.hashCode);
     _$hash = $jc(_$hash, customerId.hashCode);
-    _$hash = $jc(_$hash, maxWashers.hashCode);
+    _$hash = $jc(_$hash, maxworkers.hashCode);
     _$hash = $jc(_$hash, applicationStartTime.hashCode);
     _$hash = $jc(_$hash, applicationEndTime.hashCode);
     _$hash = $jc(_$hash, isDraft.hashCode);
@@ -228,7 +228,7 @@ class _$CreateJobRequest extends CreateJobRequest {
           ..add('startTime', startTime)
           ..add('endTime', endTime)
           ..add('customerId', customerId)
-          ..add('maxWashers', maxWashers)
+          ..add('maxworkers', maxworkers)
           ..add('applicationStartTime', applicationStartTime)
           ..add('applicationEndTime', applicationEndTime)
           ..add('isDraft', isDraft))
@@ -264,9 +264,9 @@ class CreateJobRequestBuilder
   String? get customerId => _$this._customerId;
   set customerId(String? customerId) => _$this._customerId = customerId;
 
-  int? _maxWashers;
-  int? get maxWashers => _$this._maxWashers;
-  set maxWashers(int? maxWashers) => _$this._maxWashers = maxWashers;
+  int? _maxworkers;
+  int? get maxworkers => _$this._maxworkers;
+  set maxworkers(int? maxworkers) => _$this._maxworkers = maxworkers;
 
   int? _applicationStartTime;
   int? get applicationStartTime => _$this._applicationStartTime;
@@ -293,7 +293,7 @@ class CreateJobRequestBuilder
       _startTime = $v.startTime;
       _endTime = $v.endTime;
       _customerId = $v.customerId;
-      _maxWashers = $v.maxWashers;
+      _maxworkers = $v.maxworkers;
       _applicationStartTime = $v.applicationStartTime;
       _applicationEndTime = $v.applicationEndTime;
       _isDraft = $v.isDraft;
@@ -331,8 +331,8 @@ class CreateJobRequestBuilder
                   endTime, r'CreateJobRequest', 'endTime'),
               customerId: BuiltValueNullFieldError.checkNotNull(
                   customerId, r'CreateJobRequest', 'customerId'),
-              maxWashers: BuiltValueNullFieldError.checkNotNull(
-                  maxWashers, r'CreateJobRequest', 'maxWashers'),
+              maxworkers: BuiltValueNullFieldError.checkNotNull(
+                  maxworkers, r'CreateJobRequest', 'maxworkers'),
               applicationStartTime: applicationStartTime,
               applicationEndTime: applicationEndTime,
               isDraft: isDraft);

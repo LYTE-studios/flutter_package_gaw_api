@@ -4,14 +4,14 @@ import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:gaw_api/gaw_api.dart';
 
-part 'washer_update_request.g.dart';
+part 'worker_update_request.g.dart';
 
-abstract class WasherUpdateRequest
-    implements Built<WasherUpdateRequest, WasherUpdateRequestBuilder> {
-  WasherUpdateRequest._();
+abstract class WorkerUpdateRequest
+    implements Built<WorkerUpdateRequest, WorkerUpdateRequestBuilder> {
+  WorkerUpdateRequest._();
 
-  factory WasherUpdateRequest(
-      [Function(WasherUpdateRequestBuilder b) updates]) = _$WasherUpdateRequest;
+  factory WorkerUpdateRequest(
+      [Function(WorkerUpdateRequestBuilder b) updates]) = _$WorkerUpdateRequest;
 
   @BuiltValueField(wireName: 'email')
   String? get email;
@@ -42,16 +42,16 @@ abstract class WasherUpdateRequest
 
   String toJson() {
     return json.encode(
-        serializers.serializeWith(WasherUpdateRequest.serializer, this));
+        serializers.serializeWith(WorkerUpdateRequest.serializer, this));
   }
 
-  static WasherUpdateRequest? fromJson(Map<String, dynamic> data) {
+  static WorkerUpdateRequest? fromJson(Map<String, dynamic> data) {
     return serializers.deserializeWith(
-      WasherUpdateRequest.serializer,
+      WorkerUpdateRequest.serializer,
       data,
     );
   }
 
-  static Serializer<WasherUpdateRequest> get serializer =>
-      _$washerUpdateRequestSerializer;
+  static Serializer<WorkerUpdateRequest> get serializer =>
+      _$workerUpdateRequestSerializer;
 }

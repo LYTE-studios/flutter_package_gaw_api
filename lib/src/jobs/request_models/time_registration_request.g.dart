@@ -44,10 +44,10 @@ class _$TimeRegistrationRequestSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(Uint8List)));
     }
-    value = object.washerSignature;
+    value = object.workerSignature;
     if (value != null) {
       result
-        ..add('washer_signature')
+        ..add('worker_signature')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(Uint8List)));
     }
@@ -86,8 +86,8 @@ class _$TimeRegistrationRequestSerializer
           result.customerSignature = serializers.deserialize(value,
               specifiedType: const FullType(Uint8List)) as Uint8List?;
           break;
-        case 'washer_signature':
-          result.washerSignature = serializers.deserialize(value,
+        case 'worker_signature':
+          result.workerSignature = serializers.deserialize(value,
               specifiedType: const FullType(Uint8List)) as Uint8List?;
           break;
       }
@@ -109,7 +109,7 @@ class _$TimeRegistrationRequest extends TimeRegistrationRequest {
   @override
   final Uint8List? customerSignature;
   @override
-  final Uint8List? washerSignature;
+  final Uint8List? workerSignature;
 
   factory _$TimeRegistrationRequest(
           [void Function(TimeRegistrationRequestBuilder)? updates]) =>
@@ -121,7 +121,7 @@ class _$TimeRegistrationRequest extends TimeRegistrationRequest {
       required this.endTime,
       required this.breakTime,
       this.customerSignature,
-      this.washerSignature})
+      this.workerSignature})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         jobId, r'TimeRegistrationRequest', 'jobId');
@@ -151,7 +151,7 @@ class _$TimeRegistrationRequest extends TimeRegistrationRequest {
         endTime == other.endTime &&
         breakTime == other.breakTime &&
         customerSignature == other.customerSignature &&
-        washerSignature == other.washerSignature;
+        workerSignature == other.workerSignature;
   }
 
   @override
@@ -162,7 +162,7 @@ class _$TimeRegistrationRequest extends TimeRegistrationRequest {
     _$hash = $jc(_$hash, endTime.hashCode);
     _$hash = $jc(_$hash, breakTime.hashCode);
     _$hash = $jc(_$hash, customerSignature.hashCode);
-    _$hash = $jc(_$hash, washerSignature.hashCode);
+    _$hash = $jc(_$hash, workerSignature.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -175,7 +175,7 @@ class _$TimeRegistrationRequest extends TimeRegistrationRequest {
           ..add('endTime', endTime)
           ..add('breakTime', breakTime)
           ..add('customerSignature', customerSignature)
-          ..add('washerSignature', washerSignature))
+          ..add('workerSignature', workerSignature))
         .toString();
   }
 }
@@ -206,10 +206,10 @@ class TimeRegistrationRequestBuilder
   set customerSignature(Uint8List? customerSignature) =>
       _$this._customerSignature = customerSignature;
 
-  Uint8List? _washerSignature;
-  Uint8List? get washerSignature => _$this._washerSignature;
-  set washerSignature(Uint8List? washerSignature) =>
-      _$this._washerSignature = washerSignature;
+  Uint8List? _workerSignature;
+  Uint8List? get workerSignature => _$this._workerSignature;
+  set workerSignature(Uint8List? workerSignature) =>
+      _$this._workerSignature = workerSignature;
 
   TimeRegistrationRequestBuilder();
 
@@ -221,7 +221,7 @@ class TimeRegistrationRequestBuilder
       _endTime = $v.endTime;
       _breakTime = $v.breakTime;
       _customerSignature = $v.customerSignature;
-      _washerSignature = $v.washerSignature;
+      _workerSignature = $v.workerSignature;
       _$v = null;
     }
     return this;
@@ -253,7 +253,7 @@ class TimeRegistrationRequestBuilder
             breakTime: BuiltValueNullFieldError.checkNotNull(
                 breakTime, r'TimeRegistrationRequest', 'breakTime'),
             customerSignature: customerSignature,
-            washerSignature: washerSignature);
+            workerSignature: workerSignature);
     replace(_$result);
     return _$result;
   }

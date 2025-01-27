@@ -18,7 +18,7 @@ class UsersApi {
   /// Gets the hello there data for a user
   static Future<HelloThereResponse?> helloThere() async {
     Response response = await RequestFactory.executeGet(
-      endpoint: '/hello/there',
+      endpoint: '/auth/hello/there',
     );
 
     if (response.statusCode == 200) {
@@ -30,7 +30,7 @@ class UsersApi {
 
   static Future<MeResponse?> me() async {
     Response response = await RequestFactory.executeGet(
-      endpoint: '/users/me',
+      endpoint: '/auth/users/me',
     );
 
     if (response.statusCode == 200) {
@@ -85,9 +85,10 @@ class UsersApi {
   }
 
   static Future<UpdateUserResponse?> update(
-      UpdateUserRequest updateUser) async {
-    Response response = await RequestFactory.executePost(
-      endpoint: '/users/details/update',
+    UpdateUserRequest updateUser,
+  ) async {
+    Response response = await RequestFactory.executePut(
+      endpoint: '/auth/workers/details/${updateUser.userId}',
       body: updateUser.toJson(),
     );
 
@@ -100,8 +101,8 @@ class UsersApi {
 
   static Future<UpdateLanguageRequest?> updateLanguage(
       UpdateLanguageRequest updateLanguage) async {
-    Response response = await RequestFactory.executePost(
-      endpoint: '/users/settings/language/update',
+    Response response = await RequestFactory.executePut(
+      endpoint: '/auth/users/settings/languages',
       body: updateLanguage.toJson(),
     );
 

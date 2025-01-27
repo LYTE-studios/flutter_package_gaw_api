@@ -1,33 +1,33 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'washers_list_response.dart';
+part of 'workers_list_response.dart';
 
 // **************************************************************************
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<WashersListResponse> _$washersListResponseSerializer =
-    new _$WashersListResponseSerializer();
+Serializer<WorkersListResponse> _$workersListResponseSerializer =
+    new _$WorkersListResponseSerializer();
 
-class _$WashersListResponseSerializer
-    implements StructuredSerializer<WashersListResponse> {
+class _$WorkersListResponseSerializer
+    implements StructuredSerializer<WorkersListResponse> {
   @override
   final Iterable<Type> types = const [
-    WashersListResponse,
-    _$WashersListResponse
+    WorkersListResponse,
+    _$WorkersListResponse
   ];
   @override
-  final String wireName = 'WashersListResponse';
+  final String wireName = 'WorkersListResponse';
 
   @override
   Iterable<Object?> serialize(
-      Serializers serializers, WashersListResponse object,
+      Serializers serializers, WorkersListResponse object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
-      'washers',
-      serializers.serialize(object.washers,
+      'workers',
+      serializers.serialize(object.workers,
           specifiedType:
-              const FullType(BuiltList, const [const FullType(Washer)])),
+              const FullType(BuiltList, const [const FullType(Worker)])),
     ];
     Object? value;
     value = object.itemsPerPage;
@@ -46,10 +46,10 @@ class _$WashersListResponseSerializer
   }
 
   @override
-  WashersListResponse deserialize(
+  WorkersListResponse deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new WashersListResponseBuilder();
+    final result = new WorkersListResponseBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -57,10 +57,10 @@ class _$WashersListResponseSerializer
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
-        case 'washers':
-          result.washers.replace(serializers.deserialize(value,
+        case 'workers':
+          result.workers.replace(serializers.deserialize(value,
                   specifiedType: const FullType(
-                      BuiltList, const [const FullType(Washer)]))!
+                      BuiltList, const [const FullType(Worker)]))!
               as BuiltList<Object?>);
           break;
         case 'items_per_page':
@@ -78,39 +78,39 @@ class _$WashersListResponseSerializer
   }
 }
 
-class _$WashersListResponse extends WashersListResponse {
+class _$WorkersListResponse extends WorkersListResponse {
   @override
-  final BuiltList<Washer> washers;
+  final BuiltList<Worker> workers;
   @override
   final int? itemsPerPage;
   @override
   final int? total;
 
-  factory _$WashersListResponse(
-          [void Function(WashersListResponseBuilder)? updates]) =>
-      (new WashersListResponseBuilder()..update(updates))._build();
+  factory _$WorkersListResponse(
+          [void Function(WorkersListResponseBuilder)? updates]) =>
+      (new WorkersListResponseBuilder()..update(updates))._build();
 
-  _$WashersListResponse._(
-      {required this.washers, this.itemsPerPage, this.total})
+  _$WorkersListResponse._(
+      {required this.workers, this.itemsPerPage, this.total})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        washers, r'WashersListResponse', 'washers');
+        workers, r'WorkersListResponse', 'workers');
   }
 
   @override
-  WashersListResponse rebuild(
-          void Function(WashersListResponseBuilder) updates) =>
+  WorkersListResponse rebuild(
+          void Function(WorkersListResponseBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  WashersListResponseBuilder toBuilder() =>
-      new WashersListResponseBuilder()..replace(this);
+  WorkersListResponseBuilder toBuilder() =>
+      new WorkersListResponseBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is WashersListResponse &&
-        washers == other.washers &&
+    return other is WorkersListResponse &&
+        workers == other.workers &&
         itemsPerPage == other.itemsPerPage &&
         total == other.total;
   }
@@ -118,7 +118,7 @@ class _$WashersListResponse extends WashersListResponse {
   @override
   int get hashCode {
     var _$hash = 0;
-    _$hash = $jc(_$hash, washers.hashCode);
+    _$hash = $jc(_$hash, workers.hashCode);
     _$hash = $jc(_$hash, itemsPerPage.hashCode);
     _$hash = $jc(_$hash, total.hashCode);
     _$hash = $jf(_$hash);
@@ -127,22 +127,22 @@ class _$WashersListResponse extends WashersListResponse {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(r'WashersListResponse')
-          ..add('washers', washers)
+    return (newBuiltValueToStringHelper(r'WorkersListResponse')
+          ..add('workers', workers)
           ..add('itemsPerPage', itemsPerPage)
           ..add('total', total))
         .toString();
   }
 }
 
-class WashersListResponseBuilder
-    implements Builder<WashersListResponse, WashersListResponseBuilder> {
-  _$WashersListResponse? _$v;
+class WorkersListResponseBuilder
+    implements Builder<WorkersListResponse, WorkersListResponseBuilder> {
+  _$WorkersListResponse? _$v;
 
-  ListBuilder<Washer>? _washers;
-  ListBuilder<Washer> get washers =>
-      _$this._washers ??= new ListBuilder<Washer>();
-  set washers(ListBuilder<Washer>? washers) => _$this._washers = washers;
+  ListBuilder<Worker>? _workers;
+  ListBuilder<Worker> get workers =>
+      _$this._workers ??= new ListBuilder<Worker>();
+  set workers(ListBuilder<Worker>? workers) => _$this._workers = workers;
 
   int? _itemsPerPage;
   int? get itemsPerPage => _$this._itemsPerPage;
@@ -152,12 +152,12 @@ class WashersListResponseBuilder
   int? get total => _$this._total;
   set total(int? total) => _$this._total = total;
 
-  WashersListResponseBuilder();
+  WorkersListResponseBuilder();
 
-  WashersListResponseBuilder get _$this {
+  WorkersListResponseBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _washers = $v.washers.toBuilder();
+      _workers = $v.workers.toBuilder();
       _itemsPerPage = $v.itemsPerPage;
       _total = $v.total;
       _$v = null;
@@ -166,35 +166,35 @@ class WashersListResponseBuilder
   }
 
   @override
-  void replace(WashersListResponse other) {
+  void replace(WorkersListResponse other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$WashersListResponse;
+    _$v = other as _$WorkersListResponse;
   }
 
   @override
-  void update(void Function(WashersListResponseBuilder)? updates) {
+  void update(void Function(WorkersListResponseBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  WashersListResponse build() => _build();
+  WorkersListResponse build() => _build();
 
-  _$WashersListResponse _build() {
-    _$WashersListResponse _$result;
+  _$WorkersListResponse _build() {
+    _$WorkersListResponse _$result;
     try {
       _$result = _$v ??
-          new _$WashersListResponse._(
-              washers: washers.build(),
+          new _$WorkersListResponse._(
+              workers: workers.build(),
               itemsPerPage: itemsPerPage,
               total: total);
     } catch (_) {
       late String _$failedField;
       try {
-        _$failedField = 'washers';
-        washers.build();
+        _$failedField = 'workers';
+        workers.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            r'WashersListResponse', _$failedField, e.toString());
+            r'WorkersListResponse', _$failedField, e.toString());
       }
       rethrow;
     }

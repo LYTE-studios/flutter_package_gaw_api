@@ -1,16 +1,16 @@
-library washers_api;
+library Workers_api;
 
 import 'package:dio/dio.dart';
 import 'package:gaw_api/gaw_api.dart';
 import 'package:gaw_api/src/core/utils/request_factory.dart';
 
-export 'models/washer.dart';
-export 'request_models/washer_update_request.dart';
-export 'response_models/washers_list_response.dart';
+export 'models/worker.dart';
+export 'request_models/worker_update_request.dart';
+export 'response_models/workers_list_response.dart';
 
-/// Washers API class
-class WashersApi {
-  static Future<WashersListResponse?> getWashers({
+/// Workers API class
+class WorkersApi {
+  static Future<WorkersListResponse?> getWorkers({
     int? page,
     int? itemCount,
     String? searchTerm,
@@ -24,21 +24,21 @@ class WashersApi {
       prefix = '/registered';
     }
 
-    String url = '$prefix/washers';
+    String url = '$prefix/workers';
 
     if (page != null && itemCount != null) {
-      url = '$prefix/washers/$itemCount/$page';
+      url = '$prefix/workers/$itemCount/$page';
 
       if (sortTerm?.isNotEmpty ?? false) {
         if (ascending) {
-          url = '$prefix/washers/$sortTerm/ascending/$itemCount/$page';
+          url = '$prefix/workers/$sortTerm/ascending/$itemCount/$page';
         } else {
-          url = '$prefix/washers/$sortTerm/descending/$itemCount/$page';
+          url = '$prefix/workers/$sortTerm/descending/$itemCount/$page';
         }
       }
 
       if (searchTerm?.isNotEmpty ?? false) {
-        url = '$prefix/washers/$itemCount/$page/$searchTerm';
+        url = '$prefix/workers/$itemCount/$page/$searchTerm';
       }
     }
 
@@ -47,7 +47,7 @@ class WashersApi {
     );
 
     if (response.statusCode == 200) {
-      return WashersListResponse.fromJson(
+      return WorkersListResponse.fromJson(
         FormattingUtil.decode(response.data),
       );
     }
@@ -55,9 +55,9 @@ class WashersApi {
     throw DioException(requestOptions: RequestOptions(), response: response);
   }
 
-  static Future<void> acceptWasher({required String id}) async {
+  static Future<void> acceptWorker({required String id}) async {
     Response response = await RequestFactory.executePost(
-      endpoint: '/accept/washers/$id',
+      endpoint: '/accept/workers/$id',
     );
 
     if (response.statusCode == 200) {
@@ -67,9 +67,9 @@ class WashersApi {
     throw DioException(requestOptions: RequestOptions(), response: response);
   }
 
-  static Future<void> deleteWasher({required String id}) async {
+  static Future<void> deleteWorker({required String id}) async {
     Response response = await RequestFactory.executeDelete(
-      endpoint: '/washers/details/$id',
+      endpoint: '/workers/details/$id',
     );
 
     if (response.statusCode == 200) {
@@ -79,8 +79,8 @@ class WashersApi {
     throw DioException(requestOptions: RequestOptions(), response: response);
   }
 
-  /// Register a washer
-  static Future<IdResponse?> registerWasher(
+  /// Register a Worker
+  static Future<IdResponse?> registerWorker(
       {required RegisterRequest request}) async {
     Response response = await RequestFactory.executePost(
       endpoint: '/auth/workers/register',
@@ -102,12 +102,12 @@ class WashersApi {
     throw DioException(requestOptions: RequestOptions(), response: response);
   }
 
-  static Future<void> updateWasher({
+  static Future<void> updateWorker({
     required String id,
-    required WasherUpdateRequest request,
+    required WorkerUpdateRequest request,
   }) async {
     Response response = await RequestFactory.executePut(
-      endpoint: '/washers/details/$id',
+      endpoint: '/workers/details/$id',
       body: request.toJson(),
     );
 
@@ -118,13 +118,13 @@ class WashersApi {
     throw DioException(requestOptions: RequestOptions(), response: response);
   }
 
-  static Future<Washer?> getWasher({required String id}) async {
+  static Future<Worker?> getWorker({required String id}) async {
     Response response = await RequestFactory.executeGet(
-      endpoint: '/washers/details/$id',
+      endpoint: '/workers/details/$id',
     );
 
     if (response.statusCode == 200) {
-      return Washer.fromJson(
+      return Worker.fromJson(
         FormattingUtil.decode(response.data),
       );
     }
@@ -135,7 +135,7 @@ class WashersApi {
   static Future<WeeklyStatisticsListResponse?> getWeeklyStatistics(
       {required StatsRequest request}) async {
     Response response = await RequestFactory.executePost(
-      endpoint: '/washers/statistics/me',
+      endpoint: '/workers/statistics/me',
       body: request.toJson(),
     );
 
@@ -150,7 +150,7 @@ class WashersApi {
   static Future<YearlyStatisticsListResponse?> getYearlyStatistics(
       {required StatsRequest request}) async {
     Response response = await RequestFactory.executePost(
-      endpoint: '/washers/statistics/me',
+      endpoint: '/workers/statistics/me',
       body: request.toJson(),
     );
 

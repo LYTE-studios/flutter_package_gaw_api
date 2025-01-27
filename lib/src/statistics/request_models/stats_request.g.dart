@@ -19,8 +19,8 @@ class _$StatsRequestSerializer implements StructuredSerializer<StatsRequest> {
   Iterable<Object?> serialize(Serializers serializers, StatsRequest object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
-      'washer_id',
-      serializers.serialize(object.washerId,
+      'worker_id',
+      serializers.serialize(object.workerId,
           specifiedType: const FullType(String)),
       'time_frame',
       serializers.serialize(object.timeFrame,
@@ -42,8 +42,8 @@ class _$StatsRequestSerializer implements StructuredSerializer<StatsRequest> {
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
-        case 'washer_id':
-          result.washerId = serializers.deserialize(value,
+        case 'worker_id':
+          result.workerId = serializers.deserialize(value,
               specifiedType: const FullType(String))! as String;
           break;
         case 'time_frame':
@@ -59,17 +59,17 @@ class _$StatsRequestSerializer implements StructuredSerializer<StatsRequest> {
 
 class _$StatsRequest extends StatsRequest {
   @override
-  final String washerId;
+  final String workerId;
   @override
   final TimeFrame timeFrame;
 
   factory _$StatsRequest([void Function(StatsRequestBuilder)? updates]) =>
       (new StatsRequestBuilder()..update(updates))._build();
 
-  _$StatsRequest._({required this.washerId, required this.timeFrame})
+  _$StatsRequest._({required this.workerId, required this.timeFrame})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        washerId, r'StatsRequest', 'washerId');
+        workerId, r'StatsRequest', 'workerId');
     BuiltValueNullFieldError.checkNotNull(
         timeFrame, r'StatsRequest', 'timeFrame');
   }
@@ -85,14 +85,14 @@ class _$StatsRequest extends StatsRequest {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is StatsRequest &&
-        washerId == other.washerId &&
+        workerId == other.workerId &&
         timeFrame == other.timeFrame;
   }
 
   @override
   int get hashCode {
     var _$hash = 0;
-    _$hash = $jc(_$hash, washerId.hashCode);
+    _$hash = $jc(_$hash, workerId.hashCode);
     _$hash = $jc(_$hash, timeFrame.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -101,7 +101,7 @@ class _$StatsRequest extends StatsRequest {
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'StatsRequest')
-          ..add('washerId', washerId)
+          ..add('workerId', workerId)
           ..add('timeFrame', timeFrame))
         .toString();
   }
@@ -111,9 +111,9 @@ class StatsRequestBuilder
     implements Builder<StatsRequest, StatsRequestBuilder> {
   _$StatsRequest? _$v;
 
-  String? _washerId;
-  String? get washerId => _$this._washerId;
-  set washerId(String? washerId) => _$this._washerId = washerId;
+  String? _workerId;
+  String? get workerId => _$this._workerId;
+  set workerId(String? workerId) => _$this._workerId = workerId;
 
   TimeFrame? _timeFrame;
   TimeFrame? get timeFrame => _$this._timeFrame;
@@ -124,7 +124,7 @@ class StatsRequestBuilder
   StatsRequestBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _washerId = $v.washerId;
+      _workerId = $v.workerId;
       _timeFrame = $v.timeFrame;
       _$v = null;
     }
@@ -148,8 +148,8 @@ class StatsRequestBuilder
   _$StatsRequest _build() {
     final _$result = _$v ??
         new _$StatsRequest._(
-            washerId: BuiltValueNullFieldError.checkNotNull(
-                washerId, r'StatsRequest', 'washerId'),
+            workerId: BuiltValueNullFieldError.checkNotNull(
+                workerId, r'StatsRequest', 'workerId'),
             timeFrame: BuiltValueNullFieldError.checkNotNull(
                 timeFrame, r'StatsRequest', 'timeFrame'));
     replace(_$result);

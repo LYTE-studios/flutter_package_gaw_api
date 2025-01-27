@@ -38,10 +38,10 @@ abstract class Job implements Built<Job, JobBuilder> {
   @BuiltValueField(wireName: 'application_end_time')
   int? get applicationEndTime;
 
-  @BuiltValueField(wireName: 'max_washers')
-  int get maxWashers;
+  @BuiltValueField(wireName: 'max_workers')
+  int get maxWorkers;
 
-  @BuiltValueField(wireName: 'selected_washers')
+  @BuiltValueField(wireName: 'selected_workers')
   int get selectedWashers;
 
   @BuiltValueField(wireName: 'is_draft')

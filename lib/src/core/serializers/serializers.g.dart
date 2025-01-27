@@ -59,12 +59,12 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(UpdateUserRequest.serializer)
       ..add(UpdateUserResponse.serializer)
       ..add(UserBasedJobsRequest.serializer)
-      ..add(Washer.serializer)
-      ..add(WasherUpdateRequest.serializer)
-      ..add(WashersForJobResponse.serializer)
-      ..add(WashersListResponse.serializer)
       ..add(WeeklyStatistics.serializer)
       ..add(WeeklyStatisticsListResponse.serializer)
+      ..add(Worker.serializer)
+      ..add(WorkerUpdateRequest.serializer)
+      ..add(WorkersForJobResponse.serializer)
+      ..add(WorkersListResponse.serializer)
       ..add(YearlyStatistics.serializer)
       ..add(YearlyStatisticsListResponse.serializer)
       ..addBuilderFactory(
@@ -92,17 +92,17 @@ Serializers _$serializers = (new Serializers().toBuilder()
           const FullType(BuiltList, const [const FullType(TimeRegistration)]),
           () => new ListBuilder<TimeRegistration>())
       ..addBuilderFactory(
-          const FullType(BuiltList, const [const FullType(Washer)]),
-          () => new ListBuilder<Washer>())
+          const FullType(BuiltList, const [const FullType(WeeklyStatistics)]),
+          () => new ListBuilder<WeeklyStatistics>())
       ..addBuilderFactory(
-          const FullType(BuiltList, const [const FullType(Washer)]),
-          () => new ListBuilder<Washer>())
+          const FullType(BuiltList, const [const FullType(Worker)]),
+          () => new ListBuilder<Worker>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(Worker)]),
+          () => new ListBuilder<Worker>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(TimeRegistration)]),
           () => new ListBuilder<TimeRegistration>())
-      ..addBuilderFactory(
-          const FullType(BuiltList, const [const FullType(WeeklyStatistics)]),
-          () => new ListBuilder<WeeklyStatistics>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(YearlyStatistics)]),
           () => new ListBuilder<YearlyStatistics>())

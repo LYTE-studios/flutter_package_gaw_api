@@ -36,17 +36,17 @@ class _$TimeRegistrationSerializer
         ..add('end_time')
         ..add(serializers.serialize(value, specifiedType: const FullType(int)));
     }
-    value = object.washer;
+    value = object.worker;
     if (value != null) {
       result
-        ..add('washer')
+        ..add('worker')
         ..add(serializers.serialize(value,
-            specifiedType: const FullType(Washer)));
+            specifiedType: const FullType(Worker)));
     }
-    value = object.washerSignatureUrl;
+    value = object.workerSignatureUrl;
     if (value != null) {
       result
-        ..add('washer_signature')
+        ..add('worker_signature')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
@@ -90,12 +90,12 @@ class _$TimeRegistrationSerializer
           result.endTime = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int?;
           break;
-        case 'washer':
-          result.washer.replace(serializers.deserialize(value,
-              specifiedType: const FullType(Washer))! as Washer);
+        case 'worker':
+          result.worker.replace(serializers.deserialize(value,
+              specifiedType: const FullType(Worker))! as Worker);
           break;
-        case 'washer_signature':
-          result.washerSignatureUrl = serializers.deserialize(value,
+        case 'worker_signature':
+          result.workerSignatureUrl = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
         case 'customer_signature':
@@ -121,9 +121,9 @@ class _$TimeRegistration extends TimeRegistration {
   @override
   final int? endTime;
   @override
-  final Washer? washer;
+  final Worker? worker;
   @override
-  final String? washerSignatureUrl;
+  final String? workerSignatureUrl;
   @override
   final String? customerSignatureUrl;
   @override
@@ -137,8 +137,8 @@ class _$TimeRegistration extends TimeRegistration {
       {required this.id,
       this.startTime,
       this.endTime,
-      this.washer,
-      this.washerSignatureUrl,
+      this.worker,
+      this.workerSignatureUrl,
       this.customerSignatureUrl,
       this.breakTime})
       : super._() {
@@ -160,8 +160,8 @@ class _$TimeRegistration extends TimeRegistration {
         id == other.id &&
         startTime == other.startTime &&
         endTime == other.endTime &&
-        washer == other.washer &&
-        washerSignatureUrl == other.washerSignatureUrl &&
+        worker == other.worker &&
+        workerSignatureUrl == other.workerSignatureUrl &&
         customerSignatureUrl == other.customerSignatureUrl &&
         breakTime == other.breakTime;
   }
@@ -172,8 +172,8 @@ class _$TimeRegistration extends TimeRegistration {
     _$hash = $jc(_$hash, id.hashCode);
     _$hash = $jc(_$hash, startTime.hashCode);
     _$hash = $jc(_$hash, endTime.hashCode);
-    _$hash = $jc(_$hash, washer.hashCode);
-    _$hash = $jc(_$hash, washerSignatureUrl.hashCode);
+    _$hash = $jc(_$hash, worker.hashCode);
+    _$hash = $jc(_$hash, workerSignatureUrl.hashCode);
     _$hash = $jc(_$hash, customerSignatureUrl.hashCode);
     _$hash = $jc(_$hash, breakTime.hashCode);
     _$hash = $jf(_$hash);
@@ -186,8 +186,8 @@ class _$TimeRegistration extends TimeRegistration {
           ..add('id', id)
           ..add('startTime', startTime)
           ..add('endTime', endTime)
-          ..add('washer', washer)
-          ..add('washerSignatureUrl', washerSignatureUrl)
+          ..add('worker', worker)
+          ..add('workerSignatureUrl', workerSignatureUrl)
           ..add('customerSignatureUrl', customerSignatureUrl)
           ..add('breakTime', breakTime))
         .toString();
@@ -210,14 +210,14 @@ class TimeRegistrationBuilder
   int? get endTime => _$this._endTime;
   set endTime(int? endTime) => _$this._endTime = endTime;
 
-  WasherBuilder? _washer;
-  WasherBuilder get washer => _$this._washer ??= new WasherBuilder();
-  set washer(WasherBuilder? washer) => _$this._washer = washer;
+  WorkerBuilder? _worker;
+  WorkerBuilder get worker => _$this._worker ??= new WorkerBuilder();
+  set worker(WorkerBuilder? worker) => _$this._worker = worker;
 
-  String? _washerSignatureUrl;
-  String? get washerSignatureUrl => _$this._washerSignatureUrl;
-  set washerSignatureUrl(String? washerSignatureUrl) =>
-      _$this._washerSignatureUrl = washerSignatureUrl;
+  String? _workerSignatureUrl;
+  String? get workerSignatureUrl => _$this._workerSignatureUrl;
+  set workerSignatureUrl(String? workerSignatureUrl) =>
+      _$this._workerSignatureUrl = workerSignatureUrl;
 
   String? _customerSignatureUrl;
   String? get customerSignatureUrl => _$this._customerSignatureUrl;
@@ -236,8 +236,8 @@ class TimeRegistrationBuilder
       _id = $v.id;
       _startTime = $v.startTime;
       _endTime = $v.endTime;
-      _washer = $v.washer?.toBuilder();
-      _washerSignatureUrl = $v.washerSignatureUrl;
+      _worker = $v.worker?.toBuilder();
+      _workerSignatureUrl = $v.workerSignatureUrl;
       _customerSignatureUrl = $v.customerSignatureUrl;
       _breakTime = $v.breakTime;
       _$v = null;
@@ -268,15 +268,15 @@ class TimeRegistrationBuilder
                   id, r'TimeRegistration', 'id'),
               startTime: startTime,
               endTime: endTime,
-              washer: _washer?.build(),
-              washerSignatureUrl: washerSignatureUrl,
+              worker: _worker?.build(),
+              workerSignatureUrl: workerSignatureUrl,
               customerSignatureUrl: customerSignatureUrl,
               breakTime: breakTime);
     } catch (_) {
       late String _$failedField;
       try {
-        _$failedField = 'washer';
-        _washer?.build();
+        _$failedField = 'worker';
+        _worker?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             r'TimeRegistration', _$failedField, e.toString());

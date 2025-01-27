@@ -24,11 +24,11 @@ abstract class TimeRegistration
   @BuiltValueField(wireName: 'end_time')
   int? get endTime;
 
-  @BuiltValueField(wireName: 'washer')
-  Washer? get washer;
+  @BuiltValueField(wireName: 'worker')
+  Worker? get worker;
 
-  @BuiltValueField(wireName: 'washer_signature')
-  String? get washerSignatureUrl;
+  @BuiltValueField(wireName: 'worker_signature')
+  String? get workerSignatureUrl;
 
   @BuiltValueField(wireName: 'customer_signature')
   String? get customerSignatureUrl;

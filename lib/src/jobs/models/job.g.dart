@@ -26,10 +26,10 @@ class _$JobSerializer implements StructuredSerializer<Job> {
           specifiedType: const FullType(int)),
       'end_time',
       serializers.serialize(object.endTime, specifiedType: const FullType(int)),
-      'max_washers',
-      serializers.serialize(object.maxWashers,
+      'max_workers',
+      serializers.serialize(object.maxWorkers,
           specifiedType: const FullType(int)),
-      'selected_washers',
+      'selected_workers',
       serializers.serialize(object.selectedWashers,
           specifiedType: const FullType(int)),
       'state',
@@ -134,11 +134,11 @@ class _$JobSerializer implements StructuredSerializer<Job> {
           result.applicationEndTime = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int?;
           break;
-        case 'max_washers':
-          result.maxWashers = serializers.deserialize(value,
+        case 'max_workers':
+          result.maxWorkers = serializers.deserialize(value,
               specifiedType: const FullType(int))! as int;
           break;
-        case 'selected_washers':
+        case 'selected_workers':
           result.selectedWashers = serializers.deserialize(value,
               specifiedType: const FullType(int))! as int;
           break;
@@ -185,7 +185,7 @@ class _$Job extends Job {
   @override
   final int? applicationEndTime;
   @override
-  final int maxWashers;
+  final int maxWorkers;
   @override
   final int selectedWashers;
   @override
@@ -209,7 +209,7 @@ class _$Job extends Job {
       required this.endTime,
       this.applicationStartTime,
       this.applicationEndTime,
-      required this.maxWashers,
+      required this.maxWorkers,
       required this.selectedWashers,
       this.isDraft,
       required this.state,
@@ -219,7 +219,7 @@ class _$Job extends Job {
     BuiltValueNullFieldError.checkNotNull(address, r'Job', 'address');
     BuiltValueNullFieldError.checkNotNull(startTime, r'Job', 'startTime');
     BuiltValueNullFieldError.checkNotNull(endTime, r'Job', 'endTime');
-    BuiltValueNullFieldError.checkNotNull(maxWashers, r'Job', 'maxWashers');
+    BuiltValueNullFieldError.checkNotNull(maxWorkers, r'Job', 'maxWorkers');
     BuiltValueNullFieldError.checkNotNull(
         selectedWashers, r'Job', 'selectedWashers');
     BuiltValueNullFieldError.checkNotNull(state, r'Job', 'state');
@@ -245,7 +245,7 @@ class _$Job extends Job {
         endTime == other.endTime &&
         applicationStartTime == other.applicationStartTime &&
         applicationEndTime == other.applicationEndTime &&
-        maxWashers == other.maxWashers &&
+        maxWorkers == other.maxWorkers &&
         selectedWashers == other.selectedWashers &&
         isDraft == other.isDraft &&
         state == other.state &&
@@ -264,7 +264,7 @@ class _$Job extends Job {
     _$hash = $jc(_$hash, endTime.hashCode);
     _$hash = $jc(_$hash, applicationStartTime.hashCode);
     _$hash = $jc(_$hash, applicationEndTime.hashCode);
-    _$hash = $jc(_$hash, maxWashers.hashCode);
+    _$hash = $jc(_$hash, maxWorkers.hashCode);
     _$hash = $jc(_$hash, selectedWashers.hashCode);
     _$hash = $jc(_$hash, isDraft.hashCode);
     _$hash = $jc(_$hash, state.hashCode);
@@ -285,7 +285,7 @@ class _$Job extends Job {
           ..add('endTime', endTime)
           ..add('applicationStartTime', applicationStartTime)
           ..add('applicationEndTime', applicationEndTime)
-          ..add('maxWashers', maxWashers)
+          ..add('maxWorkers', maxWorkers)
           ..add('selectedWashers', selectedWashers)
           ..add('isDraft', isDraft)
           ..add('state', state)
@@ -332,9 +332,9 @@ class JobBuilder implements Builder<Job, JobBuilder> {
   set applicationEndTime(int? applicationEndTime) =>
       _$this._applicationEndTime = applicationEndTime;
 
-  int? _maxWashers;
-  int? get maxWashers => _$this._maxWashers;
-  set maxWashers(int? maxWashers) => _$this._maxWashers = maxWashers;
+  int? _maxWorkers;
+  int? get maxWorkers => _$this._maxWorkers;
+  set maxWorkers(int? maxWorkers) => _$this._maxWorkers = maxWorkers;
 
   int? _selectedWashers;
   int? get selectedWashers => _$this._selectedWashers;
@@ -372,7 +372,7 @@ class JobBuilder implements Builder<Job, JobBuilder> {
       _endTime = $v.endTime;
       _applicationStartTime = $v.applicationStartTime;
       _applicationEndTime = $v.applicationEndTime;
-      _maxWashers = $v.maxWashers;
+      _maxWorkers = $v.maxWorkers;
       _selectedWashers = $v.selectedWashers;
       _isDraft = $v.isDraft;
       _state = $v.state;
@@ -412,8 +412,8 @@ class JobBuilder implements Builder<Job, JobBuilder> {
                   endTime, r'Job', 'endTime'),
               applicationStartTime: applicationStartTime,
               applicationEndTime: applicationEndTime,
-              maxWashers: BuiltValueNullFieldError.checkNotNull(
-                  maxWashers, r'Job', 'maxWashers'),
+              maxWorkers: BuiltValueNullFieldError.checkNotNull(
+                  maxWorkers, r'Job', 'maxWorkers'),
               selectedWashers: BuiltValueNullFieldError.checkNotNull(
                   selectedWashers, r'Job', 'selectedWashers'),
               isDraft: isDraft,

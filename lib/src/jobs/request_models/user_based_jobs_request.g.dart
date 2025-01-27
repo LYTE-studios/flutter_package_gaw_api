@@ -25,10 +25,10 @@ class _$UserBasedJobsRequestSerializer
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[];
     Object? value;
-    value = object.washerId;
+    value = object.workerId;
     if (value != null) {
       result
-        ..add('washer_id')
+        ..add('worker_id')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
@@ -54,8 +54,8 @@ class _$UserBasedJobsRequestSerializer
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
-        case 'washer_id':
-          result.washerId = serializers.deserialize(value,
+        case 'worker_id':
+          result.workerId = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
         case 'customer_id':
@@ -71,7 +71,7 @@ class _$UserBasedJobsRequestSerializer
 
 class _$UserBasedJobsRequest extends UserBasedJobsRequest {
   @override
-  final String? washerId;
+  final String? workerId;
   @override
   final String? customerId;
 
@@ -79,7 +79,7 @@ class _$UserBasedJobsRequest extends UserBasedJobsRequest {
           [void Function(UserBasedJobsRequestBuilder)? updates]) =>
       (new UserBasedJobsRequestBuilder()..update(updates))._build();
 
-  _$UserBasedJobsRequest._({this.washerId, this.customerId}) : super._();
+  _$UserBasedJobsRequest._({this.workerId, this.customerId}) : super._();
 
   @override
   UserBasedJobsRequest rebuild(
@@ -94,14 +94,14 @@ class _$UserBasedJobsRequest extends UserBasedJobsRequest {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is UserBasedJobsRequest &&
-        washerId == other.washerId &&
+        workerId == other.workerId &&
         customerId == other.customerId;
   }
 
   @override
   int get hashCode {
     var _$hash = 0;
-    _$hash = $jc(_$hash, washerId.hashCode);
+    _$hash = $jc(_$hash, workerId.hashCode);
     _$hash = $jc(_$hash, customerId.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -110,7 +110,7 @@ class _$UserBasedJobsRequest extends UserBasedJobsRequest {
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'UserBasedJobsRequest')
-          ..add('washerId', washerId)
+          ..add('workerId', workerId)
           ..add('customerId', customerId))
         .toString();
   }
@@ -120,9 +120,9 @@ class UserBasedJobsRequestBuilder
     implements Builder<UserBasedJobsRequest, UserBasedJobsRequestBuilder> {
   _$UserBasedJobsRequest? _$v;
 
-  String? _washerId;
-  String? get washerId => _$this._washerId;
-  set washerId(String? washerId) => _$this._washerId = washerId;
+  String? _workerId;
+  String? get workerId => _$this._workerId;
+  set workerId(String? workerId) => _$this._workerId = workerId;
 
   String? _customerId;
   String? get customerId => _$this._customerId;
@@ -133,7 +133,7 @@ class UserBasedJobsRequestBuilder
   UserBasedJobsRequestBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _washerId = $v.washerId;
+      _workerId = $v.workerId;
       _customerId = $v.customerId;
       _$v = null;
     }
@@ -157,7 +157,7 @@ class UserBasedJobsRequestBuilder
   _$UserBasedJobsRequest _build() {
     final _$result = _$v ??
         new _$UserBasedJobsRequest._(
-            washerId: washerId, customerId: customerId);
+            workerId: workerId, customerId: customerId);
     replace(_$result);
     return _$result;
   }

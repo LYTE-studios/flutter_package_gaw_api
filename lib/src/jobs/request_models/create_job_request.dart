@@ -33,8 +33,8 @@ abstract class CreateJobRequest
   @BuiltValueField(wireName: 'customer_id')
   String get customerId;
 
-  @BuiltValueField(wireName: 'max_washers')
-  int get maxWashers;
+  @BuiltValueField(wireName: 'max_workers')
+  int get maxworkers;
 
   @BuiltValueField(wireName: 'application_start_time')
   int? get applicationStartTime;

@@ -1,21 +1,21 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'washer.dart';
+part of 'worker.dart';
 
 // **************************************************************************
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<Washer> _$washerSerializer = new _$WasherSerializer();
+Serializer<Worker> _$workerSerializer = new _$WorkerSerializer();
 
-class _$WasherSerializer implements StructuredSerializer<Washer> {
+class _$WorkerSerializer implements StructuredSerializer<Worker> {
   @override
-  final Iterable<Type> types = const [Washer, _$Washer];
+  final Iterable<Type> types = const [Worker, _$Worker];
   @override
-  final String wireName = 'Washer';
+  final String wireName = 'Worker';
 
   @override
-  Iterable<Object?> serialize(Serializers serializers, Washer object,
+  Iterable<Object?> serialize(Serializers serializers, Worker object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
       'first_name',
@@ -43,10 +43,10 @@ class _$WasherSerializer implements StructuredSerializer<Washer> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.taxNumber;
+    value = object.iban;
     if (value != null) {
       result
-        ..add('tax_number')
+        ..add('iban')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
@@ -71,10 +71,10 @@ class _$WasherSerializer implements StructuredSerializer<Washer> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.company;
+    value = object.ssn;
     if (value != null) {
       result
-        ..add('company')
+        ..add('ssn')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
@@ -97,13 +97,6 @@ class _$WasherSerializer implements StructuredSerializer<Washer> {
         ..add('date_of_birth')
         ..add(serializers.serialize(value, specifiedType: const FullType(int)));
     }
-    value = object.hours;
-    if (value != null) {
-      result
-        ..add('hours')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(double)));
-    }
     value = object.placeOfBirth;
     if (value != null) {
       result
@@ -115,9 +108,9 @@ class _$WasherSerializer implements StructuredSerializer<Washer> {
   }
 
   @override
-  Washer deserialize(Serializers serializers, Iterable<Object?> serialized,
+  Worker deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new WasherBuilder();
+    final result = new WorkerBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -141,8 +134,8 @@ class _$WasherSerializer implements StructuredSerializer<Washer> {
           result.phoneNumber = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'tax_number':
-          result.taxNumber = serializers.deserialize(value,
+        case 'iban':
+          result.iban = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
         case 'email':
@@ -161,8 +154,8 @@ class _$WasherSerializer implements StructuredSerializer<Washer> {
           result.initials = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'company':
-          result.company = serializers.deserialize(value,
+        case 'ssn':
+          result.ssn = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
         case 'billing_address':
@@ -177,10 +170,6 @@ class _$WasherSerializer implements StructuredSerializer<Washer> {
           result.dateOfBirth = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int?;
           break;
-        case 'hours':
-          result.hours = serializers.deserialize(value,
-              specifiedType: const FullType(double)) as double?;
-          break;
         case 'place_of_birth':
           result.placeOfBirth = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
@@ -192,7 +181,7 @@ class _$WasherSerializer implements StructuredSerializer<Washer> {
   }
 }
 
-class _$Washer extends Washer {
+class _$Worker extends Worker {
   @override
   final String? id;
   @override
@@ -202,7 +191,7 @@ class _$Washer extends Washer {
   @override
   final String? phoneNumber;
   @override
-  final String? taxNumber;
+  final String? iban;
   @override
   final String email;
   @override
@@ -212,7 +201,7 @@ class _$Washer extends Washer {
   @override
   final String? initials;
   @override
-  final String? company;
+  final String? ssn;
   @override
   final Address? billingAddress;
   @override
@@ -220,60 +209,56 @@ class _$Washer extends Washer {
   @override
   final int? dateOfBirth;
   @override
-  final double? hours;
-  @override
   final String? placeOfBirth;
 
-  factory _$Washer([void Function(WasherBuilder)? updates]) =>
-      (new WasherBuilder()..update(updates))._build();
+  factory _$Worker([void Function(WorkerBuilder)? updates]) =>
+      (new WorkerBuilder()..update(updates))._build();
 
-  _$Washer._(
+  _$Worker._(
       {this.id,
       required this.firstName,
       required this.lastName,
       this.phoneNumber,
-      this.taxNumber,
+      this.iban,
       required this.email,
       this.address,
       this.profilePictureUrl,
       this.initials,
-      this.company,
+      this.ssn,
       this.billingAddress,
       this.createdAt,
       this.dateOfBirth,
-      this.hours,
       this.placeOfBirth})
       : super._() {
-    BuiltValueNullFieldError.checkNotNull(firstName, r'Washer', 'firstName');
-    BuiltValueNullFieldError.checkNotNull(lastName, r'Washer', 'lastName');
-    BuiltValueNullFieldError.checkNotNull(email, r'Washer', 'email');
+    BuiltValueNullFieldError.checkNotNull(firstName, r'Worker', 'firstName');
+    BuiltValueNullFieldError.checkNotNull(lastName, r'Worker', 'lastName');
+    BuiltValueNullFieldError.checkNotNull(email, r'Worker', 'email');
   }
 
   @override
-  Washer rebuild(void Function(WasherBuilder) updates) =>
+  Worker rebuild(void Function(WorkerBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  WasherBuilder toBuilder() => new WasherBuilder()..replace(this);
+  WorkerBuilder toBuilder() => new WorkerBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is Washer &&
+    return other is Worker &&
         id == other.id &&
         firstName == other.firstName &&
         lastName == other.lastName &&
         phoneNumber == other.phoneNumber &&
-        taxNumber == other.taxNumber &&
+        iban == other.iban &&
         email == other.email &&
         address == other.address &&
         profilePictureUrl == other.profilePictureUrl &&
         initials == other.initials &&
-        company == other.company &&
+        ssn == other.ssn &&
         billingAddress == other.billingAddress &&
         createdAt == other.createdAt &&
         dateOfBirth == other.dateOfBirth &&
-        hours == other.hours &&
         placeOfBirth == other.placeOfBirth;
   }
 
@@ -284,16 +269,15 @@ class _$Washer extends Washer {
     _$hash = $jc(_$hash, firstName.hashCode);
     _$hash = $jc(_$hash, lastName.hashCode);
     _$hash = $jc(_$hash, phoneNumber.hashCode);
-    _$hash = $jc(_$hash, taxNumber.hashCode);
+    _$hash = $jc(_$hash, iban.hashCode);
     _$hash = $jc(_$hash, email.hashCode);
     _$hash = $jc(_$hash, address.hashCode);
     _$hash = $jc(_$hash, profilePictureUrl.hashCode);
     _$hash = $jc(_$hash, initials.hashCode);
-    _$hash = $jc(_$hash, company.hashCode);
+    _$hash = $jc(_$hash, ssn.hashCode);
     _$hash = $jc(_$hash, billingAddress.hashCode);
     _$hash = $jc(_$hash, createdAt.hashCode);
     _$hash = $jc(_$hash, dateOfBirth.hashCode);
-    _$hash = $jc(_$hash, hours.hashCode);
     _$hash = $jc(_$hash, placeOfBirth.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -301,28 +285,27 @@ class _$Washer extends Washer {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(r'Washer')
+    return (newBuiltValueToStringHelper(r'Worker')
           ..add('id', id)
           ..add('firstName', firstName)
           ..add('lastName', lastName)
           ..add('phoneNumber', phoneNumber)
-          ..add('taxNumber', taxNumber)
+          ..add('iban', iban)
           ..add('email', email)
           ..add('address', address)
           ..add('profilePictureUrl', profilePictureUrl)
           ..add('initials', initials)
-          ..add('company', company)
+          ..add('ssn', ssn)
           ..add('billingAddress', billingAddress)
           ..add('createdAt', createdAt)
           ..add('dateOfBirth', dateOfBirth)
-          ..add('hours', hours)
           ..add('placeOfBirth', placeOfBirth))
         .toString();
   }
 }
 
-class WasherBuilder implements Builder<Washer, WasherBuilder> {
-  _$Washer? _$v;
+class WorkerBuilder implements Builder<Worker, WorkerBuilder> {
+  _$Worker? _$v;
 
   String? _id;
   String? get id => _$this._id;
@@ -340,9 +323,9 @@ class WasherBuilder implements Builder<Washer, WasherBuilder> {
   String? get phoneNumber => _$this._phoneNumber;
   set phoneNumber(String? phoneNumber) => _$this._phoneNumber = phoneNumber;
 
-  String? _taxNumber;
-  String? get taxNumber => _$this._taxNumber;
-  set taxNumber(String? taxNumber) => _$this._taxNumber = taxNumber;
+  String? _iban;
+  String? get iban => _$this._iban;
+  set iban(String? iban) => _$this._iban = iban;
 
   String? _email;
   String? get email => _$this._email;
@@ -361,9 +344,9 @@ class WasherBuilder implements Builder<Washer, WasherBuilder> {
   String? get initials => _$this._initials;
   set initials(String? initials) => _$this._initials = initials;
 
-  String? _company;
-  String? get company => _$this._company;
-  set company(String? company) => _$this._company = company;
+  String? _ssn;
+  String? get ssn => _$this._ssn;
+  set ssn(String? ssn) => _$this._ssn = ssn;
 
   AddressBuilder? _billingAddress;
   AddressBuilder get billingAddress =>
@@ -379,33 +362,28 @@ class WasherBuilder implements Builder<Washer, WasherBuilder> {
   int? get dateOfBirth => _$this._dateOfBirth;
   set dateOfBirth(int? dateOfBirth) => _$this._dateOfBirth = dateOfBirth;
 
-  double? _hours;
-  double? get hours => _$this._hours;
-  set hours(double? hours) => _$this._hours = hours;
-
   String? _placeOfBirth;
   String? get placeOfBirth => _$this._placeOfBirth;
   set placeOfBirth(String? placeOfBirth) => _$this._placeOfBirth = placeOfBirth;
 
-  WasherBuilder();
+  WorkerBuilder();
 
-  WasherBuilder get _$this {
+  WorkerBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _id = $v.id;
       _firstName = $v.firstName;
       _lastName = $v.lastName;
       _phoneNumber = $v.phoneNumber;
-      _taxNumber = $v.taxNumber;
+      _iban = $v.iban;
       _email = $v.email;
       _address = $v.address?.toBuilder();
       _profilePictureUrl = $v.profilePictureUrl;
       _initials = $v.initials;
-      _company = $v.company;
+      _ssn = $v.ssn;
       _billingAddress = $v.billingAddress?.toBuilder();
       _createdAt = $v.createdAt;
       _dateOfBirth = $v.dateOfBirth;
-      _hours = $v.hours;
       _placeOfBirth = $v.placeOfBirth;
       _$v = null;
     }
@@ -413,41 +391,40 @@ class WasherBuilder implements Builder<Washer, WasherBuilder> {
   }
 
   @override
-  void replace(Washer other) {
+  void replace(Worker other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$Washer;
+    _$v = other as _$Worker;
   }
 
   @override
-  void update(void Function(WasherBuilder)? updates) {
+  void update(void Function(WorkerBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  Washer build() => _build();
+  Worker build() => _build();
 
-  _$Washer _build() {
-    _$Washer _$result;
+  _$Worker _build() {
+    _$Worker _$result;
     try {
       _$result = _$v ??
-          new _$Washer._(
+          new _$Worker._(
               id: id,
               firstName: BuiltValueNullFieldError.checkNotNull(
-                  firstName, r'Washer', 'firstName'),
+                  firstName, r'Worker', 'firstName'),
               lastName: BuiltValueNullFieldError.checkNotNull(
-                  lastName, r'Washer', 'lastName'),
+                  lastName, r'Worker', 'lastName'),
               phoneNumber: phoneNumber,
-              taxNumber: taxNumber,
+              iban: iban,
               email: BuiltValueNullFieldError.checkNotNull(
-                  email, r'Washer', 'email'),
+                  email, r'Worker', 'email'),
               address: _address?.build(),
               profilePictureUrl: profilePictureUrl,
               initials: initials,
-              company: company,
+              ssn: ssn,
               billingAddress: _billingAddress?.build(),
               createdAt: createdAt,
               dateOfBirth: dateOfBirth,
-              hours: hours,
               placeOfBirth: placeOfBirth);
     } catch (_) {
       late String _$failedField;
@@ -459,7 +436,7 @@ class WasherBuilder implements Builder<Washer, WasherBuilder> {
         _billingAddress?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            r'Washer', _$failedField, e.toString());
+            r'Worker', _$failedField, e.toString());
       }
       rethrow;
     }

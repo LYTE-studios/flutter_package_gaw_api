@@ -5,11 +5,11 @@ class WorkerRegistration {
 
   String password;
 
-  final List<JobType> jobTypes;
+  List<JobType> jobTypes;
 
-  final List<RegistrationLocation> locations;
+  List<RegistrationLocation> locations;
 
-  final List<WorkType> workTypes;
+  List<WorkType> workTypes;
 
   WorkerRegistration({
     required this.email,

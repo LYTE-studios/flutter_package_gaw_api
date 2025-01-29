@@ -84,7 +84,7 @@ class AuthenticationApi {
     required String email,
   }) async {
     Response response = await RequestFactory.executePost(
-      endpoint: '/auth/registrations/verify',
+      endpoint: '/auth/registration/verify',
       body: {
         "email": email,
       },

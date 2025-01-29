@@ -80,6 +80,28 @@ class AuthenticationApi {
     throw DioException(requestOptions: RequestOptions(), response: response);
   }
 
+  static Future<String?> verifyRegistration({
+    required String email,
+  }) async {
+    Response response = await RequestFactory.executePost(
+      endpoint: '/auth/registrations/verify',
+      body: {
+        "email": email,
+      },
+      useToken: false,
+    );
+
+    if (response.statusCode == 200) {
+      return null;
+    } else if (response.statusCode == 409) {
+      return "User already exists";
+    } else if (response.statusCode == 400) {
+      return "Invalid email";
+    }
+
+    throw DioException(requestOptions: RequestOptions(), response: response);
+  }
+
   static Future<JwtResponse?> refreshToken({
     required String refreshToken,
   }) async {

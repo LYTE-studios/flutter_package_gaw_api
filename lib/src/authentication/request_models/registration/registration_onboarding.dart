@@ -1,0 +1,135 @@
+enum MasteryType {
+  beginner,
+  intermediate,
+  skilled,
+  expert,
+}
+
+extension MasteryTypeExtension on MasteryType {
+  String get api {
+    switch (this) {
+      case MasteryType.beginner:
+        return 'beginner';
+      case MasteryType.intermediate:
+        return 'intermediate';
+      case MasteryType.skilled:
+        return 'skilled';
+      case MasteryType.expert:
+        return 'expert';
+    }
+  }
+
+  String get name {
+    switch (this) {
+      case MasteryType.beginner:
+        return 'Beginner';
+      case MasteryType.intermediate:
+        return 'Intermediate';
+      case MasteryType.skilled:
+        return 'Skilled';
+      case MasteryType.expert:
+        return 'Expert';
+    }
+  }
+}
+
+class JobType {
+  final int id;
+
+  final String name;
+
+  final String icon;
+
+  final MasteryType mastery;
+
+  JobType({
+    required this.id,
+    required this.name,
+    required this.icon,
+    this.mastery = MasteryType.intermediate,
+  });
+
+  factory JobType.fromJson(Map<String, dynamic> json) => JobType(
+        id: json['id'],
+        name: json['name'],
+        icon: json['icon'],
+        mastery: json['mastery'] == null
+            ? MasteryType.intermediate
+            : MasteryType.values.firstWhere(
+                (element) => element.api == json['mastery'],
+              ),
+      );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'mastery': mastery.api,
+      };
+}
+
+class RegistrationLocation {
+  final int id;
+
+  final String name;
+
+  RegistrationLocation({
+    required this.id,
+    required this.name,
+  });
+
+  factory RegistrationLocation.fromJson(Map<String, dynamic> json) =>
+      RegistrationLocation(
+        id: json['id'],
+        name: json['name'],
+      );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+      };
+}
+
+class WorkType {
+  final int id;
+
+  final String name;
+
+  WorkType({
+    required this.id,
+    required this.name,
+  });
+
+  factory WorkType.fromJson(Map<String, dynamic> json) => WorkType(
+        id: json['id'],
+        name: json['name'],
+      );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+      };
+}
+
+class WorkerRegistrationOnboarding {
+  final List<JobType> jobTypes;
+
+  final List<RegistrationLocation> locations;
+
+  final List<WorkType> workTypes;
+
+  const WorkerRegistrationOnboarding({
+    this.jobTypes = const [],
+    this.locations = const [],
+    this.workTypes = const [],
+  });
+
+  factory WorkerRegistrationOnboarding.fromJson(Map<String, dynamic> json) =>
+      WorkerRegistrationOnboarding(
+        jobTypes: (json['job_types'] as List)
+            .map((e) => JobType.fromJson(e))
+            .toList(),
+        locations: (json['locations'] as List)
+            .map((e) => RegistrationLocation.fromJson(e))
+            .toList(),
+        workTypes: (json['work_types'] as List)
+            .map((e) => WorkType.fromJson(e))
+            .toList(),
+      );
+}

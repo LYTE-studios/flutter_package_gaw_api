@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:gaw_api/gaw_api.dart';
+import 'package:gaw_api/src/authentication/request_models/registration/registration_onboarding.dart';
 import 'package:gaw_api/src/core/utils/request_factory.dart';
 
 export 'request_models/password/code_verification_request.dart';
@@ -75,6 +76,19 @@ class AuthenticationApi {
         title: 'Invalid credentials!',
         message: 'Please check your email password combination.',
       );
+    }
+
+    throw DioException(requestOptions: RequestOptions(), response: response);
+  }
+
+  static Future<WorkerRegistrationOnboarding> getOnboardingFlow() async {
+    Response response = await RequestFactory.executeGet(
+      endpoint: '/auth/workers/onboarding',
+      useToken: false,
+    );
+
+    if (response.statusCode == 200) {
+      return WorkerRegistrationOnboarding.fromJson(response.data);
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);

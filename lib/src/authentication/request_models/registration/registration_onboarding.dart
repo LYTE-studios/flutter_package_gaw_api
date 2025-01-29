@@ -65,7 +65,7 @@ class JobType {
 
   final String icon;
 
-  final MasteryType mastery;
+  MasteryType mastery;
 
   JobType({
     required this.id,

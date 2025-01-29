@@ -117,14 +117,18 @@ class WorkType {
 
   final String name;
 
+  final String icon;
+
   WorkType({
     required this.id,
     required this.name,
+    required this.icon,
   });
 
   factory WorkType.fromJson(Map<String, dynamic> json) => WorkType(
         id: json['id'],
         name: json['name'],
+        icon: json['icon'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -133,13 +137,13 @@ class WorkType {
 }
 
 class WorkerRegistrationOnboarding {
-  final List<JobType> jobTypes;
+  List<JobType> jobTypes;
 
-  final List<RegistrationLocation> locations;
+  List<RegistrationLocation> locations;
 
-  final List<WorkType> workTypes;
+  List<WorkType> workTypes;
 
-  const WorkerRegistrationOnboarding({
+  WorkerRegistrationOnboarding({
     this.jobTypes = const [],
     this.locations = const [],
     this.workTypes = const [],

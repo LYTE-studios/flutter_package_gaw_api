@@ -6,6 +6,31 @@ enum MasteryType {
 }
 
 extension MasteryTypeExtension on MasteryType {
+  static MasteryType fromLevel(double level) {
+    if (level < 1.2) {
+      return MasteryType.beginner;
+    } else if (level < 2.1) {
+      return MasteryType.intermediate;
+    } else if (level < 3.0) {
+      return MasteryType.skilled;
+    } else {
+      return MasteryType.expert;
+    }
+  }
+
+  double get experienceLevel {
+    switch (this) {
+      case MasteryType.beginner:
+        return 0;
+      case MasteryType.intermediate:
+        return 1.2;
+      case MasteryType.skilled:
+        return 2.1;
+      case MasteryType.expert:
+        return 3.0;
+    }
+  }
+
   String get api {
     switch (this) {
       case MasteryType.beginner:

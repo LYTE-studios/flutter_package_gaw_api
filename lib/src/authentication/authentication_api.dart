@@ -20,6 +20,19 @@ export 'request_models/registration/registration_onboarding.dart';
 export 'request_models/registration/worker_registration.dart';
 
 class AuthenticationApi {
+  static Future<void> registerWorker(WorkerRegistration registration) async {
+    Response response = await RequestFactory.executePost(
+      endpoint: '/auth/workers/register',
+      body: registration.toJson(),
+    );
+
+    if (response.statusCode == 200) {
+      return;
+    }
+
+    throw DioException(requestOptions: RequestOptions(), response: response);
+  }
+
   static Future<bool> testConnection() async {
     Response response = await RequestFactory.executeGet(
       endpoint: '/auth/hello/there',

@@ -151,14 +151,17 @@ class WorkerRegistrationOnboarding {
 
   factory WorkerRegistrationOnboarding.fromJson(Map<String, dynamic> json) =>
       WorkerRegistrationOnboarding(
-        jobTypes: (json['job_types'] as List)
-            .map((e) => JobType.fromJson(e))
-            .toList(),
-        locations: (json['locations'] as List)
-            .map((e) => RegistrationLocation.fromJson(e))
-            .toList(),
-        workTypes: (json['work_types'] as List)
-            .map((e) => WorkType.fromJson(e))
-            .toList(),
+        jobTypes: (json['job_types'] as List?)
+                ?.map((e) => JobType.fromJson(e))
+                .toList() ??
+            [],
+        locations: (json['locations'] as List?)
+                ?.map((e) => RegistrationLocation.fromJson(e))
+                .toList() ??
+            [],
+        workTypes: (json['work_types'] as List?)
+                ?.map((e) => WorkType.fromJson(e))
+                .toList() ??
+            [],
       );
 }

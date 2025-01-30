@@ -186,9 +186,9 @@ class WorkerRegistrationOnboarding {
                 ?.map((e) => WorkType.fromJson(e))
                 .toList() ??
             [],
-        situations: json['situations'] == null
+        situations: json['situation_types'] == null
             ? []
-            : (json['situations'] as List?)
+            : (json['situation_types'] as List?)
                     ?.map((e) => SituationType.fromJson(e))
                     .toList() ??
                 [],

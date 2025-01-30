@@ -24,6 +24,7 @@ class AuthenticationApi {
     Response response = await RequestFactory.executePost(
       endpoint: '/auth/workers/register',
       body: registration.toJson(),
+      useToken: false,
     );
 
     if (response.statusCode == 200) {

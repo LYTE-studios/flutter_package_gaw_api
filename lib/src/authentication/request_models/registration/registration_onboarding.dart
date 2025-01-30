@@ -112,6 +112,26 @@ class RegistrationLocation {
       };
 }
 
+class SituationType {
+  final int id;
+
+  final String name;
+
+  SituationType({
+    required this.id,
+    required this.name,
+  });
+
+  factory SituationType.fromJson(Map<String, dynamic> json) => SituationType(
+        id: json['id'],
+        name: json['name'],
+      );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+      };
+}
+
 class WorkType {
   final int id;
 
@@ -143,10 +163,13 @@ class WorkerRegistrationOnboarding {
 
   List<WorkType> workTypes;
 
+  List<SituationType> situations;
+
   WorkerRegistrationOnboarding({
     this.jobTypes = const [],
     this.locations = const [],
     this.workTypes = const [],
+    this.situations = const [],
   });
 
   factory WorkerRegistrationOnboarding.fromJson(Map<String, dynamic> json) =>
@@ -163,5 +186,11 @@ class WorkerRegistrationOnboarding {
                 ?.map((e) => WorkType.fromJson(e))
                 .toList() ??
             [],
+        situations: json['situations'] == null
+            ? []
+            : (json['situations'] as List?)
+                    ?.map((e) => SituationType.fromJson(e))
+                    .toList() ??
+                [],
       );
 }

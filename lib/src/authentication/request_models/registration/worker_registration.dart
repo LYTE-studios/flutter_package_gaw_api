@@ -22,8 +22,8 @@ class WorkerRegistration {
   Map<String, dynamic> toJson() => {
         "email": email,
         "password": password,
-        "job_types": jobTypes.map((e) => e.toJson()),
-        "locations": locations.map((e) => e.toJson()),
-        "work_types": workTypes.map((e) => e.toJson()),
+        "job_types": jobTypes.map((e) => e.toJson()).toList(),
+        "locations": locations.map((e) => e.toJson()).toList(),
+        "work_types": workTypes.map((e) => e.toJson()).toList(),
       };
 }

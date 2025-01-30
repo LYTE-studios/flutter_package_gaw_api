@@ -23,7 +23,7 @@ class AuthenticationApi {
   static Future<void> registerWorker(WorkerRegistration registration) async {
     Response response = await RequestFactory.executePost(
       endpoint: '/auth/workers/register',
-      body: registration.toJson(),
+      body: jsonEncode(registration.toJson()),
       useToken: false,
     );
 

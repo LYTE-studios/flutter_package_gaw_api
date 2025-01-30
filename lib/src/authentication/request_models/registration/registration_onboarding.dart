@@ -63,7 +63,7 @@ class JobType {
 
   final String name;
 
-  final String icon;
+  final String? icon;
 
   MasteryType mastery;
 

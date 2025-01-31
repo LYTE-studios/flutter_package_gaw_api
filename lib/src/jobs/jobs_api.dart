@@ -217,7 +217,6 @@ class JobsApi {
   }
 
   static Future<TimeRegistrationResponse?> getRegistrationForJob({
-    required String washerId,
     required String jobId,
   }) async {
     Response response = await RequestFactory.executeGet(

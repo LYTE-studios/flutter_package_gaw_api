@@ -221,7 +221,7 @@ class JobsApi {
     required String jobId,
   }) async {
     Response response = await RequestFactory.executeGet(
-      endpoint: '/jobs/time_registrations/$jobId/$washerId',
+      endpoint: '/jobs/jobs/timeregistration/$jobId',
     );
     if (response.statusCode == 200) {
       return TimeRegistrationResponse.fromJson(

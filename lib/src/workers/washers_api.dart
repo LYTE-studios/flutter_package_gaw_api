@@ -137,6 +137,7 @@ class WorkersApi {
     Response response = await RequestFactory.executePost(
       endpoint: '/auth/workers/statistics/me',
       body: request.toJson(),
+      cacheDuration: const Duration(minutes: 10),
     );
 
     if (response.statusCode == 200) {
@@ -152,6 +153,7 @@ class WorkersApi {
     Response response = await RequestFactory.executePost(
       endpoint: '/auth/workers/statistics/me',
       body: request.toJson(),
+      cacheDuration: const Duration(minutes: 10),
     );
 
     if (response.statusCode == 200) {

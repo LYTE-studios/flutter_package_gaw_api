@@ -161,6 +161,7 @@ class JobsApi {
 
     Response response = await RequestFactory.executeGet(
       endpoint: url,
+      cacheDuration: const Duration(minutes: 10),
     );
 
     if (response.statusCode == 200) {

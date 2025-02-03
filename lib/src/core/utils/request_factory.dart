@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:gaw_api/gaw_api.dart';
+import 'package:hive/hive.dart';
 
 class RequestFactory {
   static Dio mainClient = Dio();
@@ -109,8 +110,31 @@ class RequestFactory {
     required String endpoint,
     bool useToken = true,
     bool useRefreshToken = false,
+    Duration? cacheDuration,
   }) async {
-    return await _performCall(
+    Box? box;
+
+    if (cacheDuration != null) {
+      box = await Hive.openBox<dynamic>('cache');
+
+      if (box.containsKey(endpoint)) {
+        Map<dynamic, dynamic> data = box.get(endpoint);
+
+        if (data['created'] == null ||
+            (DateTime.now().millisecondsSinceEpoch -
+                    ((data['created'] as int?) ?? 0) >
+                cacheDuration.inMilliseconds)) {
+          await box.delete(endpoint);
+        } else {
+          return Response(
+            data: data['data'],
+            requestOptions: RequestOptions(path: endpoint),
+          );
+        }
+      }
+    }
+
+    Response response = await _performCall(
       (Options options) {
         return mainClient.get(
           formatUrl(endpoint),
@@ -119,6 +143,18 @@ class RequestFactory {
       },
       authorize: useToken,
     );
+
+    if (box != null) {
+      box.put(
+        endpoint,
+        {
+          'created': DateTime.now().millisecondsSinceEpoch,
+          'data': response.data,
+        },
+      );
+    }
+
+    return response;
   }
 
   static Future<Response> executeDelete({
@@ -158,8 +194,31 @@ class RequestFactory {
     dynamic body,
     bool useToken = true,
     bool isMultiform = false,
+    Duration? cacheDuration,
   }) async {
-    return await _performCall(
+    Box? box;
+
+    if (cacheDuration != null) {
+      box = await Hive.openBox<dynamic>('cache');
+
+      if (box.containsKey(endpoint)) {
+        Map<dynamic, dynamic> data = box.get(endpoint);
+
+        if (data['created'] == null ||
+            (DateTime.now().millisecondsSinceEpoch -
+                    ((data['created'] as int?) ?? 0) >
+                cacheDuration.inMilliseconds)) {
+          await box.delete(endpoint);
+        } else {
+          return Response(
+            data: data['data'],
+            requestOptions: RequestOptions(path: endpoint),
+          );
+        }
+      }
+    }
+
+    Response response = await _performCall(
       (Options options) {
         return mainClient.post(
           formatUrl(endpoint),
@@ -170,6 +229,18 @@ class RequestFactory {
       authorize: useToken,
       isMultiform: isMultiform,
     );
+
+    if (box != null) {
+      box.put(
+        endpoint,
+        {
+          'created': DateTime.now().millisecondsSinceEpoch,
+          'data': response.data,
+        },
+      );
+    }
+
+    return response;
   }
 
   static Future<Response> imagePost({

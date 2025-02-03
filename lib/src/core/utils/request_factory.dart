@@ -132,6 +132,7 @@ class RequestFactory {
         } else {
           return Response(
             data: data['data'],
+            statusCode: 200,
             requestOptions: RequestOptions(path: endpoint),
           );
         }
@@ -148,7 +149,7 @@ class RequestFactory {
       authorize: useToken,
     );
 
-    if (box != null) {
+    if (box != null && response.statusCode == 200) {
       box.put(
         endpoint,
         {
@@ -218,6 +219,7 @@ class RequestFactory {
         } else {
           return Response(
             data: data['data'],
+            statusCode: 200,
             requestOptions: RequestOptions(path: endpoint),
           );
         }
@@ -236,7 +238,7 @@ class RequestFactory {
       isMultiform: isMultiform,
     );
 
-    if (box != null) {
+    if (box != null && response.statusCode == 200) {
       box.put(
         boxName,
         {

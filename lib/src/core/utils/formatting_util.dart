@@ -38,7 +38,9 @@ class FormattingUtil {
       return jsonDecode(data);
     }
     if (data is Map) {
-      return data as Map<String, dynamic>;
+      return data.map<String, dynamic>(
+        (key, value) => MapEntry((key is String) ? key : key.toString(), value),
+      );
     }
 
     throw Exception('Data couldn\'t decode correctly');

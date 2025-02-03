@@ -27,18 +27,18 @@ class WorkersApi {
     String url = '$prefix/workers';
 
     if (page != null && itemCount != null) {
-      url = '$prefix/workers/$itemCount/$page';
+      url = '$prefix/auth/workers/$itemCount/$page';
 
       if (sortTerm?.isNotEmpty ?? false) {
         if (ascending) {
-          url = '$prefix/workers/$sortTerm/ascending/$itemCount/$page';
+          url = '$prefix/auth/workers/$sortTerm/ascending/$itemCount/$page';
         } else {
-          url = '$prefix/workers/$sortTerm/descending/$itemCount/$page';
+          url = '$prefix/auth/workers/$sortTerm/descending/$itemCount/$page';
         }
       }
 
       if (searchTerm?.isNotEmpty ?? false) {
-        url = '$prefix/workers/$itemCount/$page/$searchTerm';
+        url = '$prefix/auth/workers/$itemCount/$page/$searchTerm';
       }
     }
 
@@ -57,7 +57,7 @@ class WorkersApi {
 
   static Future<void> acceptWorker({required String id}) async {
     Response response = await RequestFactory.executePost(
-      endpoint: '/accept/workers/$id',
+      endpoint: '/accept/auth/workers/$id',
     );
 
     if (response.statusCode == 200) {
@@ -69,7 +69,7 @@ class WorkersApi {
 
   static Future<void> deleteWorker({required String id}) async {
     Response response = await RequestFactory.executeDelete(
-      endpoint: '/workers/details/$id',
+      endpoint: '/auth/workers/details/$id',
     );
 
     if (response.statusCode == 200) {
@@ -83,7 +83,7 @@ class WorkersApi {
   static Future<IdResponse?> registerWorker(
       {required RegisterRequest request}) async {
     Response response = await RequestFactory.executePost(
-      endpoint: '/auth/workers/register',
+      endpoint: '/auth/auth/workers/register',
       useToken: false,
       body: request.toJson(),
     );
@@ -107,7 +107,7 @@ class WorkersApi {
     required WorkerUpdateRequest request,
   }) async {
     Response response = await RequestFactory.executePut(
-      endpoint: '/workers/details/$id',
+      endpoint: '/auth/workers/details/$id',
       body: request.toJson(),
     );
 
@@ -120,7 +120,7 @@ class WorkersApi {
 
   static Future<Worker?> getWorker({required String id}) async {
     Response response = await RequestFactory.executeGet(
-      endpoint: '/workers/details/$id',
+      endpoint: '/auth/workers/details/$id',
     );
 
     if (response.statusCode == 200) {
@@ -135,7 +135,7 @@ class WorkersApi {
   static Future<WeeklyStatisticsListResponse?> getWeeklyStatistics(
       {required StatsRequest request}) async {
     Response response = await RequestFactory.executePost(
-      endpoint: '/workers/statistics/me',
+      endpoint: '/auth/workers/statistics/me',
       body: request.toJson(),
     );
 
@@ -150,7 +150,7 @@ class WorkersApi {
   static Future<YearlyStatisticsListResponse?> getYearlyStatistics(
       {required StatsRequest request}) async {
     Response response = await RequestFactory.executePost(
-      endpoint: '/workers/statistics/me',
+      endpoint: '/auth/workers/statistics/me',
       body: request.toJson(),
     );
 

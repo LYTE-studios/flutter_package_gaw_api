@@ -12,3 +12,4 @@ export 'utils/configuration.dart';
 export 'utils/download_util.dart';
 export 'utils/formatting_util.dart';
 export 'utils/local_storage_util.dart';
+export 'utils/request_factory.dart';

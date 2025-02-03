@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:gaw_api/gaw_api.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class RequestFactory {
   static Dio mainClient = Dio();
@@ -13,6 +13,10 @@ class RequestFactory {
     'Client': Configuration.clientSecret,
     'Access-Control-Allow-Origin': '*',
   };
+
+  static Future<void> initialize() async {
+    await Hive.initFlutter();
+  }
 
   static Future<Response> _performCall(
     Future<Response> Function(Options options) call, {

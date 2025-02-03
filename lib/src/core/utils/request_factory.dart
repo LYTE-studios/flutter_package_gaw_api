@@ -202,17 +202,19 @@ class RequestFactory {
   }) async {
     Box? box;
 
+    String boxName = '$endpoint/$body';
+
     if (cacheDuration != null) {
       box = await Hive.openBox<dynamic>('cache');
 
-      if (box.containsKey(endpoint)) {
-        Map<dynamic, dynamic> data = box.get(endpoint);
+      if (box.containsKey(boxName)) {
+        Map<dynamic, dynamic> data = box.get(boxName);
 
         if (data['created'] == null ||
             (DateTime.now().millisecondsSinceEpoch -
                     ((data['created'] as int?) ?? 0) >
                 cacheDuration.inMilliseconds)) {
-          await box.delete(endpoint);
+          await box.delete(boxName);
         } else {
           return Response(
             data: data['data'],
@@ -236,7 +238,7 @@ class RequestFactory {
 
     if (box != null) {
       box.put(
-        endpoint,
+        boxName,
         {
           'created': DateTime.now().millisecondsSinceEpoch,
           'data': response.data,

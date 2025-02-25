@@ -44,7 +44,7 @@ class UsersApi {
     Uint8List image, {
     String? userId,
   }) async {
-    String url = '/upload_image';
+    String url = '/auth/users/settings/profile-picture';
 
     if (userId != null) {
       url += '/$userId';
@@ -67,7 +67,7 @@ class UsersApi {
 
     Uint8List bytes = encodePng(compressed);
 
-    Response response = await RequestFactory.executePost(
+    Response response = await RequestFactory.executePut(
       endpoint: url,
       body: FormData.fromMap(
         {
@@ -84,7 +84,7 @@ class UsersApi {
     }
   }
 
-  static Future<UpdateUserResponse?> update(
+  static Future<void> update(
     UpdateUserRequest updateUser,
   ) async {
     Response response = await RequestFactory.executePut(
@@ -93,7 +93,7 @@ class UsersApi {
     );
 
     if (response.statusCode == 200) {
-      return UpdateUserResponse.fromJson(FormattingUtil.decode(response.data));
+      return;
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);

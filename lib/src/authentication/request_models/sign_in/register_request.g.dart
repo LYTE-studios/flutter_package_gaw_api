@@ -35,16 +35,15 @@ class _$RegisterRequestSerializer
       'phone_number',
       serializers.serialize(object.phoneNumber,
           specifiedType: const FullType(String)),
-      'tax_number',
-      serializers.serialize(object.taxNumber,
-          specifiedType: const FullType(String)),
+      'iban',
+      serializers.serialize(object.iban, specifiedType: const FullType(String)),
       'place_of_birth',
       serializers.serialize(object.placeOfBirth,
           specifiedType: const FullType(String)),
       'date_of_birth',
       serializers.serialize(object.dateOfBirth,
           specifiedType: const FullType(int)),
-      'company',
+      'ssn',
       serializers.serialize(object.ssn, specifiedType: const FullType(String)),
     ];
 
@@ -83,8 +82,8 @@ class _$RegisterRequestSerializer
           result.phoneNumber = serializers.deserialize(value,
               specifiedType: const FullType(String))! as String;
           break;
-        case 'tax_number':
-          result.taxNumber = serializers.deserialize(value,
+        case 'iban':
+          result.iban = serializers.deserialize(value,
               specifiedType: const FullType(String))! as String;
           break;
         case 'place_of_birth':
@@ -95,7 +94,7 @@ class _$RegisterRequestSerializer
           result.dateOfBirth = serializers.deserialize(value,
               specifiedType: const FullType(int))! as int;
           break;
-        case 'company':
+        case 'ssn':
           result.ssn = serializers.deserialize(value,
               specifiedType: const FullType(String))! as String;
           break;
@@ -118,7 +117,7 @@ class _$RegisterRequest extends RegisterRequest {
   @override
   final String phoneNumber;
   @override
-  final String taxNumber;
+  final String iban;
   @override
   final String placeOfBirth;
   @override
@@ -135,7 +134,7 @@ class _$RegisterRequest extends RegisterRequest {
       required this.email,
       required this.password,
       required this.phoneNumber,
-      required this.taxNumber,
+      required this.iban,
       required this.placeOfBirth,
       required this.dateOfBirth,
       required this.ssn})
@@ -149,8 +148,7 @@ class _$RegisterRequest extends RegisterRequest {
         password, r'RegisterRequest', 'password');
     BuiltValueNullFieldError.checkNotNull(
         phoneNumber, r'RegisterRequest', 'phoneNumber');
-    BuiltValueNullFieldError.checkNotNull(
-        taxNumber, r'RegisterRequest', 'taxNumber');
+    BuiltValueNullFieldError.checkNotNull(iban, r'RegisterRequest', 'iban');
     BuiltValueNullFieldError.checkNotNull(
         placeOfBirth, r'RegisterRequest', 'placeOfBirth');
     BuiltValueNullFieldError.checkNotNull(
@@ -175,7 +173,7 @@ class _$RegisterRequest extends RegisterRequest {
         email == other.email &&
         password == other.password &&
         phoneNumber == other.phoneNumber &&
-        taxNumber == other.taxNumber &&
+        iban == other.iban &&
         placeOfBirth == other.placeOfBirth &&
         dateOfBirth == other.dateOfBirth &&
         ssn == other.ssn;
@@ -189,7 +187,7 @@ class _$RegisterRequest extends RegisterRequest {
     _$hash = $jc(_$hash, email.hashCode);
     _$hash = $jc(_$hash, password.hashCode);
     _$hash = $jc(_$hash, phoneNumber.hashCode);
-    _$hash = $jc(_$hash, taxNumber.hashCode);
+    _$hash = $jc(_$hash, iban.hashCode);
     _$hash = $jc(_$hash, placeOfBirth.hashCode);
     _$hash = $jc(_$hash, dateOfBirth.hashCode);
     _$hash = $jc(_$hash, ssn.hashCode);
@@ -205,7 +203,7 @@ class _$RegisterRequest extends RegisterRequest {
           ..add('email', email)
           ..add('password', password)
           ..add('phoneNumber', phoneNumber)
-          ..add('taxNumber', taxNumber)
+          ..add('iban', iban)
           ..add('placeOfBirth', placeOfBirth)
           ..add('dateOfBirth', dateOfBirth)
           ..add('ssn', ssn))
@@ -237,9 +235,9 @@ class RegisterRequestBuilder
   String? get phoneNumber => _$this._phoneNumber;
   set phoneNumber(String? phoneNumber) => _$this._phoneNumber = phoneNumber;
 
-  String? _taxNumber;
-  String? get taxNumber => _$this._taxNumber;
-  set taxNumber(String? taxNumber) => _$this._taxNumber = taxNumber;
+  String? _iban;
+  String? get iban => _$this._iban;
+  set iban(String? iban) => _$this._iban = iban;
 
   String? _placeOfBirth;
   String? get placeOfBirth => _$this._placeOfBirth;
@@ -263,7 +261,7 @@ class RegisterRequestBuilder
       _email = $v.email;
       _password = $v.password;
       _phoneNumber = $v.phoneNumber;
-      _taxNumber = $v.taxNumber;
+      _iban = $v.iban;
       _placeOfBirth = $v.placeOfBirth;
       _dateOfBirth = $v.dateOfBirth;
       _ssn = $v.ssn;
@@ -299,8 +297,8 @@ class RegisterRequestBuilder
                 password, r'RegisterRequest', 'password'),
             phoneNumber: BuiltValueNullFieldError.checkNotNull(
                 phoneNumber, r'RegisterRequest', 'phoneNumber'),
-            taxNumber: BuiltValueNullFieldError.checkNotNull(
-                taxNumber, r'RegisterRequest', 'taxNumber'),
+            iban: BuiltValueNullFieldError.checkNotNull(
+                iban, r'RegisterRequest', 'iban'),
             placeOfBirth: BuiltValueNullFieldError.checkNotNull(
                 placeOfBirth, r'RegisterRequest', 'placeOfBirth'),
             dateOfBirth: BuiltValueNullFieldError.checkNotNull(

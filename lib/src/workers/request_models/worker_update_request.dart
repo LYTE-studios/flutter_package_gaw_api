@@ -31,14 +31,14 @@ abstract class WorkerUpdateRequest
   @BuiltValueField(wireName: 'address')
   Address? get address;
 
-  @BuiltValueField(wireName: 'tax_number')
-  String? get taxNumber;
+  @BuiltValueField(wireName: 'iban')
+  String? get iban;
 
   @BuiltValueField(wireName: 'date_of_birth')
   int? get dateOfBirth;
 
-  @BuiltValueField(wireName: 'company')
-  String? get company;
+  @BuiltValueField(wireName: 'ssn')
+  String? get ssn;
 
   String toJson() {
     return json.encode(

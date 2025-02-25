@@ -363,7 +363,7 @@ class JobsApi {
       customerSignature = encodePng(decodeImage(request.customerSignature!)!);
     }
 
-    String url = '/jobs/jobs/timeregistration';
+    String url = '/jobs/jobs/timeregistration/${request.jobId}';
 
     if (userId != null) {
       url += '/$userId';

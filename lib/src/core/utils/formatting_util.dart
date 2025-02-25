@@ -51,6 +51,6 @@ class FormattingUtil {
       return null;
     }
 
-    return Configuration.apiUrl + endpoint;
+    return '${Configuration.apiUrl}/auth$endpoint';
   }
 }

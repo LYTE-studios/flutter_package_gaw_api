@@ -18,12 +18,6 @@ class _$WorkerSerializer implements StructuredSerializer<Worker> {
   Iterable<Object?> serialize(Serializers serializers, Worker object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
-      'first_name',
-      serializers.serialize(object.firstName,
-          specifiedType: const FullType(String)),
-      'last_name',
-      serializers.serialize(object.lastName,
-          specifiedType: const FullType(String)),
       'email',
       serializers.serialize(object.email,
           specifiedType: const FullType(String)),
@@ -33,6 +27,20 @@ class _$WorkerSerializer implements StructuredSerializer<Worker> {
     if (value != null) {
       result
         ..add('id')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.firstName;
+    if (value != null) {
+      result
+        ..add('first_name')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.lastName;
+    if (value != null) {
+      result
+        ..add('last_name')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
@@ -124,11 +132,11 @@ class _$WorkerSerializer implements StructuredSerializer<Worker> {
           break;
         case 'first_name':
           result.firstName = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'last_name':
           result.lastName = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'phone_number':
           result.phoneNumber = serializers.deserialize(value,
@@ -185,9 +193,9 @@ class _$Worker extends Worker {
   @override
   final String? id;
   @override
-  final String firstName;
+  final String? firstName;
   @override
-  final String lastName;
+  final String? lastName;
   @override
   final String? phoneNumber;
   @override
@@ -216,8 +224,8 @@ class _$Worker extends Worker {
 
   _$Worker._(
       {this.id,
-      required this.firstName,
-      required this.lastName,
+      this.firstName,
+      this.lastName,
       this.phoneNumber,
       this.iban,
       required this.email,
@@ -230,8 +238,6 @@ class _$Worker extends Worker {
       this.dateOfBirth,
       this.placeOfBirth})
       : super._() {
-    BuiltValueNullFieldError.checkNotNull(firstName, r'Worker', 'firstName');
-    BuiltValueNullFieldError.checkNotNull(lastName, r'Worker', 'lastName');
     BuiltValueNullFieldError.checkNotNull(email, r'Worker', 'email');
   }
 
@@ -410,10 +416,8 @@ class WorkerBuilder implements Builder<Worker, WorkerBuilder> {
       _$result = _$v ??
           new _$Worker._(
               id: id,
-              firstName: BuiltValueNullFieldError.checkNotNull(
-                  firstName, r'Worker', 'firstName'),
-              lastName: BuiltValueNullFieldError.checkNotNull(
-                  lastName, r'Worker', 'lastName'),
+              firstName: firstName,
+              lastName: lastName,
               phoneNumber: phoneNumber,
               iban: iban,
               email: BuiltValueNullFieldError.checkNotNull(

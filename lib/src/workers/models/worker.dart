@@ -17,10 +17,10 @@ abstract class Worker implements Built<Worker, WorkerBuilder> {
   String? get id;
 
   @BuiltValueField(wireName: 'first_name')
-  String get firstName;
+  String? get firstName;
 
   @BuiltValueField(wireName: 'last_name')
-  String get lastName;
+  String? get lastName;
 
   @BuiltValueField(wireName: 'phone_number')
   String? get phoneNumber;

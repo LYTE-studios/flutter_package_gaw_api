@@ -12,7 +12,7 @@ class LegalApi {
     int? page,
     int? itemCount,
   }) async {
-    String url = '/dimonas/$itemCount/$page';
+    String url = '/jobs/dimonas/$itemCount/$page';
 
     Response response = await RequestFactory.executeGet(
       endpoint: url,

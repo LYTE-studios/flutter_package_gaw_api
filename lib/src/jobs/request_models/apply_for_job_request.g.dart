@@ -90,6 +90,8 @@ class _$ApplyForJobRequestSerializer
 
 class _$ApplyForJobRequest extends ApplyForJobRequest {
   @override
+  final Job job;
+  @override
   final String jobId;
   @override
   final Address address;
@@ -105,12 +107,14 @@ class _$ApplyForJobRequest extends ApplyForJobRequest {
       (new ApplyForJobRequestBuilder()..update(updates))._build();
 
   _$ApplyForJobRequest._(
-      {required this.jobId,
+      {required this.job,
+      required this.jobId,
       required this.address,
       required this.noTravelCosts,
       this.note,
       this.distance})
       : super._() {
+    BuiltValueNullFieldError.checkNotNull(job, r'ApplyForJobRequest', 'job');
     BuiltValueNullFieldError.checkNotNull(
         jobId, r'ApplyForJobRequest', 'jobId');
     BuiltValueNullFieldError.checkNotNull(
@@ -132,6 +136,7 @@ class _$ApplyForJobRequest extends ApplyForJobRequest {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is ApplyForJobRequest &&
+        job == other.job &&
         jobId == other.jobId &&
         address == other.address &&
         noTravelCosts == other.noTravelCosts &&
@@ -142,6 +147,7 @@ class _$ApplyForJobRequest extends ApplyForJobRequest {
   @override
   int get hashCode {
     var _$hash = 0;
+    _$hash = $jc(_$hash, job.hashCode);
     _$hash = $jc(_$hash, jobId.hashCode);
     _$hash = $jc(_$hash, address.hashCode);
     _$hash = $jc(_$hash, noTravelCosts.hashCode);
@@ -154,6 +160,7 @@ class _$ApplyForJobRequest extends ApplyForJobRequest {
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'ApplyForJobRequest')
+          ..add('job', job)
           ..add('jobId', jobId)
           ..add('address', address)
           ..add('noTravelCosts', noTravelCosts)
@@ -166,6 +173,10 @@ class _$ApplyForJobRequest extends ApplyForJobRequest {
 class ApplyForJobRequestBuilder
     implements Builder<ApplyForJobRequest, ApplyForJobRequestBuilder> {
   _$ApplyForJobRequest? _$v;
+
+  JobBuilder? _job;
+  JobBuilder get job => _$this._job ??= new JobBuilder();
+  set job(JobBuilder? job) => _$this._job = job;
 
   String? _jobId;
   String? get jobId => _$this._jobId;
@@ -193,6 +204,7 @@ class ApplyForJobRequestBuilder
   ApplyForJobRequestBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
+      _job = $v.job.toBuilder();
       _jobId = $v.jobId;
       _address = $v.address.toBuilder();
       _noTravelCosts = $v.noTravelCosts;
@@ -222,6 +234,7 @@ class ApplyForJobRequestBuilder
     try {
       _$result = _$v ??
           new _$ApplyForJobRequest._(
+              job: job.build(),
               jobId: BuiltValueNullFieldError.checkNotNull(
                   jobId, r'ApplyForJobRequest', 'jobId'),
               address: address.build(),
@@ -232,6 +245,9 @@ class ApplyForJobRequestBuilder
     } catch (_) {
       late String _$failedField;
       try {
+        _$failedField = 'job';
+        job.build();
+
         _$failedField = 'address';
         address.build();
       } catch (e) {

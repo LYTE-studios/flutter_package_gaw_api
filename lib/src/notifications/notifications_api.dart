@@ -16,18 +16,19 @@ export 'models/notification.dart';
 class NotificationsApi {
   static Future<NotificationsListResponse?> getNotifications() async {
     Response response = await RequestFactory.executeGet(
-      endpoint: '/notifications',
+      endpoint: '/notifications/notifications',
     );
 
     if (response.statusCode == 200) {
-      return NotificationsListResponse.fromJson(FormattingUtil.decode(response.data));
+      return NotificationsListResponse.fromJson(
+          FormattingUtil.decode(response.data));
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);
   }
 
   static Future<void> postNotification(
-    {required NotificationsRequest request}) async {
+      {required NotificationsRequest request}) async {
     Response response = await RequestFactory.executePost(
       endpoint: '/notifications',
       body: request.toJson(),
@@ -42,7 +43,7 @@ class NotificationsApi {
 
   static Future<void> readAllNotifications() async {
     Response response = await RequestFactory.executePut(
-      endpoint: '/notifications/read-all',
+      endpoint: '/notifications/notifications/read-all',
     );
 
     if (response.statusCode == 200) {
@@ -53,7 +54,7 @@ class NotificationsApi {
   }
 
   static Future<void> updateNotification(
-    {required NotificationsUpdateRequest request}) async {
+      {required NotificationsUpdateRequest request}) async {
     Response response = await RequestFactory.executePut(
       endpoint: '/notifications',
       body: request.toJson(),
@@ -64,5 +65,5 @@ class NotificationsApi {
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);
-  } 
+  }
 }

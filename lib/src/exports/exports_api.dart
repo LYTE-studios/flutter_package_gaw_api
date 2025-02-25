@@ -15,7 +15,7 @@ class ExportsApi {
     bool ascending = false,
   }) async {
     String url = FormattingUtil.formatUrlParameters(
-      '/exports',
+      '/jobs/exports',
       page: page,
       itemCount: itemCount,
       sortTerm: sortTerm,
@@ -36,7 +36,7 @@ class ExportsApi {
     int? startTime,
     int? endTime,
   }) async {
-    String url = '/exports';
+    String url = '/jobs/exports';
 
     String? body;
 

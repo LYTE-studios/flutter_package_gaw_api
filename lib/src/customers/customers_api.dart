@@ -18,21 +18,21 @@ class CustomerApi {
     String? sortTerm,
     bool ascending = false,
   }) async {
-    String url = '/customers';
+    String url = '/auth/customers';
 
     if (page != null && itemCount != null) {
-      url = '/customers/$itemCount/$page';
+      url = '/auth/customers/$itemCount/$page';
 
       if (sortTerm?.isNotEmpty ?? false) {
         if (ascending) {
-          url = '/customers/$sortTerm/ascending/$itemCount/$page';
+          url = '/auth/customers/$sortTerm/ascending/$itemCount/$page';
         } else {
-          url = '/customers/$sortTerm/descending/$itemCount/$page';
+          url = '/auth/customers/$sortTerm/descending/$itemCount/$page';
         }
       }
 
       if (searchTerm?.isNotEmpty ?? false) {
-        url = '/customers/$itemCount/$page/$searchTerm';
+        url = '/auth/customers/$itemCount/$page/$searchTerm';
       }
     }
 
@@ -52,7 +52,7 @@ class CustomerApi {
   static Future<CustomerListResponse?> getCustomersQuery(
       {required String query}) async {
     Response response = await RequestFactory.executeGet(
-      endpoint: '/customers/$query',
+      endpoint: '/auth/customers/$query',
     );
 
     if (response.statusCode == 200) {
@@ -66,7 +66,7 @@ class CustomerApi {
 
   static Future<Customer?> getCustomer({required String id}) async {
     Response response = await RequestFactory.executeGet(
-      endpoint: '/customers/details/$id',
+      endpoint: '/auth/customers/details/$id',
     );
 
     if (response.statusCode == 200) {
@@ -80,7 +80,7 @@ class CustomerApi {
 
   static Future<void> deleteCustomer({required String id}) async {
     Response response = await RequestFactory.executeDelete(
-      endpoint: '/customers/details/$id',
+      endpoint: '/auth/customers/details/$id',
     );
 
     if (response.statusCode == 200) {
@@ -94,7 +94,7 @@ class CustomerApi {
     required CreateCustomerRequest request,
   }) async {
     Response response = await RequestFactory.executePost(
-      endpoint: '/customers/create',
+      endpoint: '/auth/customers/create',
       body: request.toJson(),
     );
 
@@ -111,7 +111,7 @@ class CustomerApi {
     required UpdateCustomerRequest request,
   }) async {
     Response response = await RequestFactory.executePut(
-      endpoint: '/customers/details/$id',
+      endpoint: '/auth/customers/details/$id',
       body: request.toJson(),
     );
 

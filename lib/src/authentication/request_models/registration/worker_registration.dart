@@ -5,6 +5,10 @@ class WorkerRegistration {
 
   String password;
 
+  String firstName;
+
+  String lastName;
+
   List<JobType> jobTypes;
 
   List<RegistrationLocation> locations;
@@ -14,6 +18,8 @@ class WorkerRegistration {
   WorkerRegistration({
     required this.email,
     required this.password,
+    required this.firstName,
+    required this.lastName,
     this.jobTypes = const [],
     this.locations = const [],
     this.workTypes = const [],
@@ -22,6 +28,8 @@ class WorkerRegistration {
   Map<String, dynamic> toJson() => {
         "email": email,
         "password": password,
+        "first_name": firstName,
+        "last_name": lastName,
         "job_types": jobTypes.map((e) => e.toJson()).toList(),
         "locations": locations.map((e) => e.toJson()).toList(),
         "work_types": workTypes.map((e) => e.toJson()).toList(),

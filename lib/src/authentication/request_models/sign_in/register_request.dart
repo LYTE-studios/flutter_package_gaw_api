@@ -30,8 +30,8 @@ abstract class RegisterRequest
   @BuiltValueField(wireName: 'phone_number')
   String get phoneNumber;
 
-  @BuiltValueField(wireName: 'tax_number')
-  String get taxNumber;
+  @BuiltValueField(wireName: 'iban')
+  String get iban;
 
   @BuiltValueField(wireName: 'place_of_birth')
   String get placeOfBirth;
@@ -39,7 +39,7 @@ abstract class RegisterRequest
   @BuiltValueField(wireName: 'date_of_birth')
   int get dateOfBirth;
 
-  @BuiltValueField(wireName: 'company')
+  @BuiltValueField(wireName: 'ssn')
   String get ssn;
 
   String toJson() {

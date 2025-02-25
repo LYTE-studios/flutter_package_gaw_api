@@ -67,10 +67,10 @@ class _$WorkerUpdateRequestSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(Address)));
     }
-    value = object.taxNumber;
+    value = object.iban;
     if (value != null) {
       result
-        ..add('tax_number')
+        ..add('iban')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
@@ -80,10 +80,10 @@ class _$WorkerUpdateRequestSerializer
         ..add('date_of_birth')
         ..add(serializers.serialize(value, specifiedType: const FullType(int)));
     }
-    value = object.company;
+    value = object.ssn;
     if (value != null) {
       result
-        ..add('company')
+        ..add('ssn')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
@@ -126,16 +126,16 @@ class _$WorkerUpdateRequestSerializer
           result.address.replace(serializers.deserialize(value,
               specifiedType: const FullType(Address))! as Address);
           break;
-        case 'tax_number':
-          result.taxNumber = serializers.deserialize(value,
+        case 'iban':
+          result.iban = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
         case 'date_of_birth':
           result.dateOfBirth = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int?;
           break;
-        case 'company':
-          result.company = serializers.deserialize(value,
+        case 'ssn':
+          result.ssn = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
       }
@@ -159,11 +159,11 @@ class _$WorkerUpdateRequest extends WorkerUpdateRequest {
   @override
   final Address? address;
   @override
-  final String? taxNumber;
+  final String? iban;
   @override
   final int? dateOfBirth;
   @override
-  final String? company;
+  final String? ssn;
 
   factory _$WorkerUpdateRequest(
           [void Function(WorkerUpdateRequestBuilder)? updates]) =>
@@ -176,9 +176,9 @@ class _$WorkerUpdateRequest extends WorkerUpdateRequest {
       this.lastName,
       this.profilePictureUrl,
       this.address,
-      this.taxNumber,
+      this.iban,
       this.dateOfBirth,
-      this.company})
+      this.ssn})
       : super._();
 
   @override
@@ -200,9 +200,9 @@ class _$WorkerUpdateRequest extends WorkerUpdateRequest {
         lastName == other.lastName &&
         profilePictureUrl == other.profilePictureUrl &&
         address == other.address &&
-        taxNumber == other.taxNumber &&
+        iban == other.iban &&
         dateOfBirth == other.dateOfBirth &&
-        company == other.company;
+        ssn == other.ssn;
   }
 
   @override
@@ -214,9 +214,9 @@ class _$WorkerUpdateRequest extends WorkerUpdateRequest {
     _$hash = $jc(_$hash, lastName.hashCode);
     _$hash = $jc(_$hash, profilePictureUrl.hashCode);
     _$hash = $jc(_$hash, address.hashCode);
-    _$hash = $jc(_$hash, taxNumber.hashCode);
+    _$hash = $jc(_$hash, iban.hashCode);
     _$hash = $jc(_$hash, dateOfBirth.hashCode);
-    _$hash = $jc(_$hash, company.hashCode);
+    _$hash = $jc(_$hash, ssn.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -230,9 +230,9 @@ class _$WorkerUpdateRequest extends WorkerUpdateRequest {
           ..add('lastName', lastName)
           ..add('profilePictureUrl', profilePictureUrl)
           ..add('address', address)
-          ..add('taxNumber', taxNumber)
+          ..add('iban', iban)
           ..add('dateOfBirth', dateOfBirth)
-          ..add('company', company))
+          ..add('ssn', ssn))
         .toString();
   }
 }
@@ -266,17 +266,17 @@ class WorkerUpdateRequestBuilder
   AddressBuilder get address => _$this._address ??= new AddressBuilder();
   set address(AddressBuilder? address) => _$this._address = address;
 
-  String? _taxNumber;
-  String? get taxNumber => _$this._taxNumber;
-  set taxNumber(String? taxNumber) => _$this._taxNumber = taxNumber;
+  String? _iban;
+  String? get iban => _$this._iban;
+  set iban(String? iban) => _$this._iban = iban;
 
   int? _dateOfBirth;
   int? get dateOfBirth => _$this._dateOfBirth;
   set dateOfBirth(int? dateOfBirth) => _$this._dateOfBirth = dateOfBirth;
 
-  String? _company;
-  String? get company => _$this._company;
-  set company(String? company) => _$this._company = company;
+  String? _ssn;
+  String? get ssn => _$this._ssn;
+  set ssn(String? ssn) => _$this._ssn = ssn;
 
   WorkerUpdateRequestBuilder();
 
@@ -289,9 +289,9 @@ class WorkerUpdateRequestBuilder
       _lastName = $v.lastName;
       _profilePictureUrl = $v.profilePictureUrl;
       _address = $v.address?.toBuilder();
-      _taxNumber = $v.taxNumber;
+      _iban = $v.iban;
       _dateOfBirth = $v.dateOfBirth;
-      _company = $v.company;
+      _ssn = $v.ssn;
       _$v = null;
     }
     return this;
@@ -322,9 +322,9 @@ class WorkerUpdateRequestBuilder
               lastName: lastName,
               profilePictureUrl: profilePictureUrl,
               address: _address?.build(),
-              taxNumber: taxNumber,
+              iban: iban,
               dateOfBirth: dateOfBirth,
-              company: company);
+              ssn: ssn);
     } catch (_) {
       late String _$failedField;
       try {

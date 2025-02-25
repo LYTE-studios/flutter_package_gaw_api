@@ -27,18 +27,18 @@ class WorkersApi {
     String url = '$prefix/workers';
 
     if (page != null && itemCount != null) {
-      url = '$prefix/auth/workers/$itemCount/$page';
+      url = '/auth$prefix/workers/$itemCount/$page';
 
       if (sortTerm?.isNotEmpty ?? false) {
         if (ascending) {
-          url = '$prefix/auth/workers/$sortTerm/ascending/$itemCount/$page';
+          url = '/auth$prefix/workers/$sortTerm/ascending/$itemCount/$page';
         } else {
-          url = '$prefix/auth/workers/$sortTerm/descending/$itemCount/$page';
+          url = '/auth$prefix/workers/$sortTerm/descending/$itemCount/$page';
         }
       }
 
       if (searchTerm?.isNotEmpty ?? false) {
-        url = '$prefix/auth/workers/$itemCount/$page/$searchTerm';
+        url = '/auth$prefix/workers/$itemCount/$page/$searchTerm';
       }
     }
 
@@ -57,7 +57,7 @@ class WorkersApi {
 
   static Future<void> acceptWorker({required String id}) async {
     Response response = await RequestFactory.executePost(
-      endpoint: '/accept/auth/workers/$id',
+      endpoint: '/auth/accept/workers/$id',
     );
 
     if (response.statusCode == 200) {
@@ -83,7 +83,7 @@ class WorkersApi {
   static Future<IdResponse?> registerWorker(
       {required RegisterRequest request}) async {
     Response response = await RequestFactory.executePost(
-      endpoint: '/auth/auth/workers/register',
+      endpoint: '/auth/workers/register',
       useToken: false,
       body: request.toJson(),
     );

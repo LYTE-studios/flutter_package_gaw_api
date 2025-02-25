@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:gaw_api/gaw_api.dart';
@@ -10,7 +12,7 @@ class GoogleApi {
       return null;
     }
 
-    String url = '/locations/autocomplete/$query';
+    String url = '/jobs/autocomplete/$query';
 
     Response response = await RequestFactory.executeGet(
       endpoint: url,
@@ -26,7 +28,7 @@ class GoogleApi {
   }
 
   static Future<LatLng?> geocodeAddress(String request) async {
-    String url = '/locations/geocode/$request';
+    String url = '/jobs/geocode/$request';
 
     Response response = await RequestFactory.executeGet(
       endpoint: url,
@@ -53,7 +55,7 @@ class GoogleApi {
     double latitude,
     double longitude,
   ) async {
-    String url = '/locations/reverse-geocode/$latitude,$longitude';
+    String url = '/jobs/reverse_geocode/$latitude,$longitude';
 
     Response response = await RequestFactory.executeGet(
       endpoint: url,
@@ -88,21 +90,17 @@ class GoogleApi {
     int toLat = parseInt(to.latitude);
     int toLon = parseInt(to.longitude);
 
-    String url = '/locations/directions/$fromLat/$fromLon/$toLat/$toLon';
+    String url = '/jobs/directions/$fromLat/$fromLon/$toLat/$toLon';
 
     Response response = await RequestFactory.executeGet(
       endpoint: url,
     );
 
     if (response.statusCode == 200) {
-      final result = FormattingUtil.decode(response.data);
-
-      if (result == {}) {
-        return [];
-      }
+      Map<String, dynamic> jsonData = jsonDecode(response.data);
 
       List<PointLatLng> pointList = PolylinePoints().decodePolyline(
-        result["routes"][0]["polyline"]["encodedPolyline"],
+        jsonData["routes"][0]["polyline"]["encodedPolyline"],
       );
       List<LatLng> data = [];
 

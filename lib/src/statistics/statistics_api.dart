@@ -22,7 +22,7 @@ class StatisticsApi {
     required int endTime,
   }) async {
     Response response = await RequestFactory.executeGet(
-      endpoint: '/statistics/overview/$startTime/$endTime',
+      endpoint: '/jobs/statistics/overview/$startTime/$endTime',
     );
 
     if (response.statusCode == 200) {

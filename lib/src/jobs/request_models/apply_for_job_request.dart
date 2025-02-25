@@ -15,6 +15,9 @@ abstract class ApplyForJobRequest
   factory ApplyForJobRequest([Function(ApplyForJobRequestBuilder b) updates]) =
       _$ApplyForJobRequest;
 
+  @BuiltValueField(serialize: false)
+  Job get job;
+
   @BuiltValueField(wireName: 'job_id')
   String get jobId;
 

@@ -422,7 +422,7 @@ class JobsApi {
     required String jobId,
   }) async {
     Response response = await RequestFactory.executeGet(
-      endpoint: '/jobs/jobs/$jobId/washers',
+      endpoint: '/jobs/jobs/$jobId/workers',
     );
 
     if (response.statusCode == 200) {

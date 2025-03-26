@@ -1,7 +1,6 @@
 library notifications_api;
 
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:gaw_api/src/core/utils/formatting_util.dart';
 import 'package:gaw_api/src/core/utils/request_factory.dart';
 import 'package:gaw_api/src/notifications/request_models/notifications_request.dart';

@@ -30,7 +30,7 @@ class NotificationsApi {
   static Future<void> postNotification(
       {required NotificationsRequest request}) async {
     Response response = await RequestFactory.executePost(
-      endpoint: '/notifications',
+      endpoint: '/notifications/notifications',
       body: request.toJson(),
     );
 
@@ -56,7 +56,7 @@ class NotificationsApi {
   static Future<void> updateNotification(
       {required NotificationsUpdateRequest request}) async {
     Response response = await RequestFactory.executePut(
-      endpoint: '/notifications',
+      endpoint: '/notifications/notifications',
       body: request.toJson(),
     );
 

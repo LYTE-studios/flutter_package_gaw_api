@@ -377,11 +377,11 @@ class JobsApi {
           'start_time': request.startTime,
           'end_time': request.endTime,
           'break_time': request.breakTime,
-          'washer_signature': washerSignature == null
+          'worker_signature': washerSignature == null
               ? null
               : MultipartFile.fromBytes(
                   washerSignature.toList(),
-                  filename: "washer.png",
+                  filename: "worker.png",
                 ),
           'customer_signature': customerSignature == null
               ? null

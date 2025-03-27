@@ -4,7 +4,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:gaw_api/gaw_api.dart';
-import 'package:gaw_api/src/core/utils/request_factory.dart';
+import 'package:gaw_api/src/authentication/request_models/registration/registration_onboarding_data.dart';
 
 export 'request_models/password/code_verification_request.dart';
 export 'request_models/password/email_request.dart';
@@ -29,6 +29,21 @@ class AuthenticationApi {
 
     if (response.statusCode == 200) {
       return;
+    }
+
+    throw DioException(requestOptions: RequestOptions(), response: response);
+  }
+
+  static Future<RegistrationOnboardingData> getWorkerRegistrationData(
+      String userId) async {
+    Response response = await RequestFactory.executeGet(
+      endpoint: '/auth/users/$userId/dashboard-flow',
+    );
+
+    if (response.statusCode == 200) {
+      return RegistrationOnboardingData.fromJson(
+        FormattingUtil.decode(response.data),
+      );
     }
 
     throw DioException(requestOptions: RequestOptions(), response: response);

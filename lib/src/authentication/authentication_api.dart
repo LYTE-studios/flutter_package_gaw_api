@@ -4,8 +4,6 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:gaw_api/gaw_api.dart';
-import 'package:gaw_api/src/authentication/request_models/registration/registration_onboarding_data.dart';
-
 export 'request_models/password/code_verification_request.dart';
 export 'request_models/password/email_request.dart';
 export 'request_models/password/password_reset_request.dart';
@@ -18,6 +16,7 @@ export 'response_models/pass_token_response.dart';
 export 'response_models/session_expiry_response.dart';
 export 'request_models/registration/registration_onboarding.dart';
 export 'request_models/registration/worker_registration.dart';
+export 'request_models/registration/registration_onboarding_data.dart';
 
 class AuthenticationApi {
   static Future<void> registerWorker(WorkerRegistration registration) async {

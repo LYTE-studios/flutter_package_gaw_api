@@ -146,7 +146,7 @@ class UsersApi {
   static Future<void> updateFcmToken(
       {required UpdateFcmTokenRequest request}) async {
     Response response = await RequestFactory.executePost(
-      endpoint: '/users/fcm',
+      endpoint: '/notifications/users/fcm',
       body: request.toJson(),
     );
 

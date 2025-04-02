@@ -88,7 +88,6 @@ class RequestFactory {
 
     if (response.statusCode == 200) {
       Configuration.accessToken = response.data['access'];
-      Configuration.refreshToken = response.data['refresh'];
     } else {
       throw DioException(requestOptions: RequestOptions(), response: response);
     }

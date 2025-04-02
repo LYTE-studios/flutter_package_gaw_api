@@ -1,6 +1,8 @@
 import 'package:gaw_api/src/authentication/request_models/registration/registration_onboarding.dart';
 
 class WorkerRegistration {
+  String phoneNumber;
+
   String email;
 
   String password;
@@ -16,6 +18,7 @@ class WorkerRegistration {
   List<WorkType> workTypes;
 
   WorkerRegistration({
+    required this.phoneNumber,
     required this.email,
     required this.password,
     required this.firstName,
@@ -26,6 +29,7 @@ class WorkerRegistration {
   });
 
   Map<String, dynamic> toJson() => {
+        "phone_number": phoneNumber,
         "email": email,
         "password": password,
         "first_name": firstName,

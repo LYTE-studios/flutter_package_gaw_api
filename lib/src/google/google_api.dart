@@ -99,6 +99,10 @@ class GoogleApi {
     if (response.statusCode == 200) {
       Map<String, dynamic> jsonData = jsonDecode(response.data);
 
+      if (jsonData.isEmpty) {
+        return [];
+      }
+
       List<PointLatLng> pointList = PolylinePoints().decodePolyline(
         jsonData["routes"][0]["polyline"]["encodedPolyline"],
       );

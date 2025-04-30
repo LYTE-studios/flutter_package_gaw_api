@@ -24,7 +24,7 @@ class WorkersApi {
       prefix = '/registered';
     }
 
-    String url = '$prefix/workers';
+    String url = '/auth$prefix/workers';
 
     if (page != null && itemCount != null) {
       url = '/auth$prefix/workers/$itemCount/$page';

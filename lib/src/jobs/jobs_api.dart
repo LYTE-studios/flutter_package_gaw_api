@@ -24,8 +24,64 @@ export 'response_models/time_registration_list_response.dart';
 export 'response_models/time_registration_response.dart';
 export 'response_models/workers_for_job_response.dart';
 export 'utils/job_utils.dart';
+export 'models/tag.dart';
+export 'response_models/tag_list_response.dart';
 
 class JobsApi {
+  static Future<void> updateTag(Tag tag) async {
+    if (tag.id == null) {
+      throw Exception('Tag id is required');
+    }
+
+    Response response = await RequestFactory.executePost(
+      endpoint: '/jobs/tags/${tag.id}',
+      body: tag.toJson(),
+    );
+
+    if (response.statusCode == 200) {
+      return;
+    }
+
+    throw DioException(requestOptions: RequestOptions(), response: response);
+  }
+
+  static Future<void> createTag(Tag tag) async {
+    Response response = await RequestFactory.executePost(
+      endpoint: '/jobs/tags',
+      body: tag.toJson(),
+    );
+
+    if (response.statusCode == 200) {
+      return;
+    }
+
+    throw DioException(requestOptions: RequestOptions(), response: response);
+  }
+
+  static Future<void> deleteTag(int id) async {
+    Response response = await RequestFactory.executeDelete(
+      endpoint: '/jobs/tags/$id',
+    );
+
+    if (response.statusCode == 200) {
+      return;
+    }
+
+    throw DioException(requestOptions: RequestOptions(), response: response);
+  }
+
+  static Future<TagListResponse?> getTags() async {
+    Response response = await RequestFactory.executeGet(
+      endpoint: '/jobs/tags',
+    );
+
+    if (response.statusCode == 200) {
+      return TagListResponse.fromJson(FormattingUtil.decode(response.data));
+    }
+
+    throw DioException(requestOptions: RequestOptions(), response: response);
+  }
+
   /// Gets the washers job applications
   static Future<ApplicationListResponse?> getMyApplications() async {
     Response response = await RequestFactory.executeGet(

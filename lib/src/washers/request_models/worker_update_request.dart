@@ -42,7 +42,10 @@ abstract class WorkerUpdateRequest
   String? get ssn;
 
   @BuiltValueField(wireName: 'tag_ids')
-  BuiltList? get tagIds;
+  BuiltList<String>? get tagIds;
+
+  @BuiltValueField(wireName: 'worker_type')
+  String? get workerType;
 
   String toJson() {
     return json.encode(

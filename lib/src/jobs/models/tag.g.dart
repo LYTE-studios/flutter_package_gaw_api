@@ -30,7 +30,14 @@ class _$TagSerializer implements StructuredSerializer<Tag> {
       serializers.serialize(object.specialCommittee,
           specifiedType: const FullType(String)),
     ];
-
+    Object? value;
+    value = object.id;
+    if (value != null) {
+      result
+        ..add('id')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     return result;
   }
 
@@ -45,6 +52,10 @@ class _$TagSerializer implements StructuredSerializer<Tag> {
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
+        case 'id':
+          result.id = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
         case 'title':
           result.title = serializers.deserialize(value,
               specifiedType: const FullType(String))! as String;
@@ -70,7 +81,7 @@ class _$TagSerializer implements StructuredSerializer<Tag> {
 
 class _$Tag extends Tag {
   @override
-  final int? id;
+  final String? id;
   @override
   final String title;
   @override
@@ -142,9 +153,9 @@ class _$Tag extends Tag {
 class TagBuilder implements Builder<Tag, TagBuilder> {
   _$Tag? _$v;
 
-  int? _id;
-  int? get id => _$this._id;
-  set id(int? id) => _$this._id = id;
+  String? _id;
+  String? get id => _$this._id;
+  set id(String? id) => _$this._id = id;
 
   String? _title;
   String? get title => _$this._title;

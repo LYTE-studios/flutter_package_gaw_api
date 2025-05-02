@@ -38,6 +38,9 @@ abstract class CreateCustomerRequest
   @BuiltValueField(wireName: 'tax_number')
   String? get taxNumber;
 
+  @BuiltValueField(wireName: 'tag_id')
+  String? get tagId;
+
   String toJson() {
     return json.encode(
         serializers.serializeWith(CreateCustomerRequest.serializer, this));

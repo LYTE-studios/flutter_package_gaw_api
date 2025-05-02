@@ -102,6 +102,13 @@ class _$UpdateCustomerRequestSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.tagId;
+    if (value != null) {
+      result
+        ..add('tag_id')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     return result;
   }
 
@@ -161,6 +168,10 @@ class _$UpdateCustomerRequestSerializer
           result.specialCommittee = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'tag_id':
+          result.tagId = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
       }
     }
 
@@ -191,6 +202,8 @@ class _$UpdateCustomerRequest extends UpdateCustomerRequest {
   final String? taxNumber;
   @override
   final String? specialCommittee;
+  @override
+  final String? tagId;
 
   factory _$UpdateCustomerRequest(
           [void Function(UpdateCustomerRequestBuilder)? updates]) =>
@@ -207,7 +220,8 @@ class _$UpdateCustomerRequest extends UpdateCustomerRequest {
       this.address,
       this.billingAddress,
       this.taxNumber,
-      this.specialCommittee})
+      this.specialCommittee,
+      this.tagId})
       : super._();
 
   @override
@@ -233,7 +247,8 @@ class _$UpdateCustomerRequest extends UpdateCustomerRequest {
         address == other.address &&
         billingAddress == other.billingAddress &&
         taxNumber == other.taxNumber &&
-        specialCommittee == other.specialCommittee;
+        specialCommittee == other.specialCommittee &&
+        tagId == other.tagId;
   }
 
   @override
@@ -250,6 +265,7 @@ class _$UpdateCustomerRequest extends UpdateCustomerRequest {
     _$hash = $jc(_$hash, billingAddress.hashCode);
     _$hash = $jc(_$hash, taxNumber.hashCode);
     _$hash = $jc(_$hash, specialCommittee.hashCode);
+    _$hash = $jc(_$hash, tagId.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -267,7 +283,8 @@ class _$UpdateCustomerRequest extends UpdateCustomerRequest {
           ..add('address', address)
           ..add('billingAddress', billingAddress)
           ..add('taxNumber', taxNumber)
-          ..add('specialCommittee', specialCommittee))
+          ..add('specialCommittee', specialCommittee)
+          ..add('tagId', tagId))
         .toString();
   }
 }
@@ -324,6 +341,10 @@ class UpdateCustomerRequestBuilder
   set specialCommittee(String? specialCommittee) =>
       _$this._specialCommittee = specialCommittee;
 
+  String? _tagId;
+  String? get tagId => _$this._tagId;
+  set tagId(String? tagId) => _$this._tagId = tagId;
+
   UpdateCustomerRequestBuilder();
 
   UpdateCustomerRequestBuilder get _$this {
@@ -340,6 +361,7 @@ class UpdateCustomerRequestBuilder
       _billingAddress = $v.billingAddress?.toBuilder();
       _taxNumber = $v.taxNumber;
       _specialCommittee = $v.specialCommittee;
+      _tagId = $v.tagId;
       _$v = null;
     }
     return this;
@@ -374,7 +396,8 @@ class UpdateCustomerRequestBuilder
               address: _address?.build(),
               billingAddress: _billingAddress?.build(),
               taxNumber: taxNumber,
-              specialCommittee: specialCommittee);
+              specialCommittee: specialCommittee,
+              tagId: tagId);
     } catch (_) {
       late String _$failedField;
       try {

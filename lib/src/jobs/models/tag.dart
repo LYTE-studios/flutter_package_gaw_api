@@ -14,8 +14,8 @@ abstract class Tag implements Built<Tag, TagBuilder> {
 
   factory Tag([Function(TagBuilder b) updates]) = _$Tag;
 
-  @BuiltValueField(wireName: 'id', serialize: false)
-  int? get id;
+  @BuiltValueField(wireName: 'id')
+  String? get id;
 
   @BuiltValueField(wireName: 'title')
   String get title;

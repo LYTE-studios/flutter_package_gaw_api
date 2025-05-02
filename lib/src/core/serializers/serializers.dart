@@ -66,6 +66,8 @@ part 'serializers.g.dart';
   TimeRegistrationResponse,
   Dimona,
   DimonaListResponse,
+  Tag,
+  TagListResponse,
 ])
 final Serializers serializers =
     (_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();

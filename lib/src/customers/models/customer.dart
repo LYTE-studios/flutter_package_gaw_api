@@ -55,6 +55,9 @@ abstract class Customer implements Built<Customer, CustomerBuilder> {
   @BuiltValueField(wireName: 'has_active_job')
   bool? get hasActiveJob;
 
+  @BuiltValueField(wireName: 'tag')
+  Tag? get tag;
+
   @BuiltValueField(wireName: 'special_committee')
   String? get specialCommittee;
 

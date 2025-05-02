@@ -70,6 +70,13 @@ class _$CreateCustomerRequestSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.tagId;
+    if (value != null) {
+      result
+        ..add('tag_id')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     return result;
   }
 
@@ -117,6 +124,10 @@ class _$CreateCustomerRequestSerializer
           result.taxNumber = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'tag_id':
+          result.tagId = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
       }
     }
 
@@ -141,6 +152,8 @@ class _$CreateCustomerRequest extends CreateCustomerRequest {
   final Address? billingAddress;
   @override
   final String? taxNumber;
+  @override
+  final String? tagId;
 
   factory _$CreateCustomerRequest(
           [void Function(CreateCustomerRequestBuilder)? updates]) =>
@@ -154,7 +167,8 @@ class _$CreateCustomerRequest extends CreateCustomerRequest {
       this.company,
       this.address,
       this.billingAddress,
-      this.taxNumber})
+      this.taxNumber,
+      this.tagId})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         firstName, r'CreateCustomerRequest', 'firstName');
@@ -184,7 +198,8 @@ class _$CreateCustomerRequest extends CreateCustomerRequest {
         company == other.company &&
         address == other.address &&
         billingAddress == other.billingAddress &&
-        taxNumber == other.taxNumber;
+        taxNumber == other.taxNumber &&
+        tagId == other.tagId;
   }
 
   @override
@@ -198,6 +213,7 @@ class _$CreateCustomerRequest extends CreateCustomerRequest {
     _$hash = $jc(_$hash, address.hashCode);
     _$hash = $jc(_$hash, billingAddress.hashCode);
     _$hash = $jc(_$hash, taxNumber.hashCode);
+    _$hash = $jc(_$hash, tagId.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -212,7 +228,8 @@ class _$CreateCustomerRequest extends CreateCustomerRequest {
           ..add('company', company)
           ..add('address', address)
           ..add('billingAddress', billingAddress)
-          ..add('taxNumber', taxNumber))
+          ..add('taxNumber', taxNumber)
+          ..add('tagId', tagId))
         .toString();
   }
 }
@@ -255,6 +272,10 @@ class CreateCustomerRequestBuilder
   String? get taxNumber => _$this._taxNumber;
   set taxNumber(String? taxNumber) => _$this._taxNumber = taxNumber;
 
+  String? _tagId;
+  String? get tagId => _$this._tagId;
+  set tagId(String? tagId) => _$this._tagId = tagId;
+
   CreateCustomerRequestBuilder();
 
   CreateCustomerRequestBuilder get _$this {
@@ -268,6 +289,7 @@ class CreateCustomerRequestBuilder
       _address = $v.address?.toBuilder();
       _billingAddress = $v.billingAddress?.toBuilder();
       _taxNumber = $v.taxNumber;
+      _tagId = $v.tagId;
       _$v = null;
     }
     return this;
@@ -302,7 +324,8 @@ class CreateCustomerRequestBuilder
               company: company,
               address: _address?.build(),
               billingAddress: _billingAddress?.build(),
-              taxNumber: taxNumber);
+              taxNumber: taxNumber,
+              tagId: tagId);
     } catch (_) {
       late String _$failedField;
       try {

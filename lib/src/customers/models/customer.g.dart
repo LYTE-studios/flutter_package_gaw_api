@@ -116,6 +116,12 @@ class _$CustomerSerializer implements StructuredSerializer<Customer> {
         ..add(
             serializers.serialize(value, specifiedType: const FullType(bool)));
     }
+    value = object.tag;
+    if (value != null) {
+      result
+        ..add('tag')
+        ..add(serializers.serialize(value, specifiedType: const FullType(Tag)));
+    }
     value = object.specialCommittee;
     if (value != null) {
       result
@@ -193,6 +199,10 @@ class _$CustomerSerializer implements StructuredSerializer<Customer> {
           result.hasActiveJob = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool?;
           break;
+        case 'tag':
+          result.tag.replace(serializers.deserialize(value,
+              specifiedType: const FullType(Tag))! as Tag);
+          break;
         case 'special_committee':
           result.specialCommittee = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
@@ -234,6 +244,8 @@ class _$Customer extends Customer {
   @override
   final bool? hasActiveJob;
   @override
+  final Tag? tag;
+  @override
   final String? specialCommittee;
 
   factory _$Customer([void Function(CustomerBuilder)? updates]) =>
@@ -254,6 +266,7 @@ class _$Customer extends Customer {
       this.createdAt,
       this.hours,
       this.hasActiveJob,
+      this.tag,
       this.specialCommittee})
       : super._();
 
@@ -282,6 +295,7 @@ class _$Customer extends Customer {
         createdAt == other.createdAt &&
         hours == other.hours &&
         hasActiveJob == other.hasActiveJob &&
+        tag == other.tag &&
         specialCommittee == other.specialCommittee;
   }
 
@@ -302,6 +316,7 @@ class _$Customer extends Customer {
     _$hash = $jc(_$hash, createdAt.hashCode);
     _$hash = $jc(_$hash, hours.hashCode);
     _$hash = $jc(_$hash, hasActiveJob.hashCode);
+    _$hash = $jc(_$hash, tag.hashCode);
     _$hash = $jc(_$hash, specialCommittee.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -324,6 +339,7 @@ class _$Customer extends Customer {
           ..add('createdAt', createdAt)
           ..add('hours', hours)
           ..add('hasActiveJob', hasActiveJob)
+          ..add('tag', tag)
           ..add('specialCommittee', specialCommittee))
         .toString();
   }
@@ -391,6 +407,10 @@ class CustomerBuilder implements Builder<Customer, CustomerBuilder> {
   bool? get hasActiveJob => _$this._hasActiveJob;
   set hasActiveJob(bool? hasActiveJob) => _$this._hasActiveJob = hasActiveJob;
 
+  TagBuilder? _tag;
+  TagBuilder get tag => _$this._tag ??= new TagBuilder();
+  set tag(TagBuilder? tag) => _$this._tag = tag;
+
   String? _specialCommittee;
   String? get specialCommittee => _$this._specialCommittee;
   set specialCommittee(String? specialCommittee) =>
@@ -415,6 +435,7 @@ class CustomerBuilder implements Builder<Customer, CustomerBuilder> {
       _createdAt = $v.createdAt;
       _hours = $v.hours;
       _hasActiveJob = $v.hasActiveJob;
+      _tag = $v.tag?.toBuilder();
       _specialCommittee = $v.specialCommittee;
       _$v = null;
     }
@@ -454,6 +475,7 @@ class CustomerBuilder implements Builder<Customer, CustomerBuilder> {
               createdAt: createdAt,
               hours: hours,
               hasActiveJob: hasActiveJob,
+              tag: _tag?.build(),
               specialCommittee: specialCommittee);
     } catch (_) {
       late String _$failedField;
@@ -462,6 +484,9 @@ class CustomerBuilder implements Builder<Customer, CustomerBuilder> {
         _address?.build();
         _$failedField = 'billingAddress';
         _billingAddress?.build();
+
+        _$failedField = 'tag';
+        _tag?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             r'Customer', _$failedField, e.toString());

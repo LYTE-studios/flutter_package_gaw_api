@@ -33,7 +33,7 @@ class JobsApi {
       throw Exception('Tag id is required');
     }
 
-    Response response = await RequestFactory.executePost(
+    Response response = await RequestFactory.executePut(
       endpoint: '/jobs/tags/${tag.id}',
       body: tag.toJson(),
     );

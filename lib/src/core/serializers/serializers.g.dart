@@ -88,6 +88,9 @@ Serializers _$serializers = (new Serializers().toBuilder()
           const FullType(BuiltList, const [const FullType(Notification)]),
           () => new ListBuilder<Notification>())
       ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(String)]),
+          () => new ListBuilder<String>())
+      ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(Tag)]),
           () => new ListBuilder<Tag>())
       ..addBuilderFactory(

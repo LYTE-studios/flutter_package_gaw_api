@@ -45,6 +45,9 @@ abstract class CreateJobRequest
   @BuiltValueField(wireName: 'is_draft')
   bool? get isDraft;
 
+  @BuiltValueField(wireName: 'tag_id')
+  String? get tagId;
+
   String toJson() {
     return json.encode(
       serializers.serializeWith(CreateJobRequest.serializer, this),

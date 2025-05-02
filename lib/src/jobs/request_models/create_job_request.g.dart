@@ -65,6 +65,13 @@ class _$CreateJobRequestSerializer
         ..add(
             serializers.serialize(value, specifiedType: const FullType(bool)));
     }
+    value = object.tagId;
+    if (value != null) {
+      result
+        ..add('tag_id')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     return result;
   }
 
@@ -120,6 +127,10 @@ class _$CreateJobRequestSerializer
           result.isDraft = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool?;
           break;
+        case 'tag_id':
+          result.tagId = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
       }
     }
 
@@ -148,6 +159,8 @@ class _$CreateJobRequest extends CreateJobRequest {
   final int? applicationEndTime;
   @override
   final bool? isDraft;
+  @override
+  final String? tagId;
 
   factory _$CreateJobRequest(
           [void Function(CreateJobRequestBuilder)? updates]) =>
@@ -163,7 +176,8 @@ class _$CreateJobRequest extends CreateJobRequest {
       required this.maxworkers,
       this.applicationStartTime,
       this.applicationEndTime,
-      this.isDraft})
+      this.isDraft,
+      this.tagId})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(title, r'CreateJobRequest', 'title');
     BuiltValueNullFieldError.checkNotNull(
@@ -199,7 +213,8 @@ class _$CreateJobRequest extends CreateJobRequest {
         maxworkers == other.maxworkers &&
         applicationStartTime == other.applicationStartTime &&
         applicationEndTime == other.applicationEndTime &&
-        isDraft == other.isDraft;
+        isDraft == other.isDraft &&
+        tagId == other.tagId;
   }
 
   @override
@@ -215,6 +230,7 @@ class _$CreateJobRequest extends CreateJobRequest {
     _$hash = $jc(_$hash, applicationStartTime.hashCode);
     _$hash = $jc(_$hash, applicationEndTime.hashCode);
     _$hash = $jc(_$hash, isDraft.hashCode);
+    _$hash = $jc(_$hash, tagId.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -231,7 +247,8 @@ class _$CreateJobRequest extends CreateJobRequest {
           ..add('maxworkers', maxworkers)
           ..add('applicationStartTime', applicationStartTime)
           ..add('applicationEndTime', applicationEndTime)
-          ..add('isDraft', isDraft))
+          ..add('isDraft', isDraft)
+          ..add('tagId', tagId))
         .toString();
   }
 }
@@ -282,6 +299,10 @@ class CreateJobRequestBuilder
   bool? get isDraft => _$this._isDraft;
   set isDraft(bool? isDraft) => _$this._isDraft = isDraft;
 
+  String? _tagId;
+  String? get tagId => _$this._tagId;
+  set tagId(String? tagId) => _$this._tagId = tagId;
+
   CreateJobRequestBuilder();
 
   CreateJobRequestBuilder get _$this {
@@ -297,6 +318,7 @@ class CreateJobRequestBuilder
       _applicationStartTime = $v.applicationStartTime;
       _applicationEndTime = $v.applicationEndTime;
       _isDraft = $v.isDraft;
+      _tagId = $v.tagId;
       _$v = null;
     }
     return this;
@@ -335,7 +357,8 @@ class CreateJobRequestBuilder
                   maxworkers, r'CreateJobRequest', 'maxworkers'),
               applicationStartTime: applicationStartTime,
               applicationEndTime: applicationEndTime,
-              isDraft: isDraft);
+              isDraft: isDraft,
+              tagId: tagId);
     } catch (_) {
       late String _$failedField;
       try {

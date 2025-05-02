@@ -87,6 +87,14 @@ class _$WorkerUpdateRequestSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.tagIds;
+    if (value != null) {
+      result
+        ..add('tag_ids')
+        ..add(serializers.serialize(value,
+            specifiedType:
+                const FullType(BuiltList, const [const FullType(dynamic)])));
+    }
     return result;
   }
 
@@ -138,6 +146,12 @@ class _$WorkerUpdateRequestSerializer
           result.ssn = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'tag_ids':
+          result.tagIds.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(dynamic)]))!
+              as BuiltList<Object?>);
+          break;
       }
     }
 
@@ -164,6 +178,8 @@ class _$WorkerUpdateRequest extends WorkerUpdateRequest {
   final int? dateOfBirth;
   @override
   final String? ssn;
+  @override
+  final BuiltList<dynamic>? tagIds;
 
   factory _$WorkerUpdateRequest(
           [void Function(WorkerUpdateRequestBuilder)? updates]) =>
@@ -178,7 +194,8 @@ class _$WorkerUpdateRequest extends WorkerUpdateRequest {
       this.address,
       this.iban,
       this.dateOfBirth,
-      this.ssn})
+      this.ssn,
+      this.tagIds})
       : super._();
 
   @override
@@ -202,7 +219,8 @@ class _$WorkerUpdateRequest extends WorkerUpdateRequest {
         address == other.address &&
         iban == other.iban &&
         dateOfBirth == other.dateOfBirth &&
-        ssn == other.ssn;
+        ssn == other.ssn &&
+        tagIds == other.tagIds;
   }
 
   @override
@@ -217,6 +235,7 @@ class _$WorkerUpdateRequest extends WorkerUpdateRequest {
     _$hash = $jc(_$hash, iban.hashCode);
     _$hash = $jc(_$hash, dateOfBirth.hashCode);
     _$hash = $jc(_$hash, ssn.hashCode);
+    _$hash = $jc(_$hash, tagIds.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -232,7 +251,8 @@ class _$WorkerUpdateRequest extends WorkerUpdateRequest {
           ..add('address', address)
           ..add('iban', iban)
           ..add('dateOfBirth', dateOfBirth)
-          ..add('ssn', ssn))
+          ..add('ssn', ssn)
+          ..add('tagIds', tagIds))
         .toString();
   }
 }
@@ -278,6 +298,11 @@ class WorkerUpdateRequestBuilder
   String? get ssn => _$this._ssn;
   set ssn(String? ssn) => _$this._ssn = ssn;
 
+  ListBuilder<dynamic>? _tagIds;
+  ListBuilder<dynamic> get tagIds =>
+      _$this._tagIds ??= new ListBuilder<dynamic>();
+  set tagIds(ListBuilder<dynamic>? tagIds) => _$this._tagIds = tagIds;
+
   WorkerUpdateRequestBuilder();
 
   WorkerUpdateRequestBuilder get _$this {
@@ -292,6 +317,7 @@ class WorkerUpdateRequestBuilder
       _iban = $v.iban;
       _dateOfBirth = $v.dateOfBirth;
       _ssn = $v.ssn;
+      _tagIds = $v.tagIds?.toBuilder();
       _$v = null;
     }
     return this;
@@ -324,12 +350,16 @@ class WorkerUpdateRequestBuilder
               address: _address?.build(),
               iban: iban,
               dateOfBirth: dateOfBirth,
-              ssn: ssn);
+              ssn: ssn,
+              tagIds: _tagIds?.build());
     } catch (_) {
       late String _$failedField;
       try {
         _$failedField = 'address';
         _address?.build();
+
+        _$failedField = 'tagIds';
+        _tagIds?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             r'WorkerUpdateRequest', _$failedField, e.toString());

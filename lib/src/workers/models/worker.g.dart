@@ -112,6 +112,13 @@ class _$WorkerSerializer implements StructuredSerializer<Worker> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.tags;
+    if (value != null) {
+      result
+        ..add('tags')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(List, const [const FullType(Tag)])));
+    }
     return result;
   }
 
@@ -182,6 +189,12 @@ class _$WorkerSerializer implements StructuredSerializer<Worker> {
           result.placeOfBirth = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'tags':
+          result.tags = serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(List, const [const FullType(Tag)]))
+              as List<Tag>?;
+          break;
       }
     }
 
@@ -218,6 +231,8 @@ class _$Worker extends Worker {
   final int? dateOfBirth;
   @override
   final String? placeOfBirth;
+  @override
+  final List<Tag>? tags;
 
   factory _$Worker([void Function(WorkerBuilder)? updates]) =>
       (new WorkerBuilder()..update(updates))._build();
@@ -236,7 +251,8 @@ class _$Worker extends Worker {
       this.billingAddress,
       this.createdAt,
       this.dateOfBirth,
-      this.placeOfBirth})
+      this.placeOfBirth,
+      this.tags})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(email, r'Worker', 'email');
   }
@@ -265,7 +281,8 @@ class _$Worker extends Worker {
         billingAddress == other.billingAddress &&
         createdAt == other.createdAt &&
         dateOfBirth == other.dateOfBirth &&
-        placeOfBirth == other.placeOfBirth;
+        placeOfBirth == other.placeOfBirth &&
+        tags == other.tags;
   }
 
   @override
@@ -285,6 +302,7 @@ class _$Worker extends Worker {
     _$hash = $jc(_$hash, createdAt.hashCode);
     _$hash = $jc(_$hash, dateOfBirth.hashCode);
     _$hash = $jc(_$hash, placeOfBirth.hashCode);
+    _$hash = $jc(_$hash, tags.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -305,7 +323,8 @@ class _$Worker extends Worker {
           ..add('billingAddress', billingAddress)
           ..add('createdAt', createdAt)
           ..add('dateOfBirth', dateOfBirth)
-          ..add('placeOfBirth', placeOfBirth))
+          ..add('placeOfBirth', placeOfBirth)
+          ..add('tags', tags))
         .toString();
   }
 }
@@ -372,6 +391,10 @@ class WorkerBuilder implements Builder<Worker, WorkerBuilder> {
   String? get placeOfBirth => _$this._placeOfBirth;
   set placeOfBirth(String? placeOfBirth) => _$this._placeOfBirth = placeOfBirth;
 
+  List<Tag>? _tags;
+  List<Tag>? get tags => _$this._tags;
+  set tags(List<Tag>? tags) => _$this._tags = tags;
+
   WorkerBuilder();
 
   WorkerBuilder get _$this {
@@ -391,6 +414,7 @@ class WorkerBuilder implements Builder<Worker, WorkerBuilder> {
       _createdAt = $v.createdAt;
       _dateOfBirth = $v.dateOfBirth;
       _placeOfBirth = $v.placeOfBirth;
+      _tags = $v.tags;
       _$v = null;
     }
     return this;
@@ -429,7 +453,8 @@ class WorkerBuilder implements Builder<Worker, WorkerBuilder> {
               billingAddress: _billingAddress?.build(),
               createdAt: createdAt,
               dateOfBirth: dateOfBirth,
-              placeOfBirth: placeOfBirth);
+              placeOfBirth: placeOfBirth,
+              tags: tags);
     } catch (_) {
       late String _$failedField;
       try {

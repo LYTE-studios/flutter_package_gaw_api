@@ -55,6 +55,9 @@ abstract class Worker implements Built<Worker, WorkerBuilder> {
   @BuiltValueField(wireName: 'place_of_birth')
   String? get placeOfBirth;
 
+  @BuiltValueField(wireName: 'tags')
+  List<Tag>? get tags;
+
   String toJson() {
     return json.encode(
       serializers.serializeWith(Worker.serializer, this),

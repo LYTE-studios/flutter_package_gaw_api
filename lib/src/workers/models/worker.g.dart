@@ -117,7 +117,8 @@ class _$WorkerSerializer implements StructuredSerializer<Worker> {
       result
         ..add('tags')
         ..add(serializers.serialize(value,
-            specifiedType: const FullType(List, const [const FullType(Tag)])));
+            specifiedType:
+                const FullType(BuiltList, const [const FullType(Tag)])));
     }
     value = object.workerType;
     if (value != null) {
@@ -197,10 +198,10 @@ class _$WorkerSerializer implements StructuredSerializer<Worker> {
               specifiedType: const FullType(String)) as String?;
           break;
         case 'tags':
-          result.tags = serializers.deserialize(value,
+          result.tags.replace(serializers.deserialize(value,
                   specifiedType:
-                      const FullType(List, const [const FullType(Tag)]))
-              as List<Tag>?;
+                      const FullType(BuiltList, const [const FullType(Tag)]))!
+              as BuiltList<Object?>);
           break;
         case 'worker_type':
           result.workerType = serializers.deserialize(value,
@@ -243,7 +244,7 @@ class _$Worker extends Worker {
   @override
   final String? placeOfBirth;
   @override
-  final List<Tag>? tags;
+  final BuiltList<Tag>? tags;
   @override
   final String? workerType;
 
@@ -408,9 +409,9 @@ class WorkerBuilder implements Builder<Worker, WorkerBuilder> {
   String? get placeOfBirth => _$this._placeOfBirth;
   set placeOfBirth(String? placeOfBirth) => _$this._placeOfBirth = placeOfBirth;
 
-  List<Tag>? _tags;
-  List<Tag>? get tags => _$this._tags;
-  set tags(List<Tag>? tags) => _$this._tags = tags;
+  ListBuilder<Tag>? _tags;
+  ListBuilder<Tag> get tags => _$this._tags ??= new ListBuilder<Tag>();
+  set tags(ListBuilder<Tag>? tags) => _$this._tags = tags;
 
   String? _workerType;
   String? get workerType => _$this._workerType;
@@ -435,7 +436,7 @@ class WorkerBuilder implements Builder<Worker, WorkerBuilder> {
       _createdAt = $v.createdAt;
       _dateOfBirth = $v.dateOfBirth;
       _placeOfBirth = $v.placeOfBirth;
-      _tags = $v.tags;
+      _tags = $v.tags?.toBuilder();
       _workerType = $v.workerType;
       _$v = null;
     }
@@ -476,7 +477,7 @@ class WorkerBuilder implements Builder<Worker, WorkerBuilder> {
               createdAt: createdAt,
               dateOfBirth: dateOfBirth,
               placeOfBirth: placeOfBirth,
-              tags: tags,
+              tags: _tags?.build(),
               workerType: workerType);
     } catch (_) {
       late String _$failedField;
@@ -486,6 +487,9 @@ class WorkerBuilder implements Builder<Worker, WorkerBuilder> {
 
         _$failedField = 'billingAddress';
         _billingAddress?.build();
+
+        _$failedField = 'tags';
+        _tags?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             r'Worker', _$failedField, e.toString());

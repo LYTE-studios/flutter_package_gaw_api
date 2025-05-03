@@ -85,6 +85,14 @@ class _$MeResponseSerializer implements StructuredSerializer<MeResponse> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.tags;
+    if (value != null) {
+      result
+        ..add('tags')
+        ..add(serializers.serialize(value,
+            specifiedType:
+                const FullType(BuiltList, const [const FullType(Tag)])));
+    }
     return result;
   }
 
@@ -139,6 +147,12 @@ class _$MeResponseSerializer implements StructuredSerializer<MeResponse> {
           result.language = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'tags':
+          result.tags.replace(serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(BuiltList, const [const FullType(Tag)]))!
+              as BuiltList<Object?>);
+          break;
       }
     }
 
@@ -167,6 +181,8 @@ class _$MeResponse extends MeResponse {
   final String? profilePictureUrl;
   @override
   final String? language;
+  @override
+  final BuiltList<Tag>? tags;
 
   factory _$MeResponse([void Function(MeResponseBuilder)? updates]) =>
       (new MeResponseBuilder()..update(updates))._build();
@@ -181,7 +197,8 @@ class _$MeResponse extends MeResponse {
       this.phoneNumber,
       this.description,
       this.profilePictureUrl,
-      this.language})
+      this.language,
+      this.tags})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(userId, r'MeResponse', 'userId');
   }
@@ -206,7 +223,8 @@ class _$MeResponse extends MeResponse {
         phoneNumber == other.phoneNumber &&
         description == other.description &&
         profilePictureUrl == other.profilePictureUrl &&
-        language == other.language;
+        language == other.language &&
+        tags == other.tags;
   }
 
   @override
@@ -222,6 +240,7 @@ class _$MeResponse extends MeResponse {
     _$hash = $jc(_$hash, description.hashCode);
     _$hash = $jc(_$hash, profilePictureUrl.hashCode);
     _$hash = $jc(_$hash, language.hashCode);
+    _$hash = $jc(_$hash, tags.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -238,7 +257,8 @@ class _$MeResponse extends MeResponse {
           ..add('phoneNumber', phoneNumber)
           ..add('description', description)
           ..add('profilePictureUrl', profilePictureUrl)
-          ..add('language', language))
+          ..add('language', language)
+          ..add('tags', tags))
         .toString();
   }
 }
@@ -287,6 +307,10 @@ class MeResponseBuilder implements Builder<MeResponse, MeResponseBuilder> {
   String? get language => _$this._language;
   set language(String? language) => _$this._language = language;
 
+  ListBuilder<Tag>? _tags;
+  ListBuilder<Tag> get tags => _$this._tags ??= new ListBuilder<Tag>();
+  set tags(ListBuilder<Tag>? tags) => _$this._tags = tags;
+
   MeResponseBuilder();
 
   MeResponseBuilder get _$this {
@@ -302,6 +326,7 @@ class MeResponseBuilder implements Builder<MeResponse, MeResponseBuilder> {
       _description = $v.description;
       _profilePictureUrl = $v.profilePictureUrl;
       _language = $v.language;
+      _tags = $v.tags?.toBuilder();
       _$v = null;
     }
     return this;
@@ -336,12 +361,16 @@ class MeResponseBuilder implements Builder<MeResponse, MeResponseBuilder> {
               phoneNumber: phoneNumber,
               description: description,
               profilePictureUrl: profilePictureUrl,
-              language: language);
+              language: language,
+              tags: _tags?.build());
     } catch (_) {
       late String _$failedField;
       try {
         _$failedField = 'address';
         _address?.build();
+
+        _$failedField = 'tags';
+        _tags?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             r'MeResponse', _$failedField, e.toString());

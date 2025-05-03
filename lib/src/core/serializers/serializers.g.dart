@@ -97,6 +97,9 @@ Serializers _$serializers = (new Serializers().toBuilder()
           const FullType(BuiltList, const [const FullType(Tag)]),
           () => new ListBuilder<Tag>())
       ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(Tag)]),
+          () => new ListBuilder<Tag>())
+      ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(TimeRegistration)]),
           () => new ListBuilder<TimeRegistration>())
       ..addBuilderFactory(

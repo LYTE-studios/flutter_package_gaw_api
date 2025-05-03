@@ -2,6 +2,7 @@ library me_response;
 
 import 'dart:convert';
 
+import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:gaw_api/gaw_api.dart';
@@ -42,6 +43,9 @@ abstract class MeResponse implements Built<MeResponse, MeResponseBuilder> {
 
   @BuiltValueField(wireName: 'language')
   String? get language;
+
+  @BuiltValueField(wireName: 'tags')
+  BuiltList<Tag>? get tags;
 
   String toJson() {
     return json.encode(

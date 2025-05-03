@@ -88,6 +88,12 @@ class _$JobSerializer implements StructuredSerializer<Job> {
             specifiedType: const FullType(
                 BuiltList, const [const FullType(TimeRegistration)])));
     }
+    value = object.tag;
+    if (value != null) {
+      result
+        ..add('tag')
+        ..add(serializers.serialize(value, specifiedType: const FullType(Tag)));
+    }
     return result;
   }
 
@@ -160,6 +166,10 @@ class _$JobSerializer implements StructuredSerializer<Job> {
                       BuiltList, const [const FullType(TimeRegistration)]))!
               as BuiltList<Object?>);
           break;
+        case 'tag':
+          result.tag.replace(serializers.deserialize(value,
+              specifiedType: const FullType(Tag))! as Tag);
+          break;
       }
     }
 
@@ -196,6 +206,8 @@ class _$Job extends Job {
   final Customer customer;
   @override
   final BuiltList<TimeRegistration>? registrations;
+  @override
+  final Tag? tag;
 
   factory _$Job([void Function(JobBuilder)? updates]) =>
       (new JobBuilder()..update(updates))._build();
@@ -214,7 +226,8 @@ class _$Job extends Job {
       this.isDraft,
       required this.state,
       required this.customer,
-      this.registrations})
+      this.registrations,
+      this.tag})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(address, r'Job', 'address');
     BuiltValueNullFieldError.checkNotNull(startTime, r'Job', 'startTime');
@@ -250,7 +263,8 @@ class _$Job extends Job {
         isDraft == other.isDraft &&
         state == other.state &&
         customer == other.customer &&
-        registrations == other.registrations;
+        registrations == other.registrations &&
+        tag == other.tag;
   }
 
   @override
@@ -270,6 +284,7 @@ class _$Job extends Job {
     _$hash = $jc(_$hash, state.hashCode);
     _$hash = $jc(_$hash, customer.hashCode);
     _$hash = $jc(_$hash, registrations.hashCode);
+    _$hash = $jc(_$hash, tag.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -290,7 +305,8 @@ class _$Job extends Job {
           ..add('isDraft', isDraft)
           ..add('state', state)
           ..add('customer', customer)
-          ..add('registrations', registrations))
+          ..add('registrations', registrations)
+          ..add('tag', tag))
         .toString();
   }
 }
@@ -359,6 +375,10 @@ class JobBuilder implements Builder<Job, JobBuilder> {
   set registrations(ListBuilder<TimeRegistration>? registrations) =>
       _$this._registrations = registrations;
 
+  TagBuilder? _tag;
+  TagBuilder get tag => _$this._tag ??= new TagBuilder();
+  set tag(TagBuilder? tag) => _$this._tag = tag;
+
   JobBuilder();
 
   JobBuilder get _$this {
@@ -378,6 +398,7 @@ class JobBuilder implements Builder<Job, JobBuilder> {
       _state = $v.state;
       _customer = $v.customer.toBuilder();
       _registrations = $v.registrations?.toBuilder();
+      _tag = $v.tag?.toBuilder();
       _$v = null;
     }
     return this;
@@ -420,7 +441,8 @@ class JobBuilder implements Builder<Job, JobBuilder> {
               state:
                   BuiltValueNullFieldError.checkNotNull(state, r'Job', 'state'),
               customer: customer.build(),
-              registrations: _registrations?.build());
+              registrations: _registrations?.build(),
+              tag: _tag?.build());
     } catch (_) {
       late String _$failedField;
       try {
@@ -431,6 +453,8 @@ class JobBuilder implements Builder<Job, JobBuilder> {
         customer.build();
         _$failedField = 'registrations';
         _registrations?.build();
+        _$failedField = 'tag';
+        _tag?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             r'Job', _$failedField, e.toString());

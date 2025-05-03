@@ -56,6 +56,9 @@ abstract class Job implements Built<Job, JobBuilder> {
   @BuiltValueField(wireName: 'time_registrations')
   BuiltList<TimeRegistration>? get registrations;
 
+  @BuiltValueField(wireName: 'tag')
+  Tag? get tag;
+
   String toJson() {
     return json.encode(
       serializers.serializeWith(Job.serializer, this),

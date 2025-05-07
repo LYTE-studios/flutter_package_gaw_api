@@ -79,7 +79,7 @@ class UsersApi {
       ),
     );
 
-    if (response.statusCode != 204) {
+    if (response.statusCode != 200) {
       throw DioException(requestOptions: RequestOptions(), response: response);
     }
   }

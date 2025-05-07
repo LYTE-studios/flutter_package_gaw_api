@@ -132,8 +132,8 @@ class UsersApi {
   }
 
   static Future<void> removeProfilePicture() async {
-    Response response = await RequestFactory.executePost(
-      endpoint: '/remove_profile_picture',
+    Response response = await RequestFactory.executeDelete(
+      endpoint: '/auth/users/settings/profile-picture',
     );
 
     if (response.statusCode == 200) {
